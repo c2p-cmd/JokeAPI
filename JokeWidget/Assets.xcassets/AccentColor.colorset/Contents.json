@@ -1,7 +1,7 @@
 {
-  "images" : [
+  "colors" : [
     {
-      "idiom" : "tv"
+      "idiom" : "universal"
     }
   ],
   "info" : {
