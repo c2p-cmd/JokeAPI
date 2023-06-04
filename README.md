@@ -1,2 +1,4 @@
 # JokeAPI
-Joke API App + Widget
+Joke API App + Widget made using SwiftUI
+
+
