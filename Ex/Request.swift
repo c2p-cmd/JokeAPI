@@ -11,6 +11,7 @@ public func getRandomJoke(
     from url: String = "https://v2.jokeapi.dev/joke/Any?format=txt",
     completionHandler: @escaping ((String?, Error?) -> Void)
 ) {
+    // TODO: UserDefault and Result data type
     let url = URL(string: url)!
     let task = URLSession.shared.dataTask(with: URLRequest(url: url)) {
         (data, _, err) in
