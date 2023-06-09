@@ -7,14 +7,13 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct JokeView: View {
     @State private var joke: String = "Why do Java Programmers have to wear glasses?\n\nBecause they don't C#."
     @State private var makignRequest = false
     @State private var error: String?
     
     var body: some View {
-        NavigationStack {
-            VStack(alignment: .center) {
+        VStack(alignment: .center) {
                 Text(joke)
                     .font(.title2)
                     .monospaced()
@@ -37,11 +36,9 @@ struct ContentView: View {
                     }.disabled(makignRequest)
                 }
             }
-        }
         .onAppear {
             showJoke()
         }
-        .preferredColorScheme(.light)
     }
     
     func showJoke() {
@@ -51,11 +48,5 @@ struct ContentView: View {
             joke = try result.get()
             makignRequest = false
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }
