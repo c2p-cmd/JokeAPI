@@ -12,7 +12,7 @@ struct ContentView: View {
         NavigationStack {
             JokeView()
         }
-        .preferredColorScheme(.light)
+        //.preferredColorScheme(.light)
     }
 }
 

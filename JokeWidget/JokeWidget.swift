@@ -14,21 +14,26 @@ struct Provider: TimelineProvider {
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        getRandomJoke {
-            newJoke, error in
+        getOrFetchRandomJoke(completionHandler: {
+            res in
             
-            if let joke = newJoke {
+            switch res {
+            case .success(let newJoke):
                 let newJokeEntry = SimpleEntry(
-                    joke: joke,
+                    joke: newJoke,
                     didError: false
                 )
                 completion(newJokeEntry)
+                break
+            case .failure(_):
+                completion(
+                    SimpleEntry(
+                        didError: true
+                    )
+                )
+                break
             }
-            
-            if error != nil {
-                completion(SimpleEntry(didError: true))
-            }
-        }
+        })
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
@@ -47,7 +52,7 @@ struct Provider: TimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
     var date: Date = Date()
-    var joke: String = "Why do Java Programmers have to wear glasses?\n\nBecause they don't C#."
+    var joke: String = ""
     var didError = false
 }
 
@@ -55,10 +60,18 @@ struct JokeWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        Text(entry.joke)
-            .font(.caption)
-            .monospaced()
-            .multilineTextAlignment(.center)
+        if entry.didError {
+            Text(UserDefaults.savedJoke)
+                .font(.caption)
+                .monospaced()
+                .multilineTextAlignment(.center)
+                .foregroundColor(.mint)
+        } else {
+            Text(entry.joke)
+                .font(.caption)
+                .monospaced()
+                .multilineTextAlignment(.center)
+        }
     }
 }
 
@@ -71,15 +84,36 @@ struct JokeWidget: Widget {
         }
         .supportedFamilies([.systemMedium])
         .configurationDisplayName("Joke Widget")
-        .description("This joke widget.")
+        .description("This is a widget to feed you with joke every hour.")
     }
 }
 
 struct JokeWidget_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            JokeWidgetEntryView(entry: SimpleEntry(date: Date()))
-                .previewContext(WidgetPreviewContext(family: .systemMedium))
+            JokeWidgetEntryView(
+                entry: SimpleEntry(
+                    date: Date(),
+                    didError: true
+                )
+            )
+            .previewContext(
+                WidgetPreviewContext(
+                    family: .systemMedium
+                )
+            )
+            
+            JokeWidgetEntryView(
+                entry: SimpleEntry(
+                    date: Date(),
+                    didError: true
+                )
+            )
+            .previewContext(
+                WidgetPreviewContext(
+                    family: .systemLarge
+                )
+            )
         }
     }
 }
