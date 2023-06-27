@@ -4,4 +4,4 @@
 
 ### Recording
 
-![Video](Screenshot\ -\ iPhone\ 14\ Pro\ -\ 2023-06-26\ at\ 15.03.35.png )
+![Video](https://github.com/c2p-cmd/JokeAPI/blob/interactive/Simulator%20Screenshot%20-%20iPhone%2014%20Pro%20-%202023-06-26%20at%2015.03.35.png)
