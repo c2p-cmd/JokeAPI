@@ -18,41 +18,39 @@ struct JokeView: View {
     
     var body: some View {
         NavigationView {
-            VStack(alignment: .center) {
-                Form {
-                    MultiSelector<Text, IdentifiableString>(
-                        label: labelView("Choose Joke Categories"),
-                        options: jokeCategories.map { IdentifiableString(string: $0) },
-                        optionToString: { $0.string },
-                        selected: self.$selectedCategories,
-                        emptySelectionString: "Any"
-                    )
-                    Toggle(isOn: self.$safeMode) {
-                        labelView("Safe Mode")
-                    }
-                    Text(joke)
-                        .font(.title2)
-                        .monospaced()
-                        .multilineTextAlignment(.center)
-                    if let err = error {
-                        Spacer()
-                        Text(err)
-                            .font(.caption2)
-                    }
+            Form {
+                HStack {
+                    Spacer()
+                    Button {
+                        if isBusy == false {
+                            getNewJoke()
+                        }
+                    } label: {
+                        Label("Reload", systemImage: "arrow.clockwise")
+                    }.disabled(isBusy)
+                }
+                MultiSelector<Text, IdentifiableString>(
+                    label: labelView("Choose Joke Categories"),
+                    options: jokeCategories.map { IdentifiableString(string: $0) },
+                    optionToString: { $0.string },
+                    selected: self.$selectedCategories,
+                    emptySelectionString: "Any"
+                )
+                Toggle(isOn: self.$safeMode) {
+                    labelView("Safe Mode")
+                }
+                Text(joke)
+                    .font(.title2)
+                    .monospaced()
+                    .multilineTextAlignment(.center)
+                if let err = error {
+                    Spacer()
+                    Text(err)
+                        .font(.caption2)
                 }
             }
         }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    if isBusy == false {
-                        getNewJoke()
-                    }
-                } label: {
-                    Label("Reload", systemImage: "arrow.clockwise")
-                }.disabled(isBusy)
-            }
-        }
+        .navigationTitle("Jokes View")
     }
     
     private func labelView(_ title: String) -> Text {
@@ -83,10 +81,8 @@ struct JokeView: View {
     }
 }
 
-struct JokeView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            JokeView()
-        }
-    }
-}
+//struct JokeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//            JokeView()
+//    }
+//}

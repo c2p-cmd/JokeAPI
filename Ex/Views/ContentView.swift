@@ -9,8 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        NavigationStack {
+        TabView {
             JokeView()
+                .tabItem {
+                    Label("Joke", systemImage: "theatermasks.circle.fill")
+                }
+            
+            QuoteView()
+                .tabItem {
+                    Label("Quote", systemImage: "quote.bubble.fill")
+                }
         }
         //.preferredColorScheme(.light)
     }

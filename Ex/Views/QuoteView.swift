@@ -16,38 +16,36 @@ struct QuoteView: View {
     
     var body: some View {
         NavigationView {
-            VStack(alignment: .center) {
-                Form {
-                    Text(quote.content)
-                        .font(.title2)
+            Form {
+                HStack {
+                    Spacer()
+                    Button {
+                        if isBusy == false {
+                            getNewQuote()
+                        }
+                    } label: {
+                        Label("Reload", systemImage: "arrow.clockwise")
+                    }
+                    .disabled(self.isBusy)
+                }
+                Text(quote.content)
+                    .font(.title2)
+                    .monospaced()
+                    .multilineTextAlignment(.center)
+                HStack() {
+                    Spacer()
+                    Text("-\(quote.author)")
+                        .font(.title3)
                         .monospaced()
-                        .multilineTextAlignment(.center)
-                    HStack() {
-                        Spacer()
-                        Text("-\(quote.author)")
-                            .font(.title3)
-                            .monospaced()
-                            .multilineTextAlignment(.leading)
-                    }
-                    if let err = error {
-                        Text(err)
-                            .font(.callout)
-                    }
+                        .multilineTextAlignment(.leading)
+                }
+                if let err = error {
+                    Text(err)
+                        .font(.callout)
                 }
             }
         }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    if isBusy == false {
-                        getNewQuote()
-                    }
-                } label: {
-                    Label("Reload", systemImage: "arrow.clockwise")
-                }
-                .disabled(self.isBusy)
-            }
-        }
+        .navigationTitle("Quotes View")
     }
     
     private func getNewQuote() {
@@ -69,10 +67,8 @@ struct QuoteView: View {
     }
 }
 
-struct QuoteView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            QuoteView()
-        }
-    }
-}
+//struct QuoteView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        QuoteView()
+//    }
+//}

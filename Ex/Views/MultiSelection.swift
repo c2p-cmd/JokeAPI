@@ -13,6 +13,8 @@ struct IdentifiableString: Identifiable, Hashable {
 }
 
 struct MultiSelectionView<Selectable: Identifiable & Hashable>: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+    
     let options: [Selectable]
     let optionToString: (Selectable) -> String
 
@@ -25,7 +27,7 @@ struct MultiSelectionView<Selectable: Identifiable & Hashable>: View {
                     toggleSelection(selectable: selectable)
                 } label: {
                     HStack {
-                        Text(optionToString(selectable)).foregroundColor(.black)
+                        Text(optionToString(selectable))
                         Spacer()
                         if selected.contains(where: { $0.id == selectable.id }) {
                             Image(systemName: "checkmark").foregroundColor(.accentColor)
@@ -103,5 +105,6 @@ struct Example_View: View {
 //struct MultiSelector_Previews: PreviewProvider {
 //    static var previews: some View {
 //        Example_View()
+//            .preferredColorScheme(.dark)
 //    }
 //}
