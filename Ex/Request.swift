@@ -7,6 +7,15 @@
 
 import Foundation
 
+public let jokeCategories: [String] = [
+    "Pun",
+    "Spooky",
+    "Christmas",
+    "Dark",
+    "Misc",
+    "Programming"
+]
+
 public func getOrFetchRandomJoke(
     from url: String = "https://v2.jokeapi.dev/joke/Any?format=txt",
     completionHandler: @escaping ((Result<String, Error>) -> Void)
@@ -28,14 +37,44 @@ public func getOrFetchRandomJoke(
     task.resume()
 }
 
-public func getRandomJoke(
-    from url: String = "https://v2.jokeapi.dev/joke/Any?format=txt"
+func getRandomQuote() async -> Result<QuoteApiResponse, Error> {
+    do {
+        let quoteUrl = URL(string: "https://api.quotable.io/random")!
+        let (data, _) = try await URLSession.shared.data(from: quoteUrl)
+        let quoteApiResponse = try JSONDecoder().decode(QuoteApiResponse.self, from: data)
+        
+        return .success(quoteApiResponse)
+    } catch {
+        return .failure(error)
+    }
+}
+
+func getRandomJoke(
+    of categories: [IdentifiableString],
+    safeMode: Bool = false
 ) async -> Result<String, Error> {
     do {
-        let url = URL(string: url)!
-        let (data, _) = try await URLSession.shared.data(for: URLRequest(url: url))
+        var urlString: String = "https://v2.jokeapi.dev/joke/"
+        if categories.isEmpty {
+            urlString.append("Any")
+        } else {
+            for i in 0 ..< categories.count {
+                if i == categories.count-1 {
+                    urlString.append(categories[i].string)
+                } else {
+                    urlString.append("\(categories[i].string),")
+                }
+            }
+        }
+        
+        var format = "?format=txt"
+        if safeMode {
+            format.append("&safe-mode")
+        }
+        let url = URL(string: "\(urlString)\(format)")!
+        
+        let (data, _) = try await URLSession.shared.data(from: url)
         let joke = String(decoding: data, as: UTF8.self)
-        UserDefaults.saveNewJoke(joke)
         return .success(joke)
     } catch let err {
         return .failure(err)

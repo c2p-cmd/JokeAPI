@@ -23,6 +23,10 @@
 		00511CF72A2C960500D1FD13 /* JokeWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 00511CE72A2C960300D1FD13 /* JokeWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		00511CFC2A2C961200D1FD13 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00511CE12A2C911F00D1FD13 /* Request.swift */; };
 		00511CFE2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png in Resources */ = {isa = PBXBuildFile; fileRef = 00511CFD2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png */; };
+		00E4B5842A4C47020064E63C /* MultiSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4B5832A4C47020064E63C /* MultiSelection.swift */; };
+		00E4B5852A4C4B4D0064E63C /* MultiSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4B5832A4C47020064E63C /* MultiSelection.swift */; };
+		00E4B5882A4C64540064E63C /* QuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4B5872A4C64540064E63C /* QuoteView.swift */; };
+		00E4B58A2A4C6E580064E63C /* QuoteWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4B5892A4C6E580064E63C /* QuoteWidget.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +70,10 @@
 		00511CF22A2C960500D1FD13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00511CF42A2C960500D1FD13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00511CFD2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2023-06-04 at 16.04.08.png"; sourceTree = "<group>"; };
+		00E4B5832A4C47020064E63C /* MultiSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelection.swift; sourceTree = "<group>"; };
+		00E4B5862A4C61570064E63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		00E4B5872A4C64540064E63C /* QuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteView.swift; sourceTree = "<group>"; };
+		00E4B5892A4C6E580064E63C /* QuoteWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteWidget.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +101,8 @@
 			children = (
 				0043377D2A339DBD004AF73F /* JokeView.swift */,
 				0043377E2A339DBD004AF73F /* ContentView.swift */,
+				00E4B5832A4C47020064E63C /* MultiSelection.swift */,
+				00E4B5872A4C64540064E63C /* QuoteView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -120,6 +130,7 @@
 		004860132A1B8A7800F3E6B4 /* Ex */ = {
 			isa = PBXGroup;
 			children = (
+				00E4B5862A4C61570064E63C /* Info.plist */,
 				0043377C2A339DBD004AF73F /* Views */,
 				004860142A1B8A7800F3E6B4 /* ExApp.swift */,
 				004860182A1B8A7900F3E6B4 /* Assets.xcassets */,
@@ -152,6 +163,7 @@
 			children = (
 				00511CEE2A2C960300D1FD13 /* JokeWidgetBundle.swift */,
 				00511CF02A2C960300D1FD13 /* JokeWidget.swift */,
+				00E4B5892A4C6E580064E63C /* QuoteWidget.swift */,
 				00511CF22A2C960500D1FD13 /* Assets.xcassets */,
 				00511CF42A2C960500D1FD13 /* Info.plist */,
 			);
@@ -260,9 +272,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00E4B5842A4C47020064E63C /* MultiSelection.swift in Sources */,
 				004337822A339E87004AF73F /* File.swift in Sources */,
 				00511CE22A2C911F00D1FD13 /* Request.swift in Sources */,
 				0043377F2A339DBD004AF73F /* JokeView.swift in Sources */,
+				00E4B5882A4C64540064E63C /* QuoteView.swift in Sources */,
 				004337802A339DBD004AF73F /* ContentView.swift in Sources */,
 				004860152A1B8A7800F3E6B4 /* ExApp.swift in Sources */,
 			);
@@ -276,6 +290,8 @@
 				004337832A33A140004AF73F /* File.swift in Sources */,
 				00511CFC2A2C961200D1FD13 /* Request.swift in Sources */,
 				00511CEF2A2C960300D1FD13 /* JokeWidgetBundle.swift in Sources */,
+				00E4B58A2A4C6E580064E63C /* QuoteWidget.swift in Sources */,
+				00E4B5852A4C4B4D0064E63C /* MultiSelection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,9 +429,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Ex/Preview Content\"";
-				DEVELOPMENT_TEAM = VD4JPC3R94;
+				DEVELOPMENT_TEAM = HJ3C6V359D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Ex/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = kEntertainment;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -426,7 +444,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thakur.joke;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidastudios.aioEntertainment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -446,9 +464,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Ex/Preview Content\"";
-				DEVELOPMENT_TEAM = VD4JPC3R94;
+				DEVELOPMENT_TEAM = HJ3C6V359D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Ex/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = kEntertainment;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -459,7 +479,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thakur.joke;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidastudios.aioEntertainment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -477,7 +497,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VD4JPC3R94;
+				DEVELOPMENT_TEAM = HJ3C6V359D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = JokeWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = JokeWidget;
@@ -489,7 +509,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thakur.joke.JokeWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidastudios.aioEntertainment.JokeWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -506,7 +526,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = VD4JPC3R94;
+				DEVELOPMENT_TEAM = HJ3C6V359D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = JokeWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = JokeWidget;
@@ -518,7 +538,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thakur.joke.JokeWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidastudios.aioEntertainment.JokeWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;

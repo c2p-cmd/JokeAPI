@@ -12,6 +12,7 @@ struct ExApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .defaultAppStorage(.standard)
         }
     }
 }

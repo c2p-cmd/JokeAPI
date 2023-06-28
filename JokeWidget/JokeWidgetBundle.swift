@@ -12,5 +12,7 @@ import SwiftUI
 struct JokeWidgetBundle: WidgetBundle {
     var body: some Widget {
         JokeWidget()
+        
+        QuoteWidget()
     }
 }
