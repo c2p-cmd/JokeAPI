@@ -16,14 +16,11 @@ struct JokeWidgetEntryView: View {
             Text(entry.joke)
                 .font(.headline)
                 .fontDesign(.monospaced)
-            Button(intent: JokeIntent()) {
-                Label {
-                    Text("")
-                } icon: {
-                    Image(systemName: "circle")
+            if #available(iOS 17, *) {
+                Button(intent: JokeIntent()) {
+                    Image(systemName: "arrow.counterclockwise")
                 }
             }
-            .font(.caption2)
         }
         .containerBackground(.fill.tertiary, for: .widget)
     }
