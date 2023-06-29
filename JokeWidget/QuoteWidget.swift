@@ -71,14 +71,28 @@ struct QuoteWidgetEntryView: View {
         }.monospaced()
     }
     
-    var body: some View {
+    var widgetView: some View {
         VStack {
             if widgetFamily == .systemSmall {
                 text().font(.caption2)
             } else {
                 text().font(.caption)
             }
+            if #available(iOS 17, macOS 14, *) {
+                Button(intent: QuoteIntent()) {
+                    Image(systemName: "arrow.counterclockwise")
+                }
+            }
         }.padding(.all, 1)
+    }
+    
+    var body: some View {
+        if #available(iOS 17, macOS 14, *) {
+            widgetView
+                .containerBackground(.fill.tertiary, for: .widget)
+        } else {
+            widgetView
+        }
     }
 }
 

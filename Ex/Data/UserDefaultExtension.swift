@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - API Model
 struct QuoteApiResponse: Codable {
     let content: String
     let author: String
@@ -32,6 +33,7 @@ struct QuoteApiResponse: Codable {
     }
 }
 
+// MARK: - To use in @AppStorage wrapper
 extension QuoteApiResponse: RawRepresentable {
     public var rawValue: String {
         guard let data = try? JSONEncoder().encode(self),
@@ -58,19 +60,21 @@ extension QuoteApiResponse: RawRepresentable {
     }
 }
 
+// MARK: - APPSTORAGE to use
+let appStorage = UserDefaults(suiteName: "group.kida")!
 
 // MARK: - UserDefaults Quote Extension
 extension UserDefaults {
     static let defaultQuote = QuoteApiResponse("Much wisdom often goes with fewest words.", by: "Sophocles")
     
     static var savedQuote: QuoteApiResponse {
-        (UserDefaults.standard.object(forKey: "quote") as? QuoteApiResponse) ?? UserDefaults.defaultQuote
+        (appStorage.object(forKey: "quote") as? QuoteApiResponse) ?? UserDefaults.defaultQuote
     }
     
     static func saveNewQuote(
         _ newQuote: QuoteApiResponse
     ) {
-        UserDefaults.standard.set(newQuote.content, forKey: "quote")
+        appStorage.set(newQuote.content, forKey: "quote")
     }
 }
 
@@ -79,12 +83,12 @@ extension UserDefaults {
     static let defaultJoke = "Why do Java Programmers have to wear glasses?\n\nBecause they don't C#."
     
     static var savedJoke: String {
-        UserDefaults.standard.string(forKey: "save_joke") ?? UserDefaults.defaultJoke
+        appStorage.string(forKey: "save_joke") ?? UserDefaults.defaultJoke
     }
     
     static func saveNewJoke(
         _ newJoke: String
     ) {
-        UserDefaults.standard.set(newJoke, forKey: "save_joke")
+        appStorage.set(newJoke, forKey: "save_joke")
     }
 }

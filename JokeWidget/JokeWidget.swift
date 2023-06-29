@@ -8,26 +8,32 @@
 import WidgetKit
 import SwiftUI
 
-struct Provider: TimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), joke: UserDefaults.savedJoke, didError: true)
+struct JokeEntry: TimelineEntry {
+    let date: Date = .now
+    var joke: String = ""
+    var didError = false
+}
+
+struct JokeProvider: TimelineProvider {
+    func placeholder(in context: Context) -> JokeEntry {
+        JokeEntry(joke: UserDefaults.savedJoke, didError: true)
     }
     
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        completion(SimpleEntry(
+    func getSnapshot(in context: Context, completion: @escaping (JokeEntry) -> ()) {
+        completion(JokeEntry(
             joke: UserDefaults.savedJoke,
             didError: false
         ))
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        getOrFetchRandomJoke(completionHandler: {
-            res in
+        Task {
+            let res = await getRandomJoke(of: [], safeMode: true)
             
             switch res {
             case .success(let newJoke):
                 UserDefaults.saveNewJoke(newJoke)
-                let newJokeEntry = SimpleEntry(
+                let newJokeEntry = JokeEntry(
                     joke: newJoke,
                     didError: false
                 )
@@ -38,7 +44,7 @@ struct Provider: TimelineProvider {
                 completion(Timeline(entries: [newJokeEntry], policy: policy))
                 break
             case .failure(_):
-                let newJokeEntry = SimpleEntry(
+                let newJokeEntry = JokeEntry(
                     joke: UserDefaults.savedJoke,
                     didError: true
                 )
@@ -49,18 +55,12 @@ struct Provider: TimelineProvider {
                 completion(Timeline(entries: [newJokeEntry], policy: policy))
                 break
             }
-        })
+        }
     }
 }
 
-struct SimpleEntry: TimelineEntry {
-    var date: Date = .now
-    var joke: String = ""
-    var didError = false
-}
-
 struct JokeWidgetEntryView : View {
-    var entry: Provider.Entry
+    var entry: JokeProvider.Entry
     @Environment(\.widgetFamily) var widgetFamily: WidgetFamily
     
     func text() -> some View {
@@ -70,14 +70,28 @@ struct JokeWidgetEntryView : View {
             .foregroundColor(entry.didError ? .black : .mint)
     }
     
-    var body: some View {
+    var widgetView: some View {
         VStack {
             if widgetFamily == .systemSmall {
                 text().font(.caption2)
             } else {
                 text().font(.caption)
             }
+            if #available(iOS 17, macOS 14, *) {
+                Button(intent: JokeIntent()) {
+                    Image(systemName: "arrow.counterclockwise")
+                }
+            }
         }.padding(.all, 1)
+    }
+    
+    var body: some View {
+        if #available(iOS 17, macOS 14, *) {
+            widgetView
+                .containerBackground(.fill.tertiary, for: .widget)
+        } else {
+            widgetView
+        }
     }
 }
 
@@ -85,7 +99,7 @@ struct JokeWidget: Widget {
     let kind: String = "JokeWidget"
     
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+        StaticConfiguration(kind: kind, provider: JokeProvider()) { entry in
             JokeWidgetEntryView(entry: entry)
         }
         .supportedFamilies([.systemSmall, .systemMedium])
@@ -96,32 +110,28 @@ struct JokeWidget: Widget {
 
 struct JokeWidget_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            JokeWidgetEntryView(
-                entry: SimpleEntry(
-                    date: Date(),
-                    joke: UserDefaults.savedJoke,
-                    didError: false
-                )
+        JokeWidgetEntryView(
+            entry: JokeEntry(
+                joke: UserDefaults.savedJoke,
+                didError: false
             )
-            .previewContext(
-                WidgetPreviewContext(
-                    family: .systemSmall
-                )
+        )
+        .previewContext(
+            WidgetPreviewContext(
+                family: .systemSmall
             )
-            
-            JokeWidgetEntryView(
-                entry: SimpleEntry(
-                    date: Date(),
-                    joke: UserDefaults.savedJoke,
-                    didError: true
-                )
+        )
+        
+        JokeWidgetEntryView(
+            entry: JokeEntry(
+                joke: UserDefaults.savedJoke,
+                didError: true
             )
-            .previewContext(
-                WidgetPreviewContext(
-                    family: .systemMedium
-                )
+        )
+        .previewContext(
+            WidgetPreviewContext(
+                family: .systemMedium
             )
-        }
+        )
     }
 }

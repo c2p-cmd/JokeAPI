@@ -54,7 +54,8 @@ func getRandomJoke(
     safeMode: Bool = false
 ) async -> Result<String, Error> {
     do {
-        var urlString: String = "https://v2.jokeapi.dev/joke/"
+        var urlString = "https://v2.jokeapi.dev/joke/"
+        
         if categories.isEmpty {
             urlString.append("Any")
         } else {
@@ -67,10 +68,8 @@ func getRandomJoke(
             }
         }
         
-        var format = "?format=txt"
-        if safeMode {
-            format.append("&safe-mode")
-        }
+        let format = safeMode ? "?format=txt&safe-mode" : "?format=txt"
+        
         let url = URL(string: "\(urlString)\(format)")!
         
         let (data, _) = try await URLSession.shared.data(from: url)
