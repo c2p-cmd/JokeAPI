@@ -18,6 +18,11 @@
 		004860152A1B8A7800F3E6B4 /* ExApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004860142A1B8A7800F3E6B4 /* ExApp.swift */; };
 		004860192A1B8A7900F3E6B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004860182A1B8A7900F3E6B4 /* Assets.xcassets */; };
 		0048601C2A1B8A7900F3E6B4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0048601B2A1B8A7900F3E6B4 /* Preview Assets.xcassets */; };
+		004D9B392A4D98F100199886 /* AnimalPictureWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B382A4D98F100199886 /* AnimalPictureWidget.swift */; };
+		004D9B3B2A4D992A00199886 /* AnimalPictureConfig.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B3A2A4D992A00199886 /* AnimalPictureConfig.intentdefinition */; };
+		004D9B3E2A4D99CD00199886 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B3D2A4D99CD00199886 /* ImageProvider.swift */; };
+		004D9B402A4D9E5600199886 /* NewConfigIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B3F2A4D9E5600199886 /* NewConfigIntent.swift */; };
+		004D9B432A4DA50600199886 /* NewConfigIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B3F2A4D9E5600199886 /* NewConfigIntent.swift */; };
 		00511CE22A2C911F00D1FD13 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00511CE12A2C911F00D1FD13 /* Request.swift */; };
 		00511CEA2A2C960300D1FD13 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00511CE92A2C960300D1FD13 /* WidgetKit.framework */; };
 		00511CEC2A2C960300D1FD13 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00511CEB2A2C960300D1FD13 /* SwiftUI.framework */; };
@@ -69,6 +74,10 @@
 		004860142A1B8A7800F3E6B4 /* ExApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExApp.swift; sourceTree = "<group>"; };
 		004860182A1B8A7900F3E6B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0048601B2A1B8A7900F3E6B4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		004D9B382A4D98F100199886 /* AnimalPictureWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalPictureWidget.swift; sourceTree = "<group>"; };
+		004D9B3A2A4D992A00199886 /* AnimalPictureConfig.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = AnimalPictureConfig.intentdefinition; sourceTree = "<group>"; };
+		004D9B3D2A4D99CD00199886 /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
+		004D9B3F2A4D9E5600199886 /* NewConfigIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConfigIntent.swift; sourceTree = "<group>"; };
 		00511CE12A2C911F00D1FD13 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		00511CE72A2C960300D1FD13 /* JokeWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = JokeWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		00511CE92A2C960300D1FD13 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = Library/Frameworks/WidgetKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -169,6 +178,15 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		004D9B3C2A4D99BA00199886 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				004D9B3D2A4D99CD00199886 /* ImageProvider.swift */,
+				004D9B3F2A4D9E5600199886 /* NewConfigIntent.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		00511CE82A2C960300D1FD13 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,11 +199,14 @@
 		00511CED2A2C960300D1FD13 /* JokeWidget */ = {
 			isa = PBXGroup;
 			children = (
+				004D9B3C2A4D99BA00199886 /* Helpers */,
 				00511CEE2A2C960300D1FD13 /* JokeWidgetBundle.swift */,
 				00511CF02A2C960300D1FD13 /* JokeWidget.swift */,
 				00E4B5892A4C6E580064E63C /* QuoteWidget.swift */,
 				00511CF22A2C960500D1FD13 /* Assets.xcassets */,
 				00511CF42A2C960500D1FD13 /* Info.plist */,
+				004D9B382A4D98F100199886 /* AnimalPictureWidget.swift */,
+				004D9B3A2A4D992A00199886 /* AnimalPictureConfig.intentdefinition */,
 			);
 			path = JokeWidget;
 			sourceTree = "<group>";
@@ -294,6 +315,7 @@
 			files = (
 				003BD26B2A4D81C2009FDFAC /* Model.swift in Sources */,
 				00E4B5842A4C47020064E63C /* MultiSelection.swift in Sources */,
+				004D9B432A4DA50600199886 /* NewConfigIntent.swift in Sources */,
 				004337822A339E87004AF73F /* UserDefaultExtension.swift in Sources */,
 				00511CE22A2C911F00D1FD13 /* Request.swift in Sources */,
 				0043377F2A339DBD004AF73F /* JokeView.swift in Sources */,
@@ -310,10 +332,14 @@
 			files = (
 				00511CF12A2C960300D1FD13 /* JokeWidget.swift in Sources */,
 				004337832A33A140004AF73F /* UserDefaultExtension.swift in Sources */,
+				004D9B3B2A4D992A00199886 /* AnimalPictureConfig.intentdefinition in Sources */,
+				004D9B392A4D98F100199886 /* AnimalPictureWidget.swift in Sources */,
 				00511CFC2A2C961200D1FD13 /* Request.swift in Sources */,
 				003BD2692A4D72B3009FDFAC /* MyIntents.swift in Sources */,
+				004D9B402A4D9E5600199886 /* NewConfigIntent.swift in Sources */,
 				00511CEF2A2C960300D1FD13 /* JokeWidgetBundle.swift in Sources */,
 				00E4B58A2A4C6E580064E63C /* QuoteWidget.swift in Sources */,
+				004D9B3E2A4D99CD00199886 /* ImageProvider.swift in Sources */,
 				00E4B5852A4C4B4D0064E63C /* MultiSelection.swift in Sources */,
 				003BD26C2A4D81C2009FDFAC /* Model.swift in Sources */,
 			);

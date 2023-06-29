@@ -20,12 +20,12 @@ struct ContentView: View {
                     Label("Quote", systemImage: "quote.bubble.fill")
                 }
         }
-        //.preferredColorScheme(.light)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
     }
 }

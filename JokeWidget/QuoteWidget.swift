@@ -109,22 +109,22 @@ struct QuoteWidget: Widget {
     }
 }
 
-struct QuoteWidget_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            QuoteWidgetEntryView(entry: QuoteEntry())
-                .previewContext(
-                    WidgetPreviewContext(
-                        family: .systemMedium
-                    )
-                )
-            
-            QuoteWidgetEntryView(entry: QuoteEntry())
-                .previewContext(
-                    WidgetPreviewContext(
-                        family: .systemSmall
-                    )
-                )
-        }
-    }
-}
+//struct QuoteWidget_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            QuoteWidgetEntryView(entry: QuoteEntry())
+//                .previewContext(
+//                    WidgetPreviewContext(
+//                        family: .systemMedium
+//                    )
+//                )
+//            
+//            QuoteWidgetEntryView(entry: QuoteEntry())
+//                .previewContext(
+//                    WidgetPreviewContext(
+//                        family: .systemSmall
+//                    )
+//                )
+//        }
+//    }
+//}
