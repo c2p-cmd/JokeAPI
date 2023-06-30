@@ -35,7 +35,7 @@ struct NewAnimalPictureProvider: AppIntentTimelineProvider {
     ) async -> Timeline<AnimalPictureEntry> {
         let entry = await snapshot(for: configuration, in: context)
         let nextReload = Calendar.current.date(
-            byAdding: .hour,
+            byAdding: .day,
             value: 1,
             to: entry.date
         )!
@@ -70,7 +70,7 @@ struct AnimalPictureProvider: IntentTimelineProvider {
     ) {
         getSnapshot(for: configuration, in: context) { entry in
             let nextReloadDate = Calendar.current.date(
-                byAdding: .hour,
+                byAdding: .day,
                 value: 1,
                 to: entry.date
             )!
@@ -92,15 +92,27 @@ struct AnimalPictureEntryView: View {
         Image(uiImage: entry.uiImage)
             .resizable()
             .scaledToFit()
+            .background(Color.black)
     }
     
     var body: some View {
-        if #available(iOS 17, macOS 14, *) {
-            imageView
-                .containerBackground(.fill.tertiary, for: .widget)
-        } else {
-            imageView
+        ZStack {
+            Rectangle()
+                .fill(.black)
+                .ignoresSafeArea()
+                .background(.black)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            if #available(iOS 17, macOS 14, *) {
+                imageView
+                    .containerBackground(.black, for: .widget)
+            } else {
+                imageView
+            }
         }
+        .background(.black)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .ignoresSafeArea()
+        .preferredColorScheme(.dark)
     }
 }
 
@@ -108,7 +120,7 @@ struct AnimalPictureWidget: Widget {
     let kind: String = "AnimalPictureWidget"
     
     func makeConfiguration() -> some WidgetConfiguration {
-        if #available(iOS 17, macOS 14, watchOS 10, *) {
+        if #available(iOS 17, macOS 14, *) {
             return AppIntentConfiguration(
                 kind: kind,
                 intent: AnimalOfChoiceIntent.self,
@@ -147,7 +159,7 @@ struct AnimalPictureWidgetView_Preview: PreviewProvider {
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
             
             AnimalPictureEntryView(entry: entry)
-                .previewContext(WidgetPreviewContext(family: .systemMedium))
+                .previewContext(WidgetPreviewContext(family: .systemExtraLarge))
         }
     }
 }

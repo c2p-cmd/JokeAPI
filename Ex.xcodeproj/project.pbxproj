@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		001ACE082A4EB505000CE9AF /* AnimalPictureConfig.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B3A2A4D992A00199886 /* AnimalPictureConfig.intentdefinition */; };
+		001ACE0A2A4EBA2C000CE9AF /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */; };
+		001ACE0B2A4EBA2E000CE9AF /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */; };
 		003BD2682A4D72B3009FDFAC /* MyIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003BD2672A4D72B3009FDFAC /* MyIntents.swift */; };
 		003BD2692A4D72B3009FDFAC /* MyIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003BD2672A4D72B3009FDFAC /* MyIntents.swift */; };
 		003BD26B2A4D81C2009FDFAC /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003BD26A2A4D81C2009FDFAC /* Model.swift */; };
@@ -63,6 +66,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resize.swift"; sourceTree = "<group>"; };
 		003BD2652A4D718A009FDFAC /* Ex.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ex.entitlements; sourceTree = "<group>"; };
 		003BD2662A4D7194009FDFAC /* JokeWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JokeWidgetExtension.entitlements; sourceTree = "<group>"; };
 		003BD2672A4D72B3009FDFAC /* MyIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyIntents.swift; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 				004337812A339E87004AF73F /* UserDefaultExtension.swift */,
 				003BD2672A4D72B3009FDFAC /* MyIntents.swift */,
 				003BD26A2A4D81C2009FDFAC /* Model.swift */,
+				001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -315,8 +320,10 @@
 			files = (
 				003BD26B2A4D81C2009FDFAC /* Model.swift in Sources */,
 				00E4B5842A4C47020064E63C /* MultiSelection.swift in Sources */,
+				001ACE082A4EB505000CE9AF /* AnimalPictureConfig.intentdefinition in Sources */,
 				004D9B432A4DA50600199886 /* NewConfigIntent.swift in Sources */,
 				004337822A339E87004AF73F /* UserDefaultExtension.swift in Sources */,
+				001ACE0A2A4EBA2C000CE9AF /* UIImage+resize.swift in Sources */,
 				00511CE22A2C911F00D1FD13 /* Request.swift in Sources */,
 				0043377F2A339DBD004AF73F /* JokeView.swift in Sources */,
 				00E4B5882A4C64540064E63C /* QuoteView.swift in Sources */,
@@ -339,6 +346,7 @@
 				004D9B402A4D9E5600199886 /* NewConfigIntent.swift in Sources */,
 				00511CEF2A2C960300D1FD13 /* JokeWidgetBundle.swift in Sources */,
 				00E4B58A2A4C6E580064E63C /* QuoteWidget.swift in Sources */,
+				001ACE0B2A4EBA2E000CE9AF /* UIImage+resize.swift in Sources */,
 				004D9B3E2A4D99CD00199886 /* ImageProvider.swift in Sources */,
 				00E4B5852A4C4B4D0064E63C /* MultiSelection.swift in Sources */,
 				003BD26C2A4D81C2009FDFAC /* Model.swift in Sources */,
