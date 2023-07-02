@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct SpeedTestView: View {
     let downloadService = DownloadService.shared
@@ -44,6 +45,7 @@ struct SpeedTestView: View {
                         case .success(let speed):
                             print("Speed of \(speed)")
                             self.currentSpeed = speed
+                            WidgetCenter.shared.reloadTimelines(ofKind: "SpeedTestWidget")
                             break
                         case .failure(let err):
                             print(err.localizedDescription)
