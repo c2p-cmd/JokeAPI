@@ -100,7 +100,7 @@ extension DownloadService: URLSessionDownloadDelegate {
         guard let startDate = responseDate, let latesDate = latestDate else {
             responseDate = Date();
             latestDate = responseDate
-            print("okay bye")
+            print("reset response date")
             return
         }
         let currentTime = Date()

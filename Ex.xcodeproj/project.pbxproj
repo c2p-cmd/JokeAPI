@@ -52,6 +52,7 @@
 		00E4B5852A4C4B4D0064E63C /* MultiSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4B5832A4C47020064E63C /* MultiSelection.swift */; };
 		00E4B5882A4C64540064E63C /* QuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4B5872A4C64540064E63C /* QuoteView.swift */; };
 		00E4B58A2A4C6E580064E63C /* QuoteWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4B5892A4C6E580064E63C /* QuoteWidget.swift */; };
+		00F2F8BD2A515DDD00A2ADE5 /* SpeedTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2F8BC2A515DDD00A2ADE5 /* SpeedTestView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,7 @@
 		00E4B5862A4C61570064E63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		00E4B5872A4C64540064E63C /* QuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteView.swift; sourceTree = "<group>"; };
 		00E4B5892A4C6E580064E63C /* QuoteWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteWidget.swift; sourceTree = "<group>"; };
+		00F2F8BC2A515DDD00A2ADE5 /* SpeedTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTestView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 				0043377E2A339DBD004AF73F /* ContentView.swift */,
 				00E4B5832A4C47020064E63C /* MultiSelection.swift */,
 				00E4B5872A4C64540064E63C /* QuoteView.swift */,
+				00F2F8BC2A515DDD00A2ADE5 /* SpeedTestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				00134F262A514E540091D6FD /* DownloadService.swift in Sources */,
 				00134F232A514E0F0091D6FD /* NetworkError.swift in Sources */,
 				0043377F2A339DBD004AF73F /* JokeView.swift in Sources */,
+				00F2F8BD2A515DDD00A2ADE5 /* SpeedTestView.swift in Sources */,
 				00E4B5882A4C64540064E63C /* QuoteView.swift in Sources */,
 				003BD2682A4D72B3009FDFAC /* MyIntents.swift in Sources */,
 				004337802A339DBD004AF73F /* ContentView.swift in Sources */,

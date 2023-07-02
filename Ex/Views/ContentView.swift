@@ -19,6 +19,11 @@ struct ContentView: View {
                 .tabItem {
                     Label("Quote", systemImage: "quote.bubble.fill")
                 }
+            
+            SpeedTestView()
+                .tabItem {
+                    Label("SpeedTest", systemImage: "speedometer")
+                }
         }
     }
 }
