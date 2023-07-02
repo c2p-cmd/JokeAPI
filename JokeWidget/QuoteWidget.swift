@@ -71,7 +71,7 @@ struct QuoteWidgetEntryView: View {
         }.monospaced()
     }
     
-    var widgetView: some View {
+    var body: some View {
         VStack {
             if widgetFamily == .systemSmall {
                 text().font(.caption2)
@@ -83,16 +83,9 @@ struct QuoteWidgetEntryView: View {
                     Image(systemName: "arrow.counterclockwise")
                 }
             }
-        }.padding(.all, 1)
-    }
-    
-    var body: some View {
-        if #available(iOS 17, macOS 14, *) {
-            widgetView
-                .containerBackground(.fill.tertiary, for: .widget)
-        } else {
-            widgetView
         }
+        .padding(.all, 1)
+        .modifyForiOS17()
     }
 }
 

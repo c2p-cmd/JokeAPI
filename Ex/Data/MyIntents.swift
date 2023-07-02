@@ -38,3 +38,23 @@ struct JokeIntent: AppIntent {
         }
     }
 }
+
+@available(iOS 16, *)
+struct SpeedTestIntent: AppIntent {
+    static var title: LocalizedStringResource = "SpeedTestingIntent"
+    
+    func perform() async throws -> some IntentResult & ReturnsValue {
+        let downloadService = DownloadService.shared
+        
+        let res = await downloadService.test(for: url, in: 60)
+        
+        switch res {
+        case .success(let speed):
+            UserDefaults.saveNewSpeed(speed)
+            return .result(value: speed.description)
+        case .failure(let err):
+            return .result(value: err.localizedDescription)
+        }
+    }
+}
+

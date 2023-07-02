@@ -7,13 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00134F1C2A514D080091D6FD /* SpeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00134F1B2A514D080091D6FD /* SpeedModel.swift */; };
+		00134F1D2A514D080091D6FD /* SpeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00134F1B2A514D080091D6FD /* SpeedModel.swift */; };
+		00134F202A514DD20091D6FD /* SpeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00134F1F2A514DD20091D6FD /* SpeedService.swift */; };
+		00134F212A514DD20091D6FD /* SpeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00134F1F2A514DD20091D6FD /* SpeedService.swift */; };
+		00134F232A514E0F0091D6FD /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00134F222A514E0F0091D6FD /* NetworkError.swift */; };
+		00134F242A514E0F0091D6FD /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00134F222A514E0F0091D6FD /* NetworkError.swift */; };
+		00134F262A514E540091D6FD /* DownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00134F252A514E540091D6FD /* DownloadService.swift */; };
+		00134F272A514E540091D6FD /* DownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00134F252A514E540091D6FD /* DownloadService.swift */; };
+		00134F292A514E820091D6FD /* URL+ping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00134F282A514E820091D6FD /* URL+ping.swift */; };
+		00134F2A2A514E820091D6FD /* URL+ping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00134F282A514E820091D6FD /* URL+ping.swift */; };
+		00134F2D2A514F6A0091D6FD /* SpeedWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00134F2B2A514F6A0091D6FD /* SpeedWidget.swift */; };
+		00134F2F2A5153610091D6FD /* ViewModifier_iOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00134F2E2A5153610091D6FD /* ViewModifier_iOS17.swift */; };
+		00134F302A5153610091D6FD /* ViewModifier_iOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00134F2E2A5153610091D6FD /* ViewModifier_iOS17.swift */; };
 		001ACE082A4EB505000CE9AF /* AnimalPictureConfig.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B3A2A4D992A00199886 /* AnimalPictureConfig.intentdefinition */; };
 		001ACE0A2A4EBA2C000CE9AF /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */; };
 		001ACE0B2A4EBA2E000CE9AF /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */; };
 		003BD2682A4D72B3009FDFAC /* MyIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003BD2672A4D72B3009FDFAC /* MyIntents.swift */; };
 		003BD2692A4D72B3009FDFAC /* MyIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003BD2672A4D72B3009FDFAC /* MyIntents.swift */; };
-		003BD26B2A4D81C2009FDFAC /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003BD26A2A4D81C2009FDFAC /* Model.swift */; };
-		003BD26C2A4D81C2009FDFAC /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003BD26A2A4D81C2009FDFAC /* Model.swift */; };
+		003BD26B2A4D81C2009FDFAC /* QuoteAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003BD26A2A4D81C2009FDFAC /* QuoteAPIModel.swift */; };
+		003BD26C2A4D81C2009FDFAC /* QuoteAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003BD26A2A4D81C2009FDFAC /* QuoteAPIModel.swift */; };
 		0043377F2A339DBD004AF73F /* JokeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0043377D2A339DBD004AF73F /* JokeView.swift */; };
 		004337802A339DBD004AF73F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0043377E2A339DBD004AF73F /* ContentView.swift */; };
 		004337822A339E87004AF73F /* UserDefaultExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004337812A339E87004AF73F /* UserDefaultExtension.swift */; };
@@ -66,11 +79,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		00134F1B2A514D080091D6FD /* SpeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedModel.swift; sourceTree = "<group>"; };
+		00134F1F2A514DD20091D6FD /* SpeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedService.swift; sourceTree = "<group>"; };
+		00134F222A514E0F0091D6FD /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		00134F252A514E540091D6FD /* DownloadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadService.swift; sourceTree = "<group>"; };
+		00134F282A514E820091D6FD /* URL+ping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+ping.swift"; sourceTree = "<group>"; };
+		00134F2B2A514F6A0091D6FD /* SpeedWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedWidget.swift; sourceTree = "<group>"; };
+		00134F2E2A5153610091D6FD /* ViewModifier_iOS17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifier_iOS17.swift; sourceTree = "<group>"; };
 		001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resize.swift"; sourceTree = "<group>"; };
 		003BD2652A4D718A009FDFAC /* Ex.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ex.entitlements; sourceTree = "<group>"; };
 		003BD2662A4D7194009FDFAC /* JokeWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JokeWidgetExtension.entitlements; sourceTree = "<group>"; };
 		003BD2672A4D72B3009FDFAC /* MyIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyIntents.swift; sourceTree = "<group>"; };
-		003BD26A2A4D81C2009FDFAC /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		003BD26A2A4D81C2009FDFAC /* QuoteAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteAPIModel.swift; sourceTree = "<group>"; };
 		0043377D2A339DBD004AF73F /* JokeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JokeView.swift; sourceTree = "<group>"; };
 		0043377E2A339DBD004AF73F /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		004337812A339E87004AF73F /* UserDefaultExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultExtension.swift; sourceTree = "<group>"; };
@@ -117,14 +137,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00134F1E2A514D120091D6FD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				003BD26A2A4D81C2009FDFAC /* QuoteAPIModel.swift */,
+				00134F1B2A514D080091D6FD /* SpeedModel.swift */,
+				00134F1F2A514DD20091D6FD /* SpeedService.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		003BD26D2A4D81C6009FDFAC /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				00134F1E2A514D120091D6FD /* Models */,
 				00511CE12A2C911F00D1FD13 /* Request.swift */,
 				004337812A339E87004AF73F /* UserDefaultExtension.swift */,
 				003BD2672A4D72B3009FDFAC /* MyIntents.swift */,
-				003BD26A2A4D81C2009FDFAC /* Model.swift */,
 				001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */,
+				00134F222A514E0F0091D6FD /* NetworkError.swift */,
+				00134F252A514E540091D6FD /* DownloadService.swift */,
+				00134F282A514E820091D6FD /* URL+ping.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -212,6 +245,8 @@
 				00511CF42A2C960500D1FD13 /* Info.plist */,
 				004D9B382A4D98F100199886 /* AnimalPictureWidget.swift */,
 				004D9B3A2A4D992A00199886 /* AnimalPictureConfig.intentdefinition */,
+				00134F2B2A514F6A0091D6FD /* SpeedWidget.swift */,
+				00134F2E2A5153610091D6FD /* ViewModifier_iOS17.swift */,
 			);
 			path = JokeWidget;
 			sourceTree = "<group>";
@@ -318,13 +353,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				003BD26B2A4D81C2009FDFAC /* Model.swift in Sources */,
+				00134F1C2A514D080091D6FD /* SpeedModel.swift in Sources */,
+				00134F2F2A5153610091D6FD /* ViewModifier_iOS17.swift in Sources */,
+				003BD26B2A4D81C2009FDFAC /* QuoteAPIModel.swift in Sources */,
 				00E4B5842A4C47020064E63C /* MultiSelection.swift in Sources */,
 				001ACE082A4EB505000CE9AF /* AnimalPictureConfig.intentdefinition in Sources */,
 				004D9B432A4DA50600199886 /* NewConfigIntent.swift in Sources */,
+				00134F202A514DD20091D6FD /* SpeedService.swift in Sources */,
 				004337822A339E87004AF73F /* UserDefaultExtension.swift in Sources */,
 				001ACE0A2A4EBA2C000CE9AF /* UIImage+resize.swift in Sources */,
+				00134F292A514E820091D6FD /* URL+ping.swift in Sources */,
 				00511CE22A2C911F00D1FD13 /* Request.swift in Sources */,
+				00134F262A514E540091D6FD /* DownloadService.swift in Sources */,
+				00134F232A514E0F0091D6FD /* NetworkError.swift in Sources */,
 				0043377F2A339DBD004AF73F /* JokeView.swift in Sources */,
 				00E4B5882A4C64540064E63C /* QuoteView.swift in Sources */,
 				003BD2682A4D72B3009FDFAC /* MyIntents.swift in Sources */,
@@ -337,19 +378,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00134F2D2A514F6A0091D6FD /* SpeedWidget.swift in Sources */,
 				00511CF12A2C960300D1FD13 /* JokeWidget.swift in Sources */,
+				00134F242A514E0F0091D6FD /* NetworkError.swift in Sources */,
+				00134F1D2A514D080091D6FD /* SpeedModel.swift in Sources */,
 				004337832A33A140004AF73F /* UserDefaultExtension.swift in Sources */,
+				00134F272A514E540091D6FD /* DownloadService.swift in Sources */,
 				004D9B3B2A4D992A00199886 /* AnimalPictureConfig.intentdefinition in Sources */,
 				004D9B392A4D98F100199886 /* AnimalPictureWidget.swift in Sources */,
 				00511CFC2A2C961200D1FD13 /* Request.swift in Sources */,
 				003BD2692A4D72B3009FDFAC /* MyIntents.swift in Sources */,
 				004D9B402A4D9E5600199886 /* NewConfigIntent.swift in Sources */,
 				00511CEF2A2C960300D1FD13 /* JokeWidgetBundle.swift in Sources */,
+				00134F212A514DD20091D6FD /* SpeedService.swift in Sources */,
 				00E4B58A2A4C6E580064E63C /* QuoteWidget.swift in Sources */,
+				00134F2A2A514E820091D6FD /* URL+ping.swift in Sources */,
 				001ACE0B2A4EBA2E000CE9AF /* UIImage+resize.swift in Sources */,
 				004D9B3E2A4D99CD00199886 /* ImageProvider.swift in Sources */,
 				00E4B5852A4C4B4D0064E63C /* MultiSelection.swift in Sources */,
-				003BD26C2A4D81C2009FDFAC /* Model.swift in Sources */,
+				003BD26C2A4D81C2009FDFAC /* QuoteAPIModel.swift in Sources */,
+				00134F302A5153610091D6FD /* ViewModifier_iOS17.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

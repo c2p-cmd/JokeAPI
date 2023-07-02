@@ -10,6 +10,25 @@ import Foundation
 // MARK: - APPSTORAGE to use
 let appStorage = UserDefaults(suiteName: "group.kida")!
 
+// MARK: - UserDefaults SpeedTest Extension
+extension UserDefaults {
+    static let defaultSpeed: Speed = Speed(value: 0.0, units: .Kbps)
+    
+    static var savedSpeed: Speed {
+        guard let speedRawValue = appStorage.string(forKey: "net_speed"),
+              let speed = Speed(rawValue: speedRawValue)
+        else {
+            return UserDefaults.defaultSpeed
+        }
+        
+        return speed
+    }
+    
+    static func saveNewSpeed(_ speed: Speed) {
+        appStorage.set(speed.rawValue, forKey: "net_speed")
+    }
+}
+
 // MARK: - UserDefaults Quote Extension
 extension UserDefaults {
     static let defaultQuote = QuoteApiResponse("Much wisdom often goes with fewest words.", by: "Sophocles")
