@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - APPSTORAGE to use
-let appStorage = UserDefaults(suiteName: "group.kida")!
+let appStorage = UserDefaults(suiteName: "group.com.kidastudios.mygroup")!
 
 // MARK: - UserDefaults SpeedTest Extension
 extension UserDefaults {
