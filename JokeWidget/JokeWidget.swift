@@ -60,31 +60,50 @@ struct JokeProvider: TimelineProvider {
 }
 
 struct JokeWidgetEntryView : View {
+    private let gradient = LinearGradient(
+        gradient: Gradient(colors: [
+            Color("YellowColor", bundle: .main),
+            Color("YellowColor 1", bundle: .main)
+        ]), startPoint: .bottom, endPoint: .top)
+    
     var entry: JokeProvider.Entry
     @Environment(\.widgetFamily) var widgetFamily: WidgetFamily
     
     func text() -> some View {
         Text(entry.joke)
-            .monospaced()
-            .multilineTextAlignment(.center)
-            .foregroundColor(entry.didError ? .black : .mint)
+            .font(.system(.body, design: .rounded))
+            .bold()
+            .shadow(radius: 10, y: 5)
+            .multilineTextAlignment(.leading)
+            .foregroundStyle(.black)
+    }
+    
+    func modifyForiOS17() -> some View {
+        if #available(iOS 17, macOS 14, *) {
+            return VStack {
+                text()
+                HStack {
+                    Spacer()
+                    Button(intent: JokeIntent()) {
+                        Image(systemName: "arrow.counterclockwise")
+                            .foregroundStyle(.white)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .background(gradient)
+            .containerBackground(gradient, for: .widget)
+        } else {
+            return text()
+                .ignoresSafeArea()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(gradient)
+        }
     }
     
     var body: some View {
-        VStack {
-            if widgetFamily == .systemSmall {
-                text().font(.caption2)
-            } else {
-                text().font(.caption)
-            }
-            if #available(iOS 17, macOS 14, *) {
-                Button(intent: JokeIntent()) {
-                    Image(systemName: "arrow.counterclockwise")
-                }
-            }
-        }
-        .padding(.all, 1)
-        .modifyForiOS17()
+        modifyForiOS17()
+            .padding(.horizontal, 0.5)
     }
 }
 
@@ -95,7 +114,7 @@ struct JokeWidget: Widget {
         StaticConfiguration(kind: kind, provider: JokeProvider()) { entry in
             JokeWidgetEntryView(entry: entry)
         }
-        .supportedFamilies([.systemSmall, .systemMedium])
+        .supportedFamilies([.systemMedium])
         .configurationDisplayName("Joke Widget")
         .description("This is a widget to feed you with joke every hour.")
     }
@@ -105,19 +124,7 @@ struct JokeWidget_Previews: PreviewProvider {
     static var previews: some View {
         JokeWidgetEntryView(
             entry: JokeEntry(
-                joke: UserDefaults.savedJoke,
-                didError: false
-            )
-        )
-        .previewContext(
-            WidgetPreviewContext(
-                family: .systemSmall
-            )
-        )
-        
-        JokeWidgetEntryView(
-            entry: JokeEntry(
-                joke: UserDefaults.savedJoke,
+                joke: "Why did everyone like the mushroom?\n\nHe was a fungi.",
                 didError: true
             )
         )

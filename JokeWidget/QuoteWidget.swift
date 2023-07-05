@@ -56,36 +56,63 @@ struct QuoteProvider: TimelineProvider {
 }
 
 struct QuoteWidgetEntryView: View {
+    private let gradient = LinearGradient(colors: [
+        Color("Green 1", bundle: .main),
+        Color("Green 2", bundle: .main)
+    ], startPoint: .bottom, endPoint: .top)
+    
     var entry: QuoteProvider.Entry
     @Environment(\.widgetFamily) var widgetFamily: WidgetFamily
     
     func text() -> some View {
         VStack {
             Text("\(entry.quoteResponse.content)\n")
-                .multilineTextAlignment(.center)
+                .multilineTextAlignment(.leading)
+            
             HStack {
                 Spacer()
-                Text("-\(entry.quoteResponse.author)")
+                Text("-\(entry.quoteResponse.author) ")
                     .multilineTextAlignment(.leading)
+                    .font(.system(.subheadline, design: .rounded))
             }
-        }.monospaced()
+            
+            if #available(iOS 17, macOS 14, *) {
+                refreshButton()
+            }
+        }
+        .font(.system(.body, design: .rounded))
+        .bold()
+        .shadow(radius: 10, y: 5)
+        .foregroundStyle(.white)
+    }
+    
+    @available(iOS 17, macOS 14, *)
+    func refreshButton() -> some View {
+        HStack {
+            Spacer()
+            Button(intent: QuoteIntent()) {
+                Image(systemName: "arrow.counterclockwise")
+                    .foregroundStyle(.white)
+            }
+            .buttonStyle(.plain)
+        }
+    }
+    
+    func modifyForiOS17() -> some View {
+        if #available(iOS 17, macOS 14, *) {
+            return text()
+                .containerBackground(gradient, for: .widget)
+        } else {
+            return text()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(gradient)
+        }
     }
     
     var body: some View {
-        VStack {
-            if widgetFamily == .systemSmall {
-                text().font(.caption2)
-            } else {
-                text().font(.caption)
-            }
-            if #available(iOS 17, macOS 14, *) {
-                Button(intent: QuoteIntent()) {
-                    Image(systemName: "arrow.counterclockwise")
-                }
-            }
-        }
-        .padding(.all, 1)
-        .modifyForiOS17()
+        modifyForiOS17()
+            .padding(.vertical, 0.1)
+            .padding(.horizontal, 0.5)
     }
 }
 
@@ -96,28 +123,23 @@ struct QuoteWidget: Widget {
         StaticConfiguration(kind: kind, provider: QuoteProvider()) { entry in
             QuoteWidgetEntryView(entry: entry)
         }
-        .supportedFamilies([.systemSmall, .systemMedium])
+        .supportedFamilies([.systemMedium])
         .configurationDisplayName("Quote Widget")
         .description("This is a widget to feed you with a nice quote every hour.")
     }
 }
 
-//struct QuoteWidget_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            QuoteWidgetEntryView(entry: QuoteEntry())
-//                .previewContext(
-//                    WidgetPreviewContext(
-//                        family: .systemMedium
-//                    )
-//                )
-//            
-//            QuoteWidgetEntryView(entry: QuoteEntry())
-//                .previewContext(
-//                    WidgetPreviewContext(
-//                        family: .systemSmall
-//                    )
-//                )
-//        }
-//    }
-//}
+struct QuoteWidget_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            QuoteWidgetEntryView(entry: QuoteEntry(
+                quoteResponse: QuoteApiResponse("Learning is the beginning of welath.Learning is the beginning of welath.Learning is the beginning of welath.", by: "Jim Rohn")
+            ))
+            .previewContext(
+                WidgetPreviewContext(
+                    family: .systemMedium
+                )
+            )
+        }
+    }
+}

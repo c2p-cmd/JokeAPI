@@ -91,17 +91,11 @@ struct AnimalPictureEntryView: View {
     var imageView: some View {
         Image(uiImage: entry.uiImage)
             .resizable()
-            .scaledToFit()
-            .background(Color.black)
+            .scaledToFill()
     }
     
     var body: some View {
         ZStack {
-            Rectangle()
-                .fill(.black)
-                .ignoresSafeArea()
-                .background(.black)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
             if #available(iOS 17, macOS 14, *) {
                 imageView
                     .containerBackground(.black, for: .widget)
@@ -143,7 +137,7 @@ struct AnimalPictureWidget: Widget {
         makeConfiguration()
             .configurationDisplayName("Animal Picture Widget")
             .description("This is a widget to show you an http status with a cat or dog")
-            .supportedFamilies([.systemSmall, .systemLarge, .systemExtraLarge])
+            .supportedFamilies([.systemLarge, .systemExtraLarge])
     }
 }
 
@@ -152,9 +146,6 @@ struct AnimalPictureWidgetView_Preview: PreviewProvider {
     
     static var previews: some View {
         Group {
-            AnimalPictureEntryView(entry: entry)
-                .previewContext(WidgetPreviewContext(family: .systemSmall))
-            
             AnimalPictureEntryView(entry: entry)
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
             
