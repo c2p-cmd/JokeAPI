@@ -23,7 +23,7 @@ enum AnimalChoice: String, AppEnum {
 
 @available(iOS 17, macOS 14, *)
 struct AnimalOfChoiceIntent: WidgetConfigurationIntent {
-    static var title: LocalizedStringResource = "Choose fav animal"
+    static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Choose fav animal")
     static var description = IntentDescription("Choose either a cat or a dog to see picture of!")
     
     @Parameter(title: "AnimalChoice", default: .cat)
