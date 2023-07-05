@@ -14,38 +14,66 @@ struct QuoteView: View {
     @State private var isBusy = false
     @State private var error: String? = nil
     
+    private let greenGradient = LinearGradient(
+        colors: [
+            Color("Green 1", bundle: .main),
+            Color("Green 2", bundle: .main)
+        ],
+        startPoint: .bottom, endPoint: .top
+    )
+    
     var body: some View {
         NavigationView {
-            Form {
-                HStack {
-                    Spacer()
-                    Button {
-                        if isBusy == false {
-                            getNewQuote()
-                        }
-                    } label: {
-                        Label("Reload", systemImage: "arrow.clockwise")
-                    }
-                    .disabled(self.isBusy)
-                }
-                Text(quote.content)
-                    .font(.title2)
-                    .monospaced()
-                    .multilineTextAlignment(.center)
-                HStack() {
-                    Spacer()
-                    Text("-\(quote.author)")
-                        .font(.title3)
-                        .monospaced()
-                        .multilineTextAlignment(.leading)
-                }
+            VStack {
+                refreshButton
+                Spacer()
+                widgetView
                 if let err = error {
+                    Spacer()
                     Text(err)
                         .font(.callout)
                 }
+                Spacer()
             }
         }
+        .padding()
         .navigationTitle("Quotes View")
+    }
+    
+    private var widgetView: some View {
+        ZStack {
+            RoundedRectangle(cornerSize: CGSize(width: 20, height: 20))
+                .fill(greenGradient)
+            VStack {
+                Text(quote.content)
+                    .font(.system(.body, design: .rounded))
+                    .multilineTextAlignment(.leading)
+                HStack() {
+                    Spacer()
+                    Text("-\(quote.author)")
+                        .font(.system(.subheadline, design: .rounded))
+                        .multilineTextAlignment(.trailing)
+                }
+            }
+            .foregroundStyle(.white)
+            .bold()
+            .padding(.horizontal, 7.5)
+        }
+        .frame(width: 360, height: 169)
+    }
+    
+    private var refreshButton: some View {
+        HStack {
+            Spacer()
+            Button {
+                if isBusy == false {
+                    getNewQuote()
+                }
+            } label: {
+                Label("Reload", systemImage: "arrow.clockwise")
+            }
+            .disabled(self.isBusy)
+        }
     }
     
     private func getNewQuote() {

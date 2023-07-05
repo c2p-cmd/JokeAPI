@@ -16,19 +16,18 @@ struct JokeView: View {
     @State private var error: String?
     @State private var selectedCategories = Set([].map { IdentifiableString(string: $0) })
     
+    private let yellowGradient = LinearGradient(
+        colors: [
+            Color("YellowColor", bundle: .main),
+            Color("YellowColor 1", bundle: .main)
+        ],
+        startPoint: .bottom, endPoint: .top
+    )
+    
     var body: some View {
         NavigationView {
-            Form {
-                HStack {
-                    Spacer()
-                    Button {
-                        if isBusy == false {
-                            getNewJoke()
-                        }
-                    } label: {
-                        Label("Reload", systemImage: "arrow.clockwise")
-                    }.disabled(isBusy)
-                }
+            VStack {
+                refreshButton
                 MultiSelector<Text, IdentifiableString>(
                     label: labelView("Choose Joke Categories"),
                     options: jokeCategories.map { IdentifiableString(string: $0) },
@@ -39,18 +38,45 @@ struct JokeView: View {
                 Toggle(isOn: self.$safeMode) {
                     labelView("Safe Mode")
                 }
-                Text(joke)
-                    .font(.title2)
-                    .monospaced()
-                    .multilineTextAlignment(.center)
-                if let err = error {
+                Spacer()
+                widgetView
+                if let error = error {
                     Spacer()
-                    Text(err)
-                        .font(.caption2)
+                    Text(error)
+                        .font(.subheadline)
                 }
+                Spacer()
             }
         }
+        .padding()
         .navigationTitle("Jokes View")
+    }
+    
+    private var widgetView: some View {
+        ZStack {
+            RoundedRectangle(cornerSize: CGSize(width: 20, height: 20))
+                .fill(yellowGradient)
+            Text(joke)
+                .foregroundStyle(.black)
+                .font(.system(.body, design: .rounded))
+                .bold()
+                .multilineTextAlignment(.leading)
+                .padding(.horizontal, 7.5)
+        }
+        .frame(width: 360, height: 169)
+    }
+    
+    private var refreshButton: some View {
+        HStack {
+            Spacer()
+            Button {
+                if isBusy == false {
+                    getNewJoke()
+                }
+            } label: {
+                Image(systemName: "arrow.clockwise")
+            }.disabled(isBusy)
+        }
     }
     
     private func labelView(_ title: String) -> Text {
@@ -80,9 +106,3 @@ struct JokeView: View {
         }
     }
 }
-
-//struct JokeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//            JokeView()
-//    }
-//}

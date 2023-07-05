@@ -38,7 +38,7 @@ struct MultiSelectionView<Selectable: Identifiable & Hashable>: View {
             Button("Clear All", role: .destructive) {
                 selected.removeAll()
             }
-        }.listStyle(GroupedListStyle())
+        }.listStyle(.automatic)
     }
 
     private func toggleSelection(selectable: Selectable) {
