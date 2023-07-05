@@ -94,19 +94,21 @@ struct AnimalPictureEntryView: View {
             .scaledToFill()
     }
     
-    var body: some View {
-        ZStack {
-            if #available(iOS 17, macOS 14, *) {
-                imageView
-                    .containerBackground(.black, for: .widget)
-            } else {
-                imageView
-            }
+    func modifyForiOS17(view: some View) -> some View {
+        if #available(iOS 17, macOS 14, *) {
+            return view
+                .containerBackground(.black, for: .widget)
+        } else {
+            return view
         }
-        .background(.black)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .ignoresSafeArea()
-        .preferredColorScheme(.dark)
+    }
+    
+    var body: some View {
+        modifyForiOS17(view: imageView)
+            .padding(.horizontal, 15)
+            .ignoresSafeArea()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(.black)
     }
 }
 
