@@ -8,7 +8,7 @@
 import AppIntents
 
 struct QuoteIntent: AppIntent {
-    static var title: LocalizedStringResource = "Set Quote To"
+    static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Set Quote To")
     
     func perform() async throws -> some IntentResult & ReturnsValue {
         let quoteResult = await getRandomQuote()
@@ -24,7 +24,7 @@ struct QuoteIntent: AppIntent {
 }
 
 struct JokeIntent: AppIntent {
-    static var title: LocalizedStringResource = "Set Joke To"
+    static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Set Joke To")
     
     func perform() async throws -> some IntentResult & ReturnsValue {
         let jokeRes = await getRandomJoke(of: [], safeMode: true)
@@ -41,7 +41,7 @@ struct JokeIntent: AppIntent {
 
 @available(iOS 16, *)
 struct SpeedTestIntent: AppIntent {
-    static var title: LocalizedStringResource = "SpeedTestingIntent"
+    static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "SpeedTestingIntent")
     
     func perform() async throws -> some IntentResult & ReturnsValue {
         let downloadService = DownloadService.shared
