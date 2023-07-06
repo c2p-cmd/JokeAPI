@@ -11,20 +11,29 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             TabView {
-                JokeView()
-                    .tabItem {
-                        Label("Joke", systemImage: "theatermasks.circle.fill")
-                    }
+                NavigationView {
+                    JokeView()
+                        .navigationBarTitle("Jokes", displayMode: .inline)
+                }
+                .tabItem {
+                    Label("Joke", systemImage: "theatermasks.circle.fill")
+                }
                 
-                QuoteView()
-                    .tabItem {
-                        Label("Quote", systemImage: "quote.bubble.fill")
-                    }
+                NavigationView {
+                    QuoteView()
+                        .navigationBarTitle("Quotes", displayMode: .inline)
+                }
+                .tabItem {
+                    Label("Quote", systemImage: "quote.bubble.fill")
+                }
                 
-                SpeedTestView()
-                    .tabItem {
-                        Label("SpeedTest", systemImage: "speedometer")
-                    }
+                NavigationView {
+                    SpeedTestView()
+                        .navigationBarTitle("Speed Test", displayMode: .inline)
+                }
+                .tabItem {
+                    Label("SpeedTest", systemImage: "speedometer")
+                }
             }
         }
     }

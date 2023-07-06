@@ -23,21 +23,25 @@ struct QuoteView: View {
     )
     
     var body: some View {
-        NavigationView {
-            VStack {
-                refreshButton
-                Spacer()
+        VStack {
+            Spacer()
+            Section("Widget View") {
                 widgetView
-                if let err = error {
-                    Spacer()
-                    Text(err)
-                        .font(.callout)
-                }
+            }
+            if let err = error {
                 Spacer()
+                Text(err)
+                    .font(.callout)
+            }
+            Spacer()
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                refreshButton
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
         .padding()
-        .navigationTitle("Quotes View")
     }
     
     private var widgetView: some View {
@@ -63,22 +67,20 @@ struct QuoteView: View {
     }
     
     private var refreshButton: some View {
-        HStack {
-            Spacer()
-            Button {
-                if isBusy == false {
-                    getNewQuote()
-                }
-            } label: {
-                Label("Reload", systemImage: "arrow.clockwise")
+        Button {
+            print("Helo")
+            if isBusy == false {
+                getNewQuote()
             }
-            .disabled(self.isBusy)
+        } label: {
+            Label("Reload", systemImage: "arrow.clockwise")
         }
+        .disabled(self.isBusy)
     }
     
     private func getNewQuote() {
-        isBusy = true
         Task {
+            isBusy = true
             let result = await getRandomQuote()
             switch result {
             case .success(let newQuote):
