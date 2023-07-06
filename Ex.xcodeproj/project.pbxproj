@@ -20,7 +20,6 @@
 		00134F2D2A514F6A0091D6FD /* SpeedWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00134F2B2A514F6A0091D6FD /* SpeedWidget.swift */; };
 		00134F2F2A5153610091D6FD /* ViewModifier_iOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00134F2E2A5153610091D6FD /* ViewModifier_iOS17.swift */; };
 		00134F302A5153610091D6FD /* ViewModifier_iOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00134F2E2A5153610091D6FD /* ViewModifier_iOS17.swift */; };
-		001ACE082A4EB505000CE9AF /* AnimalPictureConfig.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B3A2A4D992A00199886 /* AnimalPictureConfig.intentdefinition */; };
 		001ACE0A2A4EBA2C000CE9AF /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */; };
 		001ACE0B2A4EBA2E000CE9AF /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */; };
 		003BD2682A4D72B3009FDFAC /* MyIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003BD2672A4D72B3009FDFAC /* MyIntents.swift */; };
@@ -35,7 +34,6 @@
 		004860192A1B8A7900F3E6B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004860182A1B8A7900F3E6B4 /* Assets.xcassets */; };
 		0048601C2A1B8A7900F3E6B4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0048601B2A1B8A7900F3E6B4 /* Preview Assets.xcassets */; };
 		004D9B392A4D98F100199886 /* AnimalPictureWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B382A4D98F100199886 /* AnimalPictureWidget.swift */; };
-		004D9B3B2A4D992A00199886 /* AnimalPictureConfig.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B3A2A4D992A00199886 /* AnimalPictureConfig.intentdefinition */; };
 		004D9B3E2A4D99CD00199886 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B3D2A4D99CD00199886 /* ImageProvider.swift */; };
 		004D9B402A4D9E5600199886 /* NewConfigIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B3F2A4D9E5600199886 /* NewConfigIntent.swift */; };
 		004D9B432A4DA50600199886 /* NewConfigIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B3F2A4D9E5600199886 /* NewConfigIntent.swift */; };
@@ -48,6 +46,8 @@
 		00511CF72A2C960500D1FD13 /* JokeWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 00511CE72A2C960300D1FD13 /* JokeWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		00511CFC2A2C961200D1FD13 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00511CE12A2C911F00D1FD13 /* Request.swift */; };
 		00511CFE2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png in Resources */ = {isa = PBXBuildFile; fileRef = 00511CFD2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png */; };
+		00E23D7C2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 00E23D7F2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition */; };
+		00E23D7D2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 00E23D7F2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition */; };
 		00E4B5842A4C47020064E63C /* MultiSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4B5832A4C47020064E63C /* MultiSelection.swift */; };
 		00E4B5852A4C4B4D0064E63C /* MultiSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4B5832A4C47020064E63C /* MultiSelection.swift */; };
 		00E4B5882A4C64540064E63C /* QuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4B5872A4C64540064E63C /* QuoteView.swift */; };
@@ -100,7 +100,6 @@
 		004860182A1B8A7900F3E6B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0048601B2A1B8A7900F3E6B4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		004D9B382A4D98F100199886 /* AnimalPictureWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalPictureWidget.swift; sourceTree = "<group>"; };
-		004D9B3A2A4D992A00199886 /* AnimalPictureConfig.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = AnimalPictureConfig.intentdefinition; sourceTree = "<group>"; };
 		004D9B3D2A4D99CD00199886 /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
 		004D9B3F2A4D9E5600199886 /* NewConfigIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConfigIntent.swift; sourceTree = "<group>"; };
 		00511CE12A2C911F00D1FD13 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
@@ -112,6 +111,7 @@
 		00511CF22A2C960500D1FD13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00511CF42A2C960500D1FD13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00511CFD2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2023-06-04 at 16.04.08.png"; sourceTree = "<group>"; };
+		00E23D7E2A56B7AE003DD155 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/AnimalPictureConfig.intentdefinition; sourceTree = "<group>"; };
 		00E4B5832A4C47020064E63C /* MultiSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelection.swift; sourceTree = "<group>"; };
 		00E4B5862A4C61570064E63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		00E4B5872A4C64540064E63C /* QuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteView.swift; sourceTree = "<group>"; };
@@ -247,7 +247,7 @@
 				00511CF22A2C960500D1FD13 /* Assets.xcassets */,
 				00511CF42A2C960500D1FD13 /* Info.plist */,
 				004D9B382A4D98F100199886 /* AnimalPictureWidget.swift */,
-				004D9B3A2A4D992A00199886 /* AnimalPictureConfig.intentdefinition */,
+				00E23D7F2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition */,
 				00134F2B2A514F6A0091D6FD /* SpeedWidget.swift */,
 				00134F2E2A5153610091D6FD /* ViewModifier_iOS17.swift */,
 			);
@@ -360,7 +360,7 @@
 				00134F2F2A5153610091D6FD /* ViewModifier_iOS17.swift in Sources */,
 				003BD26B2A4D81C2009FDFAC /* QuoteAPIModel.swift in Sources */,
 				00E4B5842A4C47020064E63C /* MultiSelection.swift in Sources */,
-				001ACE082A4EB505000CE9AF /* AnimalPictureConfig.intentdefinition in Sources */,
+				00E23D7C2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */,
 				004D9B432A4DA50600199886 /* NewConfigIntent.swift in Sources */,
 				00134F202A514DD20091D6FD /* SpeedService.swift in Sources */,
 				004337822A339E87004AF73F /* UserDefaultExtension.swift in Sources */,
@@ -388,7 +388,7 @@
 				00134F1D2A514D080091D6FD /* SpeedModel.swift in Sources */,
 				004337832A33A140004AF73F /* UserDefaultExtension.swift in Sources */,
 				00134F272A514E540091D6FD /* DownloadService.swift in Sources */,
-				004D9B3B2A4D992A00199886 /* AnimalPictureConfig.intentdefinition in Sources */,
+				00E23D7D2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */,
 				004D9B392A4D98F100199886 /* AnimalPictureWidget.swift in Sources */,
 				00511CFC2A2C961200D1FD13 /* Request.swift in Sources */,
 				003BD2692A4D72B3009FDFAC /* MyIntents.swift in Sources */,
@@ -414,6 +414,17 @@
 			targetProxy = 00511CF52A2C960500D1FD13 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		00E23D7F2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition */ = {
+			isa = PBXVariantGroup;
+			children = (
+				00E23D7E2A56B7AE003DD155 /* Base */,
+			);
+			name = AnimalPictureConfig.intentdefinition;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		0048601D2A1B8A7900F3E6B4 /* Debug */ = {
@@ -560,10 +571,11 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 			};
 			name = Debug;
 		};
@@ -597,10 +609,11 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 			};
 			name = Release;
 		};
