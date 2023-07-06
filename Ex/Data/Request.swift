@@ -7,14 +7,14 @@
 
 import Foundation
 
-public let jokeCategories: [String] = [
+let jokeCategories: Set<IdentifiableString> = Set([
     "Pun",
     "Spooky",
     "Christmas",
     "Dark",
     "Misc",
     "Programming"
-]
+].map { IdentifiableString(string: $0) })
 
 public func getOrFetchRandomJoke(
     from url: String = "https://v2.jokeapi.dev/joke/Any?format=txt",
