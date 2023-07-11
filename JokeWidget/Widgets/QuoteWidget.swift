@@ -140,6 +140,15 @@ struct QuoteWidget_Previews: PreviewProvider {
                     family: .systemMedium
                 )
             )
+            
+            QuoteWidgetEntryView(entry: QuoteEntry(
+                quoteResponse: QuoteApiResponse("मंजिल भी उसकी थी रास्ता भी उसका था,\nएक हम अकेले थे काफिला भी उसका था !", by: "Gulzar Sahab")
+            ))
+            .previewContext(
+                WidgetPreviewContext(
+                    family: .systemMedium
+                )
+            )
         }
     }
 }
