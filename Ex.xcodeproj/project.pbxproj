@@ -46,8 +46,6 @@
 		00511CF72A2C960500D1FD13 /* JokeWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 00511CE72A2C960300D1FD13 /* JokeWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		00511CFC2A2C961200D1FD13 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00511CE12A2C911F00D1FD13 /* Request.swift */; };
 		00511CFE2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png in Resources */ = {isa = PBXBuildFile; fileRef = 00511CFD2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png */; };
-		00A07F622A5D2E47006FC4DB /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00A07F612A5D2E47006FC4DB /* Config.plist */; };
-		00A07F632A5D2E47006FC4DB /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00A07F612A5D2E47006FC4DB /* Config.plist */; };
 		00A07F652A5D2F6B006FC4DB /* NASAApodResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A07F642A5D2F6B006FC4DB /* NASAApodResponse.swift */; };
 		00A07F662A5D2F6B006FC4DB /* NASAApodResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A07F642A5D2F6B006FC4DB /* NASAApodResponse.swift */; };
 		00A07F6C2A5D4416006FC4DB /* NASAApodWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A07F6A2A5D4416006FC4DB /* NASAApodWidget.swift */; };
@@ -118,7 +116,6 @@
 		00511CF22A2C960500D1FD13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00511CF42A2C960500D1FD13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00511CFD2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2023-06-04 at 16.04.08.png"; sourceTree = "<group>"; };
-		00A07F612A5D2E47006FC4DB /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		00A07F642A5D2F6B006FC4DB /* NASAApodResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAApodResponse.swift; sourceTree = "<group>"; };
 		00A07F6A2A5D4416006FC4DB /* NASAApodWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAApodWidget.swift; sourceTree = "<group>"; };
 		00A07F712A5D67F6006FC4DB /* NASAApodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAApodView.swift; sourceTree = "<group>"; };
@@ -192,7 +189,6 @@
 		004860082A1B8A7800F3E6B4 = {
 			isa = PBXGroup;
 			children = (
-				00A07F612A5D2E47006FC4DB /* Config.plist */,
 				003BD2662A4D7194009FDFAC /* JokeWidgetExtension.entitlements */,
 				00511CFD2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png */,
 				004860132A1B8A7800F3E6B4 /* Ex */,
@@ -358,7 +354,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00A07F622A5D2E47006FC4DB /* Config.plist in Resources */,
 				00511CFE2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png in Resources */,
 				0048601C2A1B8A7900F3E6B4 /* Preview Assets.xcassets in Resources */,
 				004860192A1B8A7900F3E6B4 /* Assets.xcassets in Resources */,
@@ -369,7 +364,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00A07F632A5D2E47006FC4DB /* Config.plist in Resources */,
 				00511CF32A2C960500D1FD13 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
