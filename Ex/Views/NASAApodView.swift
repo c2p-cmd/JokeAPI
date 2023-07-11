@@ -17,7 +17,11 @@ struct NASAApodView: View {
     
     var body: some View {
         List {
-            DatePicker("Date of Image", selection: $selectedDate, displayedComponents: .date)
+            DatePicker("Date of Image",
+               selection: $selectedDate,
+               in: ...Date(),
+               displayedComponents: .date
+            )
             
             if let error = error {
                 Text(error)
@@ -56,7 +60,16 @@ struct NASAApodView: View {
                     Image(systemName: "arrow.counterclockwise")
                         .foregroundStyle(.white)
                 }
+                .disabled(isBusy)
                 .buttonStyle(.borderedProminent)
+            }
+        }
+        .refreshable {
+            getNewImage()
+        }
+        .onAppear {
+            if self.apodResponse == nil {
+                getNewImage()
             }
         }
     }
