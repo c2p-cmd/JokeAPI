@@ -10,6 +10,20 @@ import Foundation
 // MARK: - APPSTORAGE to use
 let appStorage = UserDefaults(suiteName: "group.com.kidastudios.mygroup")!
 
+extension UserDefaults {
+    static var savedApod: ApodResponse? {
+        guard let apodRawValue = appStorage.string(forKey: "nasa_apod"),
+              let apod = ApodResponse(rawValue: apodRawValue) else {
+            return nil
+        }
+        return apod
+    }
+    
+    static func saveNewNASAApod(_ apodResponse: ApodResponse) {
+        appStorage.set(apodResponse.rawValue, forKey: "nasa_apod")
+    }
+}
+
 // MARK: - UserDefaults SpeedTest Extension
 extension UserDefaults {
     static let defaultSpeed: Speed = Speed(value: 0.0, units: .Kbps)

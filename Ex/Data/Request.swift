@@ -8,38 +8,51 @@
 import Foundation
 
 let jokeCategories: Set<IdentifiableString> = Set([
-    "Pun",
-    "Spooky",
-    "Christmas",
-    "Dark",
-    "Misc",
-    "Programming"
-].map { IdentifiableString(string: $0) })
+    IdentifiableString(string: "Pun"),
+    IdentifiableString(string: "Spooky"),
+    IdentifiableString(string: "Christmas"),
+    IdentifiableString(string: "Dark"),
+    IdentifiableString(string: "Misc"),
+    IdentifiableString(string: "Programming")
+])
 
-public func getOrFetchRandomJoke(
-    from url: String = "https://v2.jokeapi.dev/joke/Any?format=txt",
-    completionHandler: @escaping ((Result<String, Error>) -> Void)
-) {
-    let url = URL(string: url)!
-    let task = URLSession.shared.dataTask(with: URLRequest(url: url)) {
-        (data, _, err) in
-        
-        if let data = data {
-            let joke = String(decoding: data, as: UTF8.self)
-            UserDefaults.saveNewJoke(joke)
-            completionHandler(.success(joke))
-        }
-        
-        if let err = err {
-            completionHandler(.failure(err))
-        }
+// MARK: - Loading the config.plist
+private var configPlist: NSDictionary = {
+    let configPlistLink = Bundle.main.path(forResource: "Config", ofType: "plist")!
+    return NSDictionary(contentsOfFile: configPlistLink)!
+}()
+
+
+// MARK: - NASA APOD API
+func getNASAApod() async -> Result<ApodResponse, Error> {
+    let urlString = configPlist.value(forKey: "NASA APOD Link") as! String
+    let apiKey = configPlist.value(forKey: "NASA API KEY") as! String
+    
+    guard let url = URL(string: "\(urlString)?api_key=\(apiKey)") else {
+        return .failure(URLError(.badURL))
     }
-    task.resume()
+    
+    do {
+        let (data, response) = try await URLSession.shared.data(from: url)
+        
+        #if DEBUG
+        if let httpResponse = response as? HTTPURLResponse {
+            print(httpResponse.debugDescription)
+        }
+        #endif
+        
+        let apodResponse = try JSONDecoder().decode(ApodResponse.self, from: data)
+        return .success(apodResponse)
+    } catch {
+        return .failure(error)
+    }
 }
 
+// MARK: - QUOTE API
 func getRandomQuote() async -> Result<QuoteApiResponse, Error> {
     do {
-        let quoteUrl = URL(string: "https://api.quotable.io/random")!
+        let urlString = configPlist.value(forKey: "Quote URL") as! String
+        let quoteUrl = URL(string: urlString)!
         let (data, _) = try await URLSession.shared.data(from: quoteUrl)
         let quoteApiResponse = try JSONDecoder().decode(QuoteApiResponse.self, from: data)
         
@@ -49,12 +62,14 @@ func getRandomQuote() async -> Result<QuoteApiResponse, Error> {
     }
 }
 
+
+// MARK: - JOKE API
 func getRandomJoke(
     of categories: [IdentifiableString],
     safeMode: Bool = false
 ) async -> Result<String, Error> {
     do {
-        var urlString = "https://v2.jokeapi.dev/joke/"
+        var urlString = configPlist.value(forKey: "Joke URL") as! String
         
         if categories.isEmpty {
             urlString.append("Any")
@@ -70,7 +85,9 @@ func getRandomJoke(
         
         let format = safeMode ? "?format=txt&safe-mode" : "?format=txt"
         
-        let url = URL(string: "\(urlString)\(format)")!
+        guard let url = URL(string: "\(urlString)\(format)") else {
+            return .failure(URLError(.badURL))
+        }
         
         let (data, _) = try await URLSession.shared.data(from: url)
         let joke = String(decoding: data, as: UTF8.self)
