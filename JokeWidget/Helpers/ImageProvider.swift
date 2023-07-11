@@ -23,6 +23,16 @@ func fetchNASAApod(
             print(error.localizedDescription)
             #endif
             
+            if let apodResponse = UserDefaults.savedApod {
+                if let image = apodResponse.uiImage {
+                    let entry = NASAApodEntry(uiImage: image, title: apodResponse.title, showTitle: showTitle ?? true)
+                    completion(entry, false)
+                } else {
+                    fetchNASAImage(from: apodResponse, showTitle: showTitle ?? false, completion: completion)
+                }
+                return
+            }
+            
             let entry = NASAApodEntry(uiImage: UIImage(named: "error")!, title: error.localizedDescription, showTitle: false)
             completion(entry, true)
             break

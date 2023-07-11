@@ -13,9 +13,11 @@ struct NASAApodView: View {
     
     @State private var isBusy = false
     @State private var error: String?
+    @State private var selectedDate: Date = .now
     
     var body: some View {
         List {
+            DatePicker("Date of Image", selection: $selectedDate, displayedComponents: .date)
             if let apodResponse = apodResponse {
                 Text(apodResponse.title)
                     .font(.system(.headline, design: .rounded))
@@ -46,7 +48,7 @@ struct NASAApodView: View {
         }
         .listStyle(.plain)
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
+            ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     getNewImage()
                 } label: {
@@ -66,7 +68,7 @@ struct NASAApodView: View {
         Task {
             isBusy = true
             
-            let result = await getNASAApod()
+            let result = await getNASAApod(on: self.selectedDate)
             
             switch result {
             case .success(let apodResonse):

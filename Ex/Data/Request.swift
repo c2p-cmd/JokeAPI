@@ -24,11 +24,22 @@ var configPlist: NSDictionary = {
 
 
 // MARK: - NASA APOD API
-func getNASAApod() async -> Result<ApodResponse, Error> {
+func getNASAApod(on date: Date? = nil) async -> Result<ApodResponse, Error> {
     let urlString = configPlist.value(forKey: "NASA APOD Link") as! String
     let apiKey = configPlist.value(forKey: "NASA API KEY") as! String
     
-    guard let url = URL(string: "\(urlString)?api_key=\(apiKey)") else {
+    var finalUrl = "\(urlString)?api_key=\(apiKey)"
+    
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    
+    if let date = date {
+        finalUrl = finalUrl.appending("&date=\(dateFormatter.string(from: date))")
+    }
+    
+    print(finalUrl)
+    
+    guard let url = URL(string: finalUrl) else {
         return .failure(URLError(.badURL))
     }
     
