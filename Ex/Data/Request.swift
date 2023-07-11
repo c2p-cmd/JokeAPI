@@ -17,7 +17,7 @@ let jokeCategories: Set<IdentifiableString> = Set([
 ])
 
 // MARK: - Loading the config.plist
-private var configPlist: NSDictionary = {
+var configPlist: NSDictionary = {
     let configPlistLink = Bundle.main.path(forResource: "Config", ofType: "plist")!
     return NSDictionary(contentsOfFile: configPlistLink)!
 }()

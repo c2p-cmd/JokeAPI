@@ -7,7 +7,8 @@
 
 import Foundation
 
-let url = URL(string: "http://speedtest.tele2.net/10MB.zip")!
+private let urlString = (configPlist.value(forKey: "SpeedTestFile URL") as? String) ?? "http://speedtest.tele2.net/10MB.zip"
+let url = URL(string: urlString)!
 
 class DownloadService: NSObject, SpeedService {
     public static let shared: DownloadService = DownloadService()
