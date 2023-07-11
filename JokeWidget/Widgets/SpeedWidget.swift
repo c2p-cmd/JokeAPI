@@ -22,13 +22,6 @@ struct SpeedTimelineProvider: TimelineProvider {
         in context: Context,
         completion: @escaping (SpeedEntry) -> Void
     ) {
-        completion(SpeedEntry())
-    }
-    
-    func getTimeline(
-        in context: Context,
-        completion: @escaping (Timeline<SpeedEntry>) -> Void
-    ) {
         Task {
             let downloadService = DownloadService.shared
             let result = await downloadService.test(for: url, in: 60)
@@ -40,9 +33,19 @@ struct SpeedTimelineProvider: TimelineProvider {
                 speedEntry.speed = newSpeed
                 break
             case .failure(_):
+                speedEntry.speed = UserDefaults.defaultSpeed
                 break
             }
             
+            completion(speedEntry)
+        }
+    }
+    
+    func getTimeline(
+        in context: Context,
+        completion: @escaping (Timeline<SpeedEntry>) -> Void
+    ) {
+        getSnapshot(in: context) { speedEntry in
             let nextReloadDate = Calendar.current.date(byAdding: .hour, value: 1, to: speedEntry.date)!
             let timeline = Timeline(entries: [speedEntry], policy: .after(nextReloadDate))
             

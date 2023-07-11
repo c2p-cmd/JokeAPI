@@ -7,6 +7,66 @@
 
 import UIKit
 
+func fetchNASAApod(
+    showTitle: Bool?,
+    completion: @escaping (NASAApodEntry, Bool) -> Void
+) {
+    Task {
+        let result = await getNASAApod()
+        
+        switch result {
+        case .success(let apodResponse):
+            fetchNASAImage(from: apodResponse, showTitle: showTitle ?? false, completion: completion)
+            break
+        case .failure(let error):
+            #if DEBUG
+            print(error.localizedDescription)
+            #endif
+            
+            let entry = NASAApodEntry(uiImage: UIImage(named: "error")!, title: error.localizedDescription, showTitle: false)
+            completion(entry, true)
+            break
+        }
+    }
+}
+
+fileprivate func fetchNASAImage(
+    from apodResponse: ApodResponse,
+    showTitle: Bool,
+    completion: @escaping (NASAApodEntry, Bool) -> Void
+) {
+    let url = URL(string: apodResponse.url)!
+    
+    let task = URLSession.shared.dataTask(with: url) { (data: Data?, response: URLResponse?, error: Error?) in
+        #if DEBUG
+        if let httpResponse = response as? HTTPURLResponse {
+            print(httpResponse.debugDescription)
+        }
+        #endif
+        
+        if let data = data {
+            guard let uiImage = UIImage(data: data) else {
+                let entry = NASAApodEntry(uiImage: UIImage(named: "error")!, title: "Image problem", showTitle: false)
+                completion(entry, true)
+                return
+            }
+            let entry = NASAApodEntry(uiImage: uiImage, title: apodResponse.title, showTitle: showTitle)
+            completion(entry, false)
+        }
+        
+        if let error = error {
+            #if DEBUG
+            print(error.localizedDescription)
+            #endif
+            
+            let entry = NASAApodEntry(uiImage: UIImage(named: "error")!, title: error.localizedDescription, showTitle: false)
+            completion(entry, true)
+        }
+    }
+    
+    task.resume()
+}
+
 func fetchAnimalImage(
     of animalType: AnimalType?,
     completion: @escaping (UIImage) -> Void

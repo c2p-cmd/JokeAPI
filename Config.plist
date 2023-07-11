@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!--
-   Config.plist
-   Ex
-
-   Created by Sharan Thakur on 11/07/23.
-   Copyright (c) 2023 ___ORGANIZATIONNAME___. All rights reserved.
--->
 <plist version="1.0">
-<dict/>
+<dict>
+	<key>NASA API KEY</key>
+	<string>nFZ4uReO3dNr3p5lmyAWslrZ7TdlU37jooVSzJ8R</string>
+	<key>NASA APOD Link</key>
+	<string>https://api.nasa.gov/planetary/apod</string>
+	<key>Joke URL</key>
+	<string>https://v2.jokeapi.dev/joke/</string>
+	<key>Quote URL</key>
+	<string>https://api.quotable.io/random</string>
+	<key>SpeedTestFile URL</key>
+	<string>https://6c20e9b8-4436-474a-a31f-665d7b41553d.usrfiles.com/archives/6c20e9_1e77a186e69e40238477d56cbe93580d.zip</string>
+</dict>
 </plist>

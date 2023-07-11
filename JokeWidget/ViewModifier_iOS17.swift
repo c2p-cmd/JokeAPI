@@ -7,10 +7,12 @@
 
 import SwiftUI
 
-struct ModifyForiOS17: ViewModifier {
+struct ModifyForiOS17<S: ShapeStyle>: ViewModifier {
+    var style: S
+    
     func body(content: Content) -> some View {
-        if #available(iOS 17, macOS 14, *) {
-            return content.containerBackground(.fill.tertiary, for: .widget)
+        if #available(iOS 17, macOS 14, watchOS 10, *) {
+            return content.containerBackground(style, for: .widget)
         } else {
             return content
         }
@@ -18,7 +20,7 @@ struct ModifyForiOS17: ViewModifier {
 }
 
 extension View {
-    func modifyForiOS17() -> some View {
-        self.modifier(ModifyForiOS17())
+    func modifyForiOS17<S>(_ style: S = .black) -> some View where S: ShapeStyle {
+        self.modifier(ModifyForiOS17(style: style))
     }
 }
