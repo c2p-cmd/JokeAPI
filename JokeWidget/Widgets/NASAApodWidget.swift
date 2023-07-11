@@ -68,6 +68,7 @@ struct NASAApodEntryView: View {
                     .multilineTextAlignment(.center)
             }
         }
+        .widgetURL(URL(string: "widget://nasa_apod"))
         .modifyForiOS17(.black)
     }
 }

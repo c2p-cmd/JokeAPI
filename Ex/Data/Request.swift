@@ -37,8 +37,6 @@ func getNASAApod(on date: Date? = nil) async -> Result<ApodResponse, Error> {
         finalUrl = finalUrl.appending("&date=\(dateFormatter.string(from: date))")
     }
     
-    print(finalUrl)
-    
     guard let url = URL(string: finalUrl) else {
         return .failure(URLError(.badURL))
     }

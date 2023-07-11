@@ -18,6 +18,12 @@ struct NASAApodView: View {
     var body: some View {
         List {
             DatePicker("Date of Image", selection: $selectedDate, displayedComponents: .date)
+            
+            if let error = error {
+                Text(error)
+                    .font(.footnote)
+            }
+            
             if let apodResponse = apodResponse {
                 Text(apodResponse.title)
                     .font(.system(.headline, design: .rounded))
@@ -40,11 +46,6 @@ struct NASAApodView: View {
                 Text(apodResponse.explanation)
                     .font(.system(.body, design: .rounded))
             }
-            
-            if let error = error {
-                Text(error)
-                    .font(.footnote)
-            }
         }
         .listStyle(.plain)
         .toolbar {
@@ -61,6 +62,10 @@ struct NASAApodView: View {
     }
     
     func getNewImage() {
+        if selectedDate > .now {
+            selectedDate = .now
+        }
+        
         if isBusy {
             return
         }
