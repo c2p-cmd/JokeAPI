@@ -68,7 +68,6 @@ struct QuoteView: View {
     
     private var refreshButton: some View {
         Button {
-            print("Helo")
             if isBusy == false {
                 getNewQuote()
             }

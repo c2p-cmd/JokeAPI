@@ -28,6 +28,14 @@ struct ContentView: View {
                 }
                 
                 NavigationView {
+                    NASAApodView()
+                        .navigationBarTitle("NASA Picture of the day", displayMode: .inline)
+                }
+                .tabItem {
+                    Label("NASA", systemImage: "photo.fill.on.rectangle.fill")
+                }
+                
+                NavigationView {
                     SpeedTestView()
                         .navigationBarTitle("Speed Test", displayMode: .inline)
                 }
