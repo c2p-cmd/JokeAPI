@@ -20,6 +20,7 @@
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>ConfigurationIntent</string>
+		<string>NASAWidgetConfigIntent</string>
 	</array>
 </dict>
 </plist>
