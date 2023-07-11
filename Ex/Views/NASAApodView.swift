@@ -13,14 +13,15 @@ struct NASAApodView: View {
     
     @State private var isBusy = false
     @State private var error: String?
+    
     @State private var selectedDate: Date = .now
     
     var body: some View {
         List {
             DatePicker("Date of Image",
-               selection: $selectedDate,
-               in: ...Date(),
-               displayedComponents: .date
+                       selection: $selectedDate,
+                       in: ...Date(),
+                       displayedComponents: .date
             )
             
             if let error = error {
@@ -71,6 +72,14 @@ struct NASAApodView: View {
             if self.apodResponse == nil {
                 getNewImage()
             }
+            
+            if let apodResponse = apodResponse {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                if let savedDate = dateFormatter.date(from: apodResponse.date) {
+                    self.selectedDate = savedDate
+                }
+            }
         }
     }
     
@@ -92,6 +101,11 @@ struct NASAApodView: View {
             case .success(let apodResonse):
                 self.error = nil
                 self.apodResponse = apodResonse
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                if let savedDate = dateFormatter.date(from: apodResonse.date) {
+                    self.selectedDate = savedDate
+                }
                 WidgetCenter.shared.reloadTimelines(ofKind: "NASA Apod Widget")
                 break
             case .failure(let error):
