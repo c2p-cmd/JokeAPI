@@ -13,15 +13,15 @@ struct NASAApodView: View {
     
     @State private var isBusy = false
     @State private var error: String?
-    
     @State private var selectedDate: Date = .now
     
     var body: some View {
         List {
-            DatePicker("Date of Image",
-                       selection: $selectedDate,
-                       in: ...Date(),
-                       displayedComponents: .date
+            DatePicker(
+                "Date of Image",
+                selection: $selectedDate,
+                in: ...Date(),
+                displayedComponents: .date
             )
             
             if let error = error {
@@ -43,7 +43,7 @@ struct NASAApodView: View {
                     } placeholder: {
                         ProgressView()
                             .progressViewStyle(CircularProgressViewStyle())
-                            .frame(width: 100, height: 100, alignment: .center)
+                            .frame(width: 100, height: 100)
                     }
                     .scaledToFit()
                 }

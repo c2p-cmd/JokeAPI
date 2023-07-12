@@ -16,14 +16,6 @@ struct JokeView: View {
     @State private var error: String?
     @State private var selectedCategories: Set<IdentifiableString> = Set()
     
-    private let yellowGradient = LinearGradient(
-        colors: [
-            Color("YellowColor", bundle: .main),
-            Color("YellowColor 1", bundle: .main)
-        ],
-        startPoint: .bottom, endPoint: .top
-    )
-    
     var body: some View {
         VStack {
             List {
@@ -34,8 +26,17 @@ struct JokeView: View {
                         .bold()
                 }
                 
-                Section("Widget View") {
-                    widgetView
+                Section {
+                    WidgetView(joke: self.$joke)
+                } header: {
+                    Text("Widget View")
+                        .foregroundStyle(.secondary)
+                } footer: {
+                    HStack {
+                        Spacer()
+                        RefreshButton(isBusy: self.$isBusy, action: getNewJoke)
+                        Spacer()
+                    }
                 }
             }
             .listStyle(.plain)
@@ -47,44 +48,16 @@ struct JokeView: View {
             }
             Spacer()
         }
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                refreshButton
-            }
-        }
         .refreshable {
-            if isBusy == false {
-                getNewJoke()
-            }
+            getNewJoke()
         }
-    }
-    
-    private var widgetView: some View {
-        ZStack {
-            RoundedRectangle(cornerSize: CGSize(width: 20, height: 20))
-                .fill(yellowGradient)
-            Text(joke)
-                .foregroundStyle(.black)
-                .font(.system(.body, design: .rounded))
-                .bold()
-                .multilineTextAlignment(.leading)
-                .padding(.horizontal, 7.5)
-        }
-        .frame(width: 360, height: 169)
-    }
-    
-    private var refreshButton: some View {
-        Button {
-            print("New Joke")
-            if isBusy == false {
-                getNewJoke()
-            }
-        } label: {
-            Label("Reload", systemImage: "arrow.clockwise")
-        }.disabled(isBusy)
     }
     
     private func getNewJoke() {
+        if isBusy {
+            return
+        }
+        
         Task {
             isBusy = true
             let result = await getRandomJoke(
@@ -103,58 +76,5 @@ struct JokeView: View {
             }
             isBusy = false
         }
-    }
-}
-
-struct MultiSelectionMenu: View {
-    @Binding var selectedCategories: Set<IdentifiableString>
-    
-    private var formattedSelectedListString: String {
-        ListFormatter.localizedString(
-            byJoining: selectedCategories.isEmpty ?
-                ["Any"] : selectedCategories.map { $0.string }
-        )
-    }
-    
-    var body: some View {
-        Menu(content: {
-            Section {
-                ForEach(Array(jokeCategories)) { category in
-                    Button {
-                        if selectedCategories.contains(category) {
-                            selectedCategories.remove(category)
-                        } else {
-                            selectedCategories.insert(category)
-                        }
-                    } label: {
-                        HStack {
-                            if selectedCategories.contains(category) {
-                                Image(systemName: "checkmark")
-                            }
-                            Text(category.string)
-                        }
-                    }
-                }
-            }
-            Section {
-                Button(role: .destructive) {
-                    selectedCategories.removeAll()
-                } label: {
-                    HStack {
-                        Image(systemName: "trash.fill")
-                        Spacer()
-                        Text("Clear All")
-                    }
-                }
-            }
-        }, label: {
-            HStack {
-                Text("Joke Categories")
-                Spacer()
-                Text(formattedSelectedListString)
-                    .foregroundStyle(.gray)
-                    .multilineTextAlignment(.trailing)
-            }
-        })
     }
 }

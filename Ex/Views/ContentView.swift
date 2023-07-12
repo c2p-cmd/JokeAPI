@@ -43,8 +43,6 @@ struct ContentView: View {
                     Label("SpeedTest", systemImage: "speedometer")
                 }
             }
-        }.onOpenURL { url in
-            print("Opened using: \(url.absoluteString)")
         }
     }
 }

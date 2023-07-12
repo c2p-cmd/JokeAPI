@@ -25,20 +25,25 @@ struct QuoteView: View {
     var body: some View {
         VStack {
             Spacer()
-            Section("Widget View") {
+            
+            Section {
                 widgetView
+            } header: {
+                Text("Widget View")
+                    .foregroundStyle(.secondary)
+            } footer: {
+                RefreshButton(
+                    isBusy: self.$isBusy,
+                    action: getNewQuote
+                )
             }
+            
             if let err = error {
                 Spacer()
                 Text(err)
                     .font(.callout)
             }
             Spacer()
-        }
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                refreshButton
-            }
         }
         .navigationBarTitleDisplayMode(.inline)
         .padding()
@@ -57,27 +62,20 @@ struct QuoteView: View {
                     Text("-\(quote.author)")
                         .font(.system(.subheadline, design: .rounded))
                         .multilineTextAlignment(.trailing)
+                        .padding(.all, 25)
                 }
             }
             .foregroundStyle(.white)
             .bold()
-            .padding(.horizontal, 7.5)
         }
         .frame(width: 360, height: 169)
     }
     
-    private var refreshButton: some View {
-        Button {
-            if isBusy == false {
-                getNewQuote()
-            }
-        } label: {
-            Label("Reload", systemImage: "arrow.clockwise")
-        }
-        .disabled(self.isBusy)
-    }
-    
     private func getNewQuote() {
+        if isBusy {
+            return
+        }
+        
         Task {
             isBusy = true
             let result = await getRandomQuote()
@@ -95,9 +93,3 @@ struct QuoteView: View {
         }
     }
 }
-
-//struct QuoteView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        QuoteView()
-//    }
-//}

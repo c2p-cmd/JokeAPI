@@ -46,6 +46,8 @@
 		00511CF72A2C960500D1FD13 /* JokeWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 00511CE72A2C960300D1FD13 /* JokeWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		00511CFC2A2C961200D1FD13 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00511CE12A2C911F00D1FD13 /* Request.swift */; };
 		00511CFE2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png in Resources */ = {isa = PBXBuildFile; fileRef = 00511CFD2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png */; };
+		0091D9972A5E961C002A281A /* MultiSelectionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0091D9962A5E961C002A281A /* MultiSelectionMenu.swift */; };
+		0091D99A2A5EBFD9002A281A /* HelperViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0091D9992A5EBFD9002A281A /* HelperViews.swift */; };
 		00A07F652A5D2F6B006FC4DB /* NASAApodResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A07F642A5D2F6B006FC4DB /* NASAApodResponse.swift */; };
 		00A07F662A5D2F6B006FC4DB /* NASAApodResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A07F642A5D2F6B006FC4DB /* NASAApodResponse.swift */; };
 		00A07F6C2A5D4416006FC4DB /* NASAApodWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A07F6A2A5D4416006FC4DB /* NASAApodWidget.swift */; };
@@ -118,6 +120,8 @@
 		00511CF22A2C960500D1FD13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00511CF42A2C960500D1FD13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00511CFD2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2023-06-04 at 16.04.08.png"; sourceTree = "<group>"; };
+		0091D9962A5E961C002A281A /* MultiSelectionMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectionMenu.swift; sourceTree = "<group>"; };
+		0091D9992A5EBFD9002A281A /* HelperViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperViews.swift; sourceTree = "<group>"; };
 		00A07F642A5D2F6B006FC4DB /* NASAApodResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAApodResponse.swift; sourceTree = "<group>"; };
 		00A07F6A2A5D4416006FC4DB /* NASAApodWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAApodWidget.swift; sourceTree = "<group>"; };
 		00A07F712A5D67F6006FC4DB /* NASAApodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAApodView.swift; sourceTree = "<group>"; };
@@ -179,12 +183,14 @@
 		0043377C2A339DBD004AF73F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0091D9982A5EBFC2002A281A /* HelperViews */,
 				0043377D2A339DBD004AF73F /* JokeView.swift */,
 				0043377E2A339DBD004AF73F /* ContentView.swift */,
 				00E4B5832A4C47020064E63C /* MultiSelection.swift */,
 				00E4B5872A4C64540064E63C /* QuoteView.swift */,
 				00F2F8BC2A515DDD00A2ADE5 /* SpeedTestView.swift */,
 				00A07F712A5D67F6006FC4DB /* NASAApodView.swift */,
+				0091D9962A5E961C002A281A /* MultiSelectionMenu.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -262,6 +268,14 @@
 				00134F2E2A5153610091D6FD /* ViewModifier_iOS17.swift */,
 			);
 			path = JokeWidget;
+			sourceTree = "<group>";
+		};
+		0091D9982A5EBFC2002A281A /* HelperViews */ = {
+			isa = PBXGroup;
+			children = (
+				0091D9992A5EBFD9002A281A /* HelperViews.swift */,
+			);
+			path = HelperViews;
 			sourceTree = "<group>";
 		};
 		00A07F6D2A5D4459006FC4DB /* Widgets */ = {
@@ -390,6 +404,7 @@
 				00134F202A514DD20091D6FD /* SpeedService.swift in Sources */,
 				00A07F652A5D2F6B006FC4DB /* NASAApodResponse.swift in Sources */,
 				004337822A339E87004AF73F /* UserDefaultExtension.swift in Sources */,
+				0091D9972A5E961C002A281A /* MultiSelectionMenu.swift in Sources */,
 				001ACE0A2A4EBA2C000CE9AF /* UIImage+resize.swift in Sources */,
 				00134F292A514E820091D6FD /* URL+ping.swift in Sources */,
 				00511CE22A2C911F00D1FD13 /* Request.swift in Sources */,
@@ -400,6 +415,7 @@
 				00F2F8BD2A515DDD00A2ADE5 /* SpeedTestView.swift in Sources */,
 				00E4B5882A4C64540064E63C /* QuoteView.swift in Sources */,
 				003BD2682A4D72B3009FDFAC /* MyIntents.swift in Sources */,
+				0091D99A2A5EBFD9002A281A /* HelperViews.swift in Sources */,
 				004337802A339DBD004AF73F /* ContentView.swift in Sources */,
 				004860152A1B8A7800F3E6B4 /* ExApp.swift in Sources */,
 			);
