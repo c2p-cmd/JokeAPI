@@ -50,21 +50,26 @@ struct QuoteView: View {
     }
     
     private var widgetView: some View {
-        ZStack {
-            RoundedRectangle(cornerSize: CGSize(width: 20, height: 20))
+        let size = CGSize(width: 20, height: 20)
+        
+        return ZStack {
+            RoundedRectangle(cornerSize: size)
                 .fill(greenGradient)
+            
             VStack {
                 Text(quote.content)
                     .font(.system(.body, design: .rounded))
                     .multilineTextAlignment(.leading)
+                
                 HStack() {
                     Spacer()
                     Text("-\(quote.author)")
                         .font(.system(.subheadline, design: .rounded))
                         .multilineTextAlignment(.trailing)
-                        .padding(.all, 25)
+                        .frame(width: .infinity, height: .infinity, alignment: .bottomTrailing)
                 }
             }
+            .padding(.all, 25)
             .foregroundStyle(.white)
             .bold()
         }

@@ -71,7 +71,7 @@ struct JokeWidgetEntryView : View {
     
     func text() -> some View {
         Text(entry.joke)
-            .font(.system(.body, design: .rounded))
+            .font(.system(.subheadline, design: .rounded))
             .bold()
             .shadow(radius: 10, y: 5)
             .multilineTextAlignment(.leading)
@@ -80,7 +80,7 @@ struct JokeWidgetEntryView : View {
     
     func modifyForiOS17() -> some View {
         if #available(iOS 17, macOS 14, *) {
-            return VStack {
+            return ZStack {
                 text()
                 HStack {
                     Spacer()
@@ -91,19 +91,19 @@ struct JokeWidgetEntryView : View {
                     .buttonStyle(.plain)
                 }
             }
-            .background(gradient)
             .containerBackground(gradient, for: .widget)
         } else {
             return text()
-                .ignoresSafeArea()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(gradient)
         }
     }
     
     var body: some View {
         modifyForiOS17()
-            .padding(.horizontal, 0.5)
+            .ignoresSafeArea()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(gradient)
+            .padding(.horizontal, 0.05)
+            .padding(.vertical, 0.01)
     }
 }
 
@@ -120,18 +120,23 @@ struct JokeWidget: Widget {
     }
 }
 
-struct JokeWidget_Previews: PreviewProvider {
-    static var previews: some View {
-        JokeWidgetEntryView(
-            entry: JokeEntry(
-                joke: "Why did everyone like the mushroom?\n\nHe was a fungi.",
-                didError: true
-            )
-        )
-        .previewContext(
-            WidgetPreviewContext(
-                family: .systemMedium
-            )
-        )
-    }
-}
+//struct JokeWidget_Previews: PreviewProvider {
+//    static var previews: some View {
+//        JokeWidgetEntryView(
+//            entry: JokeEntry(
+//                joke: """
+//                Judge: \"I sentence you to the maximum punishment....\"
+//                Me (thinking): \"Please be death, please be death....\"
+//                Judge: "Learn Java!"
+//                Me: "Damn."
+//                """,
+//                didError: true
+//            )
+//        )
+//        .previewContext(
+//            WidgetPreviewContext(
+//                family: .systemMedium
+//            )
+//        )
+//    }
+//}

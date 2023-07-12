@@ -92,6 +92,8 @@ struct AnimalPictureEntryView: View {
         Image(uiImage: entry.uiImage)
             .resizable()
             .scaledToFill()
+            .ignoresSafeArea()
+            .frame(width: .infinity, height: .infinity, alignment: .center)
     }
     
     func modifyForiOS17(view: some View) -> some View {
@@ -105,9 +107,6 @@ struct AnimalPictureEntryView: View {
     
     var body: some View {
         modifyForiOS17(view: imageView)
-            .padding(.horizontal, 15)
-            .ignoresSafeArea()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.black)
     }
 }

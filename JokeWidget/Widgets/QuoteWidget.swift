@@ -67,20 +67,20 @@ struct QuoteWidgetEntryView: View {
     func text() -> some View {
         VStack {
             Text("\(entry.quoteResponse.content)\n")
+                .font(.system(.subheadline, design: .rounded))
                 .multilineTextAlignment(.leading)
             
             HStack {
                 Spacer()
                 Text("-\(entry.quoteResponse.author) ")
-                    .multilineTextAlignment(.leading)
-                    .font(.system(.subheadline, design: .rounded))
-            }
-            
-            if #available(iOS 17, macOS 14, *) {
-                refreshButton()
+                    .multilineTextAlignment(.trailing)
+                    .font(.system(.footnote, design: .rounded))
+                Spacer()
+                if #available(iOS 17, macOS 14, *) {
+                    refreshButton()
+                }
             }
         }
-        .font(.system(.body, design: .rounded))
         .bold()
         .shadow(radius: 10, y: 5)
         .foregroundStyle(.white)
@@ -111,8 +111,8 @@ struct QuoteWidgetEntryView: View {
     
     var body: some View {
         modifyForiOS17()
-            .padding(.vertical, 0.1)
-            .padding(.horizontal, 0.5)
+            .padding(.vertical, 0.01)
+            .padding(.horizontal, 0.05)
     }
 }
 
@@ -133,7 +133,7 @@ struct QuoteWidget_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             QuoteWidgetEntryView(entry: QuoteEntry(
-                quoteResponse: QuoteApiResponse("Learning is the beginning of welath.Learning is the beginning of welath.Learning is the beginning of welath.", by: "Jim Rohn")
+                quoteResponse: QuoteApiResponse("Learning is the beginning of welath.Learning is the beginning of welath.", by: "Jim Rohn")
             ))
             .previewContext(
                 WidgetPreviewContext(
