@@ -16,6 +16,7 @@ func fetchNASAApod(
         
         switch result {
         case .success(let apodResponse):
+            UserDefaults.saveNewNASAApod(apodResponse)
             fetchNASAImage(from: apodResponse, showTitle: showTitle ?? false, completion: completion)
             break
         case .failure(let error):
