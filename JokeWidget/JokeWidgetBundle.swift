@@ -15,6 +15,8 @@ struct JokeWidgetBundle: WidgetBundle {
         
         QuoteWidget()
         
+        CustomImageWidget()
+        
         AnimalPictureWidget()
         
         NASAApodWidget()

@@ -23,6 +23,35 @@ var configPlist: NSDictionary = {
 }()
 
 
+// MARK: - Pexels Photo API
+func getPexelPhoto(
+    for query: String = "animals"
+) async -> Result<MultiPhotoResponse, Error> {
+    var urlString = configPlist.value(forKey: "Pexels URL") as! String
+    urlString.append("&query=\(query)")
+    
+    let apiKey = configPlist.value(forKey: "Pexels API KEY") as! String
+    
+    var urlRequest = URLRequest(url: URL(string: urlString)!, cachePolicy: .reloadRevalidatingCacheData)
+    urlRequest.addValue(apiKey, forHTTPHeaderField: "Authorization")
+    
+    do {
+        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+        
+        #if DEBUG
+        if let httpResponse = response as? HTTPURLResponse {
+            print("Pexels: \(httpResponse.statusCode)")
+        }
+        #endif
+        
+        let pexelsPhotoResource = try JSONDecoder().decode(MultiPhotoResponse.self, from: data)
+        
+        return .success(pexelsPhotoResource)
+    } catch {
+        return .failure(error)
+    }
+}
+
 // MARK: - NASA APOD API
 func getNASAApod(on date: Date? = nil) async -> Result<ApodResponse, Error> {
     let urlString = configPlist.value(forKey: "NASA APOD Link") as! String

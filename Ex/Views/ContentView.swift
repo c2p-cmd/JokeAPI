@@ -28,6 +28,14 @@ struct ContentView: View {
                 }
                 
                 NavigationView {
+                    PexelsView()
+                        .navigationBarTitle("Pexels Photos", displayMode: .inline)
+                }
+                .tabItem {
+                    Label("Pexels", systemImage: "photo.stack.fill")
+                }
+                
+                NavigationView {
                     NASAApodView()
                         .navigationBarTitle("NASA Picture of the day", displayMode: .inline)
                 }
