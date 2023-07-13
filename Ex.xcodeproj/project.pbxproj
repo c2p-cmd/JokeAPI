@@ -22,6 +22,8 @@
 		00134F302A5153610091D6FD /* ViewModifier_iOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00134F2E2A5153610091D6FD /* ViewModifier_iOS17.swift */; };
 		001ACE0A2A4EBA2C000CE9AF /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */; };
 		001ACE0B2A4EBA2E000CE9AF /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */; };
+		001FB8C12A5FDE3B0020F69C /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001FB8C02A5FDE3B0020F69C /* ImageSaver.swift */; };
+		001FB8C22A5FDF220020F69C /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001FB8C02A5FDE3B0020F69C /* ImageSaver.swift */; };
 		003BD2682A4D72B3009FDFAC /* MyIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003BD2672A4D72B3009FDFAC /* MyIntents.swift */; };
 		003BD2692A4D72B3009FDFAC /* MyIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003BD2672A4D72B3009FDFAC /* MyIntents.swift */; };
 		003BD26B2A4D81C2009FDFAC /* QuoteAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003BD26A2A4D81C2009FDFAC /* QuoteAPIModel.swift */; };
@@ -97,6 +99,7 @@
 		00134F2B2A514F6A0091D6FD /* SpeedWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedWidget.swift; sourceTree = "<group>"; };
 		00134F2E2A5153610091D6FD /* ViewModifier_iOS17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifier_iOS17.swift; sourceTree = "<group>"; };
 		001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resize.swift"; sourceTree = "<group>"; };
+		001FB8C02A5FDE3B0020F69C /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		003BD2652A4D718A009FDFAC /* Ex.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ex.entitlements; sourceTree = "<group>"; };
 		003BD2662A4D7194009FDFAC /* JokeWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JokeWidgetExtension.entitlements; sourceTree = "<group>"; };
 		003BD2672A4D72B3009FDFAC /* MyIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyIntents.swift; sourceTree = "<group>"; };
@@ -274,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				0091D9992A5EBFD9002A281A /* HelperViews.swift */,
+				001FB8C02A5FDE3B0020F69C /* ImageSaver.swift */,
 			);
 			path = HelperViews;
 			sourceTree = "<group>";
@@ -402,6 +406,7 @@
 				00E23D7C2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */,
 				004D9B432A4DA50600199886 /* NewConfigIntent.swift in Sources */,
 				00134F202A514DD20091D6FD /* SpeedService.swift in Sources */,
+				001FB8C12A5FDE3B0020F69C /* ImageSaver.swift in Sources */,
 				00A07F652A5D2F6B006FC4DB /* NASAApodResponse.swift in Sources */,
 				004337822A339E87004AF73F /* UserDefaultExtension.swift in Sources */,
 				0091D9972A5E961C002A281A /* MultiSelectionMenu.swift in Sources */,
@@ -432,6 +437,7 @@
 				00134F1D2A514D080091D6FD /* SpeedModel.swift in Sources */,
 				004337832A33A140004AF73F /* UserDefaultExtension.swift in Sources */,
 				00134F272A514E540091D6FD /* DownloadService.swift in Sources */,
+				001FB8C22A5FDF220020F69C /* ImageSaver.swift in Sources */,
 				00E23D7D2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */,
 				004D9B392A4D98F100199886 /* AnimalPictureWidget.swift in Sources */,
 				00511CFC2A2C961200D1FD13 /* Request.swift in Sources */,

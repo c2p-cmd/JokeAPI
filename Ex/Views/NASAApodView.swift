@@ -14,6 +14,8 @@ struct NASAApodView: View {
     @State private var isBusy = false
     @State private var error: String?
     @State private var selectedDate: Date = .now
+    @State private var isPresenting = false
+    @State private var alertText = "Success"
     
     var body: some View {
         List {
@@ -39,7 +41,10 @@ struct NASAApodView: View {
                         .scaledToFit()
                 } else {
                     AsyncImage(url: URL(string: apodResponse.url)) { imagePhase in
-                        imagePhase.resizable()
+                        imagePhase.resizable().saveImageContextMenu { didSuccess in
+                            isPresenting = true
+                            alertText = didSuccess ? "Success" : "Saving Failed"
+                        }
                     } placeholder: {
                         ProgressView()
                             .progressViewStyle(CircularProgressViewStyle())
@@ -63,6 +68,15 @@ struct NASAApodView: View {
                 }
                 .disabled(isBusy)
                 .buttonStyle(.borderedProminent)
+            }
+        }
+        .alert(alertText, isPresented: $isPresenting) {
+            VStack {
+                Button(role: .cancel) {
+                    self.isPresenting = false
+                } label: {
+                    Text("Okay")
+                }
             }
         }
         .refreshable {
