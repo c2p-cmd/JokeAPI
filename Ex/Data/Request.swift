@@ -25,9 +25,13 @@ var configPlist: NSDictionary = {
 
 // MARK: - Pexels Photo API
 func getPexelPhoto(
-    for query: String = "animals"
+    for query: String = "animals",
+    page: Int = 1
 ) async -> Result<MultiPhotoResponse, Error> {
     var urlString = configPlist.value(forKey: "Pexels URL") as! String
+    if page > 1 {
+        urlString.append("&page=\(page)")
+    }
     urlString.append("&query=\(query)")
     
     let apiKey = configPlist.value(forKey: "Pexels API KEY") as! String

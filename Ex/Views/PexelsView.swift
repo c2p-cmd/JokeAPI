@@ -24,6 +24,7 @@ struct PexelsView: View {
     @State private var alertText = "Success"
     
     @State private var selectedCategory = "animal"
+    @State private var pexelPhotoPage = 1
     
     var body: some View {
         GeometryReader { proxy in
@@ -65,13 +66,17 @@ struct PexelsView: View {
                 } header: {
                     Text("Pictures of \(selectedCategory)")
                 } footer: {
-                    HStack {
-                        Spacer()
-                        RefreshButton(isBusy: self.$isBusy) {
-                            getNewImage()
-                        }
-                        Spacer()
+                    Text("Hold on any image to save in your gallery")
+                        .foregroundStyle(.tertiary)
+                        .font(.footnote)
+                }
+                
+                HStack {
+                    Spacer()
+                    RefreshButton(isBusy: self.$isBusy) {
+                        getNewImage()
                     }
+                    Spacer()
                 }
             }
         }
@@ -87,6 +92,12 @@ struct PexelsView: View {
                 Text("Okay")
             }
         }
+        .onAppear {
+            self.pexelPhotoPage = 1
+        }
+        .onChange(of: self.selectedCategory) { _ in
+            self.pexelPhotoPage = 1
+        }
     }
     
     func saveImageCompletion(didSuccess: Bool) {
@@ -100,8 +111,9 @@ struct PexelsView: View {
         }
         
         Task {
+            self.pexelPhotoPage += 1
             isBusy = true
-            let result = await getPexelPhoto(for: self.selectedCategory)
+            let result = await getPexelPhoto(for: self.selectedCategory, page: self.pexelPhotoPage)
             
             switch result {
             case .success(let newResponse):
@@ -110,6 +122,7 @@ struct PexelsView: View {
                 WidgetCenter.shared.reloadTimelines(ofKind: "Pexel Animal Image Widget")
                 break
             case .failure(let err):
+                self.pexelPhotoPage = 1
                 self.error = err.localizedDescription
                 break
             }
