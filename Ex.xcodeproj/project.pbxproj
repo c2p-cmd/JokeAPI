@@ -23,7 +23,7 @@
 		001710F42A601642003D2071 /* PexelsPhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001710F32A601642003D2071 /* PexelsPhotoResponse.swift */; };
 		001710F52A601645003D2071 /* PexelsPhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001710F32A601642003D2071 /* PexelsPhotoResponse.swift */; };
 		001710F72A601D1E003D2071 /* PexelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001710F62A601D1E003D2071 /* PexelsView.swift */; };
-		001710F92A6029F0003D2071 /* CustomImageWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001710F82A6029F0003D2071 /* CustomImageWidget.swift */; };
+		001710F92A6029F0003D2071 /* PexelsImageWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001710F82A6029F0003D2071 /* PexelsImageWidget.swift */; };
 		001ACE0A2A4EBA2C000CE9AF /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */; };
 		001ACE0B2A4EBA2E000CE9AF /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */; };
 		001FB8C12A5FDE3B0020F69C /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001FB8C02A5FDE3B0020F69C /* ImageSaver.swift */; };
@@ -104,7 +104,7 @@
 		00134F2E2A5153610091D6FD /* ViewModifier_iOS17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifier_iOS17.swift; sourceTree = "<group>"; };
 		001710F32A601642003D2071 /* PexelsPhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PexelsPhotoResponse.swift; sourceTree = "<group>"; };
 		001710F62A601D1E003D2071 /* PexelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PexelsView.swift; sourceTree = "<group>"; };
-		001710F82A6029F0003D2071 /* CustomImageWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageWidget.swift; sourceTree = "<group>"; };
+		001710F82A6029F0003D2071 /* PexelsImageWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PexelsImageWidget.swift; sourceTree = "<group>"; };
 		001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resize.swift"; sourceTree = "<group>"; };
 		001FB8C02A5FDE3B0020F69C /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		003BD2652A4D718A009FDFAC /* Ex.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ex.entitlements; sourceTree = "<group>"; };
@@ -300,7 +300,7 @@
 				00E23D7F2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition */,
 				00134F2B2A514F6A0091D6FD /* SpeedWidget.swift */,
 				00A07F6A2A5D4416006FC4DB /* NASAApodWidget.swift */,
-				001710F82A6029F0003D2071 /* CustomImageWidget.swift */,
+				001710F82A6029F0003D2071 /* PexelsImageWidget.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -462,7 +462,7 @@
 				00134F2A2A514E820091D6FD /* URL+ping.swift in Sources */,
 				001ACE0B2A4EBA2E000CE9AF /* UIImage+resize.swift in Sources */,
 				004D9B3E2A4D99CD00199886 /* ImageProvider.swift in Sources */,
-				001710F92A6029F0003D2071 /* CustomImageWidget.swift in Sources */,
+				001710F92A6029F0003D2071 /* PexelsImageWidget.swift in Sources */,
 				00E4B5852A4C4B4D0064E63C /* MultiSelection.swift in Sources */,
 				003BD26C2A4D81C2009FDFAC /* QuoteAPIModel.swift in Sources */,
 				00A07F662A5D2F6B006FC4DB /* NASAApodResponse.swift in Sources */,

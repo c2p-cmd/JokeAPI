@@ -22,14 +22,13 @@ struct PexelsView: View {
     @State private var error: String?
     @State private var isPresenting = false
     @State private var alertText = "Success"
-    @State private var image: UIImage?
     
     @State private var selectedCategory = "animal"
     
     var body: some View {
         GeometryReader { proxy in
             let w = proxy.size.width
-            let h = proxy.size.height
+            let _ = proxy.size.height
             
             List {
                 if let error = error {
@@ -44,48 +43,13 @@ struct PexelsView: View {
                 }
                 .pickerStyle(.menu)
                 
-                if let image {
-                    Section("Loaded Image") {
-                        Image(uiImage: image)
-                            .resizable()
-                            .scaledToFit()
-                    }
-                }
-                
                 Section {
                     TabView {
                         ForEach(pexelsPhotoResponse.photos, id: \.id) {
                             AsyncImage(url: $0.imageUrl) { imagePhase in
                                 imagePhase
                                     .resizable()
-                                    .contextMenu {
-                                        Button {
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                                let uiImage = imagePhase.asUiImage()
-                                                uiImage.saveImage { didSuccess in
-                                                    alertText = didSuccess ? "Success" : "Could not set image as widget"
-                                                    isPresenting = true
-                                                    
-                                                    if didSuccess {
-                                                        WidgetCenter.shared.reloadTimelines(ofKind: "Custom Image Widget")
-                                                    }
-                                                }
-                                            }
-                                        } label: {
-                                            Label("Show on widget", systemImage: "pawprint.circle")
-                                        }
-
-                                        Divider()
-                                        
-                                        Button {
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                                let imageSaver = ImageSaver(completion: saveImageCompletion(didSuccess:))
-                                                imageSaver.writeToPhotoAlbum(image: imagePhase.asUiImage())
-                                            }
-                                        } label: {
-                                            Label("Save", systemImage: "square.and.arrow.down")
-                                        }
-                                    }
+                                    .saveImageContextMenu(completion: saveImageCompletion(didSuccess:))
                                     .aspectRatio(1.0, contentMode: .fill)
                             } placeholder: {
                                 ProgressView()
@@ -102,17 +66,11 @@ struct PexelsView: View {
                     Text("Pictures of \(selectedCategory)")
                 } footer: {
                     HStack {
+                        Spacer()
                         RefreshButton(isBusy: self.$isBusy) {
                             getNewImage()
                         }
-                        
-                        RefreshButton(isBusy: self.$isBusy) {
-                            UIImage.loadImage { image in
-                                self.image = image
-                                print("Loaded")
-                                WidgetCenter.shared.reloadTimelines(ofKind: "Custom Image Widget")
-                            }
-                        }
+                        Spacer()
                     }
                 }
             }
@@ -127,12 +85,6 @@ struct PexelsView: View {
                 self.isPresenting = false
             } label: {
                 Text("Okay")
-            }
-        }
-        .onAppear {
-            UIImage.loadImage { image in
-                self.image = image
-                print("Loaded \(String(describing: image))")
             }
         }
     }
@@ -155,6 +107,7 @@ struct PexelsView: View {
             case .success(let newResponse):
                 self.error = nil
                 self.pexelsPhotoResponse = newResponse
+                WidgetCenter.shared.reloadTimelines(ofKind: "Pexel Animal Image Widget")
                 break
             case .failure(let err):
                 self.error = err.localizedDescription

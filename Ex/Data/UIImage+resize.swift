@@ -21,10 +21,10 @@ extension UIImage {
     }
 
     static func loadImage(
-        completion: @escaping (UIImage?) -> Void
+        completion: @escaping (UIImage) -> Void
     ) {
         guard let data = appStorage.data(forKey: "image_key") else {
-            completion(nil)
+            completion(UIImage(systemName: "exclamationmark.triangle.fill")!)
             return
         }
         let decoded = try! PropertyListDecoder().decode(Data.self, from: data)

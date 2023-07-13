@@ -25,7 +25,7 @@ extension UserDefaults {
         return pexelsPhoto
     }
     
-    func saveNewPexelsPhotoResponse(_ newResponse: MultiPhotoResponse) {
+    static func saveNewPexelsPhotoResponse(_ newResponse: MultiPhotoResponse) {
         appStorage.set(newResponse, forKey: "pexels_photo")
     }
 }

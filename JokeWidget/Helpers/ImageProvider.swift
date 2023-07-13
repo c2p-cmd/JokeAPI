@@ -7,6 +7,26 @@
 
 import UIKit
 
+func fetchImage(
+    from url: URL,
+    completion: @escaping (UIImage, Bool) -> Void
+) {
+    Task {
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            
+            if let image = UIImage(data: data) {
+                completion(image, true)
+            } else {
+                completion(UIImage(systemName: "exclamationmark.triangle.fill")!, false)
+            }
+        } catch {
+            print(error.localizedDescription)
+            completion(UIImage(systemName: "exclamationmark.triangle.fill")!, false)
+        }
+    }
+}
+
 func fetchNASAApod(
     showTitle: Bool?,
     completion: @escaping (NASAApodEntry, Bool) -> Void
