@@ -29,10 +29,12 @@ struct NASAApodTimelineProvider: IntentTimelineProvider {
     func getTimeline(for configuration: NASAWidgetConfigIntent, in context: Context, completion: @escaping (Timeline<NASAApodEntry>) -> Void) {
         fetchNASAApod(showTitle: configuration.showTitle as? Bool) { (newEntry: NASAApodEntry, didError: Bool) in
             // if success fetch new image tomorrow
-            let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: newEntry.date)!
+            let tomorrowComponents = DateComponents(day: 1)
+            let tomorrow = Calendar.current.date(byAdding: tomorrowComponents, to: newEntry.date)!
             
             // if errored retry after an hour
-            let nextHour = Calendar.current.date(byAdding: .hour, value: 1, to: newEntry.date)!
+            let nextHourComponents = DateComponents(day: 1)
+            let nextHour = Calendar.current.date(byAdding: nextHourComponents, to: newEntry.date)!
             
             let nextReloadDate = didError ? tomorrow : nextHour
             
