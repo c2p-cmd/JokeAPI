@@ -138,7 +138,7 @@ struct AnimalPictureWidget: Widget {
         makeConfiguration()
             .configurationDisplayName("Animal Picture Widget")
             .description("This is a widget to show you an http status with a cat or dog")
-            .supportedFamilies([.systemLarge, .systemExtraLarge])
+            .supportedFamilies([.systemLarge, .systemExtraLarge, .systemSmall])
     }
 }
 

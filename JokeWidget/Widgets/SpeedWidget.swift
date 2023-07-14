@@ -22,8 +22,16 @@ struct SpeedTimelineProvider: TimelineProvider {
         in context: Context,
         completion: @escaping (SpeedEntry) -> Void
     ) {
+        let speedEntry = SpeedEntry(speed: UserDefaults.savedSpeed)
+        completion(speedEntry)
+    }
+    
+    func getTimeline(
+        in context: Context,
+        completion: @escaping (Timeline<SpeedEntry>) -> Void
+    ) {
         Task {
-            let downloadService = DownloadService.shared
+            let downloadService: DownloadService = .shared
             let result = await downloadService.test(for: url, in: 60)
             var speedEntry = SpeedEntry()
             
@@ -37,19 +45,34 @@ struct SpeedTimelineProvider: TimelineProvider {
                 break
             }
             
-            completion(speedEntry)
-        }
-    }
-    
-    func getTimeline(
-        in context: Context,
-        completion: @escaping (Timeline<SpeedEntry>) -> Void
-    ) {
-        getSnapshot(in: context) { speedEntry in
-            let nextReloadDate = Calendar.current.date(byAdding: .hour, value: 1, to: speedEntry.date)!
-            let timeline = Timeline(entries: [speedEntry], policy: .after(nextReloadDate))
+            let components = DateComponents(hour: 1)
+            let nextReloadDate = Calendar.current.date(
+                byAdding: components, to: speedEntry.date
+            )!
+            let policy: TimelineReloadPolicy = .after(nextReloadDate)
+            let timeline = Timeline(entries: [speedEntry], policy: policy)
             
             completion(timeline)
+        }
+    }
+}
+
+struct SpeedWidget_Placeholder: View {
+    @Environment(\.widgetFamily) var widgetFamily: WidgetFamily
+    
+    var body: some View {
+        if widgetFamily == .systemMedium {
+            Image("mdb", bundle: .main)
+                .resizable()
+                .ignoresSafeArea()
+                .scaledToFill()
+                .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 20)))
+        } else {
+            Image("xl lg sm", bundle: .main)
+                .resizable()
+                .ignoresSafeArea()
+                .scaledToFill()
+                .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 20)))
         }
     }
 }
@@ -68,27 +91,39 @@ struct SpeedWidgetEntryView: View {
     }
     
     func homescreenWidgetView(_ text: String) -> some View {
-        VStack {
-            Text("\(text) \(entry.date.formatted(date: .omitted, time: .shortened))")
-            Text("Speed is \(entry.speed.widgetDescription())")
+        VStack(spacing: 21) {
+            VStack {
+                Text("\(text) \(entry.date.formatted(date: .omitted, time: .shortened))")
+                    .font(.system(size: 18.5, weight: .bold, design: .monospaced))
+                Text("Speed is \(entry.speed.widgetDescription())")
+                    .font(.system(size: 20, weight: .bold, design: .monospaced))
+            }
             if #available(iOSApplicationExtension 17, macOSApplicationExtension 14, *) {
-                Spacer()
                 Button(intent: SpeedTestIntent()) {
-                    Image(systemName: "arrow.counterclockwise.circle.fill")
-                        .resizable()
-                        .scaledToFit()
+                    Image(systemName: "arrow.counterclockwise")
                 }
             }
         }
-        .monospaced()
-        .modifyForiOS17()
+        .buttonStyle(.plain)
+        .monospaced(true)
+        .foregroundStyle(.white)
+        .modifyForiOS17(.blue)
     }
     
     var body: some View {
         switch self.widgetFamily {
         case .systemSmall:
-            homescreenWidgetView("At")
-                .font(.callout)
+            SpeedWidget_Placeholder()
+                .overlay {
+                    homescreenWidgetView("At")
+                        .font(.callout)
+                }
+        case .systemMedium:
+            SpeedWidget_Placeholder()
+                .overlay {
+                    homescreenWidgetView("Hello it is")
+                        .font(.headline)
+                }
         case .accessoryRectangular:
             lockScreenWidgetView("Speed is")
                 .font(.headline)
@@ -96,8 +131,11 @@ struct SpeedWidgetEntryView: View {
             lockScreenWidgetView("& Speed is")
                 .font(.headline)
         default:
-            homescreenWidgetView("Hello it is")
-                .font(.headline)
+            SpeedWidget_Placeholder()
+                .overlay {
+                    homescreenWidgetView("Hello it is")
+                        .font(.headline)
+                }
         }
     }
 }
@@ -125,16 +163,16 @@ struct SpeedTestWidget: Widget {
 
 struct SpeedWidgetEntryView_Previews: PreviewProvider {
     static var previews: some View {
+        SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 99.19883, units: .Mbps)))
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
+        
+        SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 99.19883, units: .Mbps)))
+            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        
         SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 101, units: .Kbps)))
             .previewContext(WidgetPreviewContext(family: .accessoryInline))
         
         SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 101, units: .Kbps)))
             .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
-        
-        SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 99.19883, units: .Mbps)))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
-        
-        SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 99.19883, units: .Mbps)))
-            .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }

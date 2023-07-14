@@ -59,11 +59,27 @@ struct JokeProvider: TimelineProvider {
     }
 }
 
+struct JokeEntryView_Placeholder: View {
+    var widgetFamily: WidgetFamily
+    
+    var body: some View {
+        if widgetFamily == .systemMedium {
+            Image("md")
+                .resizable()
+                .scaledToFill()
+        } else {
+            Image("large")
+                .resizable()
+                .scaledToFill()
+        }
+    }
+}
+
 struct JokeWidgetEntryView : View {
     private let gradient = LinearGradient(
         gradient: Gradient(colors: [
-            Color("YellowColor", bundle: .main),
-            Color("YellowColor 1", bundle: .main)
+            Color("Orange1", bundle: .main),
+            Color("Orange2", bundle: .main)
         ]), startPoint: .bottom, endPoint: .top)
     
     var entry: JokeProvider.Entry
@@ -71,11 +87,12 @@ struct JokeWidgetEntryView : View {
     
     func text() -> some View {
         Text(entry.joke)
-            .font(.system(.subheadline, design: .rounded))
+            .font(.system(size: 16, weight: .bold, design: .rounded))
             .bold()
-            .shadow(radius: 10, y: 5)
+            .padding(.vertical, 1)
+            .shadow(radius: 1.0)
             .multilineTextAlignment(.leading)
-            .foregroundStyle(.black)
+            .foregroundStyle(.white)
     }
     
     func modifyForiOS17() -> some View {
@@ -99,11 +116,12 @@ struct JokeWidgetEntryView : View {
     
     var body: some View {
         modifyForiOS17()
+            .padding(.all, 0.15)
+            .background(content: {
+                JokeEntryView_Placeholder(widgetFamily: self.widgetFamily)
+            })
             .ignoresSafeArea()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(gradient)
-            .padding(.horizontal, 0.05)
-            .padding(.vertical, 0.01)
     }
 }
 
@@ -111,7 +129,10 @@ struct JokeWidget: Widget {
     let kind: String = "JokeWidget"
     
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: JokeProvider()) { entry in
+        StaticConfiguration(
+            kind: kind,
+            provider: JokeProvider()
+        ) { entry in
             JokeWidgetEntryView(entry: entry)
         }
         .supportedFamilies([.systemMedium])
@@ -120,23 +141,20 @@ struct JokeWidget: Widget {
     }
 }
 
-//struct JokeWidget_Previews: PreviewProvider {
-//    static var previews: some View {
-//        JokeWidgetEntryView(
-//            entry: JokeEntry(
-//                joke: """
-//                Judge: \"I sentence you to the maximum punishment....\"
-//                Me (thinking): \"Please be death, please be death....\"
-//                Judge: "Learn Java!"
-//                Me: "Damn."
-//                """,
-//                didError: true
-//            )
-//        )
-//        .previewContext(
-//            WidgetPreviewContext(
-//                family: .systemMedium
-//            )
-//        )
-//    }
-//}
+struct JokeWidget_Previews: PreviewProvider {
+    static var previews: some View {
+        JokeWidgetEntryView(
+            entry: JokeEntry(
+                joke: """
+My employer came running to me and said, "I was looking for you all day!Where the hell have you been?"
+\nI replied, "Good employees are hard to find"
+"""
+            )
+        )
+        .previewContext(
+            WidgetPreviewContext(
+                family: .systemMedium
+            )
+        )
+    }
+}

@@ -36,7 +36,7 @@ struct PexelAnimalImageProvider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<PexelAnimalImageEntry>) -> Void) {
         Task {
             let result = await getPexelPhoto(for: "animal")
-            let dateComponents = DateComponents(hour: 1)
+            let dateComponents = DateComponents(day: 1)
             let reloadDate = Calendar.current.date(byAdding: dateComponents, to: .now)!
             var entry = PexelAnimalImageEntry()
             
@@ -52,6 +52,8 @@ struct PexelAnimalImageProvider: TimelineProvider {
                 }
                 break
             case .failure(_):
+                let dateComponents = DateComponents(hour: 1)
+                let reloadDate = Calendar.current.date(byAdding: dateComponents, to: .now)!
                 let timeline = Timeline(entries: [entry], policy: .after(reloadDate))
                 completion(timeline)
                 break

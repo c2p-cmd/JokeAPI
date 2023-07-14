@@ -11,19 +11,11 @@ import WidgetKit
 struct PexelsView: View {
     @AppStorage("pexels_photo") private var pexelsPhotoResponse: MultiPhotoResponse = UserDefaults.savedPexelsPhotoResponse
     
-    private let categories: [String] = [
-        "animal",
-        "bikes",
-        "cars",
-        "vintage vehicles"
-    ]
-    
     @State private var isBusy = false
     @State private var error: String?
     @State private var isPresenting = false
     @State private var alertText = "Success"
     
-    @State private var selectedCategory = "animal"
     @State private var pexelPhotoPage = 1
     
     var body: some View {
@@ -36,13 +28,6 @@ struct PexelsView: View {
                     Text(error)
                         .font(.footnote)
                 }
-                
-                Picker("Choose Category", selection: self.$selectedCategory) {
-                    ForEach(categories, id: \.self) {
-                        Text($0.description).tag($0)
-                    }
-                }
-                .pickerStyle(.menu)
                 
                 Section {
                     TabView {
@@ -64,7 +49,7 @@ struct PexelsView: View {
                     .tabViewStyle(.page)
                     .indexViewStyle(.page(backgroundDisplayMode: .always))
                 } header: {
-                    Text("Pictures of \(selectedCategory)")
+                    Text("Pictures of animals")
                 } footer: {
                     Text("Hold on any image to save in your gallery")
                         .foregroundStyle(.tertiary)
@@ -95,9 +80,6 @@ struct PexelsView: View {
         .onAppear {
             self.pexelPhotoPage = 1
         }
-        .onChange(of: self.selectedCategory) { _ in
-            self.pexelPhotoPage = 1
-        }
     }
     
     func saveImageCompletion(didSuccess: Bool) {
@@ -113,7 +95,7 @@ struct PexelsView: View {
         Task {
             self.pexelPhotoPage += 1
             isBusy = true
-            let result = await getPexelPhoto(for: self.selectedCategory, page: self.pexelPhotoPage)
+            let result = await getPexelPhoto(page: self.pexelPhotoPage)
             
             switch result {
             case .success(let newResponse):
