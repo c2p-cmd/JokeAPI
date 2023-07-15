@@ -19,6 +19,8 @@ struct JokeWidgetBundle: WidgetBundle {
         
         AnimalPictureWidget()
         
+        CustomPictureWidget()
+        
         NASAApodWidget()
         
         SpeedTestWidget()

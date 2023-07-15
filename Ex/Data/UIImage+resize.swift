@@ -8,27 +8,30 @@
 import UIKit
 
 extension UIImage {
-    func saveImage(
-        completion: @escaping (Bool) -> Void
-    ) {
-        guard let data = self.jpegData(compressionQuality: 0.5) else {
-            completion(false)
-            return
+    func saveImage() {
+        let image = self.size.width > 800 ? self.resized(toWidth: 800) : self
+        
+        if let pngData = image.pngData() {
+            appStorage.set(pngData, forKey: "IMAGE_KEY")
+        } else {
+            print("No png data")
         }
-        let encoded = try! PropertyListEncoder().encode(data)
-        appStorage.set(encoded, forKey: "image_key")
-        completion(true)
     }
-
+    
+    static func resetWidgetImage() {
+        appStorage.removeObject(forKey: "IMAGE_KEY")
+    }
+    
     static func loadImage(
         completion: @escaping (UIImage) -> Void
     ) {
-        guard let data = appStorage.data(forKey: "image_key") else {
+        guard let data = appStorage.data(forKey: "IMAGE_KEY") else {
             completion(UIImage(systemName: "exclamationmark.triangle.fill")!)
             return
         }
-        let decoded = try! PropertyListDecoder().decode(Data.self, from: data)
-        completion(UIImage(data: decoded) ?? UIImage(systemName: "exclamationmark.triangle.fill")!)
+        let uiImage = UIImage(data: data) ?? UIImage(systemName: "exclamationmark.triangle.fill")!
+        print("Setting image: \(uiImage.debugDescription) from: \(data.debugDescription)")
+        completion(uiImage)
     }
     
     func resized(toWidth width: CGFloat, isOpaque: Bool = true) -> UIImage {

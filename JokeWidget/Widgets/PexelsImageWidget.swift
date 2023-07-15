@@ -101,8 +101,8 @@ struct PexelAnimalImageWidget: Widget {
         ) { entry in
             PexelAnimalImageEntryView(entry: entry)
         }
-        .configurationDisplayName("Custom Image Widget")
-        .description("You can add your own image on this widget")
+        .configurationDisplayName("Animal Image Widget")
+        .description("Be fed animal pictures everyday!")
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .systemExtraLarge])
     }
 }

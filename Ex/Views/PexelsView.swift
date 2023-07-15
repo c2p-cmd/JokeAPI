@@ -16,6 +16,8 @@ struct PexelsView: View {
     @State private var isPresenting = false
     @State private var alertText = "Success"
     
+    @State private var showingFullScreenCover = false
+    
     @State private var pexelPhotoPage = 1
     
     var body: some View {
@@ -79,6 +81,18 @@ struct PexelsView: View {
         }
         .onAppear {
             self.pexelPhotoPage = 1
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(action: {
+                    self.showingFullScreenCover = true
+                }, label: {
+                    Label("Set custom image widget.", systemImage: "gear.circle")
+                })
+            }
+        }
+        .fullScreenCover(isPresented: self.$showingFullScreenCover) {
+            CustomImageView()
         }
     }
     

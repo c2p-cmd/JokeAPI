@@ -61,6 +61,8 @@
 		00A07F732A5D67F6006FC4DB /* NASAApodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A07F712A5D67F6006FC4DB /* NASAApodView.swift */; };
 		00A07F752A5D7B85006FC4DB /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00A07F742A5D7B85006FC4DB /* Config.plist */; };
 		00A07F762A5D7B85006FC4DB /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00A07F742A5D7B85006FC4DB /* Config.plist */; };
+		00BDAE1C2A627805002CFD69 /* CustomPictureWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BDAE1B2A627805002CFD69 /* CustomPictureWidget.swift */; };
+		00BDAE1E2A627C17002CFD69 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BDAE1D2A627C17002CFD69 /* CustomImageView.swift */; };
 		00E23D7C2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 00E23D7F2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition */; };
 		00E23D7D2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 00E23D7F2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition */; };
 		00E4B5842A4C47020064E63C /* MultiSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4B5832A4C47020064E63C /* MultiSelection.swift */; };
@@ -136,6 +138,8 @@
 		00A07F6A2A5D4416006FC4DB /* NASAApodWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAApodWidget.swift; sourceTree = "<group>"; };
 		00A07F712A5D67F6006FC4DB /* NASAApodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAApodView.swift; sourceTree = "<group>"; };
 		00A07F742A5D7B85006FC4DB /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		00BDAE1B2A627805002CFD69 /* CustomPictureWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPictureWidget.swift; sourceTree = "<group>"; };
+		00BDAE1D2A627C17002CFD69 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		00E23D7E2A56B7AE003DD155 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/AnimalPictureConfig.intentdefinition; sourceTree = "<group>"; };
 		00E4B5832A4C47020064E63C /* MultiSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelection.swift; sourceTree = "<group>"; };
 		00E4B5862A4C61570064E63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -203,6 +207,7 @@
 				00A07F712A5D67F6006FC4DB /* NASAApodView.swift */,
 				0091D9962A5E961C002A281A /* MultiSelectionMenu.swift */,
 				001710F62A601D1E003D2071 /* PexelsView.swift */,
+				00BDAE1D2A627C17002CFD69 /* CustomImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -301,6 +306,7 @@
 				00134F2B2A514F6A0091D6FD /* SpeedWidget.swift */,
 				00A07F6A2A5D4416006FC4DB /* NASAApodWidget.swift */,
 				001710F82A6029F0003D2071 /* PexelsImageWidget.swift */,
+				00BDAE1B2A627805002CFD69 /* CustomPictureWidget.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -410,6 +416,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00134F1C2A514D080091D6FD /* SpeedModel.swift in Sources */,
+				00BDAE1E2A627C17002CFD69 /* CustomImageView.swift in Sources */,
 				00134F2F2A5153610091D6FD /* ViewModifier_iOS17.swift in Sources */,
 				003BD26B2A4D81C2009FDFAC /* QuoteAPIModel.swift in Sources */,
 				00E4B5842A4C47020064E63C /* MultiSelection.swift in Sources */,
@@ -464,6 +471,7 @@
 				004D9B3E2A4D99CD00199886 /* ImageProvider.swift in Sources */,
 				001710F92A6029F0003D2071 /* PexelsImageWidget.swift in Sources */,
 				00E4B5852A4C4B4D0064E63C /* MultiSelection.swift in Sources */,
+				00BDAE1C2A627805002CFD69 /* CustomPictureWidget.swift in Sources */,
 				003BD26C2A4D81C2009FDFAC /* QuoteAPIModel.swift in Sources */,
 				00A07F662A5D2F6B006FC4DB /* NASAApodResponse.swift in Sources */,
 				00A07F6C2A5D4416006FC4DB /* NASAApodWidget.swift in Sources */,
