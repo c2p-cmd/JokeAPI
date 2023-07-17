@@ -22,15 +22,11 @@
 		<string>ConfigurationIntent</string>
 		<string>NASAWidgetConfigIntent</string>
 	</array>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>You can select photos to add to widgets</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Please allow access to save photo in your photo library</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SubscribeRegular.ttf</string>
 		<string>SubscribeShadowRegular.ttf</string>
-        <string>ComicKings.ttf</string>
+		<string>ComicKings.ttf</string>
 	</array>
 </dict>
 </plist>

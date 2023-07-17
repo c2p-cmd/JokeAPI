@@ -15,7 +15,7 @@ struct JokeEntry: TimelineEntry {
 
 struct JokeProvider: TimelineProvider {
     func placeholder(in context: Context) -> JokeEntry {
-        JokeEntry(joke: UserDefaults.savedJoke)
+        JokeEntry()
     }
     
     func getSnapshot(in context: Context, completion: @escaping (JokeEntry) -> ()) {
@@ -26,7 +26,7 @@ struct JokeProvider: TimelineProvider {
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         Task {
-            let res = await getRandomJoke(of: [], safeMode: true)
+            let res = await getRandomJoke(of: [], type: .twopart, safeMode: true)
             
             switch res {
             case .success(let newJoke):

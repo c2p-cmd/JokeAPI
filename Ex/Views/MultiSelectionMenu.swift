@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct MultiSelectionMenu: View {
+    var label: String
     @Binding var selectedCategories: Set<IdentifiableString>
+    var availableCategories: [IdentifiableString]
     
     private var formattedSelectedListString: String {
         ListFormatter.localizedString(
@@ -20,7 +22,7 @@ struct MultiSelectionMenu: View {
     var body: some View {
         Menu(content: {
             Section {
-                ForEach(Array(jokeCategories)) { category in
+                ForEach(self.availableCategories) { category in
                     Button {
                         if selectedCategories.contains(category) {
                             selectedCategories.remove(category)
@@ -50,7 +52,7 @@ struct MultiSelectionMenu: View {
             }
         }, label: {
             HStack {
-                Text("Joke Categories")
+                Text(self.label)
                 Spacer()
                 Text(formattedSelectedListString)
                     .foregroundStyle(.gray)

@@ -108,6 +108,7 @@ func getRandomQuote() async -> Result<QuoteApiResponse, Error> {
 // MARK: - JOKE API
 func getRandomJoke(
     of categories: [IdentifiableString],
+    type jokeType: JokeType,
     safeMode: Bool = false
 ) async -> Result<String, Error> {
     do {
@@ -126,8 +127,13 @@ func getRandomJoke(
         }
         
         let format = safeMode ? "?format=txt&safe-mode" : "?format=txt"
+        urlString.append(format)
         
-        guard let url = URL(string: "\(urlString)\(format)") else {
+        if jokeType != .any {
+            urlString.append("&type=\(jokeType.rawValue)")
+        }
+        
+        guard let url = URL(string: urlString) else {
             return .failure(URLError(.badURL))
         }
         

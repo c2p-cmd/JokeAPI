@@ -27,6 +27,9 @@ struct PictureProvider: TimelineProvider {
         UIImage.loadImages { imagesArray in
             completion(PictureEntry(image: imagesArray.randomElement()))
         } onError: {
+#if DEBUG
+print($0)
+#endif
             completion(PictureEntry())
         }
     }
@@ -54,6 +57,10 @@ struct PictureProvider: TimelineProvider {
             let timeline = Timeline(entries: entries, policy: .atEnd)
             completion(timeline)
         } onError: {
+            #if DEBUG
+            print($0)
+            #endif
+            
             let entries = [PictureEntry()]
             
             let timeline = Timeline(entries: entries, policy: .atEnd)

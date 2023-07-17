@@ -78,11 +78,7 @@ struct CustomImageView: View {
         }
         .onAppear {
             self.error = nil
-            UIImage.loadImages { savedImages in
-                self.images = savedImages
-            } onError: {
-                // do nothing
-            }
+            UIImage.loadImages(onSuccess: { savedImages in self.images = savedImages }, onError: nil)
         }
         .onChange(of: self.pickedItems) { (items: [PhotosPickerItem]) in
             if items.isEmpty {

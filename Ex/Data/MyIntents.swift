@@ -27,11 +27,11 @@ struct JokeIntent: AppIntent {
     static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Set Joke To")
     
     func perform() async throws -> some IntentResult & ReturnsValue {
-        let jokeRes = await getRandomJoke(of: [], safeMode: true)
+        let jokeRes = await getRandomJoke(of: [], type: .twopart, safeMode: true)
         
         switch jokeRes {
         case .success(let newJoke):
-            appStorage.setValue(newJoke, forKey: "joke")
+            UserDefaults.saveNewJoke(newJoke)
             return .result(value: newJoke)
         case .failure(let err):
             return .result(value: err.localizedDescription)

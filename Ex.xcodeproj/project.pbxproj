@@ -69,6 +69,8 @@
 		00D004B22A65618200D51C7E /* SubscribeShadowRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00D004AF2A65618200D51C7E /* SubscribeShadowRegular.ttf */; };
 		00D004B32A65618200D51C7E /* SubscribeRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00D004B02A65618200D51C7E /* SubscribeRegular.ttf */; };
 		00D004B42A65618200D51C7E /* SubscribeRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00D004B02A65618200D51C7E /* SubscribeRegular.ttf */; };
+		00D004B62A65963500D51C7E /* JokeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D004B52A65963500D51C7E /* JokeType.swift */; };
+		00D004B72A65963500D51C7E /* JokeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D004B52A65963500D51C7E /* JokeType.swift */; };
 		00E23D7C2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 00E23D7F2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition */; };
 		00E23D7D2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 00E23D7F2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition */; };
 		00E4B5842A4C47020064E63C /* MultiSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4B5832A4C47020064E63C /* MultiSelection.swift */; };
@@ -149,6 +151,7 @@
 		00D004AA2A652F7200D51C7E /* ComicKings.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ComicKings.ttf; sourceTree = "<group>"; };
 		00D004AF2A65618200D51C7E /* SubscribeShadowRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SubscribeShadowRegular.ttf; path = "Ex/subscribe-font/SubscribeShadowRegular.ttf"; sourceTree = SOURCE_ROOT; };
 		00D004B02A65618200D51C7E /* SubscribeRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SubscribeRegular.ttf; path = "Ex/subscribe-font/SubscribeRegular.ttf"; sourceTree = SOURCE_ROOT; };
+		00D004B52A65963500D51C7E /* JokeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeType.swift; sourceTree = "<group>"; };
 		00E23D7E2A56B7AE003DD155 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/AnimalPictureConfig.intentdefinition; sourceTree = "<group>"; };
 		00E4B5832A4C47020064E63C /* MultiSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelection.swift; sourceTree = "<group>"; };
 		00E4B5862A4C61570064E63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -200,6 +203,7 @@
 				00134F222A514E0F0091D6FD /* NetworkError.swift */,
 				00134F252A514E540091D6FD /* DownloadService.swift */,
 				00134F282A514E820091D6FD /* URL+ping.swift */,
+				00D004B52A65963500D51C7E /* JokeType.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -445,6 +449,7 @@
 				00BDAE1E2A627C17002CFD69 /* CustomImageView.swift in Sources */,
 				00134F2F2A5153610091D6FD /* ViewModifier_iOS17.swift in Sources */,
 				003BD26B2A4D81C2009FDFAC /* QuoteAPIModel.swift in Sources */,
+				00D004B62A65963500D51C7E /* JokeType.swift in Sources */,
 				00E4B5842A4C47020064E63C /* MultiSelection.swift in Sources */,
 				00E23D7C2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */,
 				001710F72A601D1E003D2071 /* PexelsView.swift in Sources */,
@@ -479,6 +484,7 @@
 				00511CF12A2C960300D1FD13 /* JokeWidget.swift in Sources */,
 				00A07F732A5D67F6006FC4DB /* NASAApodView.swift in Sources */,
 				00134F242A514E0F0091D6FD /* NetworkError.swift in Sources */,
+				00D004B72A65963500D51C7E /* JokeType.swift in Sources */,
 				00134F1D2A514D080091D6FD /* SpeedModel.swift in Sources */,
 				004337832A33A140004AF73F /* UserDefaultExtension.swift in Sources */,
 				00134F272A514E540091D6FD /* DownloadService.swift in Sources */,
@@ -658,6 +664,8 @@
 				INFOPLIST_FILE = Ex/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = kEntertainment;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Please allow access to save photo in your photo library";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "You can select photos to add to widgets";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -698,6 +706,8 @@
 				INFOPLIST_FILE = Ex/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = kEntertainment;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Please allow access to save photo in your photo library";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "You can select photos to add to widgets";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";

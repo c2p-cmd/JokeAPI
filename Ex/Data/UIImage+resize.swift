@@ -7,6 +7,12 @@
 
 import UIKit
 
+extension Collection {
+    var isNotEmpty: Bool {
+        !self.isEmpty
+    }
+}
+
 extension UIImage {
     var resizedForWidget: UIImage {
         self.size.width > 800 ? self.resized(toWidth: 800) : self
@@ -31,18 +37,21 @@ extension UIImage {
     
     static func loadImages(
         onSuccess: @escaping ([UIImage]) -> Void,
-        onError: @escaping () -> Void
+        onError: ((String) -> Void)?
     ) {
-        guard let 👻 = appStorage.array(forKey: "IMAGES_KEY") as? [Data] else {
-            onError()
+        // data array saved in app storage
+        guard let 💽 = appStorage.array(forKey: "IMAGES_KEY") as? [Data],
+              💽.isNotEmpty
+        else {
+            onError?("No data to show")
             return
         }
         
-        let 🎞️: [UIImage] = 👻.compactMap { UIImage(data: $0) }
+        // image array to return
+        let 🎞️: [UIImage] = 💽.compactMap { UIImage(data: $0) }
         
         if 🎞️.isEmpty {
-            print("loading: EMPTY ARRAY OF IMAGES")
-            onError()
+            onError?("loading: EMPTY ARRAY OF IMAGES")
             return
         }
         
