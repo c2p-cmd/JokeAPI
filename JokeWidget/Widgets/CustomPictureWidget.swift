@@ -9,8 +9,13 @@ import SwiftUI
 import WidgetKit
 
 struct PictureEntry: TimelineEntry {
-    let date: Date = .now
-    var image: UIImage? = nil
+    var date: Date
+    var image: UIImage?
+    
+    init(image: UIImage? = nil, at date: Date = .now) {
+        self.date = date
+        self.image = image
+    }
 }
 
 struct PictureProvider: TimelineProvider {
@@ -19,16 +24,40 @@ struct PictureProvider: TimelineProvider {
     }
     
     func getSnapshot(in context: Context, completion: @escaping (PictureEntry) -> Void) {
-        UIImage.loadImage { savedImage in
-            var entry = PictureEntry(image: savedImage)
-            completion(entry)
+        UIImage.loadImages { imagesArray in
+            completion(PictureEntry(image: imagesArray.randomElement()))
+        } onError: {
+            completion(PictureEntry())
         }
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<PictureEntry>) -> Void) {
-        getSnapshot(in: context) { entry in
-            let timeLine = Timeline(entries: [entry], policy: .atEnd)
-            completion(timeLine)
+        UIImage.loadImages { (imageArray: [UIImage]) in
+            if imageArray.count == 1 {
+                let entries = [PictureEntry(image: imageArray.first)]
+                
+                let timeline = Timeline(entries: entries, policy: .atEnd)
+                completion(timeline)
+                return
+            }
+            
+            var entries = [PictureEntry]()
+            
+            for (hourOffset, image) in imageArray.enumerated() {
+                let components = DateComponents(hour: hourOffset)
+                let entryDate = Calendar.current.date(byAdding: components, to: .now)!
+                
+                let pictureEntry = PictureEntry(image: image, at: entryDate)
+                entries.append(pictureEntry)
+            }
+            
+            let timeline = Timeline(entries: entries, policy: .atEnd)
+            completion(timeline)
+        } onError: {
+            let entries = [PictureEntry()]
+            
+            let timeline = Timeline(entries: entries, policy: .atEnd)
+            completion(timeline)
         }
     }
 }

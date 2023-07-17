@@ -11,18 +11,16 @@ import SwiftUI
 struct JokeEntry: TimelineEntry {
     let date: Date = .now
     var joke: String = ""
-    var didError = false
 }
 
 struct JokeProvider: TimelineProvider {
     func placeholder(in context: Context) -> JokeEntry {
-        JokeEntry(joke: UserDefaults.savedJoke, didError: true)
+        JokeEntry(joke: UserDefaults.savedJoke)
     }
     
     func getSnapshot(in context: Context, completion: @escaping (JokeEntry) -> ()) {
         completion(JokeEntry(
-            joke: UserDefaults.savedJoke,
-            didError: false
+            joke: UserDefaults.savedJoke
         ))
     }
     
@@ -33,10 +31,7 @@ struct JokeProvider: TimelineProvider {
             switch res {
             case .success(let newJoke):
                 UserDefaults.saveNewJoke(newJoke)
-                let newJokeEntry = JokeEntry(
-                    joke: newJoke,
-                    didError: false
-                )
+                let newJokeEntry = JokeEntry(joke: newJoke)
                 let nextReload = Calendar.current.date(
                     byAdding: .hour, value: 1, to: newJokeEntry.date
                 )!
@@ -44,10 +39,7 @@ struct JokeProvider: TimelineProvider {
                 completion(Timeline(entries: [newJokeEntry], policy: policy))
                 break
             case .failure(_):
-                let newJokeEntry = JokeEntry(
-                    joke: UserDefaults.savedJoke,
-                    didError: true
-                )
+                let newJokeEntry = JokeEntry(joke: UserDefaults.savedJoke)
                 let nextReload = Calendar.current.date(
                     byAdding: .hour, value: 1, to: newJokeEntry.date
                 )!
@@ -60,7 +52,13 @@ struct JokeProvider: TimelineProvider {
 }
 
 struct JokeEntryView_Placeholder: View {
-    var widgetFamily: WidgetFamily
+    private let gradient = LinearGradient(
+        gradient: Gradient(colors: [
+            Color("Orange1", bundle: .main),
+            Color("Orange2", bundle: .main)
+        ]), startPoint: .bottom, endPoint: .top)
+    
+    @Environment(\.widgetFamily) var widgetFamily: WidgetFamily
     
     var body: some View {
         if widgetFamily == .systemMedium {
@@ -83,16 +81,17 @@ struct JokeWidgetEntryView : View {
         ]), startPoint: .bottom, endPoint: .top)
     
     var entry: JokeProvider.Entry
+        
     @Environment(\.widgetFamily) var widgetFamily: WidgetFamily
     
     func text() -> some View {
         Text(entry.joke)
             .font(.system(size: 16, weight: .bold, design: .rounded))
             .bold()
-            .padding(.vertical, 1)
             .shadow(radius: 1.0)
             .multilineTextAlignment(.leading)
             .foregroundStyle(.white)
+            .padding(.all, 15)
     }
     
     func modifyForiOS17() -> some View {
@@ -111,17 +110,22 @@ struct JokeWidgetEntryView : View {
             .containerBackground(gradient, for: .widget)
         } else {
             return text()
+                .ignoresSafeArea()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
     
     var body: some View {
         modifyForiOS17()
-            .padding(.all, 0.15)
-            .background(content: {
-                JokeEntryView_Placeholder(widgetFamily: self.widgetFamily)
-            })
-            .ignoresSafeArea()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background {
+                ZStack {
+                    gradient
+                    JokeEntryView_Placeholder()
+                }
+                .aspectRatio(contentMode: .fill)
+                .ignoresSafeArea()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
     }
 }
 
@@ -141,20 +145,20 @@ struct JokeWidget: Widget {
     }
 }
 
-struct JokeWidget_Previews: PreviewProvider {
-    static var previews: some View {
-        JokeWidgetEntryView(
-            entry: JokeEntry(
-                joke: """
-My employer came running to me and said, "I was looking for you all day!Where the hell have you been?"
-\nI replied, "Good employees are hard to find"
-"""
-            )
-        )
-        .previewContext(
-            WidgetPreviewContext(
-                family: .systemMedium
-            )
-        )
-    }
-}
+//struct JokeWidget_Previews: PreviewProvider {
+//    static var previews: some View {
+//        JokeWidgetEntryView(
+//            entry: JokeEntry(
+//                joke: """
+//My employer came running to me and said, "I was looking for you all day!Where the hell have you been?"
+//\nI replied, "Good employees are hard to find"
+//"""
+//            )
+//        )
+//        .previewContext(
+//            WidgetPreviewContext(
+//                family: .systemMedium
+//            )
+//        )
+//    }
+//}

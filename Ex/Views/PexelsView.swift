@@ -92,7 +92,9 @@ struct PexelsView: View {
             }
         }
         .fullScreenCover(isPresented: self.$showingFullScreenCover) {
-            CustomImageView()
+            CustomImageView(buttonAction: {
+                self.showingFullScreenCover = false
+            })
         }
     }
     

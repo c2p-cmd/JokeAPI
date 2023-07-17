@@ -63,6 +63,12 @@
 		00A07F762A5D7B85006FC4DB /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00A07F742A5D7B85006FC4DB /* Config.plist */; };
 		00BDAE1C2A627805002CFD69 /* CustomPictureWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BDAE1B2A627805002CFD69 /* CustomPictureWidget.swift */; };
 		00BDAE1E2A627C17002CFD69 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BDAE1D2A627C17002CFD69 /* CustomImageView.swift */; };
+		00D004AB2A652F7200D51C7E /* ComicKings.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00D004AA2A652F7200D51C7E /* ComicKings.ttf */; };
+		00D004AC2A652F7200D51C7E /* ComicKings.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00D004AA2A652F7200D51C7E /* ComicKings.ttf */; };
+		00D004B12A65618200D51C7E /* SubscribeShadowRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00D004AF2A65618200D51C7E /* SubscribeShadowRegular.ttf */; };
+		00D004B22A65618200D51C7E /* SubscribeShadowRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00D004AF2A65618200D51C7E /* SubscribeShadowRegular.ttf */; };
+		00D004B32A65618200D51C7E /* SubscribeRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00D004B02A65618200D51C7E /* SubscribeRegular.ttf */; };
+		00D004B42A65618200D51C7E /* SubscribeRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00D004B02A65618200D51C7E /* SubscribeRegular.ttf */; };
 		00E23D7C2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 00E23D7F2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition */; };
 		00E23D7D2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 00E23D7F2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition */; };
 		00E4B5842A4C47020064E63C /* MultiSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4B5832A4C47020064E63C /* MultiSelection.swift */; };
@@ -140,6 +146,9 @@
 		00A07F742A5D7B85006FC4DB /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		00BDAE1B2A627805002CFD69 /* CustomPictureWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPictureWidget.swift; sourceTree = "<group>"; };
 		00BDAE1D2A627C17002CFD69 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
+		00D004AA2A652F7200D51C7E /* ComicKings.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ComicKings.ttf; sourceTree = "<group>"; };
+		00D004AF2A65618200D51C7E /* SubscribeShadowRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SubscribeShadowRegular.ttf; path = "Ex/subscribe-font/SubscribeShadowRegular.ttf"; sourceTree = SOURCE_ROOT; };
+		00D004B02A65618200D51C7E /* SubscribeRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SubscribeRegular.ttf; path = "Ex/subscribe-font/SubscribeRegular.ttf"; sourceTree = SOURCE_ROOT; };
 		00E23D7E2A56B7AE003DD155 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/AnimalPictureConfig.intentdefinition; sourceTree = "<group>"; };
 		00E4B5832A4C47020064E63C /* MultiSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelection.swift; sourceTree = "<group>"; };
 		00E4B5862A4C61570064E63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -237,6 +246,8 @@
 		004860132A1B8A7800F3E6B4 /* Ex */ = {
 			isa = PBXGroup;
 			children = (
+				00D004AE2A65618200D51C7E /* subscribe-font */,
+				00D004AA2A652F7200D51C7E /* ComicKings.ttf */,
 				003BD2652A4D718A009FDFAC /* Ex.entitlements */,
 				00E4B5862A4C61570064E63C /* Info.plist */,
 				003BD26D2A4D81C6009FDFAC /* Data */,
@@ -309,6 +320,15 @@
 				00BDAE1B2A627805002CFD69 /* CustomPictureWidget.swift */,
 			);
 			path = Widgets;
+			sourceTree = "<group>";
+		};
+		00D004AE2A65618200D51C7E /* subscribe-font */ = {
+			isa = PBXGroup;
+			children = (
+				00D004AF2A65618200D51C7E /* SubscribeShadowRegular.ttf */,
+				00D004B02A65618200D51C7E /* SubscribeRegular.ttf */,
+			);
+			path = "subscribe-font";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -392,7 +412,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00D004B12A65618200D51C7E /* SubscribeShadowRegular.ttf in Resources */,
+				00D004AB2A652F7200D51C7E /* ComicKings.ttf in Resources */,
 				00A07F752A5D7B85006FC4DB /* Config.plist in Resources */,
+				00D004B32A65618200D51C7E /* SubscribeRegular.ttf in Resources */,
 				00511CFE2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png in Resources */,
 				0048601C2A1B8A7900F3E6B4 /* Preview Assets.xcassets in Resources */,
 				004860192A1B8A7900F3E6B4 /* Assets.xcassets in Resources */,
@@ -403,8 +426,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00D004B22A65618200D51C7E /* SubscribeShadowRegular.ttf in Resources */,
 				00A07F762A5D7B85006FC4DB /* Config.plist in Resources */,
 				00511CF32A2C960500D1FD13 /* Assets.xcassets in Resources */,
+				00D004B42A65618200D51C7E /* SubscribeRegular.ttf in Resources */,
+				00D004AC2A652F7200D51C7E /* ComicKings.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

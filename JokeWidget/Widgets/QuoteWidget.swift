@@ -22,7 +22,7 @@ struct QuoteProvider: TimelineProvider {
         in context: Context,
         completion: @escaping (QuoteEntry) -> Void
     ) {
-        completion(QuoteEntry())
+        completion(QuoteEntry(quoteResponse: UserDefaults.savedQuote))
     }
     
     func getTimeline(
@@ -83,6 +83,7 @@ struct QuoteWidgetEntryView: View {
                 }
             }
         }
+        .padding(.all, 15)
         .minimumScaleFactor(0.75)
         .shadow(radius: 10, x: 5)
         .foregroundStyle(.white)
@@ -103,14 +104,14 @@ struct QuoteWidgetEntryView: View {
                 .containerBackground(gradient, for: .widget)
         } else {
             return text()
+                .ignoresSafeArea()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(gradient)
         }
     }
     
     var body: some View {
         modifyForiOS17()
-            .padding(.all, 0.15)
+            .background(gradient)
     }
 }
 
@@ -130,26 +131,26 @@ struct QuoteWidget: Widget {
     }
 }
 
-struct QuoteWidget_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            QuoteWidgetEntryView(entry: QuoteEntry(
-                quoteResponse: QuoteApiResponse("Learning is the beginning of wealth.Learning is the beginning of welath.", by: "Jim Rohn")
-            ))
-            .previewContext(
-                WidgetPreviewContext(
-                    family: .systemMedium
-                )
-            )
-            
-            QuoteWidgetEntryView(entry: QuoteEntry(
-                quoteResponse: QuoteApiResponse("मंजिल भी उसकी थी रास्ता भी उसका था,\nएक हम अकेले थे काफिला भी उसका था !", by: "Gulzar Sahab")
-            ))
-            .previewContext(
-                WidgetPreviewContext(
-                    family: .systemMedium
-                )
-            )
-        }
-    }
-}
+//struct QuoteWidget_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            QuoteWidgetEntryView(entry: QuoteEntry(
+//                quoteResponse: QuoteApiResponse("Learning is the beginning of wealth.Learning is the beginning of welath.", by: "Jim Rohn")
+//            ))
+//            .previewContext(
+//                WidgetPreviewContext(
+//                    family: .systemMedium
+//                )
+//            )
+//            
+//            QuoteWidgetEntryView(entry: QuoteEntry(
+//                quoteResponse: QuoteApiResponse("मंजिल भी उसकी थी रास्ता भी उसका था,\nएक हम अकेले थे काफिला भी उसका था !", by: "Gulzar Sahab")
+//            ))
+//            .previewContext(
+//                WidgetPreviewContext(
+//                    family: .systemMedium
+//                )
+//            )
+//        }
+//    }
+//}
