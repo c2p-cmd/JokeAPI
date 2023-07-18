@@ -37,7 +37,7 @@
 		004860152A1B8A7800F3E6B4 /* ExApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004860142A1B8A7800F3E6B4 /* ExApp.swift */; };
 		004860192A1B8A7900F3E6B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004860182A1B8A7900F3E6B4 /* Assets.xcassets */; };
 		0048601C2A1B8A7900F3E6B4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0048601B2A1B8A7900F3E6B4 /* Preview Assets.xcassets */; };
-		004D9B392A4D98F100199886 /* AnimalPictureWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B382A4D98F100199886 /* AnimalPictureWidget.swift */; };
+		004D9B392A4D98F100199886 /* HTTPAnimalPictureWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B382A4D98F100199886 /* HTTPAnimalPictureWidget.swift */; };
 		004D9B3E2A4D99CD00199886 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B3D2A4D99CD00199886 /* ImageProvider.swift */; };
 		004D9B402A4D9E5600199886 /* NewConfigIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B3F2A4D9E5600199886 /* NewConfigIntent.swift */; };
 		004D9B432A4DA50600199886 /* NewConfigIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B3F2A4D9E5600199886 /* NewConfigIntent.swift */; };
@@ -50,7 +50,7 @@
 		00511CF72A2C960500D1FD13 /* JokeWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 00511CE72A2C960300D1FD13 /* JokeWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		00511CFC2A2C961200D1FD13 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00511CE12A2C911F00D1FD13 /* Request.swift */; };
 		00511CFE2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png in Resources */ = {isa = PBXBuildFile; fileRef = 00511CFD2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png */; };
-		0058ABA12A66A3010050FA96 /* RedditMemeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0058ABA02A66A3010050FA96 /* RedditMemeAPI.swift */; };
+		0058ABA12A66A3010050FA96 /* RedditScrapperAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0058ABA02A66A3010050FA96 /* RedditScrapperAPI.swift */; };
 		0058ABA32A66BC3F0050FA96 /* CuteAnimalWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0058ABA22A66BC3F0050FA96 /* CuteAnimalWidget.swift */; };
 		0091D9972A5E961C002A281A /* MultiSelectionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0091D9962A5E961C002A281A /* MultiSelectionMenu.swift */; };
 		0091D99A2A5EBFD9002A281A /* HelperViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0091D9992A5EBFD9002A281A /* HelperViews.swift */; };
@@ -126,7 +126,7 @@
 		004860142A1B8A7800F3E6B4 /* ExApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExApp.swift; sourceTree = "<group>"; };
 		004860182A1B8A7900F3E6B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0048601B2A1B8A7900F3E6B4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		004D9B382A4D98F100199886 /* AnimalPictureWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalPictureWidget.swift; sourceTree = "<group>"; };
+		004D9B382A4D98F100199886 /* HTTPAnimalPictureWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPAnimalPictureWidget.swift; sourceTree = "<group>"; };
 		004D9B3D2A4D99CD00199886 /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
 		004D9B3F2A4D9E5600199886 /* NewConfigIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConfigIntent.swift; sourceTree = "<group>"; };
 		00511CE12A2C911F00D1FD13 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
@@ -138,7 +138,7 @@
 		00511CF22A2C960500D1FD13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00511CF42A2C960500D1FD13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00511CFD2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2023-06-04 at 16.04.08.png"; sourceTree = "<group>"; };
-		0058ABA02A66A3010050FA96 /* RedditMemeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditMemeAPI.swift; sourceTree = "<group>"; };
+		0058ABA02A66A3010050FA96 /* RedditScrapperAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditScrapperAPI.swift; sourceTree = "<group>"; };
 		0058ABA22A66BC3F0050FA96 /* CuteAnimalWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuteAnimalWidget.swift; sourceTree = "<group>"; };
 		0091D9962A5E961C002A281A /* MultiSelectionMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectionMenu.swift; sourceTree = "<group>"; };
 		0091D9992A5EBFD9002A281A /* HelperViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperViews.swift; sourceTree = "<group>"; };
@@ -220,7 +220,7 @@
 				00A07F712A5D67F6006FC4DB /* NASAApodView.swift */,
 				0091D9962A5E961C002A281A /* MultiSelectionMenu.swift */,
 				00BDAE1D2A627C17002CFD69 /* CustomImageView.swift */,
-				0058ABA02A66A3010050FA96 /* RedditMemeAPI.swift */,
+				0058ABA02A66A3010050FA96 /* RedditScrapperAPI.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -316,7 +316,7 @@
 			children = (
 				00511CF02A2C960300D1FD13 /* JokeWidget.swift */,
 				00E4B5892A4C6E580064E63C /* QuoteWidget.swift */,
-				004D9B382A4D98F100199886 /* AnimalPictureWidget.swift */,
+				004D9B382A4D98F100199886 /* HTTPAnimalPictureWidget.swift */,
 				00E23D7F2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition */,
 				00134F2B2A514F6A0091D6FD /* SpeedWidget.swift */,
 				00A07F6A2A5D4416006FC4DB /* NASAApodWidget.swift */,
@@ -469,7 +469,7 @@
 				00F2F8BD2A515DDD00A2ADE5 /* SpeedTestView.swift in Sources */,
 				00E4B5882A4C64540064E63C /* QuoteView.swift in Sources */,
 				003BD2682A4D72B3009FDFAC /* MyIntents.swift in Sources */,
-				0058ABA12A66A3010050FA96 /* RedditMemeAPI.swift in Sources */,
+				0058ABA12A66A3010050FA96 /* RedditScrapperAPI.swift in Sources */,
 				0091D99A2A5EBFD9002A281A /* HelperViews.swift in Sources */,
 				004337802A339DBD004AF73F /* ContentView.swift in Sources */,
 				004860152A1B8A7800F3E6B4 /* ExApp.swift in Sources */,
@@ -490,7 +490,7 @@
 				00134F272A514E540091D6FD /* DownloadService.swift in Sources */,
 				001FB8C22A5FDF220020F69C /* ImageSaver.swift in Sources */,
 				00E23D7D2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */,
-				004D9B392A4D98F100199886 /* AnimalPictureWidget.swift in Sources */,
+				004D9B392A4D98F100199886 /* HTTPAnimalPictureWidget.swift in Sources */,
 				00511CFC2A2C961200D1FD13 /* Request.swift in Sources */,
 				0058ABA32A66BC3F0050FA96 /* CuteAnimalWidget.swift in Sources */,
 				003BD2692A4D72B3009FDFAC /* MyIntents.swift in Sources */,

@@ -58,18 +58,11 @@ struct JokeEntryView_Placeholder: View {
             Color("Orange2", bundle: .main)
         ]), startPoint: .bottom, endPoint: .top)
     
-    @Environment(\.widgetFamily) var widgetFamily: WidgetFamily
-    
     var body: some View {
-        if widgetFamily == .systemMedium {
-            Image("md")
-                .resizable()
-                .scaledToFill()
-        } else {
-            Image("large")
-                .resizable()
-                .scaledToFill()
-        }
+        Image("FUNNY 1")
+            .resizable()
+            .scaledToFill()
+            .frame(width: 370, height: 169)
     }
 }
 
@@ -86,8 +79,7 @@ struct JokeWidgetEntryView : View {
     
     func text() -> some View {
         Text(entry.joke)
-            .font(.system(size: 16, weight: .bold, design: .rounded))
-            .bold()
+            .font(.system(size: 17, weight: .bold, design: .rounded))
             .shadow(radius: 1.0)
             .multilineTextAlignment(.leading)
             .foregroundStyle(.white)

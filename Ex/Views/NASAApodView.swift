@@ -39,6 +39,10 @@ struct NASAApodView: View {
                     Image(uiImage: image)
                         .resizable()
                         .scaledToFit()
+                        .saveImageContextMenu { didSuccess in
+                            isPresenting = true
+                            alertText = didSuccess ? "Success" : "Saving Failed"
+                        }
                 } else {
                     AsyncImage(url: URL(string: apodResponse.url)) { imagePhase in
                         imagePhase.resizable().saveImageContextMenu { didSuccess in

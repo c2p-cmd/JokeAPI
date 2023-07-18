@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RedditMemeView: View {
+struct RedditScrapperView: View {
     @AppStorage("reddit_meme") private var redditMemeResponse: RedditMemeResponse = UserDefaults.savedRedditMemeResponse
     
     @State private var isBusy = false

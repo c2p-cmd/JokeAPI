@@ -25,7 +25,7 @@ extension UserDefaults {
     }
     
     static func saveNewRedditResponse(_ newResponse: RedditMemeResponse) {
-        appStorage.set(newResponse, forKey: "reddit_meme")
+        appStorage.set(newResponse.rawValue, forKey: "reddit_meme")
     }
 }
 

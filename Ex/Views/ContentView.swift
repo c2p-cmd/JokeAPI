@@ -28,7 +28,7 @@ struct ContentView: View {
                 }
                 
                 NavigationView {
-                    RedditMemeView()
+                    RedditScrapperView()
                         .navigationBarTitle("Photos", displayMode: .inline)
                 }
                 .tabItem {

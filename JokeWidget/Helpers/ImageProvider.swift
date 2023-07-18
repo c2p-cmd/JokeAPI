@@ -16,7 +16,7 @@ func fetchImage(
             let (data, _) = try await URLSession.shared.data(from: url)
             
             if let image = UIImage(data: data) {
-                completion(image, true)
+                completion(image.resizedForWidget, true)
             } else {
                 completion(UIImage(systemName: "exclamationmark.triangle.fill")!, false)
             }
@@ -160,12 +160,7 @@ fileprivate func fetchAnimalImage(
                 completion(UIImage(systemName: "wifi.exclamationmark")!)
                 return
             }
-            if url.description.contains("dog") {
-                let resizedImage = animalImage.resized(toWidth: 800)
-                completion(resizedImage)
-                return
-            }
-            completion(animalImage)
+            completion(animalImage.resizedForWidget)
             return
         }
     }

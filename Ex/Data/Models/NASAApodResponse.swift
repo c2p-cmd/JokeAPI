@@ -46,6 +46,10 @@ struct ApodResponse: Codable, RawRepresentable {
         self.explanation = try values.decode(String.self, forKey: .explanation)
         self.url = try values.decode(String.self, forKey: .url)
         self.title = try values.decode(String.self, forKey: .title)
+        
+        if let data = try values.decodeIfPresent(Data.self, forKey: .uiImage) {
+            self.uiImage = UIImage(data: data)
+        }
     }
     
     var rawValue: String {
@@ -63,6 +67,10 @@ struct ApodResponse: Codable, RawRepresentable {
         try container.encode(self.explanation, forKey: .explanation)
         try container.encode(self.title, forKey: .title)
         try container.encode(self.url, forKey: .url)
+        
+        if let pngData = self.uiImage?.pngData() {
+            try container.encodeIfPresent(pngData, forKey: .uiImage)
+        }
     }
 }
 

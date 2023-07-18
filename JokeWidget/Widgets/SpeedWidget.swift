@@ -41,7 +41,7 @@ struct SpeedTimelineProvider: TimelineProvider {
                 speedEntry.speed = newSpeed
                 break
             case .failure(_):
-                speedEntry.speed = UserDefaults.defaultSpeed
+                speedEntry.speed = UserDefaults.savedSpeed
                 break
             }
             
@@ -161,18 +161,18 @@ struct SpeedTestWidget: Widget {
     }
 }
 
-struct SpeedWidgetEntryView_Previews: PreviewProvider {
-    static var previews: some View {
-        SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 99.19883, units: .Mbps)))
-            .previewContext(WidgetPreviewContext(family: .systemMedium))
-        
-        SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 99.19883, units: .Mbps)))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
-        
-        SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 101, units: .Kbps)))
-            .previewContext(WidgetPreviewContext(family: .accessoryInline))
-        
-        SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 101, units: .Kbps)))
-            .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
-    }
-}
+//struct SpeedWidgetEntryView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 99.19883, units: .Mbps)))
+//            .previewContext(WidgetPreviewContext(family: .systemMedium))
+//        
+//        SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 99.19883, units: .Mbps)))
+//            .previewContext(WidgetPreviewContext(family: .systemSmall))
+//        
+//        SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 101, units: .Kbps)))
+//            .previewContext(WidgetPreviewContext(family: .accessoryInline))
+//        
+//        SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 101, units: .Kbps)))
+//            .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+//    }
+//}

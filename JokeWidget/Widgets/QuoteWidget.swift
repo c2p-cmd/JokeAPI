@@ -10,7 +10,7 @@ import SwiftUI
 
 struct QuoteEntry: TimelineEntry {
     let date: Date = .now
-    var quoteResponse = UserDefaults.defaultQuote
+    var quoteResponse = UserDefaults.savedQuote
 }
 
 struct QuoteProvider: TimelineProvider {
@@ -54,6 +54,21 @@ struct QuoteProvider: TimelineProvider {
                 break
             }
         }
+    }
+}
+
+struct QuoteEntryView_Placeholder: View {
+    private let gradient = LinearGradient(
+        gradient: Gradient(colors: [
+            Color("Orange1", bundle: .main),
+            Color("Orange2", bundle: .main)
+        ]), startPoint: .bottom, endPoint: .top)
+    
+    var body: some View {
+        Image("BLACKBOARD")
+            .resizable()
+            .scaledToFill()
+            .frame(width: 360, height: 169)
     }
 }
 
@@ -111,7 +126,15 @@ struct QuoteWidgetEntryView: View {
     
     var body: some View {
         modifyForiOS17()
-            .background(gradient)
+            .background {
+                ZStack {
+                    gradient
+                    QuoteEntryView_Placeholder()
+                }
+                .aspectRatio(contentMode: .fill)
+                .ignoresSafeArea()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
     }
 }
 
