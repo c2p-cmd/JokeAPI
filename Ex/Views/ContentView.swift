@@ -13,7 +13,8 @@ struct ContentView: View {
             TabView {
                 NavigationView {
                     JokeView()
-                        .navigationBarTitle("Jokes", displayMode: .inline)
+                        .navigationTitle("Jokes")
+                        .navigationBarTitleDisplayMode(.inline)
                 }
                 .tabItem {
                     Label("Joke", systemImage: "theatermasks.circle.fill")
@@ -21,7 +22,8 @@ struct ContentView: View {
                 
                 NavigationView {
                     QuoteView()
-                        .navigationBarTitle("Quotes", displayMode: .inline)
+                        .navigationTitle("Quotes")
+                        .navigationBarTitleDisplayMode(.inline)
                 }
                 .tabItem {
                     Label("Quote", systemImage: "quote.bubble.fill")
@@ -29,7 +31,8 @@ struct ContentView: View {
                 
                 NavigationView {
                     RedditScrapperView()
-                        .navigationBarTitle("Photos", displayMode: .inline)
+                        .navigationTitle("Photos")
+                        .navigationBarTitleDisplayMode(.inline)
                 }
                 .tabItem {
                     Label("Reddit", systemImage: "photo.stack.fill")
@@ -37,7 +40,8 @@ struct ContentView: View {
                 
                 NavigationView {
                     NASAApodView()
-                        .navigationBarTitle("NASA Picture of the day", displayMode: .inline)
+                        .navigationBarTitle("NASA Picture of the day")
+                        .navigationBarTitleDisplayMode(.inline)
                 }
                 .tabItem {
                     Label("NASA", systemImage: "photo.fill.on.rectangle.fill")
@@ -45,7 +49,8 @@ struct ContentView: View {
                 
                 NavigationView {
                     SpeedTestView()
-                        .navigationBarTitle("Speed Test", displayMode: .inline)
+                        .navigationBarTitle("Speed Test")
+                        .navigationBarTitleDisplayMode(.inline)
                 }
                 .tabItem {
                     Label("SpeedTest", systemImage: "speedometer")

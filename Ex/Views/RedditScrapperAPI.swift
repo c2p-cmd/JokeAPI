@@ -67,6 +67,15 @@ struct RedditScrapperView: View {
             RefreshButton(isBusy: self.$isBusy, action: getNewImage)
         }
         .padding()
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    self.showFullScreen = true
+                } label: {
+                    Label("Settings", systemImage: "gear.circle")
+                }
+            }
+        }
         .fullScreenCover(isPresented: self.$showFullScreen) {
             CustomImageView {
                 self.showFullScreen = false
