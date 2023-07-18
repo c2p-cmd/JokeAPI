@@ -10,23 +10,22 @@ import Foundation
 // MARK: - APPSTORAGE to use
 let appStorage = UserDefaults(suiteName: "group.com.kidastudios.mygroup")!
 
-// MARK: - UserDefaults Pexels Photo Extension
+// MARK: - UserDefaults RedditMemeResponse Extension
 extension UserDefaults {
-    static var defaultPexelsPhotoResponse: MultiPhotoResponse {
-        let src = Src(large: "https://images.pexels.com/photos/16575029/pexels-photo-16575029.jpeg?auto=compress&cs=tinysrgb&h=650&w=940")
-        return MultiPhotoResponse(photos: [PexelsPhotoResponse(id: 16575029, width: 3794, height: 3794, src: src, alt: "Cute Kittens Looking from Window")])
+    static var defaultRedditResponse: RedditMemeResponse {
+        return RedditMemeResponse(title: "This Cute Rottweiler Pup 🐶", url: "https://i.redd.it/vvbzgl9scacb1.jpg", nsfw: false)
     }
     
-    static var savedPexelsPhotoResponse: MultiPhotoResponse {
-        guard let savedPexelsPhoto = appStorage.string(forKey: "pexels_photo"),
-              let pexelsPhoto = MultiPhotoResponse(rawValue: savedPexelsPhoto) else {
-            return defaultPexelsPhotoResponse
+    static var savedRedditMemeResponse: RedditMemeResponse {
+        guard let saved = appStorage.string(forKey: "reddit_meme"),
+              let response = RedditMemeResponse(rawValue: saved) else {
+            return defaultRedditResponse
         }
-        return pexelsPhoto
+        return response
     }
     
-    static func saveNewPexelsPhotoResponse(_ newResponse: MultiPhotoResponse) {
-        appStorage.set(newResponse, forKey: "pexels_photo")
+    static func saveNewRedditResponse(_ newResponse: RedditMemeResponse) {
+        appStorage.set(newResponse, forKey: "reddit_meme")
     }
 }
 

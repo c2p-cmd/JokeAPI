@@ -28,11 +28,11 @@ struct ContentView: View {
                 }
                 
                 NavigationView {
-                    PexelsView()
-                        .navigationBarTitle("Pexels Photos", displayMode: .inline)
+                    RedditMemeView()
+                        .navigationBarTitle("Photos", displayMode: .inline)
                 }
                 .tabItem {
-                    Label("Pexels", systemImage: "photo.stack.fill")
+                    Label("Reddit", systemImage: "photo.stack.fill")
                 }
                 
                 NavigationView {

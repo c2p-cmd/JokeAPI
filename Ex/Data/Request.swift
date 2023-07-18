@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 let jokeCategories: Set<IdentifiableString> = Set([
     IdentifiableString(string: "Pun"),
@@ -16,41 +17,74 @@ let jokeCategories: Set<IdentifiableString> = Set([
     IdentifiableString(string: "Programming")
 ])
 
+let allCases = [
+    "cute",
+    "animal",
+    "animalsbeingderps",
+    "cuteanimals",
+    "cuteanimalstogether",
+    "cuteanimalflufffluffs"
+]
+
 // MARK: - Loading the config.plist
 var configPlist: NSDictionary = {
     let configPlistLink = Bundle.main.path(forResource: "Config", ofType: "plist")!
     return NSDictionary(contentsOfFile: configPlistLink)!
 }()
 
-
-// MARK: - Pexels Photo API
-func getPexelPhoto(
-    for query: String = "animals",
-    page: Int = 1
-) async -> Result<MultiPhotoResponse, Error> {
-    var urlString = configPlist.value(forKey: "Pexels URL") as! String
-    if page > 1 {
-        urlString.append("&page=\(page)")
+// MARK: - Reddit Scrapper API (List)
+func getRedditMemes(
+    from subreddit: String,
+    _ count: Int = 2
+) async -> Result<MemeList, Error> {
+    var count = count
+    if count <= 1 {
+        count = 2
     }
-    urlString.append("&query=\(query)")
+    if count > 10 {
+        count = 10
+    }
     
-    let apiKey = configPlist.value(forKey: "Pexels API KEY") as! String
+    var urlString = configPlist.value(forKey: "REDDIT MEME Link") as! String
+    urlString.append("/\(subreddit)/\(count)/")
     
-    var urlRequest = URLRequest(url: URL(string: urlString)!, cachePolicy: .reloadRevalidatingCacheData)
-    urlRequest.addValue(apiKey, forHTTPHeaderField: "Authorization")
+    guard let url = URL(string: urlString) else {
+        return .failure(URLError(.badURL))
+    }
     
     do {
-        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+        let (data, _) = try await URLSession.shared.data(from: url)
+        let redditMemeResponse = try JSONDecoder().decode(RedditMemeList.self, from: data)
+        let memes = redditMemeResponse.memes
         
-        #if DEBUG
-        if let httpResponse = response as? HTTPURLResponse {
-            print("Pexels: \(httpResponse.statusCode)")
+        return .success(memes)
+    } catch {
+        return .failure(error)
+    }
+}
+
+// MARK: - Reddit Scrapper API
+func getRedditMeme(
+    from subreddit: String
+) async -> Result<RedditMemeResponse, Error> {
+    var urlString = configPlist.value(forKey: "REDDIT MEME Link") as! String
+    urlString.append("/\(subreddit)")
+    
+    guard let url = URL(string: urlString) else {
+        return .failure(URLError(.badURL))
+    }
+    
+    do {
+        let (data, _) = try await URLSession.shared.data(from: url)
+        let redditMemeResponse = try JSONDecoder().decode(RedditMemeResponse.self, from: data)
+        
+        let (image, didSuccess) = await fetchURLImage(from: URL(string: redditMemeResponse.url)!)
+        
+        if didSuccess {
+            redditMemeResponse.uiImage = image.resizedForWidget
         }
-        #endif
         
-        let pexelsPhotoResource = try JSONDecoder().decode(MultiPhotoResponse.self, from: data)
-        
-        return .success(pexelsPhotoResource)
+        return .success(redditMemeResponse)
     } catch {
         return .failure(error)
     }
@@ -77,11 +111,11 @@ func getNASAApod(on date: Date? = nil) async -> Result<ApodResponse, Error> {
     do {
         let (data, response) = try await URLSession.shared.data(from: url)
         
-        #if DEBUG
+#if DEBUG
         if let httpResponse = response as? HTTPURLResponse {
             print(httpResponse.debugDescription)
         }
-        #endif
+#endif
         
         let apodResponse = try JSONDecoder().decode(ApodResponse.self, from: data)
         return .success(apodResponse)
@@ -142,5 +176,23 @@ func getRandomJoke(
         return .success(joke)
     } catch let err {
         return .failure(err)
+    }
+}
+
+// helper
+fileprivate func fetchURLImage(
+    from url: URL
+) async -> (UIImage, Bool) {
+    do {
+        let (data, _) = try await URLSession.shared.data(from: url)
+        
+        if let image = UIImage(data: data) {
+            return (image, true)
+        } else {
+            return (UIImage(systemName: "exclamationmark.triangle.fill")!, false)
+        }
+    } catch {
+        print(error.localizedDescription)
+        return (UIImage(systemName: "exclamationmark.triangle.fill")!, false)
     }
 }

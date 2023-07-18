@@ -20,10 +20,8 @@
 		00134F2D2A514F6A0091D6FD /* SpeedWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00134F2B2A514F6A0091D6FD /* SpeedWidget.swift */; };
 		00134F2F2A5153610091D6FD /* ViewModifier_iOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00134F2E2A5153610091D6FD /* ViewModifier_iOS17.swift */; };
 		00134F302A5153610091D6FD /* ViewModifier_iOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00134F2E2A5153610091D6FD /* ViewModifier_iOS17.swift */; };
-		001710F42A601642003D2071 /* PexelsPhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001710F32A601642003D2071 /* PexelsPhotoResponse.swift */; };
-		001710F52A601645003D2071 /* PexelsPhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001710F32A601642003D2071 /* PexelsPhotoResponse.swift */; };
-		001710F72A601D1E003D2071 /* PexelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001710F62A601D1E003D2071 /* PexelsView.swift */; };
-		001710F92A6029F0003D2071 /* PexelsImageWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001710F82A6029F0003D2071 /* PexelsImageWidget.swift */; };
+		001710F42A601642003D2071 /* RedditMemeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001710F32A601642003D2071 /* RedditMemeResponse.swift */; };
+		001710F52A601645003D2071 /* RedditMemeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001710F32A601642003D2071 /* RedditMemeResponse.swift */; };
 		001ACE0A2A4EBA2C000CE9AF /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */; };
 		001ACE0B2A4EBA2E000CE9AF /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */; };
 		001FB8C12A5FDE3B0020F69C /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001FB8C02A5FDE3B0020F69C /* ImageSaver.swift */; };
@@ -52,6 +50,8 @@
 		00511CF72A2C960500D1FD13 /* JokeWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 00511CE72A2C960300D1FD13 /* JokeWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		00511CFC2A2C961200D1FD13 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00511CE12A2C911F00D1FD13 /* Request.swift */; };
 		00511CFE2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png in Resources */ = {isa = PBXBuildFile; fileRef = 00511CFD2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png */; };
+		0058ABA12A66A3010050FA96 /* RedditMemeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0058ABA02A66A3010050FA96 /* RedditMemeAPI.swift */; };
+		0058ABA32A66BC3F0050FA96 /* CuteAnimalWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0058ABA22A66BC3F0050FA96 /* CuteAnimalWidget.swift */; };
 		0091D9972A5E961C002A281A /* MultiSelectionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0091D9962A5E961C002A281A /* MultiSelectionMenu.swift */; };
 		0091D99A2A5EBFD9002A281A /* HelperViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0091D9992A5EBFD9002A281A /* HelperViews.swift */; };
 		00A07F652A5D2F6B006FC4DB /* NASAApodResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A07F642A5D2F6B006FC4DB /* NASAApodResponse.swift */; };
@@ -112,9 +112,7 @@
 		00134F282A514E820091D6FD /* URL+ping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+ping.swift"; sourceTree = "<group>"; };
 		00134F2B2A514F6A0091D6FD /* SpeedWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedWidget.swift; sourceTree = "<group>"; };
 		00134F2E2A5153610091D6FD /* ViewModifier_iOS17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifier_iOS17.swift; sourceTree = "<group>"; };
-		001710F32A601642003D2071 /* PexelsPhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PexelsPhotoResponse.swift; sourceTree = "<group>"; };
-		001710F62A601D1E003D2071 /* PexelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PexelsView.swift; sourceTree = "<group>"; };
-		001710F82A6029F0003D2071 /* PexelsImageWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PexelsImageWidget.swift; sourceTree = "<group>"; };
+		001710F32A601642003D2071 /* RedditMemeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditMemeResponse.swift; sourceTree = "<group>"; };
 		001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resize.swift"; sourceTree = "<group>"; };
 		001FB8C02A5FDE3B0020F69C /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		003BD2652A4D718A009FDFAC /* Ex.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ex.entitlements; sourceTree = "<group>"; };
@@ -140,6 +138,8 @@
 		00511CF22A2C960500D1FD13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00511CF42A2C960500D1FD13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00511CFD2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2023-06-04 at 16.04.08.png"; sourceTree = "<group>"; };
+		0058ABA02A66A3010050FA96 /* RedditMemeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditMemeAPI.swift; sourceTree = "<group>"; };
+		0058ABA22A66BC3F0050FA96 /* CuteAnimalWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuteAnimalWidget.swift; sourceTree = "<group>"; };
 		0091D9962A5E961C002A281A /* MultiSelectionMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectionMenu.swift; sourceTree = "<group>"; };
 		0091D9992A5EBFD9002A281A /* HelperViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperViews.swift; sourceTree = "<group>"; };
 		00A07F642A5D2F6B006FC4DB /* NASAApodResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAApodResponse.swift; sourceTree = "<group>"; };
@@ -187,7 +187,7 @@
 				00134F1B2A514D080091D6FD /* SpeedModel.swift */,
 				00134F1F2A514DD20091D6FD /* SpeedService.swift */,
 				00A07F642A5D2F6B006FC4DB /* NASAApodResponse.swift */,
-				001710F32A601642003D2071 /* PexelsPhotoResponse.swift */,
+				001710F32A601642003D2071 /* RedditMemeResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -219,8 +219,8 @@
 				00F2F8BC2A515DDD00A2ADE5 /* SpeedTestView.swift */,
 				00A07F712A5D67F6006FC4DB /* NASAApodView.swift */,
 				0091D9962A5E961C002A281A /* MultiSelectionMenu.swift */,
-				001710F62A601D1E003D2071 /* PexelsView.swift */,
 				00BDAE1D2A627C17002CFD69 /* CustomImageView.swift */,
+				0058ABA02A66A3010050FA96 /* RedditMemeAPI.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -320,7 +320,7 @@
 				00E23D7F2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition */,
 				00134F2B2A514F6A0091D6FD /* SpeedWidget.swift */,
 				00A07F6A2A5D4416006FC4DB /* NASAApodWidget.swift */,
-				001710F82A6029F0003D2071 /* PexelsImageWidget.swift */,
+				0058ABA22A66BC3F0050FA96 /* CuteAnimalWidget.swift */,
 				00BDAE1B2A627805002CFD69 /* CustomPictureWidget.swift */,
 			);
 			path = Widgets;
@@ -452,7 +452,6 @@
 				00D004B62A65963500D51C7E /* JokeType.swift in Sources */,
 				00E4B5842A4C47020064E63C /* MultiSelection.swift in Sources */,
 				00E23D7C2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */,
-				001710F72A601D1E003D2071 /* PexelsView.swift in Sources */,
 				004D9B432A4DA50600199886 /* NewConfigIntent.swift in Sources */,
 				00134F202A514DD20091D6FD /* SpeedService.swift in Sources */,
 				001FB8C12A5FDE3B0020F69C /* ImageSaver.swift in Sources */,
@@ -462,7 +461,7 @@
 				001ACE0A2A4EBA2C000CE9AF /* UIImage+resize.swift in Sources */,
 				00134F292A514E820091D6FD /* URL+ping.swift in Sources */,
 				00511CE22A2C911F00D1FD13 /* Request.swift in Sources */,
-				001710F42A601642003D2071 /* PexelsPhotoResponse.swift in Sources */,
+				001710F42A601642003D2071 /* RedditMemeResponse.swift in Sources */,
 				00134F262A514E540091D6FD /* DownloadService.swift in Sources */,
 				00134F232A514E0F0091D6FD /* NetworkError.swift in Sources */,
 				00A07F722A5D67F6006FC4DB /* NASAApodView.swift in Sources */,
@@ -470,6 +469,7 @@
 				00F2F8BD2A515DDD00A2ADE5 /* SpeedTestView.swift in Sources */,
 				00E4B5882A4C64540064E63C /* QuoteView.swift in Sources */,
 				003BD2682A4D72B3009FDFAC /* MyIntents.swift in Sources */,
+				0058ABA12A66A3010050FA96 /* RedditMemeAPI.swift in Sources */,
 				0091D99A2A5EBFD9002A281A /* HelperViews.swift in Sources */,
 				004337802A339DBD004AF73F /* ContentView.swift in Sources */,
 				004860152A1B8A7800F3E6B4 /* ExApp.swift in Sources */,
@@ -492,16 +492,16 @@
 				00E23D7D2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */,
 				004D9B392A4D98F100199886 /* AnimalPictureWidget.swift in Sources */,
 				00511CFC2A2C961200D1FD13 /* Request.swift in Sources */,
+				0058ABA32A66BC3F0050FA96 /* CuteAnimalWidget.swift in Sources */,
 				003BD2692A4D72B3009FDFAC /* MyIntents.swift in Sources */,
 				004D9B402A4D9E5600199886 /* NewConfigIntent.swift in Sources */,
 				00511CEF2A2C960300D1FD13 /* JokeWidgetBundle.swift in Sources */,
-				001710F52A601645003D2071 /* PexelsPhotoResponse.swift in Sources */,
+				001710F52A601645003D2071 /* RedditMemeResponse.swift in Sources */,
 				00134F212A514DD20091D6FD /* SpeedService.swift in Sources */,
 				00E4B58A2A4C6E580064E63C /* QuoteWidget.swift in Sources */,
 				00134F2A2A514E820091D6FD /* URL+ping.swift in Sources */,
 				001ACE0B2A4EBA2E000CE9AF /* UIImage+resize.swift in Sources */,
 				004D9B3E2A4D99CD00199886 /* ImageProvider.swift in Sources */,
-				001710F92A6029F0003D2071 /* PexelsImageWidget.swift in Sources */,
 				00E4B5852A4C4B4D0064E63C /* MultiSelection.swift in Sources */,
 				00BDAE1C2A627805002CFD69 /* CustomPictureWidget.swift in Sources */,
 				003BD26C2A4D81C2009FDFAC /* QuoteAPIModel.swift in Sources */,

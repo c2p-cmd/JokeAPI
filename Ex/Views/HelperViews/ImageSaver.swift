@@ -9,9 +9,9 @@ import Foundation
 import UIKit
 import SwiftUI
 
-extension Image {
+extension View {
     func saveImageContextMenu(
-        completion: ((Bool) -> Void)?
+        completion: ((Bool) -> Void)? = nil // didSuccess
     ) -> some View {
         self.contextMenu {
             Button {

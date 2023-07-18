@@ -15,7 +15,7 @@ struct JokeWidgetBundle: WidgetBundle {
         
         QuoteWidget()
         
-        PexelAnimalImageWidget()
+        CuteAnimalWidget()
         
         AnimalPictureWidget()
         
