@@ -23,6 +23,10 @@ struct NewAnimalPictureProvider: AppIntentTimelineProvider {
         for configuration: AnimalOfChoiceIntent,
         in context: Context
     ) async -> AnimalPictureEntry {
+        if context.isPreview {
+            return self.placeholder(in: context)
+        }
+        
         let animalImage = await fetchAnimalImage(of: configuration.animalType)
         
         return AnimalPictureEntry(uiImage: animalImage)
@@ -58,6 +62,11 @@ struct AnimalPictureProvider: IntentTimelineProvider {
         in context: Context,
         completion: @escaping (AnimalPictureEntry) -> Void
     ) {
+        if context.isPreview {
+            completion(self.placeholder(in: context))
+            return
+        }
+        
         fetchAnimalImage(of: configuration.animalType) { image in
             completion(AnimalPictureEntry(uiImage: image))
         }

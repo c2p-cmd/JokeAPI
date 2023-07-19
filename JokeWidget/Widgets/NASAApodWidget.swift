@@ -21,6 +21,11 @@ struct NASAApodTimelineProvider: IntentTimelineProvider {
     }
     
     func getSnapshot(for configuration: NASAWidgetConfigIntent, in context: Context, completion: @escaping (NASAApodEntry) -> Void) {
+        if context.isPreview {
+            completion(self.placeholder(in: context))
+            return
+        }
+        
         fetchNASAApod(showTitle: configuration.showTitle as? Bool) { newEntry, _ in
             completion(newEntry)
         }

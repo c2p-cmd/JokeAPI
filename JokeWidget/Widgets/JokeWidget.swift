@@ -19,6 +19,11 @@ struct JokeProvider: TimelineProvider {
     }
     
     func getSnapshot(in context: Context, completion: @escaping (JokeEntry) -> ()) {
+        if context.isPreview {
+            completion(self.placeholder(in: context))
+            return
+        }
+        
         completion(JokeEntry(
             joke: UserDefaults.savedJoke
         ))

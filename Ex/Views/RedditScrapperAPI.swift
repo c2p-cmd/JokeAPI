@@ -28,7 +28,6 @@ struct RedditScrapperView: View {
                         .font(.system(.body, design: .rounded, weight: .bold))
                 }
                 .pickerStyle(.menu)
-                .frame(width: .infinity, height: .infinity, alignment: .top)
             }
             
             HStack(alignment: .top) {

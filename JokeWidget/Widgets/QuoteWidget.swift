@@ -22,6 +22,11 @@ struct QuoteProvider: TimelineProvider {
         in context: Context,
         completion: @escaping (QuoteEntry) -> Void
     ) {
+        if context.isPreview {
+            completion(self.placeholder(in: context))
+            return
+        }
+        
         completion(QuoteEntry(quoteResponse: UserDefaults.savedQuote))
     }
     
@@ -65,7 +70,7 @@ struct QuoteEntryView_Placeholder: View {
         ]), startPoint: .bottom, endPoint: .top)
     
     var body: some View {
-        Image("BLACKBOARD")
+        Image("BLACKBOARD2")
             .resizable()
             .scaledToFill()
             .frame(width: 360, height: 169)

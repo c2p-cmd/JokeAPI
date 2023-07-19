@@ -22,6 +22,11 @@ struct SpeedTimelineProvider: TimelineProvider {
         in context: Context,
         completion: @escaping (SpeedEntry) -> Void
     ) {
+        if context.isPreview {
+            completion(self.placeholder(in: context))
+            return
+        }
+        
         let speedEntry = SpeedEntry(speed: UserDefaults.savedSpeed)
         completion(speedEntry)
     }

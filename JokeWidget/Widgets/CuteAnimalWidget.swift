@@ -32,6 +32,11 @@ struct CuteAnimalProvider: TimelineProvider {
     }
     
     func getSnapshot(in context: Context, completion: @escaping (CuteAnimalEntry) -> Void) {
+        if context.isPreview {
+            completion(self.placeholder(in: context))
+            return
+        }
+        
         let savedResponse = UserDefaults.savedRedditMemeResponse
         
         if let uiImage = savedResponse.uiImage {
