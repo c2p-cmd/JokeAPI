@@ -11,14 +11,18 @@ import SwiftUI
 struct QuoteEntry: TimelineEntry {
     let date: Date = .now
     var quoteResponse = UserDefaults.savedQuote
+    var bgChoice: QuoteBackground = .green
 }
 
-struct QuoteProvider: TimelineProvider {
+struct QuoteProvider: IntentTimelineProvider {
+    typealias Intent = QuoteBGIntent
+    
     func placeholder(in context: Context) -> QuoteEntry {
         QuoteEntry()
     }
     
     func getSnapshot(
+        for configuration: Intent,
         in context: Context,
         completion: @escaping (QuoteEntry) -> Void
     ) {
@@ -27,16 +31,17 @@ struct QuoteProvider: TimelineProvider {
             return
         }
         
-        completion(QuoteEntry(quoteResponse: UserDefaults.savedQuote))
+        completion(QuoteEntry(quoteResponse: UserDefaults.savedQuote, bgChoice: configuration.background))
     }
     
     func getTimeline(
+        for configuration: Intent,
         in context: Context,
         completion: @escaping (Timeline<QuoteEntry>) -> Void
     ) {
         Task {
             let result = await getRandomQuote()
-            var entry = QuoteEntry()
+            var entry = QuoteEntry(bgChoice: configuration.background)
             
             switch result {
             case .success(let newQuote):
@@ -63,17 +68,26 @@ struct QuoteProvider: TimelineProvider {
 }
 
 struct QuoteEntryView_Placeholder: View {
-    private let gradient = LinearGradient(
-        gradient: Gradient(colors: [
-            Color("Orange1", bundle: .main),
-            Color("Orange2", bundle: .main)
-        ]), startPoint: .bottom, endPoint: .top)
+    var choice: QuoteBackground
+    
+    init(_ choice: QuoteBackground) {
+        self.choice = choice
+    }
+    
+    private func blackBoardChoice() -> String {
+        switch self.choice {
+        case .black:
+            return "BLACKBOARD2"
+        case .green, .unknown:
+            return "BLACKBOARD"
+        }
+    }
     
     var body: some View {
-        Image("BLACKBOARD2")
+        Image(blackBoardChoice())
             .resizable()
             .scaledToFill()
-            .frame(width: 360, height: 169)
+            .frame(width: 370, height: 170)
     }
 }
 
@@ -96,7 +110,7 @@ struct QuoteWidgetEntryView: View {
                 Spacer()
                 Text("-\(entry.quoteResponse.author) ")
                     .multilineTextAlignment(.trailing)
-                    .font(.custom("Chalkduster", size: 14.5))
+                    .font(.custom("Chalkduster", size: 11.5))
                 if #available(iOS 17, macOS 14, *) {
                     Spacer()
                     refreshButton
@@ -134,7 +148,7 @@ struct QuoteWidgetEntryView: View {
             .background {
                 ZStack {
                     gradient
-                    QuoteEntryView_Placeholder()
+                    QuoteEntryView_Placeholder(self.entry.bgChoice)
                 }
                 .aspectRatio(contentMode: .fill)
                 .ignoresSafeArea()
@@ -147,8 +161,9 @@ struct QuoteWidget: Widget {
     let kind: String = "QuoteWidget"
     
     var body: some WidgetConfiguration {
-        StaticConfiguration(
+        IntentConfiguration(
             kind: kind,
+            intent: QuoteBGIntent.self,
             provider: QuoteProvider()
         ) { entry in
             QuoteWidgetEntryView(entry: entry)

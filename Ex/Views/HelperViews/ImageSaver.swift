@@ -11,7 +11,7 @@ import SwiftUI
 
 extension View {
     func saveImageContextMenu(
-        completion: ((Bool) -> Void)? = nil // didSuccess
+        completion: ((Bool, String) -> Void)? = nil // didSuccess
     ) -> some View {
         self.contextMenu {
             Button {
@@ -56,9 +56,9 @@ extension Image {
 }
 
 class ImageSaver: NSObject {
-    var completion: ((Bool) -> Void)?
+    var completion: ((Bool, String) -> Void)?
     
-    init(completion: ((Bool) -> Void)?) {
+    init(completion: ((Bool, String) -> Void)?) {
         self.completion = completion
     }
     
@@ -75,12 +75,12 @@ class ImageSaver: NSObject {
     }
     
     @objc func saveCompleted(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        completion?(error == nil)
+        completion?(error == nil, error?.localizedDescription ?? "")
         if let error = error {
-            print("Error Saving")
+            // print("Error Saving")
             print(error.localizedDescription)
         } else {
-            print("No error")
+            // print("No error")
         }
     }
 }

@@ -58,11 +58,11 @@ extension UIImage {
         onSuccess(🎞️)
     }
     
-    func saveImage() {
+    func saveImage(forKey: String = "IMAGE_KEY") {
         let image = self.resizedForWidget
         
         if let pngData = image.pngData() {
-            appStorage.set(pngData, forKey: "IMAGE_KEY")
+            appStorage.set(pngData, forKey: forKey)
         } else {
             print("No png data")
         }
@@ -74,9 +74,10 @@ extension UIImage {
     }
     
     static func loadImage(
+        forKey: String = "IMAGE_KEY",
         completion: @escaping (UIImage) -> Void
     ) {
-        guard let data = appStorage.data(forKey: "IMAGE_KEY") else {
+        guard let data = appStorage.data(forKey: forKey) else {
             completion(UIImage(systemName: "exclamationmark.triangle.fill")!)
             return
         }

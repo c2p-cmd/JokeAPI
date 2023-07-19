@@ -66,7 +66,7 @@ struct QuoteView: View {
                     Text("-\(quote.author)")
                         .font(.system(.subheadline, design: .rounded))
                         .multilineTextAlignment(.trailing)
-                        .frame(width: .infinity, height: .infinity, alignment: .bottomTrailing)
+                        // .frame(width: .infinity, height: .infinity, alignment: .bottomTrailing)
                 }
             }
             .padding(.all, 25)

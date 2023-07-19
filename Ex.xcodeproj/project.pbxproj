@@ -24,6 +24,9 @@
 		001710F52A601645003D2071 /* RedditMemeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001710F32A601642003D2071 /* RedditMemeResponse.swift */; };
 		001ACE0A2A4EBA2C000CE9AF /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */; };
 		001ACE0B2A4EBA2E000CE9AF /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */; };
+		001CB1F42A67E84900458B60 /* MemeGenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001CB1F32A67E84900458B60 /* MemeGenView.swift */; };
+		001CB1F62A67ED1200458B60 /* MemeGeneratorModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001CB1F52A67ED1200458B60 /* MemeGeneratorModels.swift */; };
+		001CB1F72A67EEBB00458B60 /* MemeGeneratorModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001CB1F52A67ED1200458B60 /* MemeGeneratorModels.swift */; };
 		001FB8C12A5FDE3B0020F69C /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001FB8C02A5FDE3B0020F69C /* ImageSaver.swift */; };
 		001FB8C22A5FDF220020F69C /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001FB8C02A5FDE3B0020F69C /* ImageSaver.swift */; };
 		003BD2682A4D72B3009FDFAC /* MyIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003BD2672A4D72B3009FDFAC /* MyIntents.swift */; };
@@ -58,7 +61,6 @@
 		00A07F662A5D2F6B006FC4DB /* NASAApodResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A07F642A5D2F6B006FC4DB /* NASAApodResponse.swift */; };
 		00A07F6C2A5D4416006FC4DB /* NASAApodWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A07F6A2A5D4416006FC4DB /* NASAApodWidget.swift */; };
 		00A07F722A5D67F6006FC4DB /* NASAApodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A07F712A5D67F6006FC4DB /* NASAApodView.swift */; };
-		00A07F732A5D67F6006FC4DB /* NASAApodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A07F712A5D67F6006FC4DB /* NASAApodView.swift */; };
 		00A07F752A5D7B85006FC4DB /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00A07F742A5D7B85006FC4DB /* Config.plist */; };
 		00A07F762A5D7B85006FC4DB /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00A07F742A5D7B85006FC4DB /* Config.plist */; };
 		00BDAE1C2A627805002CFD69 /* CustomPictureWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BDAE1B2A627805002CFD69 /* CustomPictureWidget.swift */; };
@@ -114,6 +116,8 @@
 		00134F2E2A5153610091D6FD /* ViewModifier_iOS17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifier_iOS17.swift; sourceTree = "<group>"; };
 		001710F32A601642003D2071 /* RedditMemeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditMemeResponse.swift; sourceTree = "<group>"; };
 		001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resize.swift"; sourceTree = "<group>"; };
+		001CB1F32A67E84900458B60 /* MemeGenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeGenView.swift; sourceTree = "<group>"; };
+		001CB1F52A67ED1200458B60 /* MemeGeneratorModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeGeneratorModels.swift; sourceTree = "<group>"; };
 		001FB8C02A5FDE3B0020F69C /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		003BD2652A4D718A009FDFAC /* Ex.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ex.entitlements; sourceTree = "<group>"; };
 		003BD2662A4D7194009FDFAC /* JokeWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JokeWidgetExtension.entitlements; sourceTree = "<group>"; };
@@ -188,6 +192,7 @@
 				00134F1F2A514DD20091D6FD /* SpeedService.swift */,
 				00A07F642A5D2F6B006FC4DB /* NASAApodResponse.swift */,
 				001710F32A601642003D2071 /* RedditMemeResponse.swift */,
+				001CB1F52A67ED1200458B60 /* MemeGeneratorModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -221,6 +226,7 @@
 				0091D9962A5E961C002A281A /* MultiSelectionMenu.swift */,
 				00BDAE1D2A627C17002CFD69 /* CustomImageView.swift */,
 				0058ABA02A66A3010050FA96 /* RedditScrapperAPI.swift */,
+				001CB1F32A67E84900458B60 /* MemeGenView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -446,6 +452,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00134F1C2A514D080091D6FD /* SpeedModel.swift in Sources */,
+				001CB1F62A67ED1200458B60 /* MemeGeneratorModels.swift in Sources */,
 				00BDAE1E2A627C17002CFD69 /* CustomImageView.swift in Sources */,
 				00134F2F2A5153610091D6FD /* ViewModifier_iOS17.swift in Sources */,
 				003BD26B2A4D81C2009FDFAC /* QuoteAPIModel.swift in Sources */,
@@ -464,6 +471,7 @@
 				001710F42A601642003D2071 /* RedditMemeResponse.swift in Sources */,
 				00134F262A514E540091D6FD /* DownloadService.swift in Sources */,
 				00134F232A514E0F0091D6FD /* NetworkError.swift in Sources */,
+				001CB1F42A67E84900458B60 /* MemeGenView.swift in Sources */,
 				00A07F722A5D67F6006FC4DB /* NASAApodView.swift in Sources */,
 				0043377F2A339DBD004AF73F /* JokeView.swift in Sources */,
 				00F2F8BD2A515DDD00A2ADE5 /* SpeedTestView.swift in Sources */,
@@ -482,12 +490,12 @@
 			files = (
 				00134F2D2A514F6A0091D6FD /* SpeedWidget.swift in Sources */,
 				00511CF12A2C960300D1FD13 /* JokeWidget.swift in Sources */,
-				00A07F732A5D67F6006FC4DB /* NASAApodView.swift in Sources */,
 				00134F242A514E0F0091D6FD /* NetworkError.swift in Sources */,
 				00D004B72A65963500D51C7E /* JokeType.swift in Sources */,
 				00134F1D2A514D080091D6FD /* SpeedModel.swift in Sources */,
 				004337832A33A140004AF73F /* UserDefaultExtension.swift in Sources */,
 				00134F272A514E540091D6FD /* DownloadService.swift in Sources */,
+				001CB1F72A67EEBB00458B60 /* MemeGeneratorModels.swift in Sources */,
 				001FB8C22A5FDF220020F69C /* ImageSaver.swift in Sources */,
 				00E23D7D2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */,
 				004D9B392A4D98F100199886 /* HTTPAnimalPictureWidget.swift in Sources */,

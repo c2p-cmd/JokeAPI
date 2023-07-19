@@ -8,24 +8,26 @@
 import SwiftUI
 
 struct RedditScrapperView: View {
-    @AppStorage("reddit_meme") private var redditMemeResponse: RedditMemeResponse = UserDefaults.savedRedditMemeResponse
+    @AppStorage("reddit_meme") private var redditMemeResponse: RedditMemeResponse = UserDefaults.savedRedditAnimalResponse
+    @AppStorage("chosen_reddit_meme") private var subreddit: String = allAnimalSubreddits[0]
     
     @State private var isBusy = false
-    @State private var showFullScreen = false
+    @State private var showDialog = false
     @State private var error: String?
-    @State private var subreddit = "cute"
+    @State private var alertText = ""
+    @State private var alertDescription = ""
     
     var body: some View {
         VStack(spacing: 10) {
             HStack(alignment: .top) {
                 Picker(selection: self.$subreddit) {
-                    ForEach(allCases, id: \.self) {
+                    ForEach(allAnimalSubreddits, id: \.hashValue) {
                         Text($0.capitalized)
                             .tag($0.hashValue)
                     }
                 } label: {
-                    Text("Joke Type")
-                        .font(.system(.body, design: .rounded, weight: .bold))
+                    Text("Chosen Subreddit")
+                        .font(.system(.body, design: .rounded, weight: .semibold))
                 }
                 .pickerStyle(.menu)
             }
@@ -47,14 +49,32 @@ struct RedditScrapperView: View {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFit()
-                    .saveImageContextMenu()
+                    .saveImageContextMenu { (didSucess: Bool, error: String) in
+                        if didSucess {
+                            self.alertText = "Success!"
+                            self.alertDescription = "This image has been saved in your gallery!"
+                        } else {
+                            self.alertText = "Failed"
+                            self.alertDescription = "This image couldn't be saved in your gallery. \(error)"
+                        }
+                        showDialog = didSucess
+                    }
                     .frame(height: 500)
             } else {
                 AsyncImage(url: URL(string: redditMemeResponse.url)) { image in
                     image
                         .resizable()
                         .scaledToFit()
-                        .saveImageContextMenu()
+                        .saveImageContextMenu { (didSucess: Bool, error: String) in
+                            if didSucess {
+                                self.alertText = "Success!"
+                                self.alertDescription = "This image has been saved in your gallery!"
+                            } else {
+                                self.alertText = "Failed"
+                                self.alertDescription = "This image couldn't be saved in your gallery. \(error)"
+                            }
+                            showDialog = didSucess
+                        }
                         .frame(height: 500)
                 } placeholder: {
                     ProgressView()
@@ -66,19 +86,14 @@ struct RedditScrapperView: View {
             RefreshButton(isBusy: self.$isBusy, action: getNewImage)
         }
         .padding()
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    self.showFullScreen = true
-                } label: {
-                    Label("Settings", systemImage: "gear.circle")
-                }
+        .alert(self.alertText, isPresented: self.$showDialog) {
+            Button(role: .cancel) {
+                self.showDialog = false
+            } label: {
+                Text("Okay")
             }
-        }
-        .fullScreenCover(isPresented: self.$showFullScreen) {
-            CustomImageView {
-                self.showFullScreen = false
-            }
+        } message: {
+            Text(self.alertDescription)
         }
     }
     

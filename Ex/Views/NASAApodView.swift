@@ -16,13 +16,14 @@ struct NASAApodView: View {
     @State private var selectedDate: Date = .now
     @State private var isPresenting = false
     @State private var alertText = "Success"
+    @State private var alertDescription = "Success"
     
     var body: some View {
         List {
             DatePicker(
                 "Date of Image",
                 selection: $selectedDate,
-                in: ...Date(),
+                in: ...Date.now,
                 displayedComponents: .date
             )
             
@@ -35,27 +36,23 @@ struct NASAApodView: View {
                 Text(apodResponse.title)
                     .font(.system(.headline, design: .rounded))
                 
-                if let image = apodResponse.uiImage {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
-                        .saveImageContextMenu { didSuccess in
-                            isPresenting = true
-                            alertText = didSuccess ? "Success" : "Saving Failed"
+                AsyncImage(url: URL(string: apodResponse.url)) { imagePhase in
+                    imagePhase.resizable().saveImageContextMenu { (didSucess: Bool, error: String) in
+                        if didSucess {
+                            self.alertText = "Success!"
+                            self.alertDescription = "This image has been saved in your gallery!"
+                        } else {
+                            self.alertText = "Failed"
+                            self.alertDescription = "This image couldn't be saved in your gallery. \(error)"
                         }
-                } else {
-                    AsyncImage(url: URL(string: apodResponse.url)) { imagePhase in
-                        imagePhase.resizable().saveImageContextMenu { didSuccess in
-                            isPresenting = true
-                            alertText = didSuccess ? "Success" : "Saving Failed"
-                        }
-                    } placeholder: {
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle())
-                            .frame(width: 100, height: 100)
+                        self.isPresenting = didSucess
                     }
-                    .scaledToFit()
+                } placeholder: {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .frame(width: 100, height: 100)
                 }
+                .scaledToFit()
                 
                 Text(apodResponse.explanation)
                     .font(.system(.body, design: .rounded))
@@ -64,24 +61,17 @@ struct NASAApodView: View {
         .listStyle(.plain)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    getNewImage()
-                } label: {
-                    Image(systemName: "arrow.counterclockwise")
-                        .foregroundStyle(.white)
-                }
-                .disabled(isBusy)
-                .buttonStyle(.borderedProminent)
+                RefreshButton(isBusy: self.$isBusy, action: getNewImage)
             }
         }
         .alert(alertText, isPresented: $isPresenting) {
-            VStack {
-                Button(role: .cancel) {
-                    self.isPresenting = false
-                } label: {
-                    Text("Okay")
-                }
+            Button(role: .cancel) {
+                self.isPresenting = false
+            } label: {
+                Text("Okay")
             }
+        } message: {
+            Text(self.alertDescription)
         }
         .refreshable {
             getNewImage()
@@ -89,14 +79,6 @@ struct NASAApodView: View {
         .onAppear {
             if self.apodResponse == nil {
                 getNewImage()
-            }
-            
-            if let apodResponse = apodResponse {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                if let savedDate = dateFormatter.date(from: apodResponse.date) {
-                    self.selectedDate = savedDate
-                }
             }
         }
     }

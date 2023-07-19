@@ -37,7 +37,7 @@ struct CuteAnimalProvider: TimelineProvider {
             return
         }
         
-        let savedResponse = UserDefaults.savedRedditMemeResponse
+        let savedResponse = UserDefaults.savedRedditAnimalResponse
         
         if let uiImage = savedResponse.uiImage {
             let entry = CuteAnimalEntry(uiImage: uiImage, title: savedResponse.title)
@@ -56,11 +56,11 @@ struct CuteAnimalProvider: TimelineProvider {
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<CuteAnimalEntry>) -> Void) {
         Task {
-            let result = await getRedditMeme(from: allCases.randomElement()!)
+            let result = await getRedditMeme(from: allAnimalSubreddits.randomElement()!)
             
             switch result {
             case .success(let newResponse):
-                UserDefaults.saveNewRedditResponse(newResponse)
+                UserDefaults.saveNewRedditAnimalResponse(newResponse)
                 let components = DateComponents(day: 1)
                 let reloadDate = Calendar.current.date(byAdding: components, to: .now)!
                 
@@ -82,7 +82,7 @@ struct CuteAnimalProvider: TimelineProvider {
             case .failure(_):
                 let components = DateComponents(hour: 1)
                 let reloadDate = Calendar.current.date(byAdding: components, to: .now)!
-                let savedResponse = UserDefaults.savedRedditMemeResponse
+                let savedResponse = UserDefaults.savedRedditAnimalResponse
                 
                 let entry = CuteAnimalEntry(uiImage: savedResponse.uiImage, title: savedResponse.title)
                 

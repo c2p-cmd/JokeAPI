@@ -7,55 +7,92 @@
 
 import SwiftUI
 
+struct MyTabView: View {
+    var body: some View {
+        TabView {
+            NavigationView {
+                JokeView()
+                    .navigationTitle("Jokes")
+                    .navigationBarTitleDisplayMode(.inline)
+            }
+            .tabItem {
+                Label("Joke", systemImage: "theatermasks.circle.fill")
+            }
+            
+            NavigationView {
+                QuoteView()
+                    .navigationTitle("Quotes")
+                    .navigationBarTitleDisplayMode(.inline)
+            }
+            .tabItem {
+                Label("Quote", systemImage: "quote.bubble.fill")
+            }
+            
+            NavigationView {
+                RedditScrapperView()
+                    .navigationTitle("Photos")
+                    .navigationBarTitleDisplayMode(.inline)
+            }
+            .tabItem {
+                Label("Reddit", systemImage: "photo.stack.fill")
+            }
+            
+            NavigationView {
+                NASAApodView()
+                    .navigationBarTitle("NASA Picture of the day")
+                    .navigationBarTitleDisplayMode(.inline)
+            }
+            .tabItem {
+                Label("NASA", systemImage: "photo.fill.on.rectangle.fill")
+            }
+            
+            NavigationView {
+                SpeedTestView()
+                    .navigationBarTitle("Speed Test")
+                    .navigationBarTitleDisplayMode(.inline)
+            }
+            .tabItem {
+                Label("SpeedTest", systemImage: "speedometer")
+            }
+        }
+    }
+}
+
 struct ContentView: View {
     var body: some View {
         NavigationStack {
-            TabView {
-                NavigationView {
-                    JokeView()
-                        .navigationTitle("Jokes")
-                        .navigationBarTitleDisplayMode(.inline)
-                }
-                .tabItem {
-                    Label("Joke", systemImage: "theatermasks.circle.fill")
-                }
+            VStack {
+                Text("KIDA Entertainment!")
+                    .font(.system(.largeTitle, design: .rounded))
+                Text("One Stop Shop For Widget Entertainment!")
+                    .font(.system(.headline, design: .rounded))
                 
-                NavigationView {
-                    QuoteView()
-                        .navigationTitle("Quotes")
-                        .navigationBarTitleDisplayMode(.inline)
-                }
-                .tabItem {
-                    Label("Quote", systemImage: "quote.bubble.fill")
-                }
+                Spacer()
                 
-                NavigationView {
-                    RedditScrapperView()
-                        .navigationTitle("Photos")
-                        .navigationBarTitleDisplayMode(.inline)
+                HStack(alignment: .bottom, spacing: 15) {
+                    NavigationLink {
+                        MyTabView()
+                    } label: {
+                        Label("Content", systemImage: "tablecells.fill")
+                    }
+                    
+                    NavigationLink {
+                        MemeGenerator()
+                    } label: {
+                        Label("MemeGen", systemImage: "theatermask.and.paintbrush.fill")
+                    }
+                    
+                    NavigationLink {
+                        CustomImageView(buttonAction: nil)
+                    } label: {
+                        Label("Widget Settings", systemImage: "gear.circle")
+                    }
                 }
-                .tabItem {
-                    Label("Reddit", systemImage: "photo.stack.fill")
-                }
-                
-                NavigationView {
-                    NASAApodView()
-                        .navigationBarTitle("NASA Picture of the day")
-                        .navigationBarTitleDisplayMode(.inline)
-                }
-                .tabItem {
-                    Label("NASA", systemImage: "photo.fill.on.rectangle.fill")
-                }
-                
-                NavigationView {
-                    SpeedTestView()
-                        .navigationBarTitle("Speed Test")
-                        .navigationBarTitleDisplayMode(.inline)
-                }
-                .tabItem {
-                    Label("SpeedTest", systemImage: "speedometer")
-                }
+                .buttonStyle(.borderedProminent)
+                .foregroundStyle(.bar)
+                .tint(.orange)
             }
+            .padding(.vertical, 30)
         }
     }
 }

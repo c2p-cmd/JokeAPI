@@ -21,7 +21,7 @@
 	<array>
 		<string>ConfigurationIntent</string>
 		<string>NASAWidgetConfigIntent</string>
-		<string>RedditAnimalPictureIntent</string>
+		<string>QuoteBGIntent</string>
 	</array>
 	<key>UIAppFonts</key>
 	<array>

@@ -10,7 +10,7 @@ import PhotosUI
 import WidgetKit
 
 struct CustomImageView: View {
-    var buttonAction: () -> Void
+    var buttonAction: (() -> Void)?
     
     @State private var images: [UIImage] = []
     @State private var pickedItems: [PhotosPickerItem] = []
@@ -18,11 +18,13 @@ struct CustomImageView: View {
     
     var body: some View {
         VStack(spacing: 10) {
-            HStack(alignment: .top) {
-                Button("Close", action: self.buttonAction)
-                Spacer()
+            if let buttonAction = self.buttonAction {
+                HStack(alignment: .top) {
+                    Button("Close", action: buttonAction)
+                    Spacer()
+                }
+                .padding(.horizontal, 15)
             }
-            .padding(.horizontal, 15)
             
             Spacer()
             

@@ -17,7 +17,7 @@ let jokeCategories: Set<IdentifiableString> = Set([
     IdentifiableString(string: "Programming")
 ])
 
-let allCases = [
+let allAnimalSubreddits: [String] = [
     "cute",
     "animal",
     "animalsbeingderps",
@@ -31,6 +31,55 @@ var configPlist: NSDictionary = {
     let configPlistLink = Bundle.main.path(forResource: "Config", ofType: "plist")!
     return NSDictionary(contentsOfFile: configPlistLink)!
 }()
+
+// MARK: - Get MEME Image
+func getMeme(
+    id: String,
+    text: [String],
+    completion: ((Result<UIImage, Error>) -> Void)?
+) {
+    let size = "?width=800&height=800"
+    var urlString = configPlist.value(forKey: "MemeGen Link") as! String
+    
+    urlString.append("\(id)/\(text.joined()).png\(size)")
+    
+    guard let url = URL(string: urlString) else {
+        completion?(.failure(URLError(.badURL)))
+        return
+    }
+    
+    let task = URLSession.shared.dataTask(with: url) { (data: Data?, response: URLResponse?, error: Error?) in
+        if let data = data,
+           let uiImage = UIImage(data: data) {
+            completion?(.success(uiImage))
+        }
+        
+        if let error {
+            completion?(.failure(error))
+        }
+    }
+    
+    task.resume()
+}
+
+// MARK: - Meme Generator
+func getMemeTemplates() async -> Result<[MemeTemplate], Error> {
+    let urlString = configPlist.value(forKey: "MemeGen Templates") as! String
+    
+    guard let url = URL(string: urlString) else {
+        return .failure(URLError(.badURL))
+    }
+    
+    do {
+        let (data, _) = try await URLSession.shared.data(from: url)
+        
+        let templates = try JSONDecoder().decode([MemeTemplate].self, from: data)
+        
+        return .success(templates)
+    } catch {
+        return .failure(error)
+    }
+}
 
 // MARK: - Reddit Scrapper API (List)
 func getRedditMemes(
