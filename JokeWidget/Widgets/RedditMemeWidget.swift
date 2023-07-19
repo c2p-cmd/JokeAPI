@@ -1,14 +1,14 @@
 //
-//  CuteAnimalWidget.swift
+//  RedditMemeWidget.swift
 //  JokeWidgetExtension
 //
-//  Created by Sharan Thakur on 18/07/23.
+//  Created by Sharan Thakur on 19/07/23.
 //
 
 import SwiftUI
 import WidgetKit
 
-struct CuteAnimalEntry: TimelineEntry {
+struct MemeEntry: TimelineEntry {
     var date: Date
     var uiImage: UIImage
     var title: String
@@ -26,53 +26,55 @@ struct CuteAnimalEntry: TimelineEntry {
     }
 }
 
-struct CuteAnimalProvider: TimelineProvider {
-    func placeholder(in context: Context) -> CuteAnimalEntry {
-        CuteAnimalEntry()
+struct MemeProvider: TimelineProvider {
+    typealias Entry = MemeEntry
+    
+    func placeholder(in context: Context) -> Entry {
+        MemeEntry()
     }
     
-    func getSnapshot(in context: Context, completion: @escaping (CuteAnimalEntry) -> Void) {
+    func getSnapshot(in context: Context, completion: @escaping (Entry) -> Void) {
         if context.isPreview {
             completion(self.placeholder(in: context))
             return
         }
         
-        let savedResponse = UserDefaults.savedRedditAnimalResponse
+        let savedResponse = UserDefaults.savedRedditMemeResponse
         
         if let uiImage = savedResponse.uiImage {
-            let entry = CuteAnimalEntry(uiImage: uiImage, title: savedResponse.title)
+            let entry = MemeEntry(uiImage: uiImage, title: savedResponse.title)
             
             completion(entry)
         } else {
             fetchImage(from: URL(string: savedResponse.url)!) { newImage, didSuccess in
                 let uiImage = didSuccess ? newImage : UIImage(systemName: "pawprint.circle.fill")!
                 
-                let entry = CuteAnimalEntry(uiImage: uiImage, title: savedResponse.title)
+                let entry = MemeEntry(uiImage: uiImage, title: savedResponse.title)
                 
                 completion(entry)
             }
         }
     }
     
-    func getTimeline(in context: Context, completion: @escaping (Timeline<CuteAnimalEntry>) -> Void) {
+    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
         Task {
-            let result = await getRedditMeme(from: allAnimalSubreddits.randomElement()!.string)
+            let result = await getRedditMeme(from: allMemeSubreddits.randomElement()!.string)
             
             switch result {
             case .success(let newResponse):
-                UserDefaults.saveNewRedditAnimalResponse(newResponse)
+                UserDefaults.saveNewRedditMemeResponse(newResponse)
                 let components = DateComponents(day: 1)
                 let reloadDate = Calendar.current.date(byAdding: components, to: .now)!
                 
                 if let uiImage = newResponse.uiImage {
-                    let entry = CuteAnimalEntry(uiImage: uiImage, title: newResponse.title)
+                    let entry = MemeEntry(uiImage: uiImage, title: newResponse.title)
                     
                     let timeline = Timeline(entries: [entry], policy: .after(reloadDate))
                     completion(timeline)
                 } else {
                     fetchImage(from: URL(string: newResponse.url)!) { newImage, didSuccess in
                         let uiImage = didSuccess ? newImage : UIImage(systemName: "pawprint.circle.fill")!
-                        let entry = CuteAnimalEntry(uiImage: uiImage, title: newResponse.title)
+                        let entry = MemeEntry(uiImage: uiImage, title: newResponse.title)
                         
                         let timeline = Timeline(entries: [entry], policy: .after(reloadDate))
                         completion(timeline)
@@ -82,9 +84,9 @@ struct CuteAnimalProvider: TimelineProvider {
             case .failure(_):
                 let components = DateComponents(hour: 1)
                 let reloadDate = Calendar.current.date(byAdding: components, to: .now)!
-                let savedResponse = UserDefaults.savedRedditAnimalResponse
+                let savedResponse = UserDefaults.savedRedditMemeResponse
                 
-                let entry = CuteAnimalEntry(uiImage: savedResponse.uiImage, title: savedResponse.title)
+                let entry = MemeEntry(uiImage: savedResponse.uiImage, title: savedResponse.title)
                 
                 let timeline = Timeline(entries: [entry], policy: .after(reloadDate))
                 completion(timeline)
@@ -94,35 +96,65 @@ struct CuteAnimalProvider: TimelineProvider {
     }
 }
 
-struct CuteAnimalEntryView: View {
+struct MemeEntryView: View {
     let gradient = LinearGradient(colors: [
-        .black.opacity(0.9),
-        .black.opacity(0.75),
-        .black.opacity(0.1)
+        .orange.opacity(0.9),
+        .orange.opacity(0.75),
+        .orange.opacity(0.1)
     ], startPoint: .bottom, endPoint: .top)
     
-    var entry: CuteAnimalEntry
+    var entry: MemeEntry
     
     var body: some View {
-        Image(uiImage: entry.uiImage)
-            .resizable()
-            .scaledToFill()
-            .modifyForiOS17(gradient)
+        VStack {
+            VStack {
+                Image(uiImage: entry.uiImage)
+                    .resizable()
+                    .scaledToFill()
+                    .padding(.horizontal, 10)
+                    .modifyForiOS17(.clear)
+                
+                Text(entry.title)
+                    .font(.system(
+                        size: 15,
+                        weight: .semibold,
+                        design: .rounded))
+                    .foregroundStyle(.black)
+                    .minimumScaleFactor(0.75)
+            }.padding()
+        }
+        .background {
+            Image("Iarge")
+                .resizable()
+                .scaledToFill()
+        }
     }
 }
 
-struct CuteAnimalWidget: Widget {
-    let kind = "Cute Animals!"
+struct MemeWidget: Widget {
+    let kind = "Reddit Memes!"
     
     var body: some WidgetConfiguration {
         StaticConfiguration(
             kind: kind,
-            provider: CuteAnimalProvider()
+            provider: MemeProvider()
         ) { entry in
-            CuteAnimalEntryView(entry: entry)
+            MemeEntryView(entry: entry)
         }
-        .configurationDisplayName("Cute Animal Widget")
-        .description("Be fed with a cute animal widget every day!")
-        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .systemExtraLarge])
+        .configurationDisplayName("Reddit Meme Widget")
+        .description("Be fed with a nice meme everyday!")
+        .supportedFamilies([.systemLarge, .systemExtraLarge])
+    }
+}
+
+struct MemeWidget_Previews: PreviewProvider {
+    static let entry = MemeEntry(
+        uiImage: UIImage(named: "5vk4ob6hnrcb1"),
+        title: "Hoping for an Extraordinary Future for My Newborn"
+    )
+    
+    static var previews: some View {
+        MemeEntryView(entry: entry)
+            .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
 }

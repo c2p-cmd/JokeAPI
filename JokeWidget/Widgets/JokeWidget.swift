@@ -10,7 +10,7 @@ import SwiftUI
 
 struct JokeEntry: TimelineEntry {
     let date: Date = .now
-    var joke: String = ""
+    var joke: String = UserDefaults.savedJoke
 }
 
 struct JokeProvider: TimelineProvider {

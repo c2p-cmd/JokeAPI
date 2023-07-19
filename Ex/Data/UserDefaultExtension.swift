@@ -12,8 +12,32 @@ let appStorage = UserDefaults(suiteName: "group.com.kidastudios.mygroup")!
 
 // MARK: - UserDefaults RedditMemeResponse Extension
 extension UserDefaults {
+    static var defaultRedditMemeResponse: RedditMemeResponse {
+        return RedditMemeResponse(
+            title: "Hoping for an Extraordinary Future for My Newborn",
+            url: "https://i.redd.it/5vk4ob6hnrcb1.jpg",
+            nsfw: false
+        )
+    }
+    
+    static var savedRedditMemeResponse: RedditMemeResponse {
+        guard let saved = appStorage.string(forKey: "reddit_memeZ"),
+              let response = RedditMemeResponse(rawValue: saved) else {
+            return defaultRedditMemeResponse
+        }
+        return response
+    }
+    
+    static func saveNewRedditMemeResponse(_ newResponse: RedditMemeResponse) {
+        appStorage.set(newResponse.rawValue, forKey: "reddit_memeZ")
+    }
+    
     static var defaultRedditAnimalResponse: RedditMemeResponse {
-        return RedditMemeResponse(title: "This Cute Rottweiler Pup 🐶", url: "https://i.redd.it/vvbzgl9scacb1.jpg", nsfw: false)
+        return RedditMemeResponse(
+            title: "This Cute Rottweiler Pup 🐶",
+            url: "https://i.redd.it/vvbzgl9scacb1.jpg",
+            nsfw: false
+        )
     }
     
     static var savedRedditAnimalResponse: RedditMemeResponse {

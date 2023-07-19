@@ -8,8 +8,52 @@
 import SwiftUI
 
 struct RedditScrapperView: View {
-    @AppStorage("reddit_meme") private var redditMemeResponse: RedditMemeResponse = UserDefaults.savedRedditAnimalResponse
-    @AppStorage("chosen_reddit_meme") private var subreddit: String = allAnimalSubreddits[0]
+    enum RedditViewChoice: String {
+        case meme, animal
+        
+        var description: String {
+            switch self {
+            case .meme:
+                "Memes"
+            case .animal:
+                "Animals"
+            }
+        }
+        
+        static var allCases: [Self] {
+            [.animal, .meme]
+        }
+    }
+    
+    @State private var selected: RedditViewChoice = .animal
+    
+    var body: some View {
+        ScrollView {
+            VStack {
+                Picker("", selection: self.$selected) {
+                    ForEach(RedditViewChoice.allCases, id: \.hashValue) {
+                        Text($0.description)
+                            .tag($0)
+                    }
+                }
+                .pickerStyle(.segmented)
+                
+                if selected == .animal {
+                    RedditAnimalView()
+                }
+                
+                if selected == .meme {
+                    RedditMemeView()
+                }
+            }
+        }
+    }
+}
+
+// MEME ONLY
+struct RedditMemeView: View {
+    @AppStorage("reddit_memeZ") private var redditMemeResponse: RedditMemeResponse = UserDefaults.savedRedditMemeResponse
+    @AppStorage("chosen_reddit_memeZ") private var subreddit: IdentifiableString = allMemeSubreddits.first!
     
     @State private var isBusy = false
     @State private var showDialog = false
@@ -18,12 +62,107 @@ struct RedditScrapperView: View {
     @State private var alertDescription = ""
     
     var body: some View {
+        RedditView(
+            redditMemeResponse: $redditMemeResponse,
+            subreddit: $subreddit,
+            allCases: Array(allMemeSubreddits),
+            isBusy: $isBusy,
+            showDialog: $showDialog,
+            error: $error,
+            alertText: $alertText,
+            alertDescription: $alertDescription,
+            buttonAction: getNewImage
+        )
+    }
+    
+    func getNewImage() {
+        Task {
+            isBusy = true
+            
+            let result = await getRedditMeme(from: subreddit.string)
+            
+            switch result {
+            case .success(let newResponse):
+                self.error = nil
+                self.redditMemeResponse = newResponse
+                break
+            case .failure(let failure):
+                self.error = failure.localizedDescription
+                break
+            }
+            
+            isBusy = false
+        }
+    }
+}
+
+// ANIMAL ONLY
+struct RedditAnimalView: View {
+    @AppStorage("reddit_meme") private var redditMemeResponse: RedditMemeResponse = UserDefaults.savedRedditAnimalResponse
+    @AppStorage("chosen_reddit_meme") private var subreddit: IdentifiableString = allAnimalSubreddits.first!
+    
+    @State private var isBusy = false
+    @State private var showDialog = false
+    @State private var error: String?
+    @State private var alertText = ""
+    @State private var alertDescription = ""
+    
+    var body: some View {
+        RedditView(
+            redditMemeResponse: $redditMemeResponse,
+            subreddit: $subreddit,
+            allCases: Array(allAnimalSubreddits),
+            isBusy: $isBusy,
+            showDialog: $showDialog,
+            error: $error,
+            alertText: $alertText,
+            alertDescription: $alertDescription,
+            buttonAction: getNewImage
+        )
+    }
+    
+    func getNewImage() {
+        Task {
+            isBusy = true
+            
+            let result = await getRedditMeme(from: subreddit.string)
+            
+            switch result {
+            case .success(let newResponse):
+                self.error = nil
+                self.redditMemeResponse = newResponse
+                break
+            case .failure(let failure):
+                self.error = failure.localizedDescription
+                break
+            }
+            
+            isBusy = false
+        }
+    }
+}
+
+fileprivate struct RedditView: View {
+    @Binding var redditMemeResponse: RedditMemeResponse
+    @Binding var subreddit: IdentifiableString
+    
+    let allCases: [IdentifiableString]
+    
+    @Binding var isBusy: Bool
+    @Binding var showDialog: Bool
+    @Binding var error: String?
+    @Binding var alertText: String
+    @Binding var alertDescription: String
+    
+    var buttonAction: () -> Void
+    
+    var body: some View {
         VStack(spacing: 10) {
             HStack(alignment: .top) {
                 Picker(selection: self.$subreddit) {
-                    ForEach(allAnimalSubreddits, id: \.hashValue) {
-                        Text($0.capitalized)
-                            .tag($0.hashValue)
+                    ForEach(self.allCases) { element in
+                        Text(element.string.capitalized)
+                            .tag(element)
                     }
                 } label: {
                     Text("Chosen Subreddit")
@@ -59,7 +198,7 @@ struct RedditScrapperView: View {
                         }
                         showDialog = didSucess
                     }
-                    .frame(height: 500)
+                    .frame(height: 400)
             } else {
                 AsyncImage(url: URL(string: redditMemeResponse.url)) { image in
                     image
@@ -75,7 +214,7 @@ struct RedditScrapperView: View {
                             }
                             showDialog = didSucess
                         }
-                        .frame(height: 500)
+                        .frame(height: 400)
                 } placeholder: {
                     ProgressView()
                         .progressViewStyle(.circular)
@@ -83,7 +222,7 @@ struct RedditScrapperView: View {
                 }
             }
             
-            RefreshButton(isBusy: self.$isBusy, action: getNewImage)
+            RefreshButton(isBusy: self.$isBusy, action: self.buttonAction)
         }
         .padding()
         .alert(self.alertText, isPresented: self.$showDialog) {
@@ -94,26 +233,6 @@ struct RedditScrapperView: View {
             }
         } message: {
             Text(self.alertDescription)
-        }
-    }
-    
-    func getNewImage() {
-        Task {
-            isBusy = true
-            
-            let result = await getRedditMeme(from: subreddit)
-            
-            switch result {
-            case .success(let newResponse):
-                self.error = nil
-                self.redditMemeResponse = newResponse
-                break
-            case .failure(let failure):
-                self.error = failure.localizedDescription
-                break
-            }
-            
-            isBusy = false
         }
     }
 }

@@ -30,8 +30,6 @@ struct MyTabView: View {
             
             NavigationView {
                 RedditScrapperView()
-                    .navigationTitle("Photos")
-                    .navigationBarTitleDisplayMode(.inline)
             }
             .tabItem {
                 Label("Reddit", systemImage: "photo.stack.fill")

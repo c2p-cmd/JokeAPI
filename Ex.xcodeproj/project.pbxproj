@@ -55,6 +55,7 @@
 		00511CFE2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png in Resources */ = {isa = PBXBuildFile; fileRef = 00511CFD2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png */; };
 		0058ABA12A66A3010050FA96 /* RedditScrapperAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0058ABA02A66A3010050FA96 /* RedditScrapperAPI.swift */; };
 		0058ABA32A66BC3F0050FA96 /* CuteAnimalWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0058ABA22A66BC3F0050FA96 /* CuteAnimalWidget.swift */; };
+		00898D042A683CE8008EF693 /* RedditMemeWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00898D032A683CE8008EF693 /* RedditMemeWidget.swift */; };
 		0091D9972A5E961C002A281A /* MultiSelectionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0091D9962A5E961C002A281A /* MultiSelectionMenu.swift */; };
 		0091D99A2A5EBFD9002A281A /* HelperViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0091D9992A5EBFD9002A281A /* HelperViews.swift */; };
 		00A07F652A5D2F6B006FC4DB /* NASAApodResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A07F642A5D2F6B006FC4DB /* NASAApodResponse.swift */; };
@@ -144,6 +145,7 @@
 		00511CFD2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2023-06-04 at 16.04.08.png"; sourceTree = "<group>"; };
 		0058ABA02A66A3010050FA96 /* RedditScrapperAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditScrapperAPI.swift; sourceTree = "<group>"; };
 		0058ABA22A66BC3F0050FA96 /* CuteAnimalWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuteAnimalWidget.swift; sourceTree = "<group>"; };
+		00898D032A683CE8008EF693 /* RedditMemeWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditMemeWidget.swift; sourceTree = "<group>"; };
 		0091D9962A5E961C002A281A /* MultiSelectionMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectionMenu.swift; sourceTree = "<group>"; };
 		0091D9992A5EBFD9002A281A /* HelperViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperViews.swift; sourceTree = "<group>"; };
 		00A07F642A5D2F6B006FC4DB /* NASAApodResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAApodResponse.swift; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 				00134F2B2A514F6A0091D6FD /* SpeedWidget.swift */,
 				00A07F6A2A5D4416006FC4DB /* NASAApodWidget.swift */,
 				0058ABA22A66BC3F0050FA96 /* CuteAnimalWidget.swift */,
+				00898D032A683CE8008EF693 /* RedditMemeWidget.swift */,
 				00BDAE1B2A627805002CFD69 /* CustomPictureWidget.swift */,
 			);
 			path = Widgets;
@@ -500,6 +503,7 @@
 				00E23D7D2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */,
 				004D9B392A4D98F100199886 /* HTTPAnimalPictureWidget.swift in Sources */,
 				00511CFC2A2C961200D1FD13 /* Request.swift in Sources */,
+				00898D042A683CE8008EF693 /* RedditMemeWidget.swift in Sources */,
 				0058ABA32A66BC3F0050FA96 /* CuteAnimalWidget.swift in Sources */,
 				003BD2692A4D72B3009FDFAC /* MyIntents.swift in Sources */,
 				004D9B402A4D9E5600199886 /* NewConfigIntent.swift in Sources */,

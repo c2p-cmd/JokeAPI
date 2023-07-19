@@ -17,14 +17,24 @@ let jokeCategories: Set<IdentifiableString> = Set([
     IdentifiableString(string: "Programming")
 ])
 
-let allAnimalSubreddits: [String] = [
+let allAnimalSubreddits: Set<IdentifiableString> = Set([
     "cute",
     "animal",
     "animalsbeingderps",
     "cuteanimals",
     "cuteanimalstogether",
     "cuteanimalflufffluffs"
-]
+].map { IdentifiableString(string: $0) })
+
+let allMemeSubreddits: Set<IdentifiableString> = Set([
+    "memes",
+    "meme",
+    "cleanmemes",
+    "bikinibottomtwitter",
+    "historymemes",
+    "ComedyCemetery",
+    "wholesomememes"
+].map { IdentifiableString(string: $0) })
 
 // MARK: - Loading the config.plist
 var configPlist: NSDictionary = {
