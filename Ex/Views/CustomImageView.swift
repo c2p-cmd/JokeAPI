@@ -13,7 +13,7 @@ struct CustomImageView: View {
     var buttonAction: (() -> Void)?
     
     @State private var images: [UIImage] = []
-    @State private var pickedItems: [PhotosPickerItem] = []
+    @State private var pickedItems: PhotosPickerItem? = nil
     @State private var error: String?
     
     var body: some View {
@@ -29,7 +29,7 @@ struct CustomImageView: View {
             Spacer()
             
             PhotosPicker(
-                "Choose an image (or images) to show on widgets",
+                "Choose an image to show on widgets",
                 selection: self.$pickedItems,
                 matching: .images
             )
@@ -40,7 +40,7 @@ struct CustomImageView: View {
             }
             
             if self.images.isEmpty {
-                Text("No Images chosen")
+                Text("No Image is chosen")
             } else if images.count == 1 {
                 Image(uiImage: images[0])
                     .resizable()
@@ -80,42 +80,34 @@ struct CustomImageView: View {
         }
         .onAppear {
             self.error = nil
-            UIImage.loadImages(onSuccess: { savedImages in self.images = savedImages }, onError: nil)
-        }
-        .onChange(of: self.pickedItems) { (items: [PhotosPickerItem]) in
-            if items.isEmpty {
-                return
+            UIImage.loadImage { savedImage in
+                self.images = [savedImage]
             }
-            
-            let lastIndex = items.count - 1
-            for (itemIndex, photoPickerItem) in items.enumerated() {
-                photoPickerItem.loadTransferable(type: Data.self) { (result: Result<Data?, Error>) in
-                    
-                    switch result {
-                    case .success(let data):
-                        DispatchQueue.main.async {
-                            if let data {
-                                self.error = nil
-                                if let image = UIImage(data: data) {
-                                    images.append(image)
-                                    
-                                    if itemIndex == lastIndex {
-                                        self.pickedItems.removeAll()
-                                        UIImage.saveImages(self.images)
-                                        WidgetCenter.shared.reloadTimelines(ofKind: "Custom Picture Widget")
-                                    }
-                                } else {
-                                    print("Issue")
+            // UIImage.loadImages(onSuccess: { savedImages in self.images = savedImages }, onError: nil)
+        }
+        .onChange(of: self.pickedItems) { (photoPickerItem: PhotosPickerItem?) in
+            photoPickerItem?.loadTransferable(type: Data.self) { (result: Result<Data?, Error>) in
+                
+                switch result {
+                case .success(let data):
+                    DispatchQueue.main.async {
+                        if let data {
+                            self.error = nil
+                            if let image = UIImage(data: data) {
+                                withAnimation {
+                                    images = [image]
                                 }
                             } else {
-                                self.error = "No data found"
+                                print("Issue")
                             }
+                        } else {
+                            self.error = "No data found"
                         }
-                        break
-                    case .failure(let err):
-                        self.error = err.localizedDescription
-                        break
                     }
+                    break
+                case .failure(let err):
+                    self.error = err.localizedDescription
+                    break
                 }
             }
         }

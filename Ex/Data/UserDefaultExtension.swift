@@ -10,6 +10,21 @@ import Foundation
 // MARK: - APPSTORAGE to use
 let appStorage = UserDefaults(suiteName: "group.com.kidastudios.mygroup")!
 
+// MARK: - UserDefaults FlirtyLines
+extension UserDefaults {
+    static var defaultFlirtyLine: String {
+        "Are you a camera? Because every time I see you I smile"
+    }
+    
+    static var savedFlirtyLine: String {
+        appStorage.string(forKey: "flirty_line") ?? defaultFlirtyLine
+    }
+    
+    static func saveNewFlirtyLine(_ line: String) {
+        appStorage.setValue(line, forKey: "flirty_line")
+    }
+}
+
 // MARK: - UserDefaults RedditMemeResponse Extension
 extension UserDefaults {
     static var defaultRedditMemeResponse: RedditMemeResponse {

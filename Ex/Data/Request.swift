@@ -42,6 +42,42 @@ var configPlist: NSDictionary = {
     return NSDictionary(contentsOfFile: configPlistLink)!
 }()
 
+// MARK: - Pickup Lines API
+func getPickupLine(
+    completion: ((Result<String, Error>) -> Void)?
+) {
+    let urlString = [configPlist.value(forKey: "Pickupline Vercel API LINK") as! String, configPlist.value(forKey: "Pickupline Vercel API LINK") as! String].randomElement()!
+    
+    guard let url = URL(string: urlString) else {
+        completion?(.failure(URLError(.badURL)))
+        return
+    }
+    
+    let task = URLSession.shared.dataTask(with: url) { (data: Data?, response: URLResponse?, error: Error?) in
+        if let data = data {
+            if url.absoluteString.contains("vercel") {
+                do {
+                    let flirtyLine = try JSONDecoder().decode(FlirtyLineModel.self, from: data)
+                    completion?(.success(flirtyLine.pickup))
+                } catch {
+                    completion?(.failure(error))
+                }
+            } else {
+                let line = String(decoding: data, as: UTF8.self)
+                
+                completion?(.success(line))
+            }
+        }
+        
+        if let error {
+            completion?(.failure(error))
+        }
+    }
+    
+    task.resume()
+}
+
+
 // MARK: - Get MEME Image
 func getMeme(
     id: String,

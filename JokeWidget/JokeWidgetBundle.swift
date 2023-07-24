@@ -15,6 +15,8 @@ struct JokeWidgetBundle: WidgetBundle {
         
         QuoteWidget()
         
+        FlirtyLinesWidget()
+        
         CuteAnimalWidget()
         
         MemeWidget()

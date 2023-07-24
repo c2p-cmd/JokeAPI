@@ -20,50 +20,24 @@ struct PictureEntry: TimelineEntry {
 
 struct PictureProvider: TimelineProvider {
     func placeholder(in context: Context) -> PictureEntry {
-        PictureEntry()
+        PictureEntry(image: UIImage(systemName: "wind.circle.fill")!)
     }
     
     func getSnapshot(in context: Context, completion: @escaping (PictureEntry) -> Void) {
-        UIImage.loadImages { imagesArray in
-            completion(PictureEntry(image: imagesArray.randomElement()))
-        } onError: {
-#if DEBUG
-print($0)
-#endif
-            completion(PictureEntry())
+        UIImage.loadImage { savedImage in
+            guard savedImage == UIImage(systemName: "exclamationmark.triangle.fill")! else {
+                completion(PictureEntry(image: nil))
+                return
+            }
+            
+            completion(PictureEntry(image: savedImage))
         }
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<PictureEntry>) -> Void) {
-        UIImage.loadImages { (imageArray: [UIImage]) in
-            if imageArray.count == 1 {
-                let entries = [PictureEntry(image: imageArray.first)]
-                
-                let timeline = Timeline(entries: entries, policy: .atEnd)
-                completion(timeline)
-                return
-            }
+        getSnapshot(in: context) { entry in
+            let timeline = Timeline(entries: [entry], policy: .atEnd)
             
-            var entries = [PictureEntry]()
-            
-            for (hourOffset, image) in imageArray.enumerated() {
-                let components = DateComponents(hour: hourOffset)
-                let entryDate = Calendar.current.date(byAdding: components, to: .now)!
-                
-                let pictureEntry = PictureEntry(image: image, at: entryDate)
-                entries.append(pictureEntry)
-            }
-            
-            let timeline = Timeline(entries: entries, policy: .atEnd)
-            completion(timeline)
-        } onError: {
-            #if DEBUG
-            print($0)
-            #endif
-            
-            let entries = [PictureEntry()]
-            
-            let timeline = Timeline(entries: entries, policy: .atEnd)
             completion(timeline)
         }
     }

@@ -26,6 +26,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>SubscribeRegular.ttf</string>
+		<string>RAVIE.TTF</string>
 		<string>SubscribeShadowRegular.ttf</string>
 		<string>ComicKings.ttf</string>
 	</array>

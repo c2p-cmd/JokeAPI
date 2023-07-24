@@ -32,26 +32,24 @@ struct JokeProvider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         Task {
             let res = await getRandomJoke(of: [], type: .twopart, safeMode: true)
+            var entry = JokeEntry()
             
             switch res {
             case .success(let newJoke):
                 UserDefaults.saveNewJoke(newJoke)
-                let newJokeEntry = JokeEntry(joke: newJoke)
-                let nextReload = Calendar.current.date(
-                    byAdding: .hour, value: 1, to: newJokeEntry.date
-                )!
-                let policy: TimelineReloadPolicy = .after(nextReload)
-                completion(Timeline(entries: [newJokeEntry], policy: policy))
+                entry.joke = newJoke
                 break
             case .failure(_):
-                let newJokeEntry = JokeEntry(joke: UserDefaults.savedJoke)
-                let nextReload = Calendar.current.date(
-                    byAdding: .hour, value: 1, to: newJokeEntry.date
-                )!
-                let policy: TimelineReloadPolicy = .after(nextReload)
-                completion(Timeline(entries: [newJokeEntry], policy: policy))
+                entry.joke = UserDefaults.savedJoke
                 break
             }
+            
+            let components = DateComponents(hour: 1)
+            let nextReload = Calendar.current.date(
+                byAdding: components, to: entry.date
+            )!
+            let policy: TimelineReloadPolicy = .after(nextReload)
+            completion(Timeline(entries: [entry], policy: policy))
         }
     }
 }
