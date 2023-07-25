@@ -11,7 +11,7 @@ import SwiftUI
 struct QuoteEntry: TimelineEntry {
     let date: Date = .now
     var quoteResponse = UserDefaults.savedQuote
-    var bgChoice: QuoteBackground = .green
+    var bgChoice: QuoteBackground = .black
 }
 
 struct QuoteProvider: IntentTimelineProvider {

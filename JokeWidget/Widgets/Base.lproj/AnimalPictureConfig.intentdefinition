@@ -324,7 +324,7 @@
 					<key>INIntentParameterMetadata</key>
 					<dict>
 						<key>INIntentParameterMetadataDefaultValue</key>
-						<string>green</string>
+						<string>black</string>
 					</dict>
 					<key>INIntentParameterName</key>
 					<string>background</string>

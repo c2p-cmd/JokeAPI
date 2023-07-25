@@ -8,6 +8,13 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>numbersapi.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
 			<key>speedtest.tele2.net</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
@@ -29,6 +36,9 @@
 		<string>RAVIE.TTF</string>
 		<string>SubscribeShadowRegular.ttf</string>
 		<string>ComicKings.ttf</string>
+		<string>DigitalDisplayRegular.ttf</string>
+		<string>DS-DIGI.TTF</string>
+		<string>DS-DIGIB.TTF</string>
 	</array>
 </dict>
 </plist>

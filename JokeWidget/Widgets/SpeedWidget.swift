@@ -67,11 +67,11 @@ struct SpeedWidget_Placeholder: View {
     
     var body: some View {
         if widgetFamily == .systemMedium {
-            Image("mdb", bundle: .main)
+            Image("Speed WIDGETS SCREEN2", bundle: .main)
                 .resizable()
                 .ignoresSafeArea()
                 .scaledToFill()
-                .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 20)))
+                .frame(width: 370, height: 170, alignment: .center)
         } else {
             Image("xl lg sm", bundle: .main)
                 .resizable()
@@ -87,60 +87,63 @@ struct SpeedWidgetEntryView: View {
     
     @Environment(\.widgetFamily) var widgetFamily: WidgetFamily
     
-    func lockScreenWidgetView(_ text: String) -> some View {
-        HStack {
-            Text("\(text) \(entry.speed.widgetDescription())")
+    func modifyForiOS17(_ view: some View) -> some View {
+        if #available(iOS 17, macOS 14, *) {
+            return view.containerBackground(.blue, for: .widget)
+        } else {
+            return view.background(.blue)
         }
-        .monospaced()
-        .modifyForiOS17()
     }
     
-    func homescreenWidgetView(_ text: String) -> some View {
-        VStack(spacing: 21) {
-            VStack {
-                Text("\(text) \(entry.date.formatted(date: .omitted, time: .shortened))")
-                    .font(.system(size: 18.5, weight: .bold, design: .monospaced))
-                Text("Speed is \(entry.speed.widgetDescription())")
-                    .font(.system(size: 20, weight: .bold, design: .monospaced))
-            }
-            if #available(iOSApplicationExtension 17, macOSApplicationExtension 14, *) {
-                Button(intent: SpeedTestIntent()) {
-                    Image(systemName: "arrow.counterclockwise")
+    func lockScreenWidgetView(_ text: String) -> some View {
+        Text("\(text) \(entry.speed.widgetDescription())")
+            .font(.custom("DS-Digital", size: 17))
+            .bold()
+            .modifyForiOS17()
+    }
+    
+    func homescreenWidgetView() -> some View {
+        HStack(alignment: .center) {
+            Spacer()
+            VStack(alignment: .trailing, spacing: 5) {
+                Text("Download Speed")
+                    .font(.custom("DS-Digital", size: 17))
+                
+                Text(entry.speed.widgetDescription())
+                    .font(.custom("DS-Digital", size: 36))
+                
+                Text(entry.date.formatted(date: .omitted, time: .shortened))
+                    .font(.custom("DS-Digital", size: 19))
+                
+                if #available(iOSApplicationExtension 17, macOSApplicationExtension 14, *) {
+                    Button(intent: SpeedTestIntent()) {
+                        Image(systemName: "arrow.counterclockwise")
+                    }
                 }
             }
         }
+        .padding(.trailing, 25)
+        .bold()
+        .multilineTextAlignment(.trailing)
         .buttonStyle(.plain)
-        .monospaced(true)
         .foregroundStyle(.white)
         .modifyForiOS17(.blue)
     }
     
     var body: some View {
         switch self.widgetFamily {
-        case .systemSmall:
-            SpeedWidget_Placeholder()
-                .overlay {
-                    homescreenWidgetView("At")
-                        .font(.callout)
-                }
         case .systemMedium:
-            SpeedWidget_Placeholder()
-                .overlay {
-                    homescreenWidgetView("Hello it is")
-                        .font(.headline)
-                }
+            ZStack {
+                SpeedWidget_Placeholder()
+                homescreenWidgetView()
+            }
+            //.frame(width: 360, height: 169, alignment: .center)
         case .accessoryRectangular:
             lockScreenWidgetView("Speed is")
-                .font(.headline)
         case .accessoryInline:
             lockScreenWidgetView("& Speed is")
-                .font(.headline)
         default:
-            SpeedWidget_Placeholder()
-                .overlay {
-                    homescreenWidgetView("Hello it is")
-                        .font(.headline)
-                }
+            lockScreenWidgetView("& Speed is")
         }
     }
 }
@@ -158,26 +161,34 @@ struct SpeedTestWidget: Widget {
         .configurationDisplayName("Speed Test Widget")
         .description("This widget provides you the internet speed every hour.")
         .supportedFamilies([
-            .systemSmall,
+            // .systemSmall,
             .systemMedium,
             .accessoryRectangular,
-            .accessoryInline
+            // .accessoryInline
         ])
     }
 }
 
-//struct SpeedWidgetEntryView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 99.19883, units: .Mbps)))
-//            .previewContext(WidgetPreviewContext(family: .systemMedium))
-//        
-//        SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 99.19883, units: .Mbps)))
-//            .previewContext(WidgetPreviewContext(family: .systemSmall))
-//        
-//        SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 101, units: .Kbps)))
-//            .previewContext(WidgetPreviewContext(family: .accessoryInline))
-//        
-//        SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 101, units: .Kbps)))
-//            .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
-//    }
-//}
+struct SpeedWidgetEntryView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 99.19883, units: .Mbps)))
+                .previewContext(WidgetPreviewContext(family: .systemMedium))
+            
+            SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 99.19883, units: .Mbps)))
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
+            
+            SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 101, units: .Kbps)))
+                .previewContext(WidgetPreviewContext(family: .accessoryInline))
+            
+            SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 101, units: .Kbps)))
+                .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+        }
+        .onAppear {
+            for family in UIFont.familyNames.sorted() {
+                let names = UIFont.fontNames(forFamilyName: family)
+                print("Family: \(family) Font names: \(names)")
+            }
+        }
+    }
+}

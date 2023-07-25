@@ -42,14 +42,79 @@ var configPlist: NSDictionary = {
     return NSDictionary(contentsOfFile: configPlistLink)!
 }()
 
+// MARK: - NumberAPI DATE
+func getFactAboutDate(
+    month: Int,
+    day: Int,
+    completion: @escaping (String?, Error?) -> Void
+) {
+    let urlString = NumberAPI.date(month: month, day: day)
+    
+    guard let url = URL(string: urlString) else {
+        completion(nil, URLError(.badURL))
+        return
+    }
+    
+    numberAPIHelper(url, completion: completion)
+}
+
+// MARK: - NumberAPI Year
+func getFactAboutYear(
+    year: Int,
+    completion: @escaping (String?, Error?) -> Void
+) {
+    let urlString = NumberAPI.year(year)
+    
+    guard let url = URL(string: urlString) else {
+        completion(nil, URLError(.badURL))
+        return
+    }
+    
+    numberAPIHelper(url, completion: completion)
+}
+
+// MARK: - NumberAPI Number
+func getFactAboutNumber(
+    _ number: Int,
+    completion: @escaping (String?, Error?) -> Void
+) {
+    let urlString = NumberAPI.random(num: number)
+    
+    guard let url = URL(string: urlString) else {
+        completion(nil, URLError(.badURL))
+        return
+    }
+    
+    numberAPIHelper(url, completion: completion)
+}
+
+// MARK: - Number api helper
+fileprivate func numberAPIHelper(
+    _ url: URL,
+    completion: @escaping (String?, Error?) -> Void
+) {
+    let task = URLSession.shared.dataTask(with: url) { data, _, error in
+        if let data {
+            let fact = String(decoding: data, as: UTF8.self)
+            completion(fact, nil)
+        }
+        
+        if let error {
+            completion(nil, error)
+        }
+    }
+    
+    task.resume()
+}
+
 // MARK: - Pickup Lines API
 func getPickupLine(
-    completion: ((Result<String, Error>) -> Void)?
+    completion: @escaping (Result<String, Error>) -> Void
 ) {
     let urlString = [configPlist.value(forKey: "Pickupline Vercel API LINK") as! String, configPlist.value(forKey: "Pickupline Vercel API LINK") as! String].randomElement()!
     
     guard let url = URL(string: urlString) else {
-        completion?(.failure(URLError(.badURL)))
+        completion(.failure(URLError(.badURL)))
         return
     }
     
@@ -58,19 +123,19 @@ func getPickupLine(
             if url.absoluteString.contains("vercel") {
                 do {
                     let flirtyLine = try JSONDecoder().decode(FlirtyLineModel.self, from: data)
-                    completion?(.success(flirtyLine.pickup))
+                    completion(.success(flirtyLine.pickup))
                 } catch {
-                    completion?(.failure(error))
+                    completion(.failure(error))
                 }
             } else {
                 let line = String(decoding: data, as: UTF8.self)
                 
-                completion?(.success(line))
+                completion(.success(line))
             }
         }
         
         if let error {
-            completion?(.failure(error))
+            completion(.failure(error))
         }
     }
     
