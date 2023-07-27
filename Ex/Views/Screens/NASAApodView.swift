@@ -8,6 +8,22 @@
 import SwiftUI
 import WidgetKit
 
+struct NASAPhoto: Transferable {
+    static var transferRepresentation: some TransferRepresentation {
+        ProxyRepresentation(exporting: \.image)
+    }
+    
+    public var image: Image
+    public var title: String
+    public var message: String
+    
+    init(_ image: Image, from apodResponse: ApodResponse) {
+        self.image = image
+        self.title = apodResponse.title
+        self.message = apodResponse.explanation
+    }
+}
+
 struct NASAApodView: View {
     @AppStorage("nasa_apod") private var apodResponse: ApodResponse?
     
@@ -37,15 +53,18 @@ struct NASAApodView: View {
                     .font(.system(.headline, design: .rounded))
                 
                 AsyncImage(url: URL(string: apodResponse.url)) { imagePhase in
-                    imagePhase.resizable().saveImageContextMenu { (didSucess: Bool, error: String) in
-                        if didSucess {
-                            self.alertText = "Success!"
-                            self.alertDescription = "This image has been saved in your gallery!"
-                        } else {
-                            self.alertText = "Failed"
-                            self.alertDescription = "This image couldn't be saved in your gallery. \(error)"
-                        }
-                        self.isPresenting = didSucess
+                    VStack {
+                        imagePhase
+                            .resizable()
+                        
+                        let photo = NASAPhoto(imagePhase, from: apodResponse)
+                        
+                        ShareLink(
+                            item: photo,
+                            subject: Text(apodResponse.title),
+                            message: Text("Check out this picture from NASA!"),
+                            preview: SharePreview(apodResponse.title, image: photo)
+                        )
                     }
                 } placeholder: {
                     ProgressView()

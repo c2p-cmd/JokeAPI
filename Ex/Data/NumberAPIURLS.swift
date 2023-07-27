@@ -16,6 +16,10 @@ struct NumberAPI {
         "\(baseUrlString)/\(month)/\(day)/date/"
     }
     
+    static func date(formattedDate: String) -> String {
+        "\(baseUrlString)/\(formattedDate)/date/"
+    }
+    
     static func year(_ year: Int) -> String {
         "\(baseUrlString)/\(year)/year/"
     }

@@ -58,6 +58,20 @@ func getFactAboutDate(
     numberAPIHelper(url, completion: completion)
 }
 
+func getFactAboutDate(
+    formattedDate: String,
+    completion: @escaping (String?, Error?) -> Void
+) {
+    let urlString = NumberAPI.date(formattedDate: formattedDate)
+    
+    guard let url = URL(string: urlString) else {
+        completion(nil, URLError(.badURL))
+        return
+    }
+    
+    numberAPIHelper(url, completion: completion)
+}
+
 // MARK: - NumberAPI Year
 func getFactAboutYear(
     year: Int,
@@ -149,10 +163,12 @@ func getMeme(
     text: [String],
     completion: ((Result<UIImage, Error>) -> Void)?
 ) {
-    let size = "?width=800&height=800"
+    let size = "?width=800&height=800/"
     var urlString = configPlist.value(forKey: "MemeGen Link") as! String
     
     urlString.append("\(id)/\(text.joined()).png\(size)")
+    
+    print(urlString)
     
     guard let url = URL(string: urlString) else {
         completion?(.failure(URLError(.badURL)))
@@ -163,6 +179,10 @@ func getMeme(
         if let data = data,
            let uiImage = UIImage(data: data) {
             completion?(.success(uiImage))
+        }
+        
+        if let response = response as? HTTPURLResponse {
+            print(response.description)
         }
         
         if let error {

@@ -7,6 +7,18 @@
 
 import SwiftUI
 
+struct RedditPhoto: Transferable {
+    static var transferRepresentation: some TransferRepresentation {
+        ProxyRepresentation(exporting: \.image)
+    }
+    
+    public var image: Image
+    
+    init(_ image: Image) {
+        self.image = image
+    }
+}
+
 struct RedditScrapperView: View {
     enum RedditViewChoice: String {
         case meme, animal
@@ -184,37 +196,17 @@ fileprivate struct RedditView: View {
                 Text(error)
             }
             
-            if let image = redditMemeResponse.uiImage {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFit()
-                    .saveImageContextMenu { (didSucess: Bool, error: String) in
-                        if didSucess {
-                            self.alertText = "Success!"
-                            self.alertDescription = "This image has been saved in your gallery!"
-                        } else {
-                            self.alertText = "Failed"
-                            self.alertDescription = "This image couldn't be saved in your gallery. \(error)"
-                        }
-                        showDialog = didSucess
-                    }
-                    .frame(height: 400)
+            if let uiImage = redditMemeResponse.uiImage {
+                shareableImageView(
+                    image: Image(uiImage: uiImage),
+                    title: redditMemeResponse.title
+                )
             } else {
                 AsyncImage(url: URL(string: redditMemeResponse.url)) { image in
-                    image
-                        .resizable()
-                        .scaledToFit()
-                        .saveImageContextMenu { (didSucess: Bool, error: String) in
-                            if didSucess {
-                                self.alertText = "Success!"
-                                self.alertDescription = "This image has been saved in your gallery!"
-                            } else {
-                                self.alertText = "Failed"
-                                self.alertDescription = "This image couldn't be saved in your gallery. \(error)"
-                            }
-                            showDialog = didSucess
-                        }
-                        .frame(height: 400)
+                    shareableImageView(
+                        image: image,
+                        title: redditMemeResponse.title
+                    )
                 } placeholder: {
                     ProgressView()
                         .progressViewStyle(.circular)
@@ -233,6 +225,26 @@ fileprivate struct RedditView: View {
             }
         } message: {
             Text(self.alertDescription)
+        }
+    }
+    
+    private func shareableImageView(image: Image, title: String) -> some View {
+        VStack {
+            image
+                .resizable()
+                .scaledToFit()
+                .frame(height: 400)
+            
+            let redditPhoto = RedditPhoto(image)
+            
+            ShareLink(
+                item: redditPhoto,
+                subject: Text(title),
+                preview: SharePreview(
+                    "Check this out!",
+                    image: redditPhoto
+                )
+            )
         }
     }
 }

@@ -10,6 +10,21 @@ import Foundation
 // MARK: - APPSTORAGE to use
 let appStorage = UserDefaults(suiteName: "group.com.kidastudios.mygroup")!
 
+// MARK: - UserDefaults Date
+extension UserDefaults {
+    static var defaultFunFact: String {
+        "The word 'date' comes from the Greek word daktylos, meaning finger, because a date looks like the tip of a finger."
+    }
+    
+    static var savedFunFact: String {
+        appStorage.string(forKey: "date_fun_fact") ?? defaultFunFact
+    }
+    
+    static func saveNewFunFact(_ line: String) {
+        appStorage.setValue(line, forKey: "date_fun_fact")
+    }
+}
+
 // MARK: - UserDefaults FlirtyLines
 extension UserDefaults {
     static var defaultFlirtyLine: String {

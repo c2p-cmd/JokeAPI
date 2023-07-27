@@ -59,36 +59,49 @@ struct MyTabView: View {
 struct ContentView: View {
     var body: some View {
         NavigationStack {
-            VStack {
+            VStack(alignment: .center) {
                 Text("KIDA Entertainment!")
-                    .font(.system(.largeTitle, design: .rounded))
+                    .font(.system(.largeTitle, design: .rounded, weight: .heavy))
+                    .multilineTextAlignment(.center)
                 Text("One Stop Shop For Widget Entertainment!")
                     .font(.system(.headline, design: .rounded))
                 
                 Spacer()
                 
-                HStack(alignment: .bottom, spacing: 15) {
+                VStack(alignment: .center, spacing: 15) {
                     NavigationLink {
                         MyTabView()
                     } label: {
                         Label("Content", systemImage: "tablecells.fill")
                     }
+                    .clipShape(Circle())
+                    .labelStyle(.iconOnly)
+                    
+//                    NavigationLink {
+//                        MemeGenerator()
+//                    } label: {
+//                        Label("MemeGen", systemImage: "theatermask.and.paintbrush.fill")
+//                    }
                     
                     NavigationLink {
-                        MemeGenerator()
+                        NumberAPIView()
                     } label: {
-                        Label("MemeGen", systemImage: "theatermask.and.paintbrush.fill")
+                        Label("Number Fun Fact", systemImage: "number.square.fill")
                     }
-                    
-                    NavigationLink {
-                        CustomImageView(buttonAction: nil)
-                    } label: {
-                        Label("Widget Settings", systemImage: "gear.circle")
-                    }
+                    .clipShape(Circle())
+                    .labelStyle(.iconOnly)
+
+//                    NavigationLink {
+//                        CustomImageView(buttonAction: nil)
+//                    } label: {
+//                        Label("Widget Settings", systemImage: "gear.circle")
+//                    }
                 }
                 .buttonStyle(.borderedProminent)
                 .foregroundStyle(.bar)
                 .tint(.orange)
+                
+                Spacer()
             }
             .padding(.vertical, 30)
         }
