@@ -65,7 +65,7 @@ struct JokeEntryView_Placeholder: View {
         Image("FUNNY 1")
             .resizable()
             .scaledToFill()
-            .frame(width: 370, height: 169)
+            .frame(width: 370, height: 170)
     }
 }
 

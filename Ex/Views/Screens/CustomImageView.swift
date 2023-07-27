@@ -12,7 +12,7 @@ import WidgetKit
 struct CustomImageView: View {
     var buttonAction: (() -> Void)?
     
-    @State private var images: [UIImage] = []
+    @State private var image: UIImage? = nil
     @State private var pickedItems: PhotosPickerItem? = nil
     @State private var error: String?
     
@@ -39,35 +39,21 @@ struct CustomImageView: View {
                     .foregroundStyle(.primary)
             }
             
-            if self.images.isEmpty {
-                Text("No Image is chosen")
-            } else if images.count == 1 {
-                Image(uiImage: images[0])
+            if let image {
+                Image(uiImage: image)
                     .resizable()
                     .scaledToFit()
                     .background(.gray)
-                    .tag(images[0].hash)
                     .frame(height: 500)
             } else {
-                ScrollView(.horizontal) {
-                    LazyHStack {
-                        ForEach(self.images, id: \.self) {
-                            Image(uiImage: $0)
-                                .resizable()
-                                .scaledToFit()
-                                .background(.gray)
-                                .tag($0.hash)
-                        }
-                    }
-                }
-                .frame(height: 500)
+                Text("No Image Chosen")
             }
             Spacer()
             
             HStack(spacing: 25) {
                 Button("Reset Widget Image") {
                     UIImage.resetWidgetImage()
-                    self.images.removeAll()
+                    self.image = nil
                     WidgetCenter.shared.reloadTimelines(ofKind: "Custom Picture Widget")
                 }
                 .buttonStyle(.borderedProminent)
@@ -81,7 +67,7 @@ struct CustomImageView: View {
         .onAppear {
             self.error = nil
             UIImage.loadImage { savedImage in
-                self.images = [savedImage]
+                self.image = savedImage
             }
             // UIImage.loadImages(onSuccess: { savedImages in self.images = savedImages }, onError: nil)
         }
@@ -95,7 +81,9 @@ struct CustomImageView: View {
                             self.error = nil
                             if let image = UIImage(data: data) {
                                 withAnimation {
-                                    images = [image]
+                                    self.image = image.resizedForWidget
+                                    image.resizedForWidget.saveImage()
+                                    WidgetCenter.shared.reloadTimelines(ofKind: "Custom Picture Widget")
                                 }
                             } else {
                                 print("Issue")

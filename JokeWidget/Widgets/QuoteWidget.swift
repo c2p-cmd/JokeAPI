@@ -74,17 +74,17 @@ struct QuoteEntryView_Placeholder: View {
         self.choice = choice
     }
     
-    private func blackBoardChoice() -> String {
+    private var blackBoardChoice: String {
         switch self.choice {
-        case .black:
+        case .black, .unknown:
             return "BLACKBOARD2"
-        case .green, .unknown:
+        case .green:
             return "BLACKBOARD"
         }
     }
     
     var body: some View {
-        Image(blackBoardChoice())
+        Image(blackBoardChoice)
             .resizable()
             .scaledToFill()
             .frame(width: 370, height: 170)

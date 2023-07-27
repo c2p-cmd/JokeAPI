@@ -112,21 +112,16 @@ struct MemeEntryView: View {
                     .resizable()
                     .scaledToFill()
                     .padding(.horizontal, 10)
-                    .modifyForiOS17(.clear)
-                
-                Text(entry.title)
-                    .font(.system(
-                        size: 15,
-                        weight: .semibold,
-                        design: .rounded))
-                    .foregroundStyle(.black)
-                    .minimumScaleFactor(0.75)
+                    .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 20)))
+                    .frame(maxWidth: 360, maxHeight: 300)
             }.padding()
         }
+        .modifyForiOS17(.clear)
         .background {
             Image("Iarge")
                 .resizable()
                 .scaledToFill()
+                .frame(width: 370)
         }
     }
 }
