@@ -74,13 +74,26 @@ struct FlirtyLinesEntryView: View {
     }
     
     var text: some View {
-        Text(entry.pickup)
-            .font(.custom("SavoyeLetPlain", size: 30))
-            .shadow(radius: 1.0)
-            .multilineTextAlignment(.leading)
-            .foregroundStyle(.white)
-            .padding(.all, 15)
-            .minimumScaleFactor(0.75)
+        VStack {
+            Text(entry.pickup)
+                .font(.custom("SavoyeLetPlain", size: 30))
+                .shadow(radius: 1.0)
+                .multilineTextAlignment(.leading)
+                .foregroundStyle(.white)
+                .padding(.all, 15)
+                .minimumScaleFactor(0.75)
+            
+            if #available(iOSApplicationExtension 17, macOSApplicationExtension 14, *) {
+                HStack {
+                    Spacer()
+                    Button(intent: FlirtyLinesIntent()) {
+                        Image(systemName: "arrow.counterclockwise")
+                    }
+                    .buttonStyle(.plain)
+                    .foregroundStyle(.white)
+                }
+            }
+        }
     }
     
     var background: some View {
@@ -119,7 +132,7 @@ struct FlirtyLinesWidget: Widget {
 
 //struct FlirtyLinesEntryView_Previews: PreviewProvider {
 //    static let entry = FlirtyLineEntry()
-//    
+//
 //    static var previews: some View {
 //        FlirtyLinesEntryView(entry: entry)
 //            .previewContext(WidgetPreviewContext(family: .systemMedium))

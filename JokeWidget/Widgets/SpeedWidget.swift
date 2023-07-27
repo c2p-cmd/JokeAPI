@@ -11,6 +11,7 @@ import SwiftUI
 struct SpeedEntry: TimelineEntry {
     let date: Date = .now
     var speed: Speed = UserDefaults.savedSpeed
+    var ping: Int = UserDefaults.savedSpeedWithPing.0
 }
 
 struct SpeedTimelineProvider: TimelineProvider {
@@ -27,7 +28,7 @@ struct SpeedTimelineProvider: TimelineProvider {
             return
         }
         
-        let speedEntry = SpeedEntry(speed: UserDefaults.savedSpeed)
+        let speedEntry = SpeedEntry()
         completion(speedEntry)
     }
     
@@ -37,16 +38,22 @@ struct SpeedTimelineProvider: TimelineProvider {
     ) {
         Task {
             let downloadService: DownloadService = .shared
-            let result = await downloadService.test(for: url, in: 60)
+            let result = await downloadService.testWithPing(
+                for: url,
+                in: 60
+            )
             var speedEntry = SpeedEntry()
             
             switch result {
-            case .success(let newSpeed):
-                UserDefaults.saveNewSpeed(newSpeed)
+            case .success(let (newPing, newSpeed)):
+                UserDefaults.saveNewSpeedWithPing(ping: newPing, speed: newSpeed)
                 speedEntry.speed = newSpeed
+                speedEntry.ping = newPing
                 break
             case .failure(_):
-                speedEntry.speed = UserDefaults.savedSpeed
+                let (savedPing, savedSpeed) = UserDefaults.savedSpeedWithPing
+                speedEntry.speed = savedSpeed
+                speedEntry.ping = savedPing
                 break
             }
             
@@ -106,11 +113,14 @@ struct SpeedWidgetEntryView: View {
         HStack(alignment: .center) {
             Spacer()
             VStack(alignment: .trailing, spacing: 5) {
+                Text("Ping: \(entry.ping)")
+                    .font(.custom("DS-Digital", size: 21))
+                
                 Text("Download Speed")
-                    .font(.custom("DS-Digital", size: 17))
+                    .font(.custom("DS-Digital", size: 16.5))
                 
                 Text(entry.speed.widgetDescription())
-                    .font(.custom("DS-Digital", size: 36))
+                    .font(.custom("DS-Digital", size: 30))
                 
                 Text(entry.date.formatted(date: .omitted, time: .shortened))
                     .font(.custom("DS-Digital", size: 19))
@@ -137,11 +147,8 @@ struct SpeedWidgetEntryView: View {
                 SpeedWidget_Placeholder()
                 homescreenWidgetView()
             }
-            //.frame(width: 360, height: 169, alignment: .center)
         case .accessoryRectangular:
             lockScreenWidgetView("Speed is")
-        case .accessoryInline:
-            lockScreenWidgetView("& Speed is")
         default:
             lockScreenWidgetView("& Speed is")
         }
@@ -163,32 +170,27 @@ struct SpeedTestWidget: Widget {
         .supportedFamilies([
             // .systemSmall,
             .systemMedium,
-            .accessoryRectangular,
-            // .accessoryInline
+            .accessoryRectangular
         ])
     }
 }
 
 struct SpeedWidgetEntryView_Previews: PreviewProvider {
+    static let entry = SpeedEntry(speed: Speed(value: 99.1234, units: .Mbps), ping: 200)
+    
     static var previews: some View {
         Group {
-            SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 99.19883, units: .Mbps)))
+            SpeedWidgetEntryView(entry: entry)
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
-            
-            SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 99.19883, units: .Mbps)))
-                .previewContext(WidgetPreviewContext(family: .systemSmall))
-            
-            SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 101, units: .Kbps)))
-                .previewContext(WidgetPreviewContext(family: .accessoryInline))
             
             SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 101, units: .Kbps)))
                 .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
         }
         .onAppear {
-            for family in UIFont.familyNames.sorted() {
-                let names = UIFont.fontNames(forFamilyName: family)
-                print("Family: \(family) Font names: \(names)")
-            }
+//            for family in UIFont.familyNames.sorted() {
+//                let names = UIFont.fontNames(forFamilyName: family)
+//                print("Family: \(family) Font names: \(names)")
+//            }
         }
     }
 }
