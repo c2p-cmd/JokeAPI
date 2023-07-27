@@ -240,8 +240,9 @@ fileprivate struct RedditView: View {
             ShareLink(
                 item: redditPhoto,
                 subject: Text(title),
+                message: Text(title),
                 preview: SharePreview(
-                    "Check this out!",
+                    title,
                     image: redditPhoto
                 )
             )

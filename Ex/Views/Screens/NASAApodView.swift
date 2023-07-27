@@ -62,7 +62,7 @@ struct NASAApodView: View {
                         ShareLink(
                             item: photo,
                             subject: Text(apodResponse.title),
-                            message: Text("Check out this picture from NASA!"),
+                            message: Text(apodResponse.explanation),
                             preview: SharePreview(apodResponse.title, image: photo)
                         )
                     }
