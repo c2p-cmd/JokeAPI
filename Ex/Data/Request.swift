@@ -122,6 +122,28 @@ fileprivate func numberAPIHelper(
 }
 
 // MARK: - Pickup Lines API
+func getPickupLine() async -> Result<String, Error> {
+    let urlString = [configPlist.value(forKey: "Pickupline Vercel API LINK") as! String, configPlist.value(forKey: "Pickupline Vercel API LINK") as! String].randomElement()!
+    
+    guard let url = URL(string: urlString) else {
+        return .failure(URLError(.badURL))
+    }
+    
+    do {
+        let (data, _) = try await URLSession.shared.data(from: url)
+        
+        if url.absoluteString.contains("vercel") {
+            let flirtyLine = try JSONDecoder().decode(FlirtyLineModel.self, from: data)
+            return .success(flirtyLine.pickup)
+        } else {
+            let pickUpLine = String(decoding: data, as: UTF8.self)
+            return .success(pickUpLine)
+        }
+    } catch {
+        return .failure(error)
+    }
+}
+
 func getPickupLine(
     completion: @escaping (Result<String, Error>) -> Void
 ) {

@@ -39,22 +39,37 @@ struct JokeIntent: AppIntent {
     }
 }
 
-@available(iOS 16, *)
 struct SpeedTestIntent: AppIntent {
     static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "SpeedTestingIntent")
     
-    func perform() async throws -> some IntentResult & ReturnsValue {
+    func perform() async throws -> some IntentResult {
         let downloadService = DownloadService.shared
         
-        let res = await downloadService.test(for: url, in: 60)
+        let res = await downloadService.testWithPing(for: url, in: 60)
         
         switch res {
-        case .success(let speed):
-            UserDefaults.saveNewSpeed(speed)
-            return .result(value: speed.description)
-        case .failure(let err):
-            return .result(value: err.localizedDescription)
+        case .success(let (newPing, newSpeed)):
+            UserDefaults.saveNewSpeedWithPing(ping: newPing, speed: newSpeed)
+            return .result()
+        case .failure(_):
+            return .result()
         }
     }
 }
 
+
+struct FlirtyLinesIntent: AppIntent {
+    static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Flirty Lines Intent")
+    
+    func perform() async throws -> some IntentResult {
+        let result = await getPickupLine()
+        
+        switch result {
+        case .success(let newLine):
+            UserDefaults.saveNewFlirtyLine(newLine)
+            return .result()
+        case .failure(_):
+            return .result()
+        }
+    }
+}

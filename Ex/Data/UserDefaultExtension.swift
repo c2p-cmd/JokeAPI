@@ -112,6 +112,18 @@ extension UserDefaults {
         return speed
     }
     
+    static var savedSpeedWithPing: (Int, Speed) {
+        let speed = savedSpeed
+        let ping = appStorage.integer(forKey: "speed_ping")
+        
+        return (ping, speed)
+    }
+    
+    static func saveNewSpeedWithPing(ping: Int, speed: Speed) {
+        self.saveNewSpeed(speed)
+        appStorage.setValue(ping, forKey: "speed_ping")
+    }
+    
     static func saveNewSpeed(_ speed: Speed) {
         appStorage.set(speed.rawValue, forKey: "net_speed")
     }

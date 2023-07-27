@@ -21,6 +21,20 @@ class DownloadService: NSObject, SpeedService {
     
     private override init() { }
     
+    func testWithPing(for url: URL, in timeout: TimeInterval) async -> Result<(Int, Speed), Error> {
+        async let ping = url.ping(timeout: timeout)
+        async let result = self.test(for: url, in: timeout)
+        
+        do {
+            let pingMS = try await ping.get()
+            let speed = try await result.get()
+            
+            return .success((pingMS, speed))
+        } catch {
+            return .failure(error)
+        }
+    }
+    
     func test(
         for url: URL,
         in timeout: TimeInterval
