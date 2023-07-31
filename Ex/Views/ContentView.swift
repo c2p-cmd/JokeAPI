@@ -75,7 +75,6 @@ struct ContentView: View {
                         Label("Content", systemImage: "tablecells.fill")
                     }
                     .clipShape(Circle())
-                    .labelStyle(.iconOnly)
                     
 //                    NavigationLink {
 //                        MemeGenerator()
@@ -89,7 +88,13 @@ struct ContentView: View {
                         Label("Number Fun Fact", systemImage: "number.square.fill")
                     }
                     .clipShape(Circle())
-                    .labelStyle(.iconOnly)
+                    
+                    NavigationLink {
+                        AllWidgetsView()
+                    } label: {
+                        Label("All Widgets View", systemImage: "arrow.forward.circle")
+                    }
+                    .clipShape(Circle())
 
 //                    NavigationLink {
 //                        CustomImageView(buttonAction: nil)
@@ -97,6 +102,7 @@ struct ContentView: View {
 //                        Label("Widget Settings", systemImage: "gear.circle")
 //                    }
                 }
+                .labelStyle(.iconOnly)
                 .buttonStyle(.borderedProminent)
                 .foregroundStyle(.bar)
                 .tint(.orange)

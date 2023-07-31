@@ -6,6 +6,47 @@
 //
 
 import SwiftUI
+import WidgetKit
+
+struct GenericWidgetView<V1: View, V2: View>: View {
+    @ViewBuilder var backgroundImage: V1
+    @ViewBuilder var textView: V2
+    var widgetFamily: WidgetFamily = .systemMedium
+    
+    var body: some View {
+        ZStack {
+            backgroundImage
+                .scaledToFill()
+                .modifier(ModifyForWidgetViewFrame(widgetFamily: self.widgetFamily))
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+            
+            textView
+                .padding(.all, 15)
+        }
+        .modifier(ModifyForWidgetViewFrame(widgetFamily: self.widgetFamily))
+        .background(.clear)
+    }
+}
+
+struct ModifyForWidgetViewFrame: ViewModifier {
+    var widgetFamily: WidgetFamily = .systemMedium
+    
+    func body(content: Content) -> some View {
+        switch self.widgetFamily {
+        case .systemSmall:
+            content
+                .frame(width: 169, height: 169)
+        case .systemMedium:
+            content
+                .frame(width: 360, height: 169)
+        case .systemLarge:
+            content
+                .frame(width: 360, height: 376)
+        default:
+            content
+        }
+    }
+}
 
 struct WidgetView: View {
     @Binding var joke: String

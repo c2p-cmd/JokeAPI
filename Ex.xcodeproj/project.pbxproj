@@ -96,6 +96,8 @@
 		00E4B5882A4C64540064E63C /* QuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4B5872A4C64540064E63C /* QuoteView.swift */; };
 		00E4B58A2A4C6E580064E63C /* QuoteWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4B5892A4C6E580064E63C /* QuoteWidget.swift */; };
 		00F2F8BD2A515DDD00A2ADE5 /* SpeedTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2F8BC2A515DDD00A2ADE5 /* SpeedTestView.swift */; };
+		00F49BAC2A73C450008428F9 /* AllWidgetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F49BAB2A73C450008428F9 /* AllWidgetsView.swift */; };
+		00F49BAF2A73DD44008428F9 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F49BAE2A73DD44008428F9 /* Storage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -188,6 +190,8 @@
 		00E4B5872A4C64540064E63C /* QuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteView.swift; sourceTree = "<group>"; };
 		00E4B5892A4C6E580064E63C /* QuoteWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteWidget.swift; sourceTree = "<group>"; };
 		00F2F8BC2A515DDD00A2ADE5 /* SpeedTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTestView.swift; sourceTree = "<group>"; };
+		00F49BAB2A73C450008428F9 /* AllWidgetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWidgetsView.swift; sourceTree = "<group>"; };
+		00F49BAE2A73DD44008428F9 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +244,7 @@
 		0043377C2A339DBD004AF73F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				00F49BAD2A73DD29008428F9 /* AllWidgetsView */,
 				009CEBCC2A726FD500E3D2E7 /* Screens */,
 				0091D9982A5EBFC2002A281A /* HelperViews */,
 				0043377E2A339DBD004AF73F /* ContentView.swift */,
@@ -393,6 +398,15 @@
 			path = "subscribe-font";
 			sourceTree = "<group>";
 		};
+		00F49BAD2A73DD29008428F9 /* AllWidgetsView */ = {
+			isa = PBXGroup;
+			children = (
+				00F49BAB2A73C450008428F9 /* AllWidgetsView.swift */,
+				00F49BAE2A73DD44008428F9 /* Storage.swift */,
+			);
+			path = AllWidgetsView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -515,6 +529,7 @@
 				001CB1F62A67ED1200458B60 /* MemeGeneratorModels.swift in Sources */,
 				00BDAE1E2A627C17002CFD69 /* CustomImageView.swift in Sources */,
 				005048F52A6E95F200328710 /* FlirtyLineModel.swift in Sources */,
+				00F49BAC2A73C450008428F9 /* AllWidgetsView.swift in Sources */,
 				00134F2F2A5153610091D6FD /* ViewModifier_iOS17.swift in Sources */,
 				003BD26B2A4D81C2009FDFAC /* QuoteAPIModel.swift in Sources */,
 				00D004B62A65963500D51C7E /* JokeType.swift in Sources */,
@@ -539,6 +554,7 @@
 				0043377F2A339DBD004AF73F /* JokeView.swift in Sources */,
 				00F2F8BD2A515DDD00A2ADE5 /* SpeedTestView.swift in Sources */,
 				00E4B5882A4C64540064E63C /* QuoteView.swift in Sources */,
+				00F49BAF2A73DD44008428F9 /* Storage.swift in Sources */,
 				003BD2682A4D72B3009FDFAC /* MyIntents.swift in Sources */,
 				0058ABA12A66A3010050FA96 /* RedditScrapperAPI.swift in Sources */,
 				0091D99A2A5EBFD9002A281A /* HelperViews.swift in Sources */,

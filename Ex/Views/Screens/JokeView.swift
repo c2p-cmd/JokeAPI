@@ -10,8 +10,8 @@ import WidgetKit
 
 struct JokeView: View {
     @AppStorage("new_joke") private var joke: String = UserDefaults.savedJoke
-    @AppStorage("safe_mode") private var safeMode: Bool = true
-    @AppStorage("joke_type") private var jokeType: JokeType = .any
+    @State private var safeMode: Bool = true
+    @State private var jokeType: JokeType = .any
     
     @State private var isBusy = false
     @State private var error: String?

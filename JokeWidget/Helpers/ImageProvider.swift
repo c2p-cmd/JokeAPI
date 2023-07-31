@@ -40,22 +40,17 @@ func fetchNASAApod(
             fetchNASAImage(from: apodResponse, showTitle: showTitle ?? false, completion: completion)
             break
         case .failure(let error):
-            #if DEBUG
+#if DEBUG
             print(error.localizedDescription)
-            #endif
+#endif
             
-            if let apodResponse = UserDefaults.savedApod {
-                if let image = apodResponse.uiImage {
-                    let entry = NASAApodEntry(uiImage: image, title: apodResponse.title, showTitle: showTitle ?? true)
-                    completion(entry, false)
-                } else {
-                    fetchNASAImage(from: apodResponse, showTitle: showTitle ?? false, completion: completion)
-                }
-                return
+            let apodResponse = UserDefaults.savedApod
+            if let image = apodResponse.uiImage {
+                let entry = NASAApodEntry(uiImage: image, title: apodResponse.title, showTitle: showTitle ?? true)
+                completion(entry, false)
+            } else {
+                fetchNASAImage(from: apodResponse, showTitle: showTitle ?? false, completion: completion)
             }
-            
-            let entry = NASAApodEntry(uiImage: UIImage(named: "error")!, title: error.localizedDescription, showTitle: false)
-            completion(entry, true)
             break
         }
     }
@@ -69,11 +64,11 @@ fileprivate func fetchNASAImage(
     let url = URL(string: apodResponse.url)!
     
     let task = URLSession.shared.dataTask(with: url) { (data: Data?, response: URLResponse?, error: Error?) in
-        #if DEBUG
+#if DEBUG
         if let httpResponse = response as? HTTPURLResponse {
             print(httpResponse.debugDescription)
         }
-        #endif
+#endif
         
         if let data = data {
             guard let uiImage = UIImage(data: data) else {
@@ -86,9 +81,9 @@ fileprivate func fetchNASAImage(
         }
         
         if let error = error {
-            #if DEBUG
+#if DEBUG
             print(error.localizedDescription)
-            #endif
+#endif
             
             let entry = NASAApodEntry(uiImage: UIImage(named: "error")!, title: error.localizedDescription, showTitle: false)
             completion(entry, true)
@@ -111,12 +106,12 @@ func fetchAnimalImage(
         421, 422, 423, 424, 425, 426, 428, 429, 431, 451,
         500, 501, 502, 503, 504, 505, 506, 507, 508, 510, 511
     ]
-
+    
     var catUrl: URL {
         let statusCode = statusCodes.randomElement() ?? 100
         return URL(string: "https://http.cat/\(statusCode)")!
     }
-
+    
     var dogUrl: URL {
         let statusCode = statusCodes.randomElement() ?? 100
         return URL(string: "https://http.dog/\(statusCode).jpg")!
