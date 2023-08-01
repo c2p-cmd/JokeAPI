@@ -360,7 +360,7 @@ class FunFactAboutTodayView: ObservableObject, Identifiable {
         isBusy = true
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM-dd"
+        dateFormatter.dateFormat = "MM/dd"
         let formattedDate = dateFormatter.string(from: Date())
         
         getFactAboutDate(formattedDate: formattedDate) { (funFact: String?, _: Error?)  in

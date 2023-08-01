@@ -42,7 +42,7 @@ struct ModifyForWidgetViewFrame: ViewModifier {
                 .frame(width: 360, height: 169)
         case .systemLarge:
             content
-                .frame(width: 360, height: 380)
+                .frame(width: 360, height: 376)
         default:
             content
         }

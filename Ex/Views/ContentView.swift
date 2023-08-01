@@ -63,45 +63,24 @@ struct ContentView: View {
                 Text("KIDA Entertainment!")
                     .font(.system(.largeTitle, design: .rounded, weight: .heavy))
                     .multilineTextAlignment(.center)
-                Text("One Stop Shop For Widget Entertainment!")
-                    .font(.system(.headline, design: .rounded))
                 
                 Spacer()
                 
-                VStack(alignment: .center, spacing: 15) {
-                    NavigationLink {
-                        MyTabView()
-                    } label: {
-                        Label("Content", systemImage: "tablecells.fill")
-                    }
-                    .clipShape(Circle())
-                    
-//                    NavigationLink {
-//                        MemeGenerator()
-//                    } label: {
-//                        Label("MemeGen", systemImage: "theatermask.and.paintbrush.fill")
-//                    }
-                    
-                    NavigationLink {
-                        NumberAPIView()
-                    } label: {
-                        Label("Number Fun Fact", systemImage: "number.square.fill")
-                    }
-                    .clipShape(Circle())
+                VStack(alignment: .center, spacing: 25.0) {
+                    Text("Your One Stop Shop For Widget Entertainment!")
+                        .font(.system(size: 24, weight: .semibold, design: .rounded))
+                        .foregroundStyle(.black)
+                        .padding(.bottom, 55.0)
+                        .multilineTextAlignment(.center)
                     
                     NavigationLink {
                         AllWidgetsView()
                             .navigationBarBackButtonHidden(true)
                     } label: {
                         Label("All Widgets View", systemImage: "arrow.forward.circle")
+                            .foregroundStyle(.black)
                     }
                     .clipShape(Circle())
-
-//                    NavigationLink {
-//                        CustomImageView(buttonAction: nil)
-//                    } label: {
-//                        Label("Widget Settings", systemImage: "gear.circle")
-//                    }
                 }
                 .labelStyle(.iconOnly)
                 .buttonStyle(.borderedProminent)
@@ -111,7 +90,24 @@ struct ContentView: View {
                 Spacer()
             }
             .padding(.vertical, 30)
+            .padding(.horizontal, 10)
+            .background(backGround())
         }
+    }
+    
+    private func backGround() -> some View {
+        let gradient = LinearGradient(
+            colors: [.cyan, .blue],
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        
+        return Image("Main_BG")
+            .resizable()
+            .opacity(0.69)
+            .scaledToFill()
+            .ignoresSafeArea()
+            .background(gradient)
     }
 }
 

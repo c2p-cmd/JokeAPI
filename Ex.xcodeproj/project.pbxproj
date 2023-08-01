@@ -40,6 +40,8 @@
 		004860152A1B8A7800F3E6B4 /* ExApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004860142A1B8A7800F3E6B4 /* ExApp.swift */; };
 		004860192A1B8A7900F3E6B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004860182A1B8A7900F3E6B4 /* Assets.xcassets */; };
 		0048601C2A1B8A7900F3E6B4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0048601B2A1B8A7900F3E6B4 /* Preview Assets.xcassets */; };
+		004CA8492A793EEB005B4F07 /* GifImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004CA8482A793EEB005B4F07 /* GifImage.swift */; };
+		004CA8512A79455E005B4F07 /* add_to_home_screen_new.gif in Resources */ = {isa = PBXBuildFile; fileRef = 004CA8502A79455E005B4F07 /* add_to_home_screen_new.gif */; };
 		004D9B392A4D98F100199886 /* HTTPAnimalPictureWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B382A4D98F100199886 /* HTTPAnimalPictureWidget.swift */; };
 		004D9B3E2A4D99CD00199886 /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B3D2A4D99CD00199886 /* ImageProvider.swift */; };
 		004D9B402A4D9E5600199886 /* NewConfigIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B3F2A4D9E5600199886 /* NewConfigIntent.swift */; };
@@ -148,6 +150,8 @@
 		004860142A1B8A7800F3E6B4 /* ExApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExApp.swift; sourceTree = "<group>"; };
 		004860182A1B8A7900F3E6B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0048601B2A1B8A7900F3E6B4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		004CA8482A793EEB005B4F07 /* GifImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifImage.swift; sourceTree = "<group>"; };
+		004CA8502A79455E005B4F07 /* add_to_home_screen_new.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = add_to_home_screen_new.gif; sourceTree = "<group>"; };
 		004D9B382A4D98F100199886 /* HTTPAnimalPictureWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPAnimalPictureWidget.swift; sourceTree = "<group>"; };
 		004D9B3D2A4D99CD00199886 /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
 		004D9B3F2A4D9E5600199886 /* NewConfigIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConfigIntent.swift; sourceTree = "<group>"; };
@@ -257,6 +261,7 @@
 			children = (
 				00A07F742A5D7B85006FC4DB /* Config.plist */,
 				003BD2662A4D7194009FDFAC /* JokeWidgetExtension.entitlements */,
+				004CA8502A79455E005B4F07 /* add_to_home_screen_new.gif */,
 				00511CFD2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png */,
 				004860132A1B8A7800F3E6B4 /* Ex */,
 				00511CED2A2C960300D1FD13 /* JokeWidget */,
@@ -334,6 +339,7 @@
 			children = (
 				0091D9992A5EBFD9002A281A /* HelperViews.swift */,
 				001FB8C02A5FDE3B0020F69C /* ImageSaver.swift */,
+				004CA8482A793EEB005B4F07 /* GifImage.swift */,
 			);
 			path = HelperViews;
 			sourceTree = "<group>";
@@ -425,6 +431,8 @@
 				00511CF62A2C960500D1FD13 /* PBXTargetDependency */,
 			);
 			name = Ex;
+			packageProductDependencies = (
+			);
 			productName = Ex;
 			productReference = 004860112A1B8A7800F3E6B4 /* Ex.app */;
 			productType = "com.apple.product-type.application";
@@ -473,6 +481,8 @@
 				Base,
 			);
 			mainGroup = 004860082A1B8A7800F3E6B4;
+			packageReferences = (
+			);
 			productRefGroup = 004860122A1B8A7800F3E6B4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -493,6 +503,7 @@
 				00A6051F2A6FEE2D00AF5FD0 /* DigitalDisplayRegular.ttf in Resources */,
 				00D004AB2A652F7200D51C7E /* ComicKings.ttf in Resources */,
 				00A07F752A5D7B85006FC4DB /* Config.plist in Resources */,
+				004CA8512A79455E005B4F07 /* add_to_home_screen_new.gif in Resources */,
 				00A605222A6FF15D00AF5FD0 /* DS-DIGI.TTF in Resources */,
 				00D004B32A65618200D51C7E /* SubscribeRegular.ttf in Resources */,
 				00B799B12A6985D300F66EC5 /* RAVIE.TTF in Resources */,
@@ -527,6 +538,7 @@
 			files = (
 				00134F1C2A514D080091D6FD /* SpeedModel.swift in Sources */,
 				001CB1F62A67ED1200458B60 /* MemeGeneratorModels.swift in Sources */,
+				004CA8492A793EEB005B4F07 /* GifImage.swift in Sources */,
 				00BDAE1E2A627C17002CFD69 /* CustomImageView.swift in Sources */,
 				005048F52A6E95F200328710 /* FlirtyLineModel.swift in Sources */,
 				00F49BAC2A73C450008428F9 /* AllWidgetsView.swift in Sources */,
@@ -847,6 +859,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -877,6 +892,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

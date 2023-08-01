@@ -147,6 +147,6 @@ struct NumberAPIView: View {
     }
 }
 
-#Preview {
-    NumberAPIView()
-}
+//#Preview {
+//    NumberAPIView()
+//}
