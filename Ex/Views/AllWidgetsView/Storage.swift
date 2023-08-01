@@ -7,17 +7,18 @@
 
 import SwiftUI
 
-class JokeViews: ObservableObject {
+class JokeViews: ObservableObject, Identifiable {
     static let shared = JokeViews()
     
     private init() {
         self.getNewJoke()
     }
     
+    let id: UUID = UUID()
     @Published var savedJoke = UserDefaults.savedJoke
     var isBusy = false
     
-    func views() -> [some View] {
+    var views: [some View] {
         return [
             GenericWidgetView(backgroundImage: {
                 Image("FUNNY 1")
@@ -26,11 +27,7 @@ class JokeViews: ObservableObject {
                 Text(self.savedJoke)
                     .font(.system(size: 18, weight: .bold, design: .rounded))
             })
-        ].map {
-            $0.onTapGesture {
-                self.getNewJoke()
-            }
-        }
+        ]
     }
     
     private func getNewJoke() {
@@ -59,17 +56,18 @@ class JokeViews: ObservableObject {
     }
 }
 
-class QuoteViews: ObservableObject {
+class QuoteViews: ObservableObject, Identifiable {
     static let shared = QuoteViews()
     
     private init() {
         self.getNewQuote()
     }
     
+    let id: UUID = UUID()
     @Published var savedQuote = UserDefaults.savedQuote
     var isBusy = false
     
-    func views() -> [some View] {
+    var views: [some View] {
         let text = VStack {
             Text(savedQuote.content)
                 .multilineTextAlignment(.leading)
@@ -98,11 +96,7 @@ class QuoteViews: ObservableObject {
             }, textView: {
                 text
             })
-        ].map {
-            $0.onTapGesture {
-                self.getNewQuote()
-            }
-        }
+        ]
     }
     
     private func getNewQuote() {
@@ -131,7 +125,7 @@ class QuoteViews: ObservableObject {
     }
 }
 
-class SpeedTestViews: ObservableObject {
+class SpeedTestViews: ObservableObject, Identifiable {
     static let shared = SpeedTestViews()
     
     private init() {
@@ -141,12 +135,13 @@ class SpeedTestViews: ObservableObject {
         self.getNewSpeed()
     }
     
+    let id: UUID = UUID()
     @Published var savedSpeed: Speed
     @Published var pingMS: Int
     var isBusy = false
     
-    func views() -> [some View] {
-        [
+    var views: [some View] {
+        return [
             GenericWidgetView(backgroundImage: {
                 Image("Speed WIDGETS SCREEN2")
                     .resizable()
@@ -173,11 +168,7 @@ class SpeedTestViews: ObservableObject {
                 .buttonStyle(.plain)
                 .foregroundStyle(.white)
             })
-        ].map {
-            $0.onTapGesture {
-                self.getNewSpeed()
-            }
-        }
+        ]
     }
     
     private func getNewSpeed() {
@@ -207,7 +198,7 @@ class SpeedTestViews: ObservableObject {
     }
 }
 
-class FlirtyLineViews: ObservableObject {
+class FlirtyLineViews: ObservableObject, Identifiable {
     static let shared = FlirtyLineViews()
     
     private init() {
@@ -215,11 +206,12 @@ class FlirtyLineViews: ObservableObject {
         self.getNewFlirtyLine()
     }
     
+    let id: UUID = UUID()
     @Published var savedFlirtyLine: String
     var isBusy = false
     
-    func views() -> [some View] {
-        [
+    var views: [some View] {
+        return [
             GenericWidgetView(backgroundImage: {
                 Image("wp3515553")
                     .resizable()
@@ -234,11 +226,7 @@ class FlirtyLineViews: ObservableObject {
                     .foregroundStyle(.white)
                     .multilineTextAlignment(.leading)
             })
-        ].map {
-            $0.onTapGesture {
-                self.getNewFlirtyLine()
-            }
-        }
+        ]
     }
     
     private func getNewFlirtyLine() {
@@ -265,7 +253,7 @@ class FlirtyLineViews: ObservableObject {
     }
 }
 
-class NASApodView: ObservableObject {
+class NASApodView: ObservableObject, Identifiable {
     static let shared = NASApodView()
     
     private init() {
@@ -275,10 +263,11 @@ class NASApodView: ObservableObject {
         self.getApod()
     }
     
+    let id: UUID = UUID()
     @Published var apod: ApodResponse
     var isBusy = false
     
-    func views() -> [some View] {
+    var views: [some View] {
         let apodImage = AsyncImage(url: URL(string: apod.url)) {
             $0.resizable()
         } placeholder: {
@@ -312,11 +301,7 @@ class NASApodView: ObservableObject {
             }, textView: {
                 text
             }, widgetFamily: .systemLarge)
-        ].map {
-            $0.onTapGesture {
-                self.getApod()
-            }
-        }
+        ]
     }
     
     private func getApod() {
@@ -336,5 +321,181 @@ class NASApodView: ObservableObject {
                 break
             }
         }
+    }
+}
+
+class FunFactAboutTodayView: ObservableObject, Identifiable {
+    static let shared = FunFactAboutTodayView()
+    
+    private init() {
+        funFact = UserDefaults.savedFunFact
+        self.getFunFact()
+    }
+    
+    let id: UUID = UUID()
+    @Published var funFact: String
+    var isBusy = false
+    
+    var views: [some View] {
+        return [
+            GenericWidgetView(backgroundImage: {
+                Image("IMG_6838", bundle: .main)
+                    .resizable()
+                    .opacity(0.6)
+                    .blur(radius: 5)
+            }, textView: {
+                Text(self.funFact)
+                    .font(.system(size: 15, weight: .bold, design: .rounded))
+                    .foregroundStyle(.black)
+                    .multilineTextAlignment(.leading)
+            })
+        ]
+    }
+    
+    private func getFunFact() {
+        if isBusy {
+            return
+        }
+        
+        isBusy = true
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd"
+        let formattedDate = dateFormatter.string(from: Date())
+        
+        getFactAboutDate(formattedDate: formattedDate) { (funFact: String?, _: Error?)  in
+            self.isBusy = false
+            
+            if let funFact {
+                DispatchQueue.main.async {
+                    withAnimation {
+                        UserDefaults.saveNewFunFact(funFact)
+                        self.funFact = funFact
+                    }
+                }
+            }
+        }
+    }
+}
+
+class CuteAnimalView: ObservableObject, Identifiable {
+    static let shared = CuteAnimalView()
+    
+    private init() {
+        cuteAnimal = UserDefaults.savedRedditAnimalResponse
+        self.getCuteAnimal()
+    }
+    
+    let id: UUID = UUID()
+    @Published var cuteAnimal: RedditMemeResponse
+    var isBusy = false
+    
+    var views: [some View] {
+        let image = AsyncImage(url: URL(string: self.cuteAnimal.url)) {
+            $0.resizable()
+        } placeholder: {
+            if Bool.random() {
+                return Image("happy_dog").resizable()
+            } else {
+                return Image("black_cat").resizable()
+            }
+        }
+        
+        return [
+            GenericWidgetView(backgroundImage: {
+                image
+            }, textView: {
+                
+            }, widgetFamily: .systemSmall),
+            
+            GenericWidgetView(backgroundImage: {
+                image
+            }, textView: {
+                
+            }, widgetFamily: .systemMedium),
+            
+            GenericWidgetView(backgroundImage: {
+                image
+            }, textView: {
+                
+            }, widgetFamily: .systemLarge)
+        ]
+    }
+    
+    private func getCuteAnimal() {
+        if self.isBusy {
+            return
+        }
+        
+        isBusy = true
+        
+        Task {
+            let result = await getRedditMeme(from: allAnimalSubreddits.randomElement()!.string)
+            
+            switch result {
+            case .success(let newAnimalResponse):
+                DispatchQueue.main.async {
+                    withAnimation {
+                        UserDefaults.saveNewRedditAnimalResponse(newAnimalResponse)
+                        self.cuteAnimal = newAnimalResponse
+                    }
+                }
+                break
+            case .failure(_):
+                break
+            }
+        }
+    }
+}
+
+class HTTPAnimalView: Identifiable {
+    static let shared = HTTPAnimalView()
+    
+    private init() { }
+    
+    let id: UUID = UUID()
+    
+    var views: [some View] {
+        let statusCodes: [Int] = [
+            100, 101, 102, 103,
+            200, 201, 202, 203, 204, 206, 207,
+            300, 301, 302, 303, 304, 305, 307, 308,
+            400, 401, 402, 403, 404, 405, 406, 407, 408, 409,
+            410, 411, 412, 413, 414, 415, 416, 417, 418,
+            421, 422, 423, 424, 425, 426, 428, 429, 431, 451,
+            500, 501, 502, 503, 504, 505, 506, 507, 508, 510, 511
+        ]
+        
+        var catUrl: URL {
+            let statusCode = statusCodes.randomElement() ?? 100
+            return URL(string: "https://http.cat/\(statusCode)")!
+        }
+        
+        var dogUrl: URL {
+            let statusCode = statusCodes.randomElement() ?? 100
+            return URL(string: "https://http.dog/\(statusCode).jpg")!
+        }
+        
+        return [
+            GenericWidgetView(backgroundImage: {
+                AsyncImage(url: dogUrl) {
+                    $0.resizable()
+                } placeholder: {
+                    Image("102_d").resizable()
+                }
+            }, textView: {
+                
+            }, widgetFamily: .systemLarge, backgroundColor: .black),
+            
+            GenericWidgetView(backgroundImage: {
+                AsyncImage(url: catUrl) {
+                    $0.resizable()
+                } placeholder: {
+                    Image("102").resizable()
+                }
+            }, textView: {
+                
+            }, widgetFamily: .systemLarge, backgroundColor: .black)
+        ]
     }
 }

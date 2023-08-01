@@ -8,7 +8,7 @@
 import AppIntents
 
 struct QuoteIntent: AppIntent {
-    static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Set Quote To")
+    static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Fetch New Quote")
     
     func perform() async throws -> some IntentResult & ReturnsValue {
         let quoteResult = await getRandomQuote()
@@ -17,14 +17,14 @@ struct QuoteIntent: AppIntent {
         case .success(let quoteResponse):
             UserDefaults.saveNewQuote(quoteResponse)
             return .result(value: quoteResponse.content)
-        case .failure(let error):
-            return .result(value: error.localizedDescription)
+        case .failure(_):
+            return .result(value: UserDefaults.savedQuote.content)
         }
     }
 }
 
 struct JokeIntent: AppIntent {
-    static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Set Joke To")
+    static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Fetch New Joke")
     
     func perform() async throws -> some IntentResult & ReturnsValue {
         let jokeRes = await getRandomJoke(of: [], type: .twopart, safeMode: true)
@@ -33,16 +33,16 @@ struct JokeIntent: AppIntent {
         case .success(let newJoke):
             UserDefaults.saveNewJoke(newJoke)
             return .result(value: newJoke)
-        case .failure(let err):
-            return .result(value: err.localizedDescription)
+        case .failure(_):
+            return .result(value: UserDefaults.savedJoke)
         }
     }
 }
 
 struct SpeedTestIntent: AppIntent {
-    static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "SpeedTestingIntent")
+    static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Fetch Latest Download Speed")
     
-    func perform() async throws -> some IntentResult {
+    func perform() async throws -> some IntentResult & ReturnsValue {
         let downloadService = DownloadService.shared
         
         let res = await downloadService.testWithPing(for: url, in: 60)
@@ -50,26 +50,27 @@ struct SpeedTestIntent: AppIntent {
         switch res {
         case .success(let (newPing, newSpeed)):
             UserDefaults.saveNewSpeedWithPing(ping: newPing, speed: newSpeed)
-            return .result()
+            return .result(value: "At a ping of \(newPing) the speed is \(newSpeed.description)")
         case .failure(_):
-            return .result()
+            let (oldPing, oldSpeed) = UserDefaults.savedSpeedWithPing
+            return .result(value: "At a ping of \(oldPing) the speed is \(oldSpeed.description)")
         }
     }
 }
 
 
 struct FlirtyLinesIntent: AppIntent {
-    static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Flirty Lines Intent")
+    static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Flirt with me ;-)")
     
-    func perform() async throws -> some IntentResult {
+    func perform() async throws -> some IntentResult & ReturnsValue {
         let result = await getPickupLine()
         
         switch result {
         case .success(let newLine):
             UserDefaults.saveNewFlirtyLine(newLine)
-            return .result()
+            return .result(value: newLine)
         case .failure(_):
-            return .result()
+            return .result(value: UserDefaults.savedFlirtyLine)
         }
     }
 }

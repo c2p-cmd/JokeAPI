@@ -8,33 +8,51 @@
 import SwiftUI
 
 struct AllWidgetsView: View {
-    @ObservedObject private var joke = JokeViews.shared
-    @ObservedObject private var quotes = QuoteViews.shared
-    @ObservedObject private var speeds = SpeedTestViews.shared
-    @ObservedObject private var flirtyLines = FlirtyLineViews.shared
-    @ObservedObject private var nasaApod = NASApodView.shared
+    @StateObject private var joke = JokeViews.shared
+    @StateObject private var quotes = QuoteViews.shared
+    @StateObject private var speeds = SpeedTestViews.shared
+    @StateObject private var flirtyLines = FlirtyLineViews.shared
+    @StateObject private var nasaApod = NASApodView.shared
+    @StateObject private var cuteAnimal = CuteAnimalView.shared
+    private var httpAnimal = HTTPAnimalView.shared
+    
+    private let paddingHeight: CGFloat = 60.0
     
     var body: some View {
         List {
             // joke view
-            NonStickySection(joke.views(), "🤣 Joke Widgets")
-            .tag("Joke Widgets")
+            NonStickySection(joke.views, "🤣 Joke Widgets")
+                .padding(.bottom, paddingHeight)
+                .tag(joke.id)
             
             // quote view
-            NonStickySection(quotes.views(), "💬 Quote Widgets")
-            .tag("Quote Widgets")
+            NonStickySection(quotes.views, "💬 Quote Widgets")
+                .padding(.bottom, paddingHeight)
+                .tag(quotes.id)
             
             // speed test
-            NonStickySection(speeds.views(), "⚡️ Speed Test Widget")
-            .tag("Speed Test Widget")
+            NonStickySection(speeds.views, "⚡️ Speed Test Widget")
+                .padding(.bottom, paddingHeight)
+                .tag(speeds.id)
             
             // NASA views
-            NonStickySection(nasaApod.views(), "🔭 NASA Apod Widget", height: 450)
-            .tag("NASA Apod Widget")
+            NonStickySection(nasaApod.views, "🔭 NASA Apod Widget", height: 450)
+                .padding(.bottom, paddingHeight)
+                .tag(nasaApod.id)
             
             // flirty lines
-            NonStickySection(flirtyLines.views(), "😉 Flirty Lines Widget")
-            .tag("Flirty Lines Widget")
+            NonStickySection(flirtyLines.views, "😉 Flirty Lines Widget")
+                .padding(.bottom, paddingHeight)
+                .tag(flirtyLines.id)
+            
+            // cute animals
+            NonStickySection(cuteAnimal.views, "🐾 Cute Animals Widget", height: 450)
+                .padding(.bottom, paddingHeight)
+                .tag(cuteAnimal.id)
+            
+            // http cat or dog
+            NonStickySection(httpAnimal.views, "🥹 HTTP Cat or Dog Widget", height: 450)
+                .tag(httpAnimal.id)
         }
         .scrollIndicators(.automatic)
         .headerProminence(.standard)
@@ -86,8 +104,6 @@ struct NonStickySection<V: View>: View {
     }
 }
 
-struct AllWidgetView_Previews: PreviewProvider {
-    static var previews: some View {
-        AllWidgetsView()
-    }
-}
+#Preview("All Widget Views", body: {
+    AllWidgetsView()
+})

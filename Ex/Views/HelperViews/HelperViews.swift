@@ -12,6 +12,7 @@ struct GenericWidgetView<V1: View, V2: View>: View {
     @ViewBuilder var backgroundImage: V1
     @ViewBuilder var textView: V2
     var widgetFamily: WidgetFamily = .systemMedium
+    var backgroundColor: Color = .clear
     
     var body: some View {
         ZStack {
@@ -24,7 +25,7 @@ struct GenericWidgetView<V1: View, V2: View>: View {
                 .padding(.all, 15)
         }
         .modifier(ModifyForWidgetViewFrame(widgetFamily: self.widgetFamily))
-        .background(.clear)
+        .background(self.backgroundColor)
     }
 }
 
@@ -41,7 +42,7 @@ struct ModifyForWidgetViewFrame: ViewModifier {
                 .frame(width: 360, height: 169)
         case .systemLarge:
             content
-                .frame(width: 360, height: 376)
+                .frame(width: 360, height: 380)
         default:
             content
         }
