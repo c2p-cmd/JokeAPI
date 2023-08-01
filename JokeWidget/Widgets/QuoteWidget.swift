@@ -31,7 +31,7 @@ struct QuoteProvider: IntentTimelineProvider {
             return
         }
         
-        completion(QuoteEntry(quoteResponse: UserDefaults.savedQuote, bgChoice: configuration.background))
+        completion(QuoteEntry(bgChoice: configuration.background))
     }
     
     func getTimeline(
@@ -105,18 +105,21 @@ struct QuoteWidgetEntryView: View {
             Text("\(entry.quoteResponse.content)\n")
                 .font(.custom("Chalkduster", size: 18))
                 .multilineTextAlignment(.leading)
+                .transition(.slide)
             
             HStack {
                 Spacer()
                 Text("-\(entry.quoteResponse.author) ")
                     .multilineTextAlignment(.trailing)
                     .font(.custom("Chalkduster", size: 11.5))
+                    .transition(.push(from: .leading))
                 if #available(iOS 17, macOS 14, *) {
                     Spacer()
                     refreshButton
                 }
             }
         }
+        .maybeInvalidatableContent()
         .padding(.all, 15)
         .minimumScaleFactor(0.75)
         .shadow(radius: 10, x: 5)

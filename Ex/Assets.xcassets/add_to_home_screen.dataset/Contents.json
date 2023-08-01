@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "add_to_home_screen.gif",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

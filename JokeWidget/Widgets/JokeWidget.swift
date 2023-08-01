@@ -87,6 +87,8 @@ struct JokeWidgetEntryView : View {
             .multilineTextAlignment(.leading)
             .foregroundStyle(.white)
             .padding(.all, 15)
+            .transition(.push(from: .bottom))
+            .maybeInvalidatableContent()
     }
     
     func modifyForiOS17() -> some View {
@@ -139,6 +141,13 @@ struct JokeWidget: Widget {
         .description("This is a widget to feed you with joke every hour.")
     }
 }
+
+
+//#Preview("Somrhing", as: .systemMedium, widget: {
+//    JokeWidget()
+//}, timelineProvider: {
+//    JokeProvider()
+//})
 
 //struct JokeWidget_Previews: PreviewProvider {
 //    static var previews: some View {

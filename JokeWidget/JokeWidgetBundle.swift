@@ -23,7 +23,7 @@ struct JokeWidgetBundle: WidgetBundle {
         
         CuteAnimalWidget()
         
-        MemeWidget()
+//        MemeWidget()
         
         AnimalPictureWidget()
         

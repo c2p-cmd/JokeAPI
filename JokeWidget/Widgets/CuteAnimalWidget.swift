@@ -13,13 +13,21 @@ struct CuteAnimalEntry: TimelineEntry {
     var uiImage: UIImage
     var title: String
     
+    static func randomImage() -> UIImage {
+        if Bool.random() {
+            return UIImage(named: "happy_dog")!
+        } else {
+            return UIImage(named: "black_cat")!
+        }
+    }
+    
     init(date: Date = .now, uiImage: UIImage?, title: String = "Cute Paw!") {
         self.date = date
-        self.uiImage = uiImage ?? UIImage(systemName: "pawprint.circle.fill")!
+        self.uiImage = uiImage ?? Self.randomImage()
         self.title = title
     }
     
-    init(date: Date = .now, uiImage: UIImage = UIImage(systemName: "pawprint.circle.fill")!, title: String = "Cute Paw!") {
+    init(date: Date = .now, uiImage: UIImage = Self.randomImage(), title: String = "Cute Paw!") {
         self.date = date
         self.uiImage = uiImage
         self.title = title
@@ -45,7 +53,7 @@ struct CuteAnimalProvider: TimelineProvider {
             completion(entry)
         } else {
             fetchImage(from: URL(string: savedResponse.url)!) { newImage, didSuccess in
-                let uiImage = didSuccess ? newImage : UIImage(systemName: "pawprint.circle.fill")!
+                let uiImage = didSuccess ? newImage : CuteAnimalEntry.randomImage()
                 
                 let entry = CuteAnimalEntry(uiImage: uiImage, title: savedResponse.title)
                 
@@ -71,7 +79,7 @@ struct CuteAnimalProvider: TimelineProvider {
                     completion(timeline)
                 } else {
                     fetchImage(from: URL(string: newResponse.url)!) { newImage, didSuccess in
-                        let uiImage = didSuccess ? newImage : UIImage(systemName: "pawprint.circle.fill")!
+                        let uiImage = didSuccess ? newImage : CuteAnimalEntry.randomImage()
                         let entry = CuteAnimalEntry(uiImage: uiImage, title: newResponse.title)
                         
                         let timeline = Timeline(entries: [entry], policy: .after(reloadDate))

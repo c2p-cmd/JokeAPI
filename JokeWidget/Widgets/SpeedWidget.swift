@@ -10,8 +10,19 @@ import SwiftUI
 
 struct SpeedEntry: TimelineEntry {
     let date: Date = .now
-    var speed: Speed = UserDefaults.savedSpeed
-    var ping: Int = UserDefaults.savedSpeedWithPing.0
+    var speed: Speed
+    var ping: Int
+    
+    init() {
+        let (savedPing, savedSpeed) = UserDefaults.savedSpeedWithPing
+        self.speed = savedSpeed
+        self.ping = savedPing
+    }
+    
+    init(speed: Speed, ping: Int) {
+        self.speed = speed
+        self.ping = ping
+    }
 }
 
 struct SpeedTimelineProvider: TimelineProvider {
@@ -94,19 +105,11 @@ struct SpeedWidgetEntryView: View {
     
     @Environment(\.widgetFamily) var widgetFamily: WidgetFamily
     
-    func modifyForiOS17(_ view: some View) -> some View {
-        if #available(iOS 17, macOS 14, *) {
-            return view.containerBackground(.blue, for: .widget)
-        } else {
-            return view.background(.blue)
-        }
-    }
-    
     func lockScreenWidgetView(_ text: String) -> some View {
         Text("\(text) \(entry.speed.widgetDescription())")
             .font(.custom("DS-Digital", size: 17))
             .bold()
-            .modifyForiOS17()
+            .modifyForiOS17(.blue)
     }
     
     func homescreenWidgetView() -> some View {
@@ -115,12 +118,16 @@ struct SpeedWidgetEntryView: View {
             VStack(alignment: .trailing, spacing: 5) {
                 Text("Ping: \(entry.ping)")
                     .font(.custom("DS-Digital", size: 21))
+                    .contentTransition(.numericText())
+                    .maybeInvalidatableContent()
                 
                 Text("Download Speed")
                     .font(.custom("DS-Digital", size: 16.5))
                 
                 Text(entry.speed.widgetDescription())
                     .font(.custom("DS-Digital", size: 30))
+                    .contentTransition(.numericText())
+                    .maybeInvalidatableContent()
                 
                 Text(entry.date.formatted(date: .omitted, time: .shortened))
                     .font(.custom("DS-Digital", size: 19))
@@ -175,22 +182,32 @@ struct SpeedTestWidget: Widget {
     }
 }
 
-struct SpeedWidgetEntryView_Previews: PreviewProvider {
-    static let entry = SpeedEntry(speed: Speed(value: 99.1234, units: .Mbps), ping: 200)
-    
-    static var previews: some View {
-        Group {
-            SpeedWidgetEntryView(entry: entry)
-                .previewContext(WidgetPreviewContext(family: .systemMedium))
-            
-            SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 101, units: .Kbps)))
-                .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
-        }
-        .onAppear {
-//            for family in UIFont.familyNames.sorted() {
-//                let names = UIFont.fontNames(forFamilyName: family)
-//                print("Family: \(family) Font names: \(names)")
-//            }
-        }
-    }
+#Preview(as: .systemMedium) {
+    SpeedTestWidget()
+} timeline: {
+    return [
+        SpeedEntry(speed: Speed(value: 99.8, units: .Mbps), ping: 34),
+        SpeedEntry(speed: Speed(value: 91.8, units: .Mbps), ping: 54),
+        SpeedEntry(speed: Speed(value: 126.8, units: .Mbps), ping: 304)
+    ]
 }
+
+//struct SpeedWidgetEntryView_Previews: PreviewProvider {
+//    static let entry = SpeedEntry(speed: Speed(value: 99.1234, units: .Mbps), ping: 200)
+//    
+//    static var previews: some View {
+//        Group {
+//            SpeedWidgetEntryView(entry: entry)
+//                .previewContext(WidgetPreviewContext(family: .systemMedium))
+//            
+//            SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 101, units: .Kbps)))
+//                .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+//        }
+//        .onAppear {
+////            for family in UIFont.familyNames.sorted() {
+////                let names = UIFont.fontNames(forFamilyName: family)
+////                print("Family: \(family) Font names: \(names)")
+////            }
+//        }
+//    }
+//}

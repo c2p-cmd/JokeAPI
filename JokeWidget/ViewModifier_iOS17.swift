@@ -23,4 +23,12 @@ extension View {
     func modifyForiOS17<S>(_ style: S = .black) -> some View where S: ShapeStyle {
         self.modifier(ModifyForiOS17(style: style))
     }
+    
+    func maybeInvalidatableContent() -> some View {
+        if #available(iOS 17, macOS 14, *) {
+            return self.invalidatableContent()
+        } else {
+            return self
+        }
+    }
 }

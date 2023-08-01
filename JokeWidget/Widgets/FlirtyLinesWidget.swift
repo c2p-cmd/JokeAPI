@@ -76,12 +76,15 @@ struct FlirtyLinesEntryView: View {
     var text: some View {
         VStack {
             Text(entry.pickup)
-                .font(.custom("SavoyeLetPlain", size: 30))
+                .font(.custom("SnellRoundhand", size: 27))
+                .fontWeight(.bold)
                 .shadow(radius: 1.0)
                 .multilineTextAlignment(.leading)
                 .foregroundStyle(.white)
                 .padding(.all, 15)
                 .minimumScaleFactor(0.75)
+                .transition(.slide)
+                .maybeInvalidatableContent()
             
             if #available(iOSApplicationExtension 17, macOSApplicationExtension 14, *) {
                 HStack {
