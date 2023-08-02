@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MarqueeText
 
 struct AllWidgetsView: View {
     @State var showBottomSheet = false
@@ -19,6 +20,7 @@ struct AllWidgetsView: View {
     @StateObject private var funFactAboutToday = FunFactAboutTodayView.shared
     
     private var httpAnimal = HTTPAnimalView.shared
+    private let largeWidgetHeight = 520.0
     
     var body: some View {
         List {
@@ -47,7 +49,7 @@ struct AllWidgetsView: View {
             NonStickySection(
                 title: "🔭 NASA Apod Widget",
                 showing: nasaApod.views,
-                height: 450,
+                height: largeWidgetHeight,
                 showBottomSheet: $showBottomSheet
             ).tag(nasaApod.id)
             
@@ -62,7 +64,7 @@ struct AllWidgetsView: View {
             NonStickySection(
                 title: "🐾 Cute Animals Widget",
                 showing: cuteAnimal.views,
-                height: 450,
+                height: largeWidgetHeight,
                 showBottomSheet: $showBottomSheet
             ).tag(cuteAnimal.id)
             
@@ -77,7 +79,7 @@ struct AllWidgetsView: View {
             NonStickySection(
                 title: "🥹 HTTP Cat or Dog Widget",
                 showing: httpAnimal.views,
-                height: 450,
+                height: largeWidgetHeight,
                 showBottomSheet: $showBottomSheet
             ).tag(httpAnimal.id)
         }
@@ -113,7 +115,6 @@ struct BottomSheet: View {
             }
             .tint(.purple)
             .buttonStyle(.borderedProminent)
-            .clipShape(RoundedRectangle(cornerRadius: 15.0, style: .continuous))
         }
         .padding()
         .presentationDetents([.fraction(0.63)])
@@ -143,35 +144,60 @@ struct NonStickySection<V: View>: View {
         self.onTap = onTap
     }
     
+    private func font() -> UIFont {
+        // set rounded font
+        let fontSize = 27.0
+        let systemFont = UIFont.systemFont(ofSize: fontSize, weight: .heavy)
+        guard let descriptor = systemFont.fontDescriptor.withDesign(.rounded)
+        else {
+            return systemFont
+        }
+        return UIFont(descriptor: descriptor, size: fontSize)
+    }
+    
     var body: some View {
         VStack(spacing: 25.5) {
             HStack {
-                Text(self.textView)
+                if self.textView.count >= 22 {
+                    MarqueeText(
+                        text: self.textView,
+                        font: self.font(),
+                        leftFade: 2,
+                        rightFade: 2,
+                        startDelay: 2
+                    )
+                } else {
+                    Text(self.textView)
+                }
                 Spacer()
             }
+            .padding(.bottom, 15.0)
             
             if self.categoryViews.count == 1 {
-                self.categoryViews.first!
+                LazyHStack(alignment: .center, spacing: 20) {
+                    self.categoryViews.first!
+                }
             } else {
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(alignment: .center, spacing: 20) {
                         let indices: Range<Int> = self.categoryViews.indices
                         
                         ForEach(indices, id: \.self) {
-                            self.categoryViews[$0]
+                            categoryViews[$0]
+                                .onTapGesture {
+                                    withAnimation {
+                                        showBottomSheet.wrappedValue = true
+                                        onTap?()
+                                    }
+                                }
                         }
                     }
                 }
             }
         }
-        .padding(.bottom, self.paddingHeight)
+        .padding(.top, self.paddingHeight/2)
+        .padding(.bottom, self.paddingHeight/2)
         .frame(height: self.height)
-        .onTapGesture {
-            withAnimation {
-                showBottomSheet.wrappedValue = true
-                onTap?()
-            }
-        }
     }
 }
 

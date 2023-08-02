@@ -288,7 +288,7 @@ class NASApodView: ObservableObject, Identifiable {
                 apodImage
             }, textView: {
                 text
-            }, widgetFamily: .systemSmall),
+            }, widgetFamily: .systemLarge),
             
             GenericWidgetView(backgroundImage: {
                 apodImage
@@ -300,7 +300,7 @@ class NASApodView: ObservableObject, Identifiable {
                 apodImage
             }, textView: {
                 text
-            }, widgetFamily: .systemLarge)
+            }, widgetFamily: .systemSmall)
         ]
     }
     
@@ -406,7 +406,7 @@ class CuteAnimalView: ObservableObject, Identifiable {
                 image
             }, textView: {
                 
-            }, widgetFamily: .systemSmall),
+            }, widgetFamily: .systemLarge),
             
             GenericWidgetView(backgroundImage: {
                 image
@@ -418,7 +418,7 @@ class CuteAnimalView: ObservableObject, Identifiable {
                 image
             }, textView: {
                 
-            }, widgetFamily: .systemLarge)
+            }, widgetFamily: .systemSmall)
         ]
     }
     
@@ -455,47 +455,63 @@ class HTTPAnimalView: Identifiable {
     
     let id: UUID = UUID()
     
+    private let statusCodes: [Int] = [
+        100, 101, 102, 103,
+        200, 201, 202, 203, 204, 206, 207,
+        300, 301, 302, 303, 304, 305, 307, 308,
+        400, 401, 402, 403, 404, 405, 406, 407, 408, 409,
+        410, 411, 412, 413, 414, 415, 416, 417, 418,
+        421, 422, 423, 424, 425, 426, 428, 429, 431, 451,
+        500, 501, 502, 503, 504, 505, 506, 507, 508, 510, 511
+    ]
+    
+    private var catUrl: URL {
+        let statusCode = statusCodes.randomElement() ?? 100
+        return URL(string: "https://http.cat/\(statusCode)")!
+    }
+    
+    private var dogUrl: URL {
+        let statusCode = statusCodes.randomElement() ?? 100
+        return URL(string: "https://http.dog/\(statusCode).jpg")!
+    }
+    
+    private func image(asyncImage: Image) -> some View {
+        asyncImage.resizable().offset(x: -25.0)
+    }
+    
     var views: [some View] {
-        let statusCodes: [Int] = [
-            100, 101, 102, 103,
-            200, 201, 202, 203, 204, 206, 207,
-            300, 301, 302, 303, 304, 305, 307, 308,
-            400, 401, 402, 403, 404, 405, 406, 407, 408, 409,
-            410, 411, 412, 413, 414, 415, 416, 417, 418,
-            421, 422, 423, 424, 425, 426, 428, 429, 431, 451,
-            500, 501, 502, 503, 504, 505, 506, 507, 508, 510, 511
-        ]
-        
-        var catUrl: URL {
-            let statusCode = statusCodes.randomElement() ?? 100
-            return URL(string: "https://http.cat/\(statusCode)")!
-        }
-        
-        var dogUrl: URL {
-            let statusCode = statusCodes.randomElement() ?? 100
-            return URL(string: "https://http.dog/\(statusCode).jpg")!
-        }
-        
         return [
             GenericWidgetView(backgroundImage: {
-                AsyncImage(url: dogUrl) {
-                    $0.resizable()
-                } placeholder: {
+                AsyncImage(url: dogUrl, content: image, placeholder: {
                     Image("102_d").resizable()
-                }
+                })
             }, textView: {
                 
-            }, widgetFamily: .systemLarge, backgroundColor: .black),
+            }, widgetFamily: .systemLarge),
             
             GenericWidgetView(backgroundImage: {
-                AsyncImage(url: catUrl) {
-                    $0.resizable()
-                } placeholder: {
-                    Image("102").resizable()
-                }
+                AsyncImage(url: dogUrl, content: image, placeholder: {
+                    Image("102_d").resizable()
+                })
             }, textView: {
                 
-            }, widgetFamily: .systemLarge, backgroundColor: .black)
+            }, widgetFamily: .systemSmall),
+            
+            GenericWidgetView(backgroundImage: {
+                AsyncImage(url: catUrl, content: image, placeholder: {
+                    Image("102").resizable()
+                })
+            }, textView: {
+                
+            }, widgetFamily: .systemLarge),
+            
+            GenericWidgetView(backgroundImage: {
+                AsyncImage(url: catUrl, content: image, placeholder: {
+                    Image("102").resizable()
+                })
+            }, textView: {
+                
+            }, widgetFamily: .systemSmall)
         ]
     }
 }

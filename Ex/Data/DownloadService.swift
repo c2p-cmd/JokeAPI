@@ -55,6 +55,21 @@ class DownloadService: NSObject, SpeedService {
     func test(
         for url: URL,
         timeout: TimeInterval,
+        final: @escaping (Result<Speed, Error>) -> Void
+    ) {
+        self.final = final
+        self.task = URLSession(
+            configuration: sessionConfiguration(timeout: timeout),
+            delegate: self,
+            delegateQueue: OperationQueue.main
+        ).downloadTask(with: url)
+        print("Starting!")
+        self.task?.resume()
+    }
+    
+    func test(
+        for url: URL,
+        timeout: TimeInterval,
         current: @escaping (Speed, Speed) -> Void,
         final: @escaping (Result<Speed, Error>) -> Void
     ) {

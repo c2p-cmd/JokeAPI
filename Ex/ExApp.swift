@@ -13,6 +13,7 @@ struct ExApp: App {
         WindowGroup {
             ContentView()
                 .defaultAppStorage(appStorage)
+                .preferredColorScheme(.light)
 //                .onAppear {
 //                    for family in UIFont.familyNames.sorted() {
 //                        let names = UIFont.fontNames(forFamilyName: family)

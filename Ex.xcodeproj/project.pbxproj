@@ -59,6 +59,7 @@
 		00511CFE2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png in Resources */ = {isa = PBXBuildFile; fileRef = 00511CFD2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png */; };
 		0058ABA12A66A3010050FA96 /* RedditScrapperAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0058ABA02A66A3010050FA96 /* RedditScrapperAPI.swift */; };
 		0058ABA32A66BC3F0050FA96 /* CuteAnimalWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0058ABA22A66BC3F0050FA96 /* CuteAnimalWidget.swift */; };
+		00842AD32A7A76350016983C /* MarqueeText in Frameworks */ = {isa = PBXBuildFile; productRef = 00842AD22A7A76350016983C /* MarqueeText */; };
 		00898D042A683CE8008EF693 /* RedditMemeWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00898D032A683CE8008EF693 /* RedditMemeWidget.swift */; };
 		0091D9972A5E961C002A281A /* MultiSelectionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0091D9962A5E961C002A281A /* MultiSelectionMenu.swift */; };
 		0091D99A2A5EBFD9002A281A /* HelperViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0091D9992A5EBFD9002A281A /* HelperViews.swift */; };
@@ -203,6 +204,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00842AD32A7A76350016983C /* MarqueeText in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +434,7 @@
 			);
 			name = Ex;
 			packageProductDependencies = (
+				00842AD22A7A76350016983C /* MarqueeText */,
 			);
 			productName = Ex;
 			productReference = 004860112A1B8A7800F3E6B4 /* Ex.app */;
@@ -482,6 +485,7 @@
 			);
 			mainGroup = 004860082A1B8A7800F3E6B4;
 			packageReferences = (
+				00842AD12A7A76350016983C /* XCRemoteSwiftPackageReference "MarqueeText" */,
 			);
 			productRefGroup = 004860122A1B8A7800F3E6B4 /* Products */;
 			projectDirPath = "";
@@ -932,6 +936,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		00842AD12A7A76350016983C /* XCRemoteSwiftPackageReference "MarqueeText" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/joekndy/MarqueeText";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		00842AD22A7A76350016983C /* MarqueeText */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00842AD12A7A76350016983C /* XCRemoteSwiftPackageReference "MarqueeText" */;
+			productName = MarqueeText;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 004860092A1B8A7800F3E6B4 /* Project object */;
 }

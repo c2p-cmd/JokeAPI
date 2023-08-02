@@ -123,6 +123,10 @@ extension UserDefaults {
         return (ping, speed)
     }
     
+    static func saveNewPing(_ ping: Int) {
+        appStorage.setValue(ping, forKey: "speed_ping")
+    }
+    
     static func saveNewSpeedWithPing(ping: Int, speed: Speed) {
         self.saveNewSpeed(speed)
         appStorage.setValue(ping, forKey: "speed_ping")

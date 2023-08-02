@@ -75,6 +75,7 @@ struct ContentView: View {
                     
                     NavigationLink {
                         AllWidgetsView()
+                            .navigationTitle("All Widgets")
                             .navigationBarBackButtonHidden(true)
                     } label: {
                         Label("All Widgets View", systemImage: "arrow.forward.circle")

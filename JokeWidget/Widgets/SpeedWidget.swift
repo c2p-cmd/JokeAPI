@@ -27,7 +27,7 @@ struct SpeedEntry: TimelineEntry {
 
 struct SpeedTimelineProvider: TimelineProvider {
     func placeholder(in context: Context) -> SpeedEntry {
-        SpeedEntry()
+        SpeedEntry(speed: Speed(value: 0.0, units: .Mbps), ping: 0)
     }
     
     func getSnapshot(
@@ -47,6 +47,47 @@ struct SpeedTimelineProvider: TimelineProvider {
         in context: Context,
         completion: @escaping (Timeline<SpeedEntry>) -> Void
     ) {
+        Task {
+            let downloadService = DownloadService.shared
+            var speedEntry = SpeedEntry()
+            
+            let res = await url.ping(timeout: 60)
+            
+            switch res {
+            case .success(let ping):
+                UserDefaults.saveNewPing(ping)
+                speedEntry.ping = ping
+                break
+            case .failure(_):
+                speedEntry.ping = UserDefaults.savedSpeedWithPing.0
+                break
+            }
+            
+            downloadService.test(for: url, timeout: 60) { result in
+                switch result {
+                case .success(let newSpeed):
+                    UserDefaults.saveNewSpeed(newSpeed)
+                    speedEntry.speed = newSpeed
+                    break
+                case .failure(_):
+                    speedEntry.speed = UserDefaults.savedSpeed
+                    break
+                }
+                
+                let components = DateComponents(hour: 1)
+                let nextReloadDate = Calendar.current.date(
+                    byAdding: components, to: speedEntry.date
+                )!
+                let policy: TimelineReloadPolicy = .after(nextReloadDate)
+                let timeline = Timeline(entries: [speedEntry], policy: policy)
+                
+                completion(timeline)
+            }
+        }
+    }
+    
+    // old logic
+    private func asyncTimeline(completion: @escaping (Timeline<SpeedEntry>) -> Void) {
         Task {
             let downloadService: DownloadService = .shared
             let result = await downloadService.testWithPing(
@@ -106,31 +147,63 @@ struct SpeedWidgetEntryView: View {
     @Environment(\.widgetFamily) var widgetFamily: WidgetFamily
     
     func lockScreenWidgetView(_ text: String) -> some View {
-        Text("\(text) \(entry.speed.widgetDescription())")
+        let preview = entry.speed.value <= 0.0
+        
+        if preview {
+            return Text("\(text)\n----")
+                .contentTransition(.numericText())
+                .font(.custom("DS-Digital", size: 17))
+                .bold()
+                .modifyForiOS17(.blue)
+        }
+        
+        return Text("\(text)\n\(entry.speed.widgetDescription())")
+            .contentTransition(.numericText())
             .font(.custom("DS-Digital", size: 17))
             .bold()
             .modifyForiOS17(.blue)
     }
     
     func homescreenWidgetView() -> some View {
-        HStack(alignment: .center) {
+        let preview = entry.speed.value <= 0.0
+        
+        return HStack(alignment: .center) {
             Spacer()
             VStack(alignment: .trailing, spacing: 5) {
-                Text("Ping: \(entry.ping)")
-                    .font(.custom("DS-Digital", size: 21))
-                    .contentTransition(.numericText())
-                    .maybeInvalidatableContent()
+                if preview {
+                    Text("Ping: --")
+                        .font(.custom("DS-Digital", size: 21))
+                        .contentTransition(.numericText())
+                        .maybeInvalidatableContent()
+                } else {
+                    Text("Ping: \(entry.ping)")
+                        .font(.custom("DS-Digital", size: 21))
+                        .contentTransition(.numericText())
+                        .maybeInvalidatableContent()
+                }
                 
                 Text("Download Speed")
                     .font(.custom("DS-Digital", size: 16.5))
                 
-                Text(entry.speed.widgetDescription())
-                    .font(.custom("DS-Digital", size: 30))
-                    .contentTransition(.numericText())
-                    .maybeInvalidatableContent()
+                if preview {
+                    Text("----")
+                        .font(.custom("DS-Digital", size: 30))
+                        .contentTransition(.numericText())
+                        .maybeInvalidatableContent()
+                } else {
+                    Text(entry.speed.widgetDescription())
+                        .font(.custom("DS-Digital", size: 30))
+                        .contentTransition(.numericText())
+                        .maybeInvalidatableContent()
+                }
                 
-                Text(entry.date.formatted(date: .omitted, time: .shortened))
-                    .font(.custom("DS-Digital", size: 19))
+                if preview {
+                    Text("--")
+                        .font(.custom("DS-Digital", size: 19))
+                } else {
+                    Text(entry.date.formatted(date: .omitted, time: .shortened))
+                        .font(.custom("DS-Digital", size: 19))
+                }
                 
                 if #available(iOSApplicationExtension 17, macOSApplicationExtension 14, *) {
                     Button(intent: SpeedTestIntent()) {
@@ -186,7 +259,7 @@ struct SpeedTestWidget: Widget {
     SpeedTestWidget()
 } timeline: {
     return [
-        SpeedEntry(speed: Speed(value: 99.8, units: .Mbps), ping: 34),
+        SpeedEntry(speed: Speed(value: 0.0, units: .Mbps), ping: 34),
         SpeedEntry(speed: Speed(value: 91.8, units: .Mbps), ping: 54),
         SpeedEntry(speed: Speed(value: 126.8, units: .Mbps), ping: 304)
     ]
@@ -194,20 +267,14 @@ struct SpeedTestWidget: Widget {
 
 //struct SpeedWidgetEntryView_Previews: PreviewProvider {
 //    static let entry = SpeedEntry(speed: Speed(value: 99.1234, units: .Mbps), ping: 200)
-//    
+//
 //    static var previews: some View {
 //        Group {
 //            SpeedWidgetEntryView(entry: entry)
 //                .previewContext(WidgetPreviewContext(family: .systemMedium))
-//            
+//
 //            SpeedWidgetEntryView(entry: SpeedEntry(speed: Speed(value: 101, units: .Kbps)))
 //                .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
-//        }
-//        .onAppear {
-////            for family in UIFont.familyNames.sorted() {
-////                let names = UIFont.fontNames(forFamilyName: family)
-////                print("Family: \(family) Font names: \(names)")
-////            }
 //        }
 //    }
 //}

@@ -139,20 +139,19 @@ fileprivate func fetchAnimalImage(
     completion: @escaping (UIImage) -> ()
 ) {
     let dataTask = URLSession.shared.dataTask(with: url) { (data: Data?, response: URLResponse?, error: Error?) in
-        if let httpResponse = response as? HTTPURLResponse {
-            print(httpResponse.statusCode)
-            print(httpResponse.debugDescription)
-        }
+//        if let httpResponse = response as? HTTPURLResponse {
+//            print(httpResponse.statusCode)
+//            print(httpResponse.debugDescription)
+//        }
         
         if let error = error {
-            print(error.localizedDescription)
-            completion(UIImage(systemName: "wifi.exclamationmark")!)
+            completion(UIImage(named: Bool.random() ? "102_d" : "102")!.resizedForWidget)
             return
         }
         
         if let data = data {
             guard let animalImage = UIImage(data: data) else {
-                completion(UIImage(systemName: "wifi.exclamationmark")!)
+                completion(UIImage(named: Bool.random() ? "102_d" : "102")!.resizedForWidget)
                 return
             }
             completion(animalImage.resizedForWidget)

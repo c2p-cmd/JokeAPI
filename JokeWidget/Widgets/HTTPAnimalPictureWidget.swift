@@ -15,7 +15,7 @@ struct AnimalPictureEntry: TimelineEntry {
 
 struct NewAnimalPictureProvider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> AnimalPictureEntry {
-        AnimalPictureEntry()
+        AnimalPictureEntry(uiImage: UIImage(named: Bool.random() ? "102_d" : "102")!.resizedForWidget)
     }
     
     @available(iOSApplicationExtension 17, *)
@@ -54,7 +54,7 @@ struct NewAnimalPictureProvider: AppIntentTimelineProvider {
 
 struct AnimalPictureProvider: IntentTimelineProvider {
     func placeholder(in context: Context) -> AnimalPictureEntry {
-        AnimalPictureEntry()
+        AnimalPictureEntry(uiImage: UIImage(named: Bool.random() ? "102_d" : "102")!.resizedForWidget)
     }
     
     func getSnapshot(
@@ -152,7 +152,7 @@ struct AnimalPictureWidget: Widget {
 }
 
 struct AnimalPictureWidgetView_Preview: PreviewProvider {
-    static var entry = AnimalPictureEntry(uiImage: UIImage(named: "102.jpg")!)
+    static var entry = AnimalPictureEntry(uiImage: UIImage(named: Bool.random() ? "102_d" : "102")!)
     
     static var previews: some View {
         Group {

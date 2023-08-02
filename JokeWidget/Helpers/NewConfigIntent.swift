@@ -82,11 +82,11 @@ fileprivate func fetchAnimalImage(
         #endif
         
         guard let animalImage = UIImage(data: data) else {
-            return UIImage(systemName: "wifi.exclamationmark")!
+            return UIImage(named: Bool.random() ? "102_d" : "102")!
         }
         return animalImage
     } catch {
         print(error.localizedDescription)
-        return UIImage(systemName: "wifi.exclamationmark")!
+        return UIImage(named: Bool.random() ? "102_d" : "102")!
     }
 }

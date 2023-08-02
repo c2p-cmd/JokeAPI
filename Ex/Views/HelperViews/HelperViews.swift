@@ -12,7 +12,6 @@ struct GenericWidgetView<V1: View, V2: View>: View {
     @ViewBuilder var backgroundImage: V1
     @ViewBuilder var textView: V2
     var widgetFamily: WidgetFamily = .systemMedium
-    var backgroundColor: Color = .clear
     
     var body: some View {
         ZStack {
@@ -20,12 +19,18 @@ struct GenericWidgetView<V1: View, V2: View>: View {
                 .scaledToFill()
                 .modifier(ModifyForWidgetViewFrame(widgetFamily: self.widgetFamily))
                 .clipShape(RoundedRectangle(cornerRadius: 20))
+                .shadow(
+                    color: .black.opacity(0.15),
+                    radius: 5,
+                    x: 0,
+                    y: 5
+                )
             
             textView
                 .padding(.all, 15)
         }
         .modifier(ModifyForWidgetViewFrame(widgetFamily: self.widgetFamily))
-        .background(self.backgroundColor)
+        .background(.clear)
     }
 }
 
@@ -36,13 +41,13 @@ struct ModifyForWidgetViewFrame: ViewModifier {
         switch self.widgetFamily {
         case .systemSmall:
             content
-                .frame(width: 169, height: 169)
+                .frame(width: 164.3, height: 164.3, alignment: .leading)
         case .systemMedium:
             content
-                .frame(width: 360, height: 169)
+                .frame(width: 345, height: 162, alignment: .leading)
         case .systemLarge:
             content
-                .frame(width: 360, height: 376)
+                .frame(width: 345, height: 360, alignment: .leading)
         default:
             content
         }
