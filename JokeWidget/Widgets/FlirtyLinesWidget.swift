@@ -134,8 +134,8 @@ struct FlirtyLinesWidget: Widget {
         StaticConfiguration(
             kind: kind,
             provider: FlirtyLinesProvider()
-        ) {
-            FlirtyLinesEntryView(entry: $0)
+        ) { entry in
+            FlirtyLinesEntryView(entry: entry)
         }
         .configurationDisplayName("Flirty Lines Widget")
         .description("Get a new pickup line everyday!")

@@ -211,17 +211,28 @@ class FlirtyLineViews: ObservableObject, Identifiable {
     var isBusy = false
     
     var views: [some View] {
+        let bgGradient = LinearGradient(
+            colors: [
+                Color(red: 251 / 256, green: 87 / 256, blue: 113 / 256),
+                Color(red: 227 / 256, green: 64 / 256, blue: 82 / 256),
+                Color(red: 240 / 256, green: 42 / 256, blue: 63 / 256)
+            ],
+            startPoint: .bottom,
+            endPoint: .top
+        )
+        
+        let img = Image("wp3515553")
+            .offset(x: 135, y: 111)
+            .opacity(0.25)
+            .rotationEffect(.degrees(180-15))
+            .background(bgGradient)
+        
         return [
             GenericWidgetView(backgroundImage: {
-                Image("wp3515553")
-                    .resizable()
-                    .offset(y: 50)
-                    .opacity(0.33)
-                    .rotationEffect(.degrees(180))
-                    .background(.pink)
+                img
             }, textView: {
                 Text(self.savedFlirtyLine)
-                    .font(.custom("SavoyeLetPlain", size: 30))
+                    .font(.custom("CarryYou-Regular", size: 30))
                     .shadow(radius: 1.0)
                     .foregroundStyle(.white)
                     .multilineTextAlignment(.leading)
