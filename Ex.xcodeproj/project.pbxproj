@@ -61,6 +61,8 @@
 		0058ABA32A66BC3F0050FA96 /* CuteAnimalWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0058ABA22A66BC3F0050FA96 /* CuteAnimalWidget.swift */; };
 		00842AD32A7A76350016983C /* MarqueeText in Frameworks */ = {isa = PBXBuildFile; productRef = 00842AD22A7A76350016983C /* MarqueeText */; };
 		00898D042A683CE8008EF693 /* RedditMemeWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00898D032A683CE8008EF693 /* RedditMemeWidget.swift */; };
+		008C2AF92A7B918D0078EEB7 /* CarryYouRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 008C2AF82A7B918D0078EEB7 /* CarryYouRegular.ttf */; };
+		008C2AFA2A7B918D0078EEB7 /* CarryYouRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 008C2AF82A7B918D0078EEB7 /* CarryYouRegular.ttf */; };
 		0091D9972A5E961C002A281A /* MultiSelectionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0091D9962A5E961C002A281A /* MultiSelectionMenu.swift */; };
 		0091D99A2A5EBFD9002A281A /* HelperViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0091D9992A5EBFD9002A281A /* HelperViews.swift */; };
 		009CEBCB2A72645A00E3D2E7 /* FunFactAboutTodayWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009CEBCA2A72645A00E3D2E7 /* FunFactAboutTodayWidget.swift */; };
@@ -169,6 +171,7 @@
 		0058ABA02A66A3010050FA96 /* RedditScrapperAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditScrapperAPI.swift; sourceTree = "<group>"; };
 		0058ABA22A66BC3F0050FA96 /* CuteAnimalWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuteAnimalWidget.swift; sourceTree = "<group>"; };
 		00898D032A683CE8008EF693 /* RedditMemeWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditMemeWidget.swift; sourceTree = "<group>"; };
+		008C2AF82A7B918D0078EEB7 /* CarryYouRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CarryYouRegular.ttf; sourceTree = "<group>"; };
 		0091D9962A5E961C002A281A /* MultiSelectionMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectionMenu.swift; sourceTree = "<group>"; };
 		0091D9992A5EBFD9002A281A /* HelperViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperViews.swift; sourceTree = "<group>"; };
 		009CEBCA2A72645A00E3D2E7 /* FunFactAboutTodayWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunFactAboutTodayWidget.swift; sourceTree = "<group>"; };
@@ -401,6 +404,7 @@
 				00A6051E2A6FEE2D00AF5FD0 /* DigitalDisplayRegular.ttf */,
 				00B799B02A6985D300F66EC5 /* RAVIE.TTF */,
 				00D004AF2A65618200D51C7E /* SubscribeShadowRegular.ttf */,
+				008C2AF82A7B918D0078EEB7 /* CarryYouRegular.ttf */,
 				00D004B02A65618200D51C7E /* SubscribeRegular.ttf */,
 			);
 			path = "subscribe-font";
@@ -508,6 +512,7 @@
 				00D004AB2A652F7200D51C7E /* ComicKings.ttf in Resources */,
 				00A07F752A5D7B85006FC4DB /* Config.plist in Resources */,
 				004CA8512A79455E005B4F07 /* add_to_home_screen_new.gif in Resources */,
+				008C2AF92A7B918D0078EEB7 /* CarryYouRegular.ttf in Resources */,
 				00A605222A6FF15D00AF5FD0 /* DS-DIGI.TTF in Resources */,
 				00D004B32A65618200D51C7E /* SubscribeRegular.ttf in Resources */,
 				00B799B12A6985D300F66EC5 /* RAVIE.TTF in Resources */,
@@ -529,6 +534,7 @@
 				00511CF32A2C960500D1FD13 /* Assets.xcassets in Resources */,
 				00A605202A6FEE2D00AF5FD0 /* DigitalDisplayRegular.ttf in Resources */,
 				00D004B42A65618200D51C7E /* SubscribeRegular.ttf in Resources */,
+				008C2AFA2A7B918D0078EEB7 /* CarryYouRegular.ttf in Resources */,
 				00D004AC2A652F7200D51C7E /* ComicKings.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -76,8 +76,7 @@ struct FlirtyLinesEntryView: View {
     var text: some View {
         VStack {
             Text(entry.pickup)
-                .font(.custom("SnellRoundhand", size: 27))
-                .fontWeight(.bold)
+                .font(.custom("CarryYou-Regular", size: 30))
                 .shadow(radius: 1.0)
                 .multilineTextAlignment(.leading)
                 .foregroundStyle(.white)
@@ -100,11 +99,22 @@ struct FlirtyLinesEntryView: View {
     }
     
     var background: some View {
-        Image("wp3515553")
-            .offset(y: 50)
-            .opacity(0.33)
+        let bgGradient = LinearGradient(
+            colors: [
+                Color(red: 251 / 256, green: 87 / 256, blue: 113 / 256),
+                Color(red: 227 / 256, green: 64 / 256, blue: 82 / 256),
+                Color(red: 240 / 256, green: 42 / 256, blue: 63 / 256)
+            ],
+            startPoint: .bottom,
+            endPoint: .top
+        )
+        
+        return Image("wp3515553")
+            .offset(x: -55, y: 66)
+            .rotationEffect(.degrees(-15))
+            .opacity(0.25)
             .rotationEffect(.degrees(180))
-            .background(.pink)
+            .background(bgGradient)
     }
     
     func modifyForiOS17() -> some View {
