@@ -11,15 +11,15 @@ import SwiftUI
 struct SpeedEntry: TimelineEntry {
     let date: Date = .now
     var speed: Speed
-    var ping: Int
+    var ping: Int?
     
     init() {
-        let (savedPing, savedSpeed) = UserDefaults.savedSpeedWithPing
+        let (_, savedSpeed) = UserDefaults.savedSpeedWithPing
         self.speed = savedSpeed
-        self.ping = savedPing
+        self.ping = nil
     }
     
-    init(speed: Speed, ping: Int) {
+    init(speed: Speed, ping: Int?) {
         self.speed = speed
         self.ping = ping
     }
@@ -27,7 +27,7 @@ struct SpeedEntry: TimelineEntry {
 
 struct SpeedTimelineProvider: TimelineProvider {
     func placeholder(in context: Context) -> SpeedEntry {
-        SpeedEntry(speed: Speed(value: 0.0, units: .Mbps), ping: 0)
+        SpeedEntry(speed: Speed(value: 0.0, units: .Mbps), ping: nil)
     }
     
     func getSnapshot(
@@ -51,17 +51,17 @@ struct SpeedTimelineProvider: TimelineProvider {
             let downloadService = DownloadService.shared
             var speedEntry = SpeedEntry()
             
-            let res = await url.ping(timeout: 60)
+             // let res = await url.ping(timeout: 60)
             
-            switch res {
-            case .success(let ping):
-                UserDefaults.saveNewPing(ping)
-                speedEntry.ping = ping
-                break
-            case .failure(_):
-                speedEntry.ping = UserDefaults.savedSpeedWithPing.0
-                break
-            }
+//            switch res {
+//            case .success(let ping):
+//                UserDefaults.saveNewPing(ping)
+//                speedEntry.ping = ping
+//                break
+//            case .failure(_):
+//                speedEntry.ping = UserDefaults.savedSpeedWithPing.0
+//                break
+//            }
             
             downloadService.test(for: url, timeout: 60) { result in
                 switch result {
@@ -170,16 +170,18 @@ struct SpeedWidgetEntryView: View {
         return HStack(alignment: .center) {
             Spacer()
             VStack(alignment: .trailing, spacing: 5) {
-                if preview {
-                    Text("Ping: --")
-                        .font(.custom("DS-Digital", size: 21))
-                        .contentTransition(.numericText())
-                        .maybeInvalidatableContent()
-                } else {
-                    Text("Ping: \(entry.ping)")
-                        .font(.custom("DS-Digital", size: 21))
-                        .contentTransition(.numericText())
-                        .maybeInvalidatableContent()
+                if let ping = entry.ping {
+                    if preview {
+                        Text("Ping: --")
+                            .font(.custom("DS-Digital", size: 21))
+                            .contentTransition(.numericText())
+                            .maybeInvalidatableContent()
+                    } else {
+                        Text("Ping: \(ping)")
+                            .font(.custom("DS-Digital", size: 21))
+                            .contentTransition(.numericText())
+                            .maybeInvalidatableContent()
+                    }
                 }
                 
                 Text("Download Speed")

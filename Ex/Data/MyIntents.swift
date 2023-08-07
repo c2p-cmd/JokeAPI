@@ -11,7 +11,7 @@ import SwiftUI
 struct QuoteIntent: AppIntent {
     static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Fetch New Quote")
     
-    static var openAppWhenRun: Bool = true
+//    static var openAppWhenRun: Bool = true
     
     func perform() async throws -> some IntentResult & ReturnsValue {
         let quoteResult = await getRandomQuote()
@@ -29,7 +29,7 @@ struct QuoteIntent: AppIntent {
 struct JokeIntent: AppIntent {
     static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Fetch New Joke")
     
-    static var openAppWhenRun: Bool = true
+//    static var openAppWhenRun: Bool = true
     
     func perform() async throws -> some IntentResult & ReturnsValue {
         let jokeRes = await getRandomJoke(of: [], type: .twopart, safeMode: true)
@@ -47,7 +47,7 @@ struct JokeIntent: AppIntent {
 struct SpeedTestIntent: AppIntent {
     static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Fetch Latest Download Speed")
     
-    static var openAppWhenRun: Bool = true
+//    static var openAppWhenRun: Bool = true
     
     func perform() async throws -> some IntentResult & ReturnsValue {
         let downloadService = DownloadService.shared
@@ -69,7 +69,7 @@ struct SpeedTestIntent: AppIntent {
 struct FlirtyLinesIntent: AppIntent {
     static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Flirt with me ;-)")
     
-    static var openAppWhenRun: Bool = true
+//    static var openAppWhenRun: Bool = true
     
     func perform() async throws -> some IntentResult & ReturnsValue {
         let result = await getPickupLine()
@@ -87,7 +87,7 @@ struct FlirtyLinesIntent: AppIntent {
 struct HTTPAnimalIntent: AppIntent {
     static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "HTPP Status with picture of cat or dog")
     
-    static var openAppWhenRun: Bool = true
+//    static var openAppWhenRun: Bool = true
     
     @Parameter(title: "Choice between cat or dog")
     var animalChoice: AnimalChoice
@@ -106,7 +106,7 @@ struct HTTPAnimalIntent: AppIntent {
 struct CuteAnimalPictureIntent: AppIntent {
     static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Fetch a cute animal picture!")
     
-    static var openAppWhenRun: Bool = true
+//    static var openAppWhenRun: Bool = true
     
     func perform() async throws -> some IntentResult & ReturnsValue {
         let result = await getRedditMeme(from: allAnimalSubreddits.randomElement()!.string)

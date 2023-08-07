@@ -526,3 +526,61 @@ class HTTPAnimalView: Identifiable {
         ]
     }
 }
+
+class BhagvatGitaView: Identifiable {
+    static let shared = BhagvatGitaView()
+    
+    private init() {
+        self.bhagwatGitaResponse = getShlokas().randomElement()!
+    }
+    
+    let id: UUID = UUID()
+    let bhagwatGitaResponse: BhagvatGitaResponse
+    
+    var views: [some View] {
+        let brown = Color(red: 104/256, green: 63/256, blue: 17/256)
+        
+        let text = VStack {
+            Text(bhagwatGitaResponse.englishTranslation)
+                .multilineTextAlignment(.leading)
+                .font(.custom("handwriting-draft_free-version", size: 15))
+            
+            HStack {
+                Spacer()
+                Text("-\(bhagwatGitaResponse.englishAuthor)")
+                    .multilineTextAlignment(.trailing)
+                    .font(.custom("handwriting-draft_free-version", size: 12.5))
+                
+            }
+        }.foregroundStyle(brown)
+        
+        let textHindi = VStack {
+            Text(bhagwatGitaResponse.hindiTranslation)
+                .multilineTextAlignment(.leading)
+                .font(.custom("Devanagari Sangam MN", size: 15))
+            
+            HStack {
+                Spacer()
+                Text("-\(bhagwatGitaResponse.hindiAuthor)")
+                    .multilineTextAlignment(.trailing)
+                    .font(.custom("handwriting-draft_free-version", size: 12.5))
+            }
+        }.foregroundStyle(brown)
+        
+        return [
+            GenericWidgetView(backgroundImage: {
+                Image("bhagawatGita")
+                    .resizable()
+            }, textView: {
+                text
+            }, widgetFamily: .systemMedium),
+            
+            GenericWidgetView(backgroundImage: {
+                Image("bhagawatGita")
+                    .resizable()
+            }, textView: {
+                textHindi
+            }, widgetFamily: .systemMedium)
+        ]
+    }
+}

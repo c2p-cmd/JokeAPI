@@ -20,6 +20,7 @@ struct AllWidgetsView: View {
     @StateObject private var funFactAboutToday = FunFactAboutTodayView.shared
     
     private var httpAnimal = HTTPAnimalView.shared
+    private var bhagwatGita = BhagvatGitaView.shared
     private let largeWidgetHeight = 520.0
     
     var body: some View {
@@ -30,6 +31,13 @@ struct AllWidgetsView: View {
                 showing: joke.views,
                 showBottomSheet: $showBottomSheet
             ).tag(joke.id)
+            
+            // bhagwat gita
+            NonStickySection(
+                title: "🙏🏻 Bhagvat Gita Widget",
+                showing: bhagwatGita.views,
+                showBottomSheet: $showBottomSheet
+            ).tag(bhagwatGita.id)
             
             // quote view
             NonStickySection(

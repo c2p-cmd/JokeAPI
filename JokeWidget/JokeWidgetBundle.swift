@@ -13,6 +13,8 @@ struct JokeWidgetBundle: WidgetBundle {
     var body: some Widget {
         JokeWidget()
         
+        BhagvatGitaWidget()
+        
         QuoteWidget()
         
         SpeedTestWidget()

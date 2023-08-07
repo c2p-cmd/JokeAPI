@@ -109,12 +109,17 @@ struct FlirtyLinesEntryView: View {
             endPoint: .top
         )
         
-        return Image("wp3515553")
-            .offset(x: -55, y: 66)
-            .rotationEffect(.degrees(-15))
-            .opacity(0.25)
-            .rotationEffect(.degrees(180))
-            .background(bgGradient)
+        return ZStack {
+            Image("wp3515553")
+                .offset(x: -55, y: 66)
+                .opacity(1)
+                .rotationEffect(.degrees(180-15))
+                .background(bgGradient)
+            
+            RoundedRectangle(cornerRadius: 20)
+                .fill(bgGradient)
+                .opacity(0.75)
+        }
     }
     
     func modifyForiOS17() -> some View {
@@ -143,11 +148,11 @@ struct FlirtyLinesWidget: Widget {
     }
 }
 
-//struct FlirtyLinesEntryView_Previews: PreviewProvider {
-//    static let entry = FlirtyLineEntry()
-//
-//    static var previews: some View {
-//        FlirtyLinesEntryView(entry: entry)
-//            .previewContext(WidgetPreviewContext(family: .systemMedium))
-//    }
-//}
+struct FlirtyLinesEntryView_Previews: PreviewProvider {
+    static let entry = FlirtyLineEntry()
+
+    static var previews: some View {
+        FlirtyLinesEntryView(entry: entry)
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
+    }
+}

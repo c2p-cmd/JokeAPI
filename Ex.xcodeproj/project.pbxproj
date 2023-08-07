@@ -103,6 +103,14 @@
 		00F2F8BD2A515DDD00A2ADE5 /* SpeedTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2F8BC2A515DDD00A2ADE5 /* SpeedTestView.swift */; };
 		00F49BAC2A73C450008428F9 /* AllWidgetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F49BAB2A73C450008428F9 /* AllWidgetsView.swift */; };
 		00F49BAF2A73DD44008428F9 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F49BAE2A73DD44008428F9 /* Storage.swift */; };
+		00F5230A2A81008C0046576E /* BhagwatGitaResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F523092A81008C0046576E /* BhagwatGitaResponse.swift */; };
+		00F5230B2A81008C0046576E /* BhagwatGitaResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F523092A81008C0046576E /* BhagwatGitaResponse.swift */; };
+		00F5230D2A8103400046576E /* Shlokas.json in Resources */ = {isa = PBXBuildFile; fileRef = 00F5230C2A8103400046576E /* Shlokas.json */; };
+		00F5230E2A8103400046576E /* Shlokas.json in Resources */ = {isa = PBXBuildFile; fileRef = 00F5230C2A8103400046576E /* Shlokas.json */; };
+		00F523102A81043F0046576E /* BhagvatGitaWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F5230F2A81043F0046576E /* BhagvatGitaWidget.swift */; };
+		00F523112A81043F0046576E /* BhagvatGitaWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F5230F2A81043F0046576E /* BhagvatGitaWidget.swift */; };
+		00F523132A8108650046576E /* HandwritingDraft.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00F523122A8108650046576E /* HandwritingDraft.ttf */; };
+		00F523142A8108650046576E /* HandwritingDraft.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00F523122A8108650046576E /* HandwritingDraft.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -200,6 +208,10 @@
 		00F2F8BC2A515DDD00A2ADE5 /* SpeedTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTestView.swift; sourceTree = "<group>"; };
 		00F49BAB2A73C450008428F9 /* AllWidgetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWidgetsView.swift; sourceTree = "<group>"; };
 		00F49BAE2A73DD44008428F9 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		00F523092A81008C0046576E /* BhagwatGitaResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BhagwatGitaResponse.swift; sourceTree = "<group>"; };
+		00F5230C2A8103400046576E /* Shlokas.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Shlokas.json; sourceTree = "<group>"; };
+		00F5230F2A81043F0046576E /* BhagvatGitaWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BhagvatGitaWidget.swift; sourceTree = "<group>"; };
+		00F523122A8108650046576E /* HandwritingDraft.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HandwritingDraft.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +245,7 @@
 				001710F32A601642003D2071 /* RedditMemeResponse.swift */,
 				001CB1F52A67ED1200458B60 /* MemeGeneratorModels.swift */,
 				005048F42A6E95F200328710 /* FlirtyLineModel.swift */,
+				00F523092A81008C0046576E /* BhagwatGitaResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -246,6 +259,7 @@
 				004337812A339E87004AF73F /* UserDefaultExtension.swift */,
 				003BD2672A4D72B3009FDFAC /* MyIntents.swift */,
 				00D004B52A65963500D51C7E /* JokeType.swift */,
+				00F5230C2A8103400046576E /* Shlokas.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -392,6 +406,7 @@
 				00BDAE1B2A627805002CFD69 /* CustomPictureWidget.swift */,
 				00A605192A6E9BD100AF5FD0 /* FlirtyLinesWidget.swift */,
 				009CEBCA2A72645A00E3D2E7 /* FunFactAboutTodayWidget.swift */,
+				00F5230F2A81043F0046576E /* BhagvatGitaWidget.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -399,6 +414,7 @@
 		00D004AE2A65618200D51C7E /* subscribe-font */ = {
 			isa = PBXGroup;
 			children = (
+				00F523122A8108650046576E /* HandwritingDraft.ttf */,
 				00A605242A6FF6CB00AF5FD0 /* DS-DIGIB.TTF */,
 				00A605212A6FF15D00AF5FD0 /* DS-DIGI.TTF */,
 				00A6051E2A6FEE2D00AF5FD0 /* DigitalDisplayRegular.ttf */,
@@ -509,7 +525,9 @@
 				00A605252A6FF6CB00AF5FD0 /* DS-DIGIB.TTF in Resources */,
 				00D004B12A65618200D51C7E /* SubscribeShadowRegular.ttf in Resources */,
 				00A6051F2A6FEE2D00AF5FD0 /* DigitalDisplayRegular.ttf in Resources */,
+				00F5230D2A8103400046576E /* Shlokas.json in Resources */,
 				00D004AB2A652F7200D51C7E /* ComicKings.ttf in Resources */,
+				00F523132A8108650046576E /* HandwritingDraft.ttf in Resources */,
 				00A07F752A5D7B85006FC4DB /* Config.plist in Resources */,
 				004CA8512A79455E005B4F07 /* add_to_home_screen_new.gif in Resources */,
 				008C2AF92A7B918D0078EEB7 /* CarryYouRegular.ttf in Resources */,
@@ -529,10 +547,12 @@
 				00A605232A6FF15D00AF5FD0 /* DS-DIGI.TTF in Resources */,
 				00A605262A6FF6CB00AF5FD0 /* DS-DIGIB.TTF in Resources */,
 				00B799B22A6985D300F66EC5 /* RAVIE.TTF in Resources */,
+				00F5230E2A8103400046576E /* Shlokas.json in Resources */,
 				00D004B22A65618200D51C7E /* SubscribeShadowRegular.ttf in Resources */,
 				00A07F762A5D7B85006FC4DB /* Config.plist in Resources */,
 				00511CF32A2C960500D1FD13 /* Assets.xcassets in Resources */,
 				00A605202A6FEE2D00AF5FD0 /* DigitalDisplayRegular.ttf in Resources */,
+				00F523142A8108650046576E /* HandwritingDraft.ttf in Resources */,
 				00D004B42A65618200D51C7E /* SubscribeRegular.ttf in Resources */,
 				008C2AFA2A7B918D0078EEB7 /* CarryYouRegular.ttf in Resources */,
 				00D004AC2A652F7200D51C7E /* ComicKings.ttf in Resources */,
@@ -552,6 +572,7 @@
 				00BDAE1E2A627C17002CFD69 /* CustomImageView.swift in Sources */,
 				005048F52A6E95F200328710 /* FlirtyLineModel.swift in Sources */,
 				00F49BAC2A73C450008428F9 /* AllWidgetsView.swift in Sources */,
+				00F5230A2A81008C0046576E /* BhagwatGitaResponse.swift in Sources */,
 				00134F2F2A5153610091D6FD /* ViewModifier_iOS17.swift in Sources */,
 				003BD26B2A4D81C2009FDFAC /* QuoteAPIModel.swift in Sources */,
 				00D004B62A65963500D51C7E /* JokeType.swift in Sources */,
@@ -581,6 +602,7 @@
 				0058ABA12A66A3010050FA96 /* RedditScrapperAPI.swift in Sources */,
 				0091D99A2A5EBFD9002A281A /* HelperViews.swift in Sources */,
 				004337802A339DBD004AF73F /* ContentView.swift in Sources */,
+				00F523102A81043F0046576E /* BhagvatGitaWidget.swift in Sources */,
 				004860152A1B8A7800F3E6B4 /* ExApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -606,6 +628,7 @@
 				009CEBCB2A72645A00E3D2E7 /* FunFactAboutTodayWidget.swift in Sources */,
 				003BD2692A4D72B3009FDFAC /* MyIntents.swift in Sources */,
 				004D9B402A4D9E5600199886 /* NewConfigIntent.swift in Sources */,
+				00F523112A81043F0046576E /* BhagvatGitaWidget.swift in Sources */,
 				00511CEF2A2C960300D1FD13 /* JokeWidgetBundle.swift in Sources */,
 				001710F52A601645003D2071 /* RedditMemeResponse.swift in Sources */,
 				00134F212A514DD20091D6FD /* SpeedService.swift in Sources */,
@@ -617,6 +640,7 @@
 				00E4B5852A4C4B4D0064E63C /* MultiSelection.swift in Sources */,
 				00BDAE1C2A627805002CFD69 /* CustomPictureWidget.swift in Sources */,
 				005048F62A6E95F200328710 /* FlirtyLineModel.swift in Sources */,
+				00F5230B2A81008C0046576E /* BhagwatGitaResponse.swift in Sources */,
 				003BD26C2A4D81C2009FDFAC /* QuoteAPIModel.swift in Sources */,
 				00A07F662A5D2F6B006FC4DB /* NASAApodResponse.swift in Sources */,
 				00A6051A2A6E9BD100AF5FD0 /* FlirtyLinesWidget.swift in Sources */,

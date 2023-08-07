@@ -27,6 +27,7 @@
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>ConfigurationIntent</string>
+		<string>GitaLanguageIntent</string>
 		<string>NASAWidgetConfigIntent</string>
 		<string>QuoteBGIntent</string>
 	</array>
@@ -40,6 +41,7 @@
 		<string>DS-DIGI.TTF</string>
 		<string>DS-DIGIB.TTF</string>
 		<string>CarryYouRegular.ttf</string>
+		<string>HandwritingDraft.ttf</string>
 	</array>
 </dict>
 </plist>
