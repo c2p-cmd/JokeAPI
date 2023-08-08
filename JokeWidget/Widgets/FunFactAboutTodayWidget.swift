@@ -48,7 +48,7 @@ struct FunFactTimelineProvider: TimelineProvider {
         getFactAboutDate(formattedDate: formattedDate) { newFact, error in
             if let newFact {
                 let entries = [FunFactEntry(funFact: newFact)]
-                let components = DateComponents(day: 1)
+                let components = DateComponents(hour: 12)
                 let reloadDate = Calendar.current.date(byAdding: components, to: .now)!
                 
                 let timeline = Timeline(entries: entries, policy: .after(reloadDate))
@@ -85,7 +85,7 @@ struct FunFactEntryView: View {
                 .font(.system(size: 15, weight: .bold, design: .rounded))
                 .foregroundStyle(.black)
                 .minimumScaleFactor(0.75)
-                .padding(.all, 15)
+                .padding(.all, 20)
                 .multilineTextAlignment(.leading)
         }
         .background(grey)
