@@ -43,5 +43,9 @@
 		<string>CarryYouRegular.ttf</string>
 		<string>HandwritingDraft.ttf</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+	</array>
 </dict>
 </plist>

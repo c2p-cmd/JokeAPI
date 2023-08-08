@@ -154,7 +154,7 @@ extension UserDefaults {
     static func saveNewQuote(
         _ newQuote: QuoteApiResponse
     ) {
-        appStorage.set(newQuote.content, forKey: "quote")
+        appStorage.set(newQuote.rawValue, forKey: "quote")
     }
 }
 

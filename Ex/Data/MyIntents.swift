@@ -19,9 +19,12 @@ struct QuoteIntent: AppIntent {
         switch quoteResult {
         case .success(let quoteResponse):
             UserDefaults.saveNewQuote(quoteResponse)
-            return .result(value: quoteResponse.content)
+            let reply = "Once \(quoteResponse.author) said. \(quoteResponse.content)"
+            return .result(value: reply)
         case .failure(_):
-            return .result(value: UserDefaults.savedQuote.content)
+            let quoteResponse = UserDefaults.savedQuote
+            let reply = "Once \(quoteResponse.author) said. \(quoteResponse.content)"
+            return .result(value: reply)
         }
     }
 }
@@ -80,58 +83,6 @@ struct FlirtyLinesIntent: AppIntent {
             return .result(value: newLine)
         case .failure(_):
             return .result(value: UserDefaults.savedFlirtyLine)
-        }
-    }
-}
-
-struct HTTPAnimalIntent: AppIntent {
-    static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "HTPP Status with picture of cat or dog")
-    
-//    static var openAppWhenRun: Bool = true
-    
-    @Parameter(title: "Choice between cat or dog")
-    var animalChoice: AnimalChoice
-    
-    func perform() async throws -> some IntentResult & ReturnsValue {
-        let res = await fetchAnimalImage(of: self.animalChoice)
-        
-        return .result(value: "Here is a picture of a \(self.animalChoice)") {
-            Image(uiImage: res)
-                .resizable()
-                .scaledToFit()
-        }
-    }
-}
-
-struct CuteAnimalPictureIntent: AppIntent {
-    static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Fetch a cute animal picture!")
-    
-//    static var openAppWhenRun: Bool = true
-    
-    func perform() async throws -> some IntentResult & ReturnsValue {
-        let result = await getRedditMeme(from: allAnimalSubreddits.randomElement()!.string)
-        
-        switch result {
-        case .success(let response):
-            return .result(value: response.title) {
-                return AsyncImage(url: URL(string: response.url)) {
-                    $0.resizable()
-                } placeholder: {
-                    Image(Bool.random() ? "black_cat" : "happy_dog")
-                }.scaledToFill()
-            }
-        case .failure(_):
-            break
-        }
-        
-        let savedResponse = UserDefaults.savedRedditAnimalResponse
-        
-        return .result(value: savedResponse.title) {
-            AsyncImage(url: URL(string: savedResponse.url)) {
-                $0.resizable()
-            } placeholder: {
-                Image(Bool.random() ? "black_cat" : "happy_dog")
-            }
         }
     }
 }

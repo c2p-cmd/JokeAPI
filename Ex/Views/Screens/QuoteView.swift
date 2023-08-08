@@ -9,7 +9,7 @@ import WidgetKit
 import SwiftUI
 
 struct QuoteView: View {
-    @AppStorage("quote") private var quote = UserDefaults.defaultQuote
+    @AppStorage("quote") private var quote = UserDefaults.savedQuote
     
     @State private var isBusy = false
     @State private var error: String? = nil
@@ -66,7 +66,6 @@ struct QuoteView: View {
                     Text("-\(quote.author)")
                         .font(.system(.subheadline, design: .rounded))
                         .multilineTextAlignment(.trailing)
-                        // .frame(width: .infinity, height: .infinity, alignment: .bottomTrailing)
                 }
             }
             .padding(.all, 25)
@@ -98,3 +97,7 @@ struct QuoteView: View {
         }
     }
 }
+
+//#Preview {
+//    QuoteView()
+//}

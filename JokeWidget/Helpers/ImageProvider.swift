@@ -144,7 +144,7 @@ fileprivate func fetchAnimalImage(
 //            print(httpResponse.debugDescription)
 //        }
         
-        if let error = error {
+        if error != nil {
             completion(UIImage(named: Bool.random() ? "102_d" : "102")!.resizedForWidget)
             return
         }

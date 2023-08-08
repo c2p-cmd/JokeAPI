@@ -280,11 +280,20 @@ func getRedditMeme(
         let (data, _) = try await URLSession.shared.data(from: url)
         let redditMemeResponse = try JSONDecoder().decode(RedditMemeResponse.self, from: data)
         
-        let (image, didSuccess) = await fetchURLImage(from: URL(string: redditMemeResponse.url)!)
+        let imageData = try Data(contentsOf: URL(string: redditMemeResponse.url)!)
         
-        if didSuccess {
-            redditMemeResponse.uiImage = image.resizedForWidget
+        if let image = UIImage(data: imageData) {
+            redditMemeResponse.uiImage = image
+            print("Yayyie")
+        } else {
+            print("nein!")
         }
+        
+//        let (image, didSuccess) = await fetchURLImage(from: URL(string: redditMemeResponse.url)!)
+//        
+//        if didSuccess {
+//            redditMemeResponse.uiImage = image.resizedForWidget
+//        }
         
         return .success(redditMemeResponse)
     } catch {
@@ -311,13 +320,13 @@ func getNASAApod(on date: Date? = nil) async -> Result<ApodResponse, Error> {
     }
     
     do {
-        let (data, response) = try await URLSession.shared.data(from: url)
+        let (data, _) = try await URLSession.shared.data(from: url)
         
-#if DEBUG
-        if let httpResponse = response as? HTTPURLResponse {
-            print(httpResponse.debugDescription)
-        }
-#endif
+//#if DEBUG
+//        if let httpResponse = response as? HTTPURLResponse {
+//            print(httpResponse.debugDescription)
+//        }
+//#endif
         
         let apodResponse = try JSONDecoder().decode(ApodResponse.self, from: data)
         return .success(apodResponse)

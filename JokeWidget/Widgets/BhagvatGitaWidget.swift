@@ -11,9 +11,9 @@ import WidgetKit
 var firstResponse = BhagvatGitaResponse(chapterNo: 1, shlokNo: 1, shlok: "धृतराष्ट्र उवाच |\nधर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः |\nमामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय ||१-१||", englishTranslation: "1.1 The King Dhritarashtra asked: \"O Sanjaya! What happened on the sacred battlefield of Kurukshetra, when my people gathered against the Pandavas?\"", hindiTranslation: "।।1.1।।धृतराष्ट्र ने कहा -- हे संजय ! धर्मभूमि कुरुक्षेत्र में एकत्र हुए युद्ध के इच्छुक (युयुत्सव:) मेरे और पाण्डु के पुत्रों ने क्या किया?", englishAuthor: "Shri Purohit Swami", hindiAuthor: "Swami Tejomayananda")
 
 struct BhagvatGitaEntry: TimelineEntry {
-    var date: Date = .now
-    var bhagwatGitaResponse: BhagvatGitaResponse
-    var languageChoice: LanguageChoice
+    let date: Date
+    let bhagwatGitaResponse: BhagvatGitaResponse
+    let languageChoice: LanguageChoice
     
     init(
         _ bhagwatGitaResponse: BhagvatGitaResponse,
@@ -26,7 +26,8 @@ struct BhagvatGitaEntry: TimelineEntry {
     }
     
     static func randomShloka() -> BhagvatGitaEntry {
-        BhagvatGitaEntry(getShlokas().first!)
+        let randomShloka = getShlokas().randomElement()!
+        return BhagvatGitaEntry(randomShloka)
     }
 }
 
@@ -38,6 +39,7 @@ struct BhagvatGitaProvider: IntentTimelineProvider {
     func getSnapshot(for configuration: GitaLanguageIntent, in context: Context, completion: @escaping (BhagvatGitaEntry) -> Void) {
         if context.isPreview {
             completion(placeholder(in: context))
+            return
         }
         
         let entry = BhagvatGitaEntry(firstResponse, in: configuration.language)
@@ -206,23 +208,6 @@ struct BhagvatGitaMediumEntryView: View {
     }
 }
 
-struct ResolverView: View {
-    var entry: BhagvatGitaEntry
-    
-    @Environment(\.widgetFamily) private var family
-    
-    var body: some View {
-        ZStack {
-            if family == .systemLarge {
-                BhagvatGitaLargeEntryView(entry: entry)
-            }
-            if family == .systemMedium {
-                BhagvatGitaMediumEntryView(entry: entry)
-            }
-        }
-    }
-}
-
 struct BhagvatGitaWidget: Widget {
     let kind = "BhagvatGitaWidget"
     
@@ -234,18 +219,12 @@ struct BhagvatGitaWidget: Widget {
             intent: GitaLanguageIntent.self,
             provider: BhagvatGitaProvider()
         ) { entry in
-            ResolverView(entry: entry)
+            BhagvatGitaMediumEntryView(entry: entry)
         }
         .configurationDisplayName("Bhagvat Gita Widget")
         .description("Everyday learn something new.")
-        .supportedFamilies([.systemMedium, .systemLarge])
+        .supportedFamilies([.systemMedium])
     }
-}
-
-#Preview(as: .systemLarge) {
-    BhagvatGitaWidget()
-} timeline: {
-    return getShlokas().map { BhagvatGitaEntry($0, in: .hindi) }
 }
 
 #Preview(as: .systemMedium) {
