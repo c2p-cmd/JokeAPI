@@ -10,6 +10,24 @@ import Foundation
 // MARK: - APPSTORAGE to use
 let appStorage = UserDefaults(suiteName: "group.com.kidastudios.mygroup")!
 
+// MARK: - TV Show Quote
+extension UserDefaults {
+    static var savedTVShowQuotes: TVShowQuoteResponses {
+        let responses = TVShowQuoteResponses(rawValue: appStorage.string(forKey: "tv_show_quotes") ?? "[]")
+        
+        if responses.isEmpty {
+            return .getSavedQuotes()
+        }
+        return responses
+    }
+    
+    static func saveNewTVShowQuotes(_ newResponse: TVShowQuoteResponses) {
+        var savedResponses = savedTVShowQuotes
+        savedResponses.append(contentsOf: newResponse)
+        appStorage.set(savedResponses.rawValue, forKey: "tv_show_quotes")
+    }
+}
+
 // MARK: - UserDefaults Date
 extension UserDefaults {
     static var defaultFunFact: String {

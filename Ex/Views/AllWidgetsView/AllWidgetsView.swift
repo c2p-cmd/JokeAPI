@@ -13,6 +13,7 @@ struct AllWidgetsView: View {
     
     @StateObject private var joke = JokeViews.shared
     @StateObject private var quotes = QuoteViews.shared
+    @StateObject private var tvShowQuotes = TVShowQuotesResponsesView.shared
     @StateObject private var speeds = SpeedTestViews.shared
     @StateObject private var flirtyLines = FlirtyLineViews.shared
     @StateObject private var nasaApod = NASApodView.shared
@@ -45,6 +46,13 @@ struct AllWidgetsView: View {
                 showing: quotes.views,
                 showBottomSheet: $showBottomSheet
             ).tag(quotes.id)
+            
+            // tv show quote view
+            NonStickySection(
+                title: "📺 TV Show Quote Widgets",
+                showing: tvShowQuotes.views,
+                showBottomSheet: $showBottomSheet
+            ).tag(tvShowQuotes.id)
             
             // speed test
             NonStickySection(

@@ -42,6 +42,77 @@ var configPlist: NSDictionary = {
     return NSDictionary(contentsOfFile: configPlistLink)!
 }()
 
+
+// MARK: - TV Show Quote
+func getTVShowQuote(
+    from tvShow: String = TVShowQuoteResponses.allShows.randomElement()!,
+    count: Int = 1,
+    keepShort: Bool = true
+) async -> TVShowQuoteResponses {
+    var urlString = configPlist.value(forKey: "TV Show Quotes") as! String
+    urlString.append("/\(count)")
+    let queryItems = [
+        URLQueryItem(name: "show", value: tvShow),
+        URLQueryItem(name: "short", value: keepShort.description)
+    ]
+    guard let url = URL(string: urlString)?.appending(queryItems: queryItems) else {
+        fatalError(URLError(.badURL).localizedDescription)
+    }
+    
+    do {
+        let (data, _) = try await URLSession.shared.data(from: url)
+        
+        let newResponses: TVShowQuoteResponses = try JSONDecoder().decode(TVShowQuoteResponses.self, from: data)
+        
+        return newResponses
+    } catch {
+        print(error.localizedDescription)
+        var savedResponses = TVShowQuoteResponses.getSavedQuotes()
+        savedResponses.shuffle()
+        
+        return savedResponses
+    }
+}
+
+// MARK: - TV Show Quote with closure
+func getTVShowQuote(
+    from tvShow: String = TVShowQuoteResponses.allShows.randomElement()!,
+    count: Int = 1,
+    keepShort: Bool = true,
+    completion: @escaping (TVShowQuoteResponses, Error?) -> Void
+) {
+    var urlString = configPlist.value(forKey: "TV Show Quotes") as! String
+    urlString.append("/\(count)")
+    let queryItems = [
+        URLQueryItem(name: "show", value: tvShow),
+        URLQueryItem(name: "short", value: keepShort.description)
+    ]
+    guard let url = URL(string: urlString)?.appending(queryItems: queryItems) else {
+        fatalError(URLError(.badURL).localizedDescription)
+    }
+    
+//    print(url.absoluteString)
+    
+    URLSession.shared.dataTask(with: url) { (data: Data?, _: URLResponse?, error: Error?) in
+        var savedResponses = UserDefaults.savedTVShowQuotes
+        savedResponses.shuffle()
+        
+        if let data {
+            if let newResponses = try? JSONDecoder().decode(TVShowQuoteResponses.self, from: data) {
+                completion(newResponses, nil)
+            } else {
+                completion(savedResponses, NetworkError(message: "Data not decoded"))
+            }
+        }
+        
+        if let error {
+//            print(error.localizedDescription)
+            completion(savedResponses, error)
+        }
+    }.resume()
+}
+
+
 // MARK: - NumberAPI DATE
 func getFactAboutDate(
     month: Int,
@@ -123,7 +194,7 @@ fileprivate func numberAPIHelper(
 
 // MARK: - Pickup Lines API
 func getPickupLine() async -> Result<String, Error> {
-    let urlString = [configPlist.value(forKey: "Pickupline Vercel API LINK") as! String, configPlist.value(forKey: "Pickupline Vercel API LINK") as! String].randomElement()!
+    let urlString = [configPlist.value(forKey: "Pickup API LINK ANOTHER") as! String, configPlist.value(forKey: "Pickupline Vercel API LINK") as! String].randomElement()!
     
     guard let url = URL(string: urlString) else {
         return .failure(URLError(.badURL))
@@ -147,7 +218,7 @@ func getPickupLine() async -> Result<String, Error> {
 func getPickupLine(
     completion: @escaping (Result<String, Error>) -> Void
 ) {
-    let urlString = [configPlist.value(forKey: "Pickupline Vercel API LINK") as! String, configPlist.value(forKey: "Pickupline Vercel API LINK") as! String].randomElement()!
+    let urlString = [configPlist.value(forKey: "Pickupline Vercel API LINK") as! String, configPlist.value(forKey: "Pickup API LINK ANOTHER") as! String].randomElement()!
     
     guard let url = URL(string: urlString) else {
         completion(.failure(URLError(.badURL)))

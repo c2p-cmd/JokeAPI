@@ -129,15 +129,12 @@ class SpeedTestViews: ObservableObject, Identifiable {
     static let shared = SpeedTestViews()
     
     private init() {
-        let (ping, speed) = UserDefaults.savedSpeedWithPing
-        self.pingMS = ping
-        self.savedSpeed = speed
+        self.savedSpeed = UserDefaults.savedSpeed
         self.getNewSpeed()
     }
     
     let id: UUID = UUID()
     @Published var savedSpeed: Speed
-    @Published var pingMS: Int
     var isBusy = false
     
     var views: [some View] {
@@ -149,9 +146,6 @@ class SpeedTestViews: ObservableObject, Identifiable {
                 HStack(alignment: .center) {
                     Spacer()
                     VStack(alignment: .trailing, spacing: 5) {
-                        Text("Ping: \(pingMS)")
-                            .font(.custom("DS-Digital", size: 21))
-                        
                         Text("Download Speed")
                             .font(.custom("DS-Digital", size: 16.5))
                         
@@ -185,7 +179,6 @@ class SpeedTestViews: ObservableObject, Identifiable {
             case .success(let (ping, speed)):
                 DispatchQueue.main.async {
                     withAnimation {
-                        self.pingMS = ping
                         self.savedSpeed = speed
                         UserDefaults.saveNewSpeedWithPing(ping: ping, speed: speed)
                     }
@@ -582,5 +575,62 @@ class BhagvatGitaView: Identifiable {
                 textHindi
             }, widgetFamily: .systemMedium)
         ]
+    }
+}
+
+class TVShowQuotesResponsesView: Identifiable, ObservableObject {
+    static let shared = TVShowQuotesResponsesView()
+    
+    @Published var tvShowQuote: TVShowQuoteResponse
+    let id: UUID = UUID()
+    private var isBusy = false
+    
+    private init() {
+        self.tvShowQuote = UserDefaults.savedTVShowQuotes.randomElement()!
+        self.getNew()
+    }
+    
+    private func myFont(size: CGFloat) -> Font {
+        .custom("Arial Rounded MT Bold", size: size)
+    }
+    
+    var views: [some View] {
+        let widgetView = GenericWidgetView {
+            Image("TV_Quote_BG")
+                .resizable()
+        } textView: {
+            VStack(spacing: 10) {
+                Text(tvShowQuote.text)
+                    .font(myFont(size: 15))
+                
+                HStack {
+                    Text("From: \"\(tvShowQuote.show)\"")
+                    Spacer()
+                    Text("-\(tvShowQuote.character)")
+                }
+                .font(myFont(size: 11.5))
+            }
+            .padding(.all, 25)
+            .minimumScaleFactor(0.75)
+        }
+        return [
+            widgetView
+        ]
+    }
+    
+    private func getNew() {
+        if isBusy {
+            return
+        }
+        
+        isBusy = true
+        getTVShowQuote { responses, _ in
+            self.isBusy = false
+            DispatchQueue.main.async {
+                withAnimation {
+                    self.tvShowQuote = responses.randomElement()!
+                }
+            }
+        }
     }
 }
