@@ -7,27 +7,6 @@
 
 import Foundation
 
-extension MemeTemplates: RawRepresentable {
-    public init(rawValue: String) {
-        if let data = rawValue.data(using: .utf8),
-           let value = try? JSONDecoder().decode(Self.self, from: data) {
-            self = value
-        }
-        else {
-            self = [.defaultMemeTemplate]
-        }
-    }
-    
-    public var rawValue: String {
-        guard let data = try? JSONEncoder().encode(self),
-              let rawValue = String(data: data, encoding: .utf8) else {
-            return "{}"
-        }
-        
-        return rawValue
-    }
-}
-
 // Hashable or Equatable:
 // The compiler will not be able to synthesize the implementation of Hashable or Equatable
 // for types that require the use of JSONAny, nor will the implementation of Hashable be
