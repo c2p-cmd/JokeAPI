@@ -17,6 +17,10 @@ struct RedditPhoto: Transferable {
     init(_ image: Image) {
         self.image = image
     }
+    
+    init(uiImage: UIImage) {
+        self.image = Image(uiImage: uiImage)
+    }
 }
 
 struct RedditScrapperView: View {
