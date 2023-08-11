@@ -27,7 +27,7 @@
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>cat</string>
+					<string>Cat 🐈</string>
 					<key>INEnumValueDisplayNameID</key>
 					<string>Z0kAd4</string>
 					<key>INEnumValueIndex</key>
@@ -37,7 +37,7 @@
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>dog</string>
+					<string>Dog 🐕</string>
 					<key>INEnumValueDisplayNameID</key>
 					<string>MPdpRl</string>
 					<key>INEnumValueIndex</key>
@@ -70,7 +70,7 @@
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>black</string>
+					<string>Black ⚫️</string>
 					<key>INEnumValueDisplayNameID</key>
 					<string>JojiK4</string>
 					<key>INEnumValueIndex</key>
@@ -80,7 +80,7 @@
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>green</string>
+					<string>Green 🟢</string>
 					<key>INEnumValueDisplayNameID</key>
 					<string>LvdOFU</string>
 					<key>INEnumValueIndex</key>
@@ -113,7 +113,7 @@
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>english</string>
+					<string>English</string>
 					<key>INEnumValueDisplayNameID</key>
 					<string>eLuQJr</string>
 					<key>INEnumValueIndex</key>
@@ -123,7 +123,7 @@
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>hindi</string>
+					<string>Hindi</string>
 					<key>INEnumValueDisplayNameID</key>
 					<string>9g66pr</string>
 					<key>INEnumValueIndex</key>
@@ -141,7 +141,7 @@
 	<key>INIntentDefinitionSystemVersion</key>
 	<string>22F82</string>
 	<key>INIntentDefinitionToolsBuildVersion</key>
-	<string>15A5195m</string>
+	<string>15A5219j</string>
 	<key>INIntentDefinitionToolsVersion</key>
 	<string>15.0</string>
 	<key>INIntents</key>
@@ -533,6 +533,107 @@
 			<string>Gita Language</string>
 			<key>INIntentTitleID</key>
 			<string>b5lRcy</string>
+			<key>INIntentType</key>
+			<string>Custom</string>
+			<key>INIntentVerb</key>
+			<string>Do</string>
+		</dict>
+		<dict>
+			<key>INIntentCategory</key>
+			<string>generic</string>
+			<key>INIntentDescriptionID</key>
+			<string>EK1DmN</string>
+			<key>INIntentEligibleForWidgets</key>
+			<true/>
+			<key>INIntentIneligibleForSuggestions</key>
+			<true/>
+			<key>INIntentLastParameterTag</key>
+			<integer>1</integer>
+			<key>INIntentName</key>
+			<string>TVShowIntent</string>
+			<key>INIntentParameters</key>
+			<array>
+				<dict>
+					<key>INIntentParameterConfigurable</key>
+					<true/>
+					<key>INIntentParameterDisplayName</key>
+					<string>TV Show Choice</string>
+					<key>INIntentParameterDisplayNameID</key>
+					<string>NgdSAi</string>
+					<key>INIntentParameterDisplayPriority</key>
+					<integer>1</integer>
+					<key>INIntentParameterMetadata</key>
+					<dict>
+						<key>INIntentParameterMetadataCapitalization</key>
+						<string>Sentences</string>
+						<key>INIntentParameterMetadataDefaultValueID</key>
+						<string>7QNTMM</string>
+					</dict>
+					<key>INIntentParameterName</key>
+					<string>tvShowChoice</string>
+					<key>INIntentParameterPromptDialogs</key>
+					<array>
+						<dict>
+							<key>INIntentParameterPromptDialogCustom</key>
+							<true/>
+							<key>INIntentParameterPromptDialogType</key>
+							<string>Configuration</string>
+						</dict>
+						<dict>
+							<key>INIntentParameterPromptDialogCustom</key>
+							<true/>
+							<key>INIntentParameterPromptDialogType</key>
+							<string>Primary</string>
+						</dict>
+						<dict>
+							<key>INIntentParameterPromptDialogCustom</key>
+							<true/>
+							<key>INIntentParameterPromptDialogFormatString</key>
+							<string>There are ${count} options matching ‘${tvShowChoice}’.</string>
+							<key>INIntentParameterPromptDialogFormatStringID</key>
+							<string>hizNpN</string>
+							<key>INIntentParameterPromptDialogType</key>
+							<string>DisambiguationIntroduction</string>
+						</dict>
+						<dict>
+							<key>INIntentParameterPromptDialogCustom</key>
+							<true/>
+							<key>INIntentParameterPromptDialogFormatString</key>
+							<string>Just to confirm, you wanted ‘${tvShowChoice}’?</string>
+							<key>INIntentParameterPromptDialogFormatStringID</key>
+							<string>5uUetu</string>
+							<key>INIntentParameterPromptDialogType</key>
+							<string>Confirmation</string>
+						</dict>
+					</array>
+					<key>INIntentParameterSupportsDynamicEnumeration</key>
+					<true/>
+					<key>INIntentParameterTag</key>
+					<integer>1</integer>
+					<key>INIntentParameterType</key>
+					<string>String</string>
+				</dict>
+			</array>
+			<key>INIntentResponse</key>
+			<dict>
+				<key>INIntentResponseCodes</key>
+				<array>
+					<dict>
+						<key>INIntentResponseCodeName</key>
+						<string>success</string>
+						<key>INIntentResponseCodeSuccess</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>INIntentResponseCodeName</key>
+						<string>failure</string>
+					</dict>
+				</array>
+			</dict>
+			<key>INIntentTitle</key>
+			<string>TV Show Intent</string>
+			<key>INIntentTitleID</key>
+			<string>gv42xU</string>
 			<key>INIntentType</key>
 			<string>Custom</string>
 			<key>INIntentVerb</key>
