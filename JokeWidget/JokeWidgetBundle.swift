@@ -21,6 +21,8 @@ struct JokeWidgetBundle: WidgetBundle {
         
         FlirtyLinesWidget()
         
+        TVShowQuoteWidget()
+        
         FunFactAboutTodayWidget()
         
         CuteAnimalWidget()
