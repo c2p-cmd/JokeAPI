@@ -30,6 +30,7 @@
 		<string>GitaLanguageIntent</string>
 		<string>NASAWidgetConfigIntent</string>
 		<string>QuoteBGIntent</string>
+		<string>TVShowIntentIntent</string>
 	</array>
 	<key>UIAppFonts</key>
 	<array>
