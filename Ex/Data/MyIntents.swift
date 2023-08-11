@@ -11,7 +11,7 @@ import SwiftUI
 struct QuoteIntent: AppIntent {
     static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Fetch New Quote")
     
-//    static var openAppWhenRun: Bool = true
+    //    static var openAppWhenRun: Bool = true
     
     func perform() async throws -> some IntentResult & ReturnsValue {
         let quoteResult = await getRandomQuote()
@@ -32,7 +32,7 @@ struct QuoteIntent: AppIntent {
 struct JokeIntent: AppIntent {
     static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Fetch New Joke")
     
-//    static var openAppWhenRun: Bool = true
+    //    static var openAppWhenRun: Bool = true
     
     func perform() async throws -> some IntentResult & ReturnsValue {
         let jokeRes = await getRandomJoke(of: [], type: .twopart, safeMode: true)
@@ -50,7 +50,7 @@ struct JokeIntent: AppIntent {
 struct SpeedTestIntent: AppIntent {
     static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Fetch Latest Download Speed")
     
-//    static var openAppWhenRun: Bool = true
+    //    static var openAppWhenRun: Bool = true
     
     func perform() async throws -> some IntentResult & ReturnsValue {
         let downloadService = DownloadService.shared
@@ -72,7 +72,7 @@ struct SpeedTestIntent: AppIntent {
 struct FlirtyLinesIntent: AppIntent {
     static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Flirt with me ;-)")
     
-//    static var openAppWhenRun: Bool = true
+    //    static var openAppWhenRun: Bool = true
     
     func perform() async throws -> some IntentResult & ReturnsValue {
         let result = await getPickupLine()
@@ -84,5 +84,32 @@ struct FlirtyLinesIntent: AppIntent {
         case .failure(_):
             return .result(value: UserDefaults.savedFlirtyLine)
         }
+    }
+}
+
+struct TVShowQuoteAppIntent: AppIntent {
+    static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Get TV Show Quote")
+    
+    init() {
+        self.keepShort = true
+    }
+    
+    init(keepShort: Bool) {
+        self.keepShort = keepShort
+    }
+    
+    @Parameter(title: "ShortQuote", default: true)
+    var keepShort: Bool
+    
+    func perform() async throws -> some IntentResult & ReturnsValue<String> {
+        let tvShowQuote = await getTVShowQuote(count: 1, keepShort: false).randomElement()!
+        
+        let responseString = """
+From the show: \"\(tvShowQuote.show)\",
+\"\(tvShowQuote.character)\" says.
+\(tvShowQuote.text)
+"""
+        
+        return .result(value: responseString)
     }
 }
