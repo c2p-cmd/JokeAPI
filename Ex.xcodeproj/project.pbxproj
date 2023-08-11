@@ -82,6 +82,20 @@
 		00A605232A6FF15D00AF5FD0 /* DS-DIGI.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 00A605212A6FF15D00AF5FD0 /* DS-DIGI.TTF */; };
 		00A605252A6FF6CB00AF5FD0 /* DS-DIGIB.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 00A605242A6FF6CB00AF5FD0 /* DS-DIGIB.TTF */; };
 		00A605262A6FF6CB00AF5FD0 /* DS-DIGIB.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 00A605242A6FF6CB00AF5FD0 /* DS-DIGIB.TTF */; };
+		00AC0A262A8641C900798580 /* TVShowQuoteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AC0A252A8641C900798580 /* TVShowQuoteResponse.swift */; };
+		00AC0A282A8642B300798580 /* TVShowQuotes.json in Resources */ = {isa = PBXBuildFile; fileRef = 00AC0A272A8642B300798580 /* TVShowQuotes.json */; };
+		00AC0A292A8642B300798580 /* TVShowQuotes.json in Resources */ = {isa = PBXBuildFile; fileRef = 00AC0A272A8642B300798580 /* TVShowQuotes.json */; };
+		00AC0A2A2A864ADC00798580 /* TVShowQuoteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AC0A252A8641C900798580 /* TVShowQuoteResponse.swift */; };
+		00AC0A2C2A86515400798580 /* TVShowQuotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AC0A2B2A86515400798580 /* TVShowQuotesView.swift */; };
+		00AC0A552A865F5D00798580 /* TVShowQuoteWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AC0A542A865F5D00798580 /* TVShowQuoteWidget.swift */; };
+		00AC0A5E2A867BC700798580 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00AC0A342A865EA000798580 /* Intents.framework */; };
+		00AC0A612A867BC800798580 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AC0A602A867BC800798580 /* IntentHandler.swift */; };
+		00AC0A652A867BC800798580 /* MyIntentHandler.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 00AC0A5D2A867BC700798580 /* MyIntentHandler.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		00AC0A692A867C0C00798580 /* AnimalPictureConfig.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 00E23D7F2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition */; };
+		00AC0A6B2A867C6C00798580 /* TVShowQuoteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AC0A252A8641C900798580 /* TVShowQuoteResponse.swift */; };
+		00AC0A6D2A867E8000798580 /* Array+RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AC0A6C2A867E8000798580 /* Array+RawRepresentable.swift */; };
+		00AC0A6E2A867E9E00798580 /* Array+RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AC0A6C2A867E8000798580 /* Array+RawRepresentable.swift */; };
+		00AC0A6F2A867E9F00798580 /* Array+RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AC0A6C2A867E8000798580 /* Array+RawRepresentable.swift */; };
 		00B799B12A6985D300F66EC5 /* RAVIE.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 00B799B02A6985D300F66EC5 /* RAVIE.TTF */; };
 		00B799B22A6985D300F66EC5 /* RAVIE.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 00B799B02A6985D300F66EC5 /* RAVIE.TTF */; };
 		00BDAE1C2A627805002CFD69 /* CustomPictureWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BDAE1B2A627805002CFD69 /* CustomPictureWidget.swift */; };
@@ -121,6 +135,13 @@
 			remoteGlobalIDString = 00511CE62A2C960300D1FD13;
 			remoteInfo = JokeWidgetExtension;
 		};
+		00AC0A632A867BC800798580 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 004860092A1B8A7800F3E6B4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 00AC0A5C2A867BC700798580;
+			remoteInfo = MyIntentHandler;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -131,6 +152,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				00511CF72A2C960500D1FD13 /* JokeWidgetExtension.appex in Embed Foundation Extensions */,
+				00AC0A652A867BC800798580 /* MyIntentHandler.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -178,6 +200,7 @@
 		00511CFD2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2023-06-04 at 16.04.08.png"; sourceTree = "<group>"; };
 		0058ABA02A66A3010050FA96 /* RedditScrapperAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditScrapperAPI.swift; sourceTree = "<group>"; };
 		0058ABA22A66BC3F0050FA96 /* CuteAnimalWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuteAnimalWidget.swift; sourceTree = "<group>"; };
+		006E267E2A855013000F3A23 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AnimalPictureConfig.strings; sourceTree = "<group>"; };
 		00898D032A683CE8008EF693 /* RedditMemeWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditMemeWidget.swift; sourceTree = "<group>"; };
 		008C2AF82A7B918D0078EEB7 /* CarryYouRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CarryYouRegular.ttf; sourceTree = "<group>"; };
 		0091D9962A5E961C002A281A /* MultiSelectionMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectionMenu.swift; sourceTree = "<group>"; };
@@ -193,6 +216,16 @@
 		00A6051E2A6FEE2D00AF5FD0 /* DigitalDisplayRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DigitalDisplayRegular.ttf; sourceTree = "<group>"; };
 		00A605212A6FF15D00AF5FD0 /* DS-DIGI.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGI.TTF"; sourceTree = "<group>"; };
 		00A605242A6FF6CB00AF5FD0 /* DS-DIGIB.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGIB.TTF"; sourceTree = "<group>"; };
+		00AC0A252A8641C900798580 /* TVShowQuoteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowQuoteResponse.swift; sourceTree = "<group>"; };
+		00AC0A272A8642B300798580 /* TVShowQuotes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TVShowQuotes.json; sourceTree = "<group>"; };
+		00AC0A2B2A86515400798580 /* TVShowQuotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowQuotesView.swift; sourceTree = "<group>"; };
+		00AC0A342A865EA000798580 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
+		00AC0A3F2A865EA000798580 /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
+		00AC0A542A865F5D00798580 /* TVShowQuoteWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowQuoteWidget.swift; sourceTree = "<group>"; };
+		00AC0A5D2A867BC700798580 /* MyIntentHandler.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MyIntentHandler.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		00AC0A602A867BC800798580 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
+		00AC0A622A867BC800798580 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00AC0A6C2A867E8000798580 /* Array+RawRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+RawRepresentable.swift"; sourceTree = "<group>"; };
 		00B799B02A6985D300F66EC5 /* RAVIE.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = RAVIE.TTF; sourceTree = "<group>"; };
 		00BDAE1B2A627805002CFD69 /* CustomPictureWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPictureWidget.swift; sourceTree = "<group>"; };
 		00BDAE1D2A627C17002CFD69 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
@@ -232,6 +265,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		00AC0A5A2A867BC700798580 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00AC0A5E2A867BC700798580 /* Intents.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -246,6 +287,8 @@
 				001CB1F52A67ED1200458B60 /* MemeGeneratorModels.swift */,
 				005048F42A6E95F200328710 /* FlirtyLineModel.swift */,
 				00F523092A81008C0046576E /* BhagwatGitaResponse.swift */,
+				00AC0A252A8641C900798580 /* TVShowQuoteResponse.swift */,
+				00AC0A6C2A867E8000798580 /* Array+RawRepresentable.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -260,6 +303,7 @@
 				003BD2672A4D72B3009FDFAC /* MyIntents.swift */,
 				00D004B52A65963500D51C7E /* JokeType.swift */,
 				00F5230C2A8103400046576E /* Shlokas.json */,
+				00AC0A272A8642B300798580 /* TVShowQuotes.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -284,6 +328,7 @@
 				00511CFD2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png */,
 				004860132A1B8A7800F3E6B4 /* Ex */,
 				00511CED2A2C960300D1FD13 /* JokeWidget */,
+				00AC0A5F2A867BC800798580 /* MyIntentHandler */,
 				00511CE82A2C960300D1FD13 /* Frameworks */,
 				004860122A1B8A7800F3E6B4 /* Products */,
 			);
@@ -294,6 +339,7 @@
 			children = (
 				004860112A1B8A7800F3E6B4 /* Ex.app */,
 				00511CE72A2C960300D1FD13 /* JokeWidgetExtension.appex */,
+				00AC0A5D2A867BC700798580 /* MyIntentHandler.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -336,6 +382,8 @@
 			children = (
 				00511CE92A2C960300D1FD13 /* WidgetKit.framework */,
 				00511CEB2A2C960300D1FD13 /* SwiftUI.framework */,
+				00AC0A342A865EA000798580 /* Intents.framework */,
+				00AC0A3F2A865EA000798580 /* IntentsUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -376,6 +424,7 @@
 				001CB1F32A67E84900458B60 /* MemeGenView.swift */,
 				009E8B1F2A71343D00676255 /* NumberAPIView.swift */,
 				0043377D2A339DBD004AF73F /* JokeView.swift */,
+				00AC0A2B2A86515400798580 /* TVShowQuotesView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -407,8 +456,18 @@
 				00A605192A6E9BD100AF5FD0 /* FlirtyLinesWidget.swift */,
 				009CEBCA2A72645A00E3D2E7 /* FunFactAboutTodayWidget.swift */,
 				00F5230F2A81043F0046576E /* BhagvatGitaWidget.swift */,
+				00AC0A542A865F5D00798580 /* TVShowQuoteWidget.swift */,
 			);
 			path = Widgets;
+			sourceTree = "<group>";
+		};
+		00AC0A5F2A867BC800798580 /* MyIntentHandler */ = {
+			isa = PBXGroup;
+			children = (
+				00AC0A602A867BC800798580 /* IntentHandler.swift */,
+				00AC0A622A867BC800798580 /* Info.plist */,
+			);
+			path = MyIntentHandler;
 			sourceTree = "<group>";
 		};
 		00D004AE2A65618200D51C7E /* subscribe-font */ = {
@@ -451,6 +510,7 @@
 			);
 			dependencies = (
 				00511CF62A2C960500D1FD13 /* PBXTargetDependency */,
+				00AC0A642A867BC800798580 /* PBXTargetDependency */,
 			);
 			name = Ex;
 			packageProductDependencies = (
@@ -477,6 +537,23 @@
 			productReference = 00511CE72A2C960300D1FD13 /* JokeWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		00AC0A5C2A867BC700798580 /* MyIntentHandler */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00AC0A662A867BC800798580 /* Build configuration list for PBXNativeTarget "MyIntentHandler" */;
+			buildPhases = (
+				00AC0A592A867BC700798580 /* Sources */,
+				00AC0A5A2A867BC700798580 /* Frameworks */,
+				00AC0A5B2A867BC700798580 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyIntentHandler;
+			productName = MyIntentHandler;
+			productReference = 00AC0A5D2A867BC700798580 /* MyIntentHandler.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -484,7 +561,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1430;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					004860102A1B8A7800F3E6B4 = {
@@ -492,6 +569,9 @@
 					};
 					00511CE62A2C960300D1FD13 = {
 						CreatedOnToolsVersion = 14.3;
+					};
+					00AC0A5C2A867BC700798580 = {
+						CreatedOnToolsVersion = 15.0;
 					};
 				};
 			};
@@ -513,6 +593,7 @@
 			targets = (
 				004860102A1B8A7800F3E6B4 /* Ex */,
 				00511CE62A2C960300D1FD13 /* JokeWidgetExtension */,
+				00AC0A5C2A867BC700798580 /* MyIntentHandler */,
 			);
 		};
 /* End PBXProject section */
@@ -527,6 +608,7 @@
 				00A6051F2A6FEE2D00AF5FD0 /* DigitalDisplayRegular.ttf in Resources */,
 				00F5230D2A8103400046576E /* Shlokas.json in Resources */,
 				00D004AB2A652F7200D51C7E /* ComicKings.ttf in Resources */,
+				00AC0A282A8642B300798580 /* TVShowQuotes.json in Resources */,
 				00F523132A8108650046576E /* HandwritingDraft.ttf in Resources */,
 				00A07F752A5D7B85006FC4DB /* Config.plist in Resources */,
 				004CA8512A79455E005B4F07 /* add_to_home_screen_new.gif in Resources */,
@@ -547,6 +629,7 @@
 				00A605232A6FF15D00AF5FD0 /* DS-DIGI.TTF in Resources */,
 				00A605262A6FF6CB00AF5FD0 /* DS-DIGIB.TTF in Resources */,
 				00B799B22A6985D300F66EC5 /* RAVIE.TTF in Resources */,
+				00AC0A292A8642B300798580 /* TVShowQuotes.json in Resources */,
 				00F5230E2A8103400046576E /* Shlokas.json in Resources */,
 				00D004B22A65618200D51C7E /* SubscribeShadowRegular.ttf in Resources */,
 				00A07F762A5D7B85006FC4DB /* Config.plist in Resources */,
@@ -556,6 +639,13 @@
 				00D004B42A65618200D51C7E /* SubscribeRegular.ttf in Resources */,
 				008C2AFA2A7B918D0078EEB7 /* CarryYouRegular.ttf in Resources */,
 				00D004AC2A652F7200D51C7E /* ComicKings.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		00AC0A5B2A867BC700798580 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,11 +664,13 @@
 				00F49BAC2A73C450008428F9 /* AllWidgetsView.swift in Sources */,
 				00F5230A2A81008C0046576E /* BhagwatGitaResponse.swift in Sources */,
 				00134F2F2A5153610091D6FD /* ViewModifier_iOS17.swift in Sources */,
+				00AC0A2C2A86515400798580 /* TVShowQuotesView.swift in Sources */,
 				003BD26B2A4D81C2009FDFAC /* QuoteAPIModel.swift in Sources */,
 				00D004B62A65963500D51C7E /* JokeType.swift in Sources */,
 				00E4B5842A4C47020064E63C /* MultiSelection.swift in Sources */,
 				00E23D7C2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */,
 				004D9B432A4DA50600199886 /* NewConfigIntent.swift in Sources */,
+				00AC0A262A8641C900798580 /* TVShowQuoteResponse.swift in Sources */,
 				00134F202A514DD20091D6FD /* SpeedService.swift in Sources */,
 				001FB8C12A5FDE3B0020F69C /* ImageSaver.swift in Sources */,
 				00A07F652A5D2F6B006FC4DB /* NASAApodResponse.swift in Sources */,
@@ -589,6 +681,7 @@
 				00511CE22A2C911F00D1FD13 /* Request.swift in Sources */,
 				001710F42A601642003D2071 /* RedditMemeResponse.swift in Sources */,
 				00134F262A514E540091D6FD /* DownloadService.swift in Sources */,
+				00AC0A6D2A867E8000798580 /* Array+RawRepresentable.swift in Sources */,
 				00134F232A514E0F0091D6FD /* NetworkError.swift in Sources */,
 				009E8B202A71343D00676255 /* NumberAPIView.swift in Sources */,
 				001CB1F42A67E84900458B60 /* MemeGenView.swift in Sources */,
@@ -614,7 +707,9 @@
 				00134F2D2A514F6A0091D6FD /* SpeedWidget.swift in Sources */,
 				00511CF12A2C960300D1FD13 /* JokeWidget.swift in Sources */,
 				00134F242A514E0F0091D6FD /* NetworkError.swift in Sources */,
+				00AC0A6E2A867E9E00798580 /* Array+RawRepresentable.swift in Sources */,
 				00D004B72A65963500D51C7E /* JokeType.swift in Sources */,
+				00AC0A2A2A864ADC00798580 /* TVShowQuoteResponse.swift in Sources */,
 				00134F1D2A514D080091D6FD /* SpeedModel.swift in Sources */,
 				004337832A33A140004AF73F /* UserDefaultExtension.swift in Sources */,
 				00134F272A514E540091D6FD /* DownloadService.swift in Sources */,
@@ -641,11 +736,23 @@
 				00BDAE1C2A627805002CFD69 /* CustomPictureWidget.swift in Sources */,
 				005048F62A6E95F200328710 /* FlirtyLineModel.swift in Sources */,
 				00F5230B2A81008C0046576E /* BhagwatGitaResponse.swift in Sources */,
+				00AC0A552A865F5D00798580 /* TVShowQuoteWidget.swift in Sources */,
 				003BD26C2A4D81C2009FDFAC /* QuoteAPIModel.swift in Sources */,
 				00A07F662A5D2F6B006FC4DB /* NASAApodResponse.swift in Sources */,
 				00A6051A2A6E9BD100AF5FD0 /* FlirtyLinesWidget.swift in Sources */,
 				00A07F6C2A5D4416006FC4DB /* NASAApodWidget.swift in Sources */,
 				00134F302A5153610091D6FD /* ViewModifier_iOS17.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		00AC0A592A867BC700798580 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00AC0A612A867BC800798580 /* IntentHandler.swift in Sources */,
+				00AC0A6B2A867C6C00798580 /* TVShowQuoteResponse.swift in Sources */,
+				00AC0A692A867C0C00798580 /* AnimalPictureConfig.intentdefinition in Sources */,
+				00AC0A6F2A867E9F00798580 /* Array+RawRepresentable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -657,6 +764,11 @@
 			target = 00511CE62A2C960300D1FD13 /* JokeWidgetExtension */;
 			targetProxy = 00511CF52A2C960500D1FD13 /* PBXContainerItemProxy */;
 		};
+		00AC0A642A867BC800798580 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 00AC0A5C2A867BC700798580 /* MyIntentHandler */;
+			targetProxy = 00AC0A632A867BC800798580 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -664,6 +776,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				00E23D7E2A56B7AE003DD155 /* Base */,
+				006E267E2A855013000F3A23 /* en */,
 			);
 			name = AnimalPictureConfig.intentdefinition;
 			sourceTree = "<group>";
@@ -935,6 +1048,71 @@
 			};
 			name = Release;
 		};
+		00AC0A672A867BC800798580 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HJ3C6V359D;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyIntentHandler/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MyIntentHandler;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidastudios.aioEntertainment.MyIntentHandler;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		00AC0A682A867BC800798580 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HJ3C6V359D;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyIntentHandler/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MyIntentHandler;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidastudios.aioEntertainment.MyIntentHandler;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -961,6 +1139,15 @@
 			buildConfigurations = (
 				00511CF92A2C960500D1FD13 /* Debug */,
 				00511CFA2A2C960500D1FD13 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		00AC0A662A867BC800798580 /* Build configuration list for PBXNativeTarget "MyIntentHandler" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00AC0A672A867BC800798580 /* Debug */,
+				00AC0A682A867BC800798580 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
