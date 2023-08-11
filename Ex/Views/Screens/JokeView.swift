@@ -16,15 +16,25 @@ struct JokeView: View {
     @State private var isBusy = false
     @State private var error: String?
     @State private var selectedCategories: Set<IdentifiableString> = Set()
+    @State private var selectedCategory = jokeCategories.first!
     
     var body: some View {
         VStack {
             List {
-                MultiSelectionMenu(
-                    label: "Joke Category",
-                    selectedCategories: self.$selectedCategories,
-                    availableCategories: Array(jokeCategories)
-                )
+//                MultiSelectionMenu(
+//                    label: "Joke Category",
+//                    selectedCategories: self.$selectedCategories,
+//                    availableCategories: Array(jokeCategories)
+//                )
+                Picker(selection: $selectedCategory) {
+                    ForEach(Array(jokeCategories), id: \.self) {
+                        Text($0.string)
+                            .tag($0.hashValue)
+                    }
+                } label: {
+                    Text("Joke Category")
+                        .font(.system(.body, design: .rounded, weight: .bold))
+                }
                 
                 Picker(selection: self.$jokeType) {
                     ForEach(JokeType.allCase, id: \.self) {
@@ -39,7 +49,7 @@ struct JokeView: View {
                 
                 Toggle(isOn: self.$safeMode) {
                     Text("Safe Mode")
-                        .bold()
+                        .font(.system(.body, design: .rounded, weight: .bold))
                 }
                 
                 Section {
@@ -50,7 +60,7 @@ struct JokeView: View {
                 } footer: {
                     HStack {
                         Spacer()
-                        RefreshButton(isBusy: self.$isBusy, action: getNewJoke)
+                        RefreshButton(isBusy: self.$isBusy, action: getNewJokeFromUs)
                         Spacer()
                     }
                 }
@@ -65,8 +75,33 @@ struct JokeView: View {
             Spacer()
         }
         .refreshable {
-            getNewJoke()
+//            getNewJoke()
+            getNewJokeFromUs()
         }
+    }
+    
+    private func getNewJokeFromUs() {
+        if isBusy {
+            return
+        }
+        
+        isBusy = true
+        
+        let url = URL(string: "http://192.168.0.179:8000/master/random_joke/\(self.selectedCategory.string)/")!
+        
+        URLSession.shared.dataTask(with: url) {
+            (data: Data?, _: URLResponse?, error: Error?) in
+            
+            if let error {
+                self.error = error.localizedDescription
+            }
+            
+            if let data {
+                self.error = nil
+                self.joke = String(decoding: data, as: UTF8.self)
+            }
+            isBusy = false
+        }.resume()
     }
     
     private func getNewJoke() {
@@ -94,4 +129,8 @@ struct JokeView: View {
             isBusy = false
         }
     }
+}
+
+#Preview {
+    JokeView()
 }
