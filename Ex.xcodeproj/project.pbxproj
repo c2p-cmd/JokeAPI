@@ -59,6 +59,9 @@
 		00511CFE2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png in Resources */ = {isa = PBXBuildFile; fileRef = 00511CFD2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png */; };
 		0058ABA12A66A3010050FA96 /* RedditScrapperAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0058ABA02A66A3010050FA96 /* RedditScrapperAPI.swift */; };
 		0058ABA32A66BC3F0050FA96 /* CuteAnimalWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0058ABA22A66BC3F0050FA96 /* CuteAnimalWidget.swift */; };
+		007F29B32A8A332500D729D0 /* BhagwatGitaResponseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F29B22A8A332500D729D0 /* BhagwatGitaResponseView.swift */; };
+		007F29B52A8A3D7600D729D0 /* Date+RawRepresentale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F29B42A8A3D7600D729D0 /* Date+RawRepresentale.swift */; };
+		007F29B62A8A3D7600D729D0 /* Date+RawRepresentale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F29B42A8A3D7600D729D0 /* Date+RawRepresentale.swift */; };
 		00842AD32A7A76350016983C /* MarqueeText in Frameworks */ = {isa = PBXBuildFile; productRef = 00842AD22A7A76350016983C /* MarqueeText */; };
 		00898D042A683CE8008EF693 /* RedditMemeWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00898D032A683CE8008EF693 /* RedditMemeWidget.swift */; };
 		008C2AF92A7B918D0078EEB7 /* CarryYouRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 008C2AF82A7B918D0078EEB7 /* CarryYouRegular.ttf */; };
@@ -201,6 +204,8 @@
 		0058ABA02A66A3010050FA96 /* RedditScrapperAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditScrapperAPI.swift; sourceTree = "<group>"; };
 		0058ABA22A66BC3F0050FA96 /* CuteAnimalWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuteAnimalWidget.swift; sourceTree = "<group>"; };
 		006E267E2A855013000F3A23 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AnimalPictureConfig.strings; sourceTree = "<group>"; };
+		007F29B22A8A332500D729D0 /* BhagwatGitaResponseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BhagwatGitaResponseView.swift; sourceTree = "<group>"; };
+		007F29B42A8A3D7600D729D0 /* Date+RawRepresentale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+RawRepresentale.swift"; sourceTree = "<group>"; };
 		00898D032A683CE8008EF693 /* RedditMemeWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditMemeWidget.swift; sourceTree = "<group>"; };
 		008C2AF82A7B918D0078EEB7 /* CarryYouRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CarryYouRegular.ttf; sourceTree = "<group>"; };
 		0091D9962A5E961C002A281A /* MultiSelectionMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectionMenu.swift; sourceTree = "<group>"; };
@@ -289,6 +294,7 @@
 				00F523092A81008C0046576E /* BhagwatGitaResponse.swift */,
 				00AC0A252A8641C900798580 /* TVShowQuoteResponse.swift */,
 				00AC0A6C2A867E8000798580 /* Array+RawRepresentable.swift */,
+				007F29B42A8A3D7600D729D0 /* Date+RawRepresentale.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -425,6 +431,7 @@
 				009E8B1F2A71343D00676255 /* NumberAPIView.swift */,
 				0043377D2A339DBD004AF73F /* JokeView.swift */,
 				00AC0A2B2A86515400798580 /* TVShowQuotesView.swift */,
+				007F29B22A8A332500D729D0 /* BhagwatGitaResponseView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -660,6 +667,7 @@
 				001CB1F62A67ED1200458B60 /* MemeGeneratorModels.swift in Sources */,
 				004CA8492A793EEB005B4F07 /* GifImage.swift in Sources */,
 				00BDAE1E2A627C17002CFD69 /* CustomImageView.swift in Sources */,
+				007F29B52A8A3D7600D729D0 /* Date+RawRepresentale.swift in Sources */,
 				005048F52A6E95F200328710 /* FlirtyLineModel.swift in Sources */,
 				00F49BAC2A73C450008428F9 /* AllWidgetsView.swift in Sources */,
 				00F5230A2A81008C0046576E /* BhagwatGitaResponse.swift in Sources */,
@@ -669,6 +677,7 @@
 				00D004B62A65963500D51C7E /* JokeType.swift in Sources */,
 				00E4B5842A4C47020064E63C /* MultiSelection.swift in Sources */,
 				00E23D7C2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */,
+				007F29B32A8A332500D729D0 /* BhagwatGitaResponseView.swift in Sources */,
 				004D9B432A4DA50600199886 /* NewConfigIntent.swift in Sources */,
 				00AC0A262A8641C900798580 /* TVShowQuoteResponse.swift in Sources */,
 				00134F202A514DD20091D6FD /* SpeedService.swift in Sources */,
@@ -742,6 +751,7 @@
 				00A6051A2A6E9BD100AF5FD0 /* FlirtyLinesWidget.swift in Sources */,
 				00A07F6C2A5D4416006FC4DB /* NASAApodWidget.swift in Sources */,
 				00134F302A5153610091D6FD /* ViewModifier_iOS17.swift in Sources */,
+				007F29B62A8A3D7600D729D0 /* Date+RawRepresentale.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
