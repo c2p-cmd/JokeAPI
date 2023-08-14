@@ -10,15 +10,13 @@ import SwiftUI
 
 struct QuoteIntent: AppIntent {
     static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Fetch New Quote")
+    static var description: IntentDescription? = IntentDescription(stringLiteral: "This is an intent to fetch a new quote")
     
-    //    static var openAppWhenRun: Bool = true
-    
-    func perform() async throws -> some IntentResult & ReturnsValue {
+    func perform() async throws -> some IntentResult & ReturnsValue<String> {
         let quoteResult = await getRandomQuote()
         
         switch quoteResult {
         case .success(let quoteResponse):
-            UserDefaults.saveNewQuote(quoteResponse)
             let reply = "Once \(quoteResponse.author) said. \(quoteResponse.content)"
             return .result(value: reply)
         case .failure(_):
@@ -31,15 +29,13 @@ struct QuoteIntent: AppIntent {
 
 struct JokeIntent: AppIntent {
     static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Fetch New Joke")
+    static var description: IntentDescription? = IntentDescription(stringLiteral: "This is an intent to fetch a new joke")
     
-    //    static var openAppWhenRun: Bool = true
-    
-    func perform() async throws -> some IntentResult & ReturnsValue {
+    func perform() async throws -> some IntentResult & ReturnsValue<String> {
         let jokeRes = await getRandomJoke(of: [], type: .twopart, safeMode: true)
         
         switch jokeRes {
         case .success(let newJoke):
-            UserDefaults.saveNewJoke(newJoke)
             return .result(value: newJoke)
         case .failure(_):
             return .result(value: UserDefaults.savedJoke)
@@ -49,21 +45,18 @@ struct JokeIntent: AppIntent {
 
 struct SpeedTestIntent: AppIntent {
     static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Fetch Latest Download Speed")
+    static var description: IntentDescription? = IntentDescription(stringLiteral: "This is an intent to test internet speed")
     
-    //    static var openAppWhenRun: Bool = true
-    
-    func perform() async throws -> some IntentResult & ReturnsValue {
+    func perform() async throws -> some IntentResult & ReturnsValue<String> {
         let downloadService = DownloadService.shared
         
-        let res = await downloadService.testWithPing(for: url, in: 60)
+        let res = await downloadService.test(for: url, in: 60)
         
         switch res {
-        case .success(let (newPing, newSpeed)):
-            UserDefaults.saveNewSpeedWithPing(ping: newPing, speed: newSpeed)
-            return .result(value: "At a ping of \(newPing) the speed is \(newSpeed.description)")
+        case .success(let newSpeed):
+            return .result(value: "The speed is \(newSpeed.description)")
         case .failure(_):
-            let (oldPing, oldSpeed) = UserDefaults.savedSpeedWithPing
-            return .result(value: "At a ping of \(oldPing) the speed is \(oldSpeed.description)")
+            return .result(value: "Sorry! you seem to be offline")
         }
     }
 }
@@ -71,15 +64,13 @@ struct SpeedTestIntent: AppIntent {
 
 struct FlirtyLinesIntent: AppIntent {
     static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Flirt with me ;-)")
+    static var description: IntentDescription? = IntentDescription(stringLiteral: "This is an intent to fetch a pick up line")
     
-    //    static var openAppWhenRun: Bool = true
-    
-    func perform() async throws -> some IntentResult & ReturnsValue {
+    func perform() async throws -> some IntentResult & ReturnsValue<String> {
         let result = await getPickupLine()
         
         switch result {
         case .success(let newLine):
-            UserDefaults.saveNewFlirtyLine(newLine)
             return .result(value: newLine)
         case .failure(_):
             return .result(value: UserDefaults.savedFlirtyLine)
@@ -89,6 +80,10 @@ struct FlirtyLinesIntent: AppIntent {
 
 struct TVShowQuoteAppIntent: AppIntent {
     static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Get TV Show Quote")
+    static var description: IntentDescription? = IntentDescription(stringLiteral: "This is an intent to fetch a Quote from a TV Show")
+    
+    @Parameter(title: "ShortQuote", default: true)
+    var keepShort: Bool
     
     init() {
         self.keepShort = true
@@ -98,11 +93,8 @@ struct TVShowQuoteAppIntent: AppIntent {
         self.keepShort = keepShort
     }
     
-    @Parameter(title: "ShortQuote", default: true)
-    var keepShort: Bool
-    
     func perform() async throws -> some IntentResult & ReturnsValue<String> {
-        let tvShowQuote = await getTVShowQuote(count: 1, keepShort: false).randomElement()!
+        let tvShowQuote = await getTVShowQuote(count: 1, keepShort: self.keepShort).randomElement()!
         
         let responseString = """
 From the show: \"\(tvShowQuote.show)\",
