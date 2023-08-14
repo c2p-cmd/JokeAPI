@@ -10,6 +10,36 @@ import Foundation
 // MARK: - APPSTORAGE to use
 let appStorage = UserDefaults(suiteName: "group.com.kidastudios.mygroup")!
 
+// MARK: - BhagvadGita Response
+extension UserDefaults {
+    static let defaultBhagvadGitaResponse = BhagvatGitaResponse(
+        chapterNo: 1,
+        shlokNo: 1,
+        shlok: "धृतराष्ट्र उवाच |\nधर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः |\nमामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय ||१-१||",
+        englishTranslation: "1.1 The King Dhritarashtra asked: \"O Sanjaya! What happened on the sacred battlefield of Kurukshetra, when my people gathered against the Pandavas?\"",
+        hindiTranslation: "।।1.1।।धृतराष्ट्र ने कहा -- हे संजय ! धर्मभूमि कुरुक्षेत्र में एकत्र हुए युद्ध के इच्छुक (युयुत्सव:) मेरे और पाण्डु के पुत्रों ने क्या किया?",
+        englishAuthor: "Shri Purohit Swami",
+        hindiAuthor: "Swami Tejomayananda"
+    )
+    
+    static var savedBhagvatGitaResponses: [BhagvatGitaResponse] {
+        let shloaksFromFile = BhagvatGitaResponse.getShlokas()
+        
+        guard let responseRawValue = appStorage.string(forKey: "bhagvad_gita_response")
+        else {
+            return shloaksFromFile
+        }
+        
+        let responses = [BhagvatGitaResponse].init(rawValue: responseRawValue)
+        
+        if responses.isEmpty {
+            return shloaksFromFile
+        }
+        
+        return responses
+    }
+}
+
 // MARK: - TV Show Quote
 extension UserDefaults {
     static var savedTVShowQuotes: TVShowQuoteResponses {
@@ -134,6 +164,19 @@ extension UserDefaults {
         return speed
     }
     
+    static var savedSpeedWithDate: (Speed, Date?) {
+        let dateRawValue = appStorage.double(forKey: "speed_test_date")
+        let date: Date? = Date(rawValue: dateRawValue)
+        
+        guard let speedRawValue = appStorage.string(forKey: "net_speed"),
+              let speed = Speed(rawValue: speedRawValue)
+        else {
+            return (UserDefaults.defaultSpeed, nil)
+        }
+        
+        return (speed, date)
+    }
+    
     static var savedSpeedWithPing: (Int, Speed) {
         let speed = savedSpeed
         let ping = appStorage.integer(forKey: "speed_ping")
@@ -143,6 +186,11 @@ extension UserDefaults {
     
     static func saveNewPing(_ ping: Int) {
         appStorage.setValue(ping, forKey: "speed_ping")
+    }
+    
+    static func saveNewSpeed(speed: Speed, at date: Date) {
+        self.saveNewSpeed(speed)
+        appStorage.setValue(date.rawValue, forKey: "speed_test_date")
     }
     
     static func saveNewSpeedWithPing(ping: Int, speed: Speed) {
