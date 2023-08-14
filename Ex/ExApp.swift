@@ -14,10 +14,10 @@ struct ExApp: App {
             ContentView()
                 .defaultAppStorage(appStorage)
                 .preferredColorScheme(.light)
-//                .onAppear {
-//                    let deviceId = UIDevice.current.identifierForVendor?.uuidString
-//                    print(deviceId ?? "NO ID!")
-//                }
+                .onAppear {
+                    let deviceId = UIDevice.current.identifierForVendor?.uuidString
+                    print("My Device ID is: \(deviceId ?? "NO ID!")")
+                }
 //                .onAppear {
 //                    for family in UIFont.familyNames.sorted() {
 //                        let names = UIFont.fontNames(forFamilyName: family)
