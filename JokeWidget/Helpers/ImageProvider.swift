@@ -138,11 +138,7 @@ fileprivate func fetchAnimalImage(
     from url: URL,
     completion: @escaping (UIImage) -> ()
 ) {
-    let dataTask = URLSession.shared.dataTask(with: url) { (data: Data?, response: URLResponse?, error: Error?) in
-//        if let httpResponse = response as? HTTPURLResponse {
-//            print(httpResponse.statusCode)
-//            print(httpResponse.debugDescription)
-//        }
+    let dataTask = URLSession.shared.dataTask(with: url) { (data: Data?, _: URLResponse?, error: Error?) in
         
         if error != nil {
             completion(UIImage(named: Bool.random() ? "102_d" : "102")!.resizedForWidget)
