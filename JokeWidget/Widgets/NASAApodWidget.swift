@@ -33,12 +33,12 @@ struct NASAApodTimelineProvider: IntentTimelineProvider {
     
     func getTimeline(for configuration: NASAWidgetConfigIntent, in context: Context, completion: @escaping (Timeline<NASAApodEntry>) -> Void) {
         fetchNASAApod(showTitle: configuration.showTitle as? Bool) { (newEntry: NASAApodEntry, didError: Bool) in
-            // if success fetch new image tomorrow
-            let tomorrowComponents = DateComponents(day: 1)
-            let tomorrow = Calendar.current.date(byAdding: tomorrowComponents, to: newEntry.date)!
+            // if success fetch new image after 12 hours
+            let halfDayComponent = DateComponents(hour: 12)
+            let tomorrow = Calendar.current.date(byAdding: halfDayComponent, to: newEntry.date)!
             
             // if errored retry after an hour
-            let nextHourComponents = DateComponents(day: 1)
+            let nextHourComponents = DateComponents(hour: 1)
             let nextHour = Calendar.current.date(byAdding: nextHourComponents, to: newEntry.date)!
             
             let nextReloadDate = didError ? tomorrow : nextHour
@@ -71,6 +71,7 @@ struct NASAApodEntryView: View {
                     .background(gradient)
                     .cornerRadius(5)
                     .padding(.bottom, 5)
+                    .padding(.horizontal, 25)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                     .multilineTextAlignment(.center)
             }
@@ -94,7 +95,7 @@ struct NASAApodWidget: Widget {
         )
         .configurationDisplayName("NASA Apod Widget")
         .description("This widget will show an image from NASA's website for today.")
-        .supportedFamilies([.systemSmall, .systemLarge, .systemExtraLarge])
+        .supportedFamilies([.systemLarge, .systemExtraLarge])
     }
 }
 

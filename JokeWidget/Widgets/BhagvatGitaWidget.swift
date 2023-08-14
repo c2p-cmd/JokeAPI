@@ -8,8 +8,6 @@
 import SwiftUI
 import WidgetKit
 
-var firstResponse = BhagvatGitaResponse(chapterNo: 1, shlokNo: 1, shlok: "धृतराष्ट्र उवाच |\nधर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः |\nमामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय ||१-१||", englishTranslation: "1.1 The King Dhritarashtra asked: \"O Sanjaya! What happened on the sacred battlefield of Kurukshetra, when my people gathered against the Pandavas?\"", hindiTranslation: "।।1.1।।धृतराष्ट्र ने कहा -- हे संजय ! धर्मभूमि कुरुक्षेत्र में एकत्र हुए युद्ध के इच्छुक (युयुत्सव:) मेरे और पाण्डु के पुत्रों ने क्या किया?", englishAuthor: "Shri Purohit Swami", hindiAuthor: "Swami Tejomayananda")
-
 struct BhagvatGitaEntry: TimelineEntry {
     let date: Date
     let bhagwatGitaResponse: BhagvatGitaResponse
@@ -26,7 +24,7 @@ struct BhagvatGitaEntry: TimelineEntry {
     }
     
     static func randomShloka() -> BhagvatGitaEntry {
-        let randomShloka = getShlokas().randomElement()!
+        let randomShloka: BhagvatGitaResponse = .getShlokas().randomElement()!
         return BhagvatGitaEntry(randomShloka)
     }
 }
@@ -36,18 +34,49 @@ struct BhagvatGitaProvider: IntentTimelineProvider {
         BhagvatGitaEntry.randomShloka()
     }
     
-    func getSnapshot(for configuration: GitaLanguageIntent, in context: Context, completion: @escaping (BhagvatGitaEntry) -> Void) {
+    func getSnapshot(
+        for configuration: GitaLanguageIntent,
+        in context: Context,
+        completion: @escaping (BhagvatGitaEntry) -> Void
+    ) {
         if context.isPreview {
             completion(placeholder(in: context))
             return
         }
         
-        let entry = BhagvatGitaEntry(firstResponse, in: configuration.language)
+        let entry = BhagvatGitaEntry(UserDefaults.defaultBhagvadGitaResponse, in: configuration.language)
         completion(entry)
     }
     
-    func getTimeline(for configuration: GitaLanguageIntent, in context: Context, completion: @escaping (Timeline<BhagvatGitaEntry>) -> Void) {
-        let shlokas = getShlokas()
+    func getTimeline(
+        for configuration: GitaLanguageIntent,
+        in context: Context,
+        completion: @escaping (Timeline<BhagvatGitaEntry>) -> Void
+    ) {
+        getBhagvadGitaShloka { response, error in
+            if error != nil {
+                let timeline = buildTimeLineFromStaticData(for: configuration)
+                completion(timeline)
+            }
+            
+            if let response {
+                let entry = BhagvatGitaEntry(response, in: configuration.language)
+                
+                let component = DateComponents(hour: 12)
+                let reloadDate = Calendar.current.date(byAdding: component, to: .now)!
+                
+                let timeline = Timeline(entries: [entry], policy: .after(reloadDate))
+                
+                completion(timeline)
+            }
+        }
+    }
+    
+    // old Logic for buildingtimeline
+    func buildTimeLineFromStaticData(
+        for configuration: GitaLanguageIntent
+    ) -> Timeline<BhagvatGitaEntry> {
+        let shlokas = BhagvatGitaResponse.getShlokas()
         var entries: [BhagvatGitaEntry] = []
         
         for hourOffset in 0..<shlokas.count {
@@ -59,8 +88,7 @@ struct BhagvatGitaProvider: IntentTimelineProvider {
             entries.append(entry)
         }
         
-        let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
+        return Timeline(entries: entries, policy: .atEnd)
     }
 }
 
@@ -72,60 +100,36 @@ struct BhagvatGitaLargeEntryView: View {
     }
     
     var body: some View {
-        modifyForiOS17(ZStack {
-            background()
-            
-            let brown = Color(red: 104/256, green: 63/256, blue: 17/256)
-            
-            VStack(spacing: 45) {
-                Text(bhagvatGitaResponse.shlok)
-                    .font(.custom("Devanagari Sangam MN", size: 18))
-                    .animation(.easeInOut)
+        modifyForiOS17 {
+            ZStack {
+                background()
                 
-                switch entry.languageChoice {
-                case .english:
-                    Text(bhagvatGitaResponse.englishTranslation)
-                        .font(.custom("handwriting-draft_free-version", size: 16.5))
-                        .animation(.easeInOut)
-                case .hindi:
-                    Text(bhagvatGitaResponse.hindiTranslation.replacingOccurrences(of: " ", with: "  "))
+                let brown = Color(red: 104/256, green: 63/256, blue: 17/256)
+                
+                VStack(spacing: 45) {
+                    Text(bhagvatGitaResponse.shlok)
                         .font(.custom("Devanagari Sangam MN", size: 18))
                         .animation(.easeInOut)
-                case .unknown:
-                    Text("")
-                }
-            }
-            .multilineTextAlignment(.leading)
-            .foregroundColor(brown)
-            .minimumScaleFactor(0.75)
-            .padding(.all, 25)
-            
-            VStack(spacing: 10) {
-                Spacer()
-                
-                switch entry.languageChoice {
-                case .english:
-                    HStack {
-                        Spacer()
-                        Text("-\(bhagvatGitaResponse.englishAuthor)")
-                            .font(.custom("handwriting-draft_free-version", size: 12.5))
-                    }
-                case .hindi:
-                    HStack {
-                        Spacer()
-                        Text("-\(bhagvatGitaResponse.englishAuthor)")
-                            .font(.custom("Devanagari Sangam MN", size: 12.5))
+                    
+                    switch entry.languageChoice {
+                    case .english:
+                        Text(bhagvatGitaResponse.englishTranslation)
+                            .font(.custom("handwriting-draft_free-version", size: 16.5))
                             .animation(.easeInOut)
+                    case .hindi:
+                        Text(bhagvatGitaResponse.hindiTranslation.replacingOccurrences(of: " ", with: "  "))
+                            .font(.custom("Devanagari Sangam MN", size: 18))
+                            .animation(.easeInOut)
+                    case .unknown:
+                        Text("")
                     }
-                case .unknown:
-                    Text("")
                 }
+                .multilineTextAlignment(.leading)
+                .foregroundColor(brown)
+                .minimumScaleFactor(0.75)
+                .padding(.all, 25)
             }
-            .multilineTextAlignment(.leading)
-            .foregroundColor(brown)
-            .minimumScaleFactor(0.75)
-            .padding(.all, 27)
-        })
+        }
     }
     
     private func background() -> some View {
@@ -137,11 +141,11 @@ struct BhagvatGitaLargeEntryView: View {
             .ignoresSafeArea()
     }
     
-    private func modifyForiOS17(_ content: some View) -> some View {
+    private func modifyForiOS17(_ content: () -> some View) -> some View {
         if #available(iOS 17, *) {
-            return content.containerBackground(.clear, for: .widget)
+            return content().containerBackground(.clear, for: .widget)
         } else {
-            return content.background(background())
+            return content().background(background())
         }
     }
 }
@@ -154,41 +158,31 @@ struct BhagvatGitaMediumEntryView: View {
     }
     
     var body: some View {
-        modifyForiOS17(ZStack {
-            background()
-            
-            let brown = Color(red: 104/256, green: 63/256, blue: 17/256)
-            
-            VStack(spacing: 18) {
-                switch entry.languageChoice {
-                case .english:
-                    Text(bhagvatGitaResponse.englishTranslation)
-                        .font(.custom("handwriting-draft_free-version", size: 18))
-                        .animation(.easeInOut)
-                    
-                    HStack {
-                        Spacer()
-                        Text("-\(bhagvatGitaResponse.englishAuthor)")
-                            .font(.custom("handwriting-draft_free-version", size: 12.5))
+        modifyForiOS17 {
+            ZStack {
+                background()
+                
+                let brown = Color(red: 104/256, green: 63/256, blue: 17/256)
+                
+                VStack(spacing: 18) {
+                    switch entry.languageChoice {
+                    case .english:
+                        Text(bhagvatGitaResponse.englishTranslation)
+                            .font(.custom("handwriting-draft_free-version", size: 18))
+                            .animation(.easeInOut)
+                    case .hindi:
+                        Text(bhagvatGitaResponse.hindiTranslation.replacingOccurrences(of: " ", with: "  "))
+                            .font(.custom("Devanagari Sangam MN", size: 18))
+                            .animation(.easeInOut)
+                    case .unknown:
+                        Text("")
                     }
-                case .hindi:
-                    Text(bhagvatGitaResponse.hindiTranslation.replacingOccurrences(of: " ", with: "  "))
-                        .font(.custom("Devanagari Sangam MN", size: 18))
-                        .animation(.easeInOut)
-                    
-                    HStack {
-                        Spacer()
-                        Text("-\(bhagvatGitaResponse.hindiAuthor)")
-                            .font(.custom("handwriting-draft_free-version", size: 12.5))
-                    }
-                case .unknown:
-                    Text("")
                 }
+                .foregroundColor(brown)
+                .minimumScaleFactor(0.75)
+                .padding(.all, 25)
             }
-            .foregroundColor(brown)
-            .minimumScaleFactor(0.75)
-            .padding(.all, 25)
-        })
+        }
     }
     
     private func background() -> some View {
@@ -199,11 +193,11 @@ struct BhagvatGitaMediumEntryView: View {
             .ignoresSafeArea()
     }
     
-    private func modifyForiOS17(_ content: some View) -> some View {
+    private func modifyForiOS17(_ content: () -> some View) -> some View {
         if #available(iOS 17, *) {
-            return content.invalidatableContent().containerBackground(.clear, for: .widget)
+            return content().invalidatableContent().containerBackground(.clear, for: .widget)
         } else {
-            return content.background(background())
+            return content().background(background())
         }
     }
 }
@@ -225,10 +219,4 @@ struct BhagvatGitaWidget: Widget {
         .description("Everyday learn something new.")
         .supportedFamilies([.systemMedium])
     }
-}
-
-#Preview(as: .systemMedium) {
-    BhagvatGitaWidget()
-} timeline: {
-    return getShlokas().map { BhagvatGitaEntry($0, in: .english) }
 }
