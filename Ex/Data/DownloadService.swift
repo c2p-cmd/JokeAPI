@@ -7,7 +7,7 @@
 
 import Foundation
 
-private let urlString = (configPlist.value(forKey: "SpeedTestFile URL") as? String) ?? "http://speedtest.tele2.net/10MB.zip"
+private let urlString = (configPlist.value(forKey: "SpeedTestFile URL") as? String)!
 let url = URL(string: urlString)!
 
 class DownloadService: NSObject, SpeedService {
@@ -21,34 +21,28 @@ class DownloadService: NSObject, SpeedService {
     
     private override init() { }
     
-    func testWithPing(for url: URL, in timeout: TimeInterval) async -> Result<(Int, Speed), Error> {
-        async let ping = url.ping(timeout: timeout)
-        async let result = self.test(for: url, in: timeout)
-        
-        do {
-            let pingMS = try await ping.get()
-            let speed = try await result.get()
-            
-            return .success((pingMS, speed))
-        } catch {
-            return .failure(error)
-        }
-    }
-    
     func test(
         for url: URL,
         in timeout: TimeInterval
     ) async -> Result<Speed, Error> {
         do {
-            let res = try await withCheckedThrowingContinuation { continuation in
-                self.test(for: url, timeout: 60, current: { _, __ in }, final: {
-                    result in continuation.resume(returning: result)
-                })
+            let res: Speed = try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Speed, Error>) in
+                self.speedTestMayErrorContinuation(for: url, in: timeout, continuation: continuation)
             }
             
-            return res
+            return .success(res)
         } catch {
             return .failure(error)
+        }
+    }
+    
+    private func speedTestMayErrorContinuation(
+        for url: URL,
+        in timeout: TimeInterval,
+        continuation: CheckedContinuation<Speed, Error>
+    ) {
+        test(for: url, timeout: 60) { (result: Result<Speed, Error>) in
+            continuation.resume(with: result)
         }
     }
     
@@ -100,7 +94,10 @@ extension DownloadService: URLSessionDownloadDelegate {
         self.responseDate = nil
     }
     
-    func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
+    func urlSession(
+        _ session: URLSession,
+        didBecomeInvalidWithError error: Error?
+    ) {
         if error != nil {
             print("url session1")
             self.final?(.failure(NetworkError.requestFailed))
@@ -108,7 +105,11 @@ extension DownloadService: URLSessionDownloadDelegate {
         }
     }
     
-    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+    func urlSession(
+        _ session: URLSession,
+        task: URLSessionTask,
+        didCompleteWithError error: Error?
+    ) {
         if error != nil {
             print(error.debugDescription)
             print("task is \(task.error.debugDescription)")
@@ -127,7 +128,9 @@ extension DownloadService: URLSessionDownloadDelegate {
         totalBytesWritten: Int64,
         totalBytesExpectedToWrite: Int64
     ) {
-        guard let startDate = responseDate, let latesDate = latestDate else {
+        guard let startDate = responseDate,
+              let latesDate = latestDate
+        else {
             responseDate = Date();
             latestDate = responseDate
             print("reset response date")
