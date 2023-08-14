@@ -129,11 +129,15 @@ class SpeedTestViews: ObservableObject, Identifiable {
     static let shared = SpeedTestViews()
     
     private init() {
-        self.savedSpeed = UserDefaults.savedSpeed
+        let (savedSpeed, savedDate) = UserDefaults.savedSpeedWithDate
+        self.savedSpeed = savedSpeed
+        self.date = savedDate
         self.getNewSpeed()
     }
     
     let id: UUID = UUID()
+    
+    @Published var date: Date?
     @Published var savedSpeed: Speed
     var isBusy = false
     
@@ -149,11 +153,18 @@ class SpeedTestViews: ObservableObject, Identifiable {
                         Text("Download Speed")
                             .font(.custom("DS-Digital", size: 16.5))
                         
-                        Text(self.savedSpeed.widgetDescription())
-                            .font(.custom("DS-Digital", size: 30))
+                        if date == nil {
+                            Text("----")
+                                .font(.custom("DS-Digital", size: 30))
+                        } else {
+                            Text(self.savedSpeed.widgetDescription())
+                                .font(.custom("DS-Digital", size: 30))
+                        }
                         
-                        Text(Date().formatted(date: .omitted, time: .shortened))
-                            .font(.custom("DS-Digital", size: 19))
+                        if let date {
+                            Text(date.formatted(date: .omitted, time: .shortened))
+                                .font(.custom("DS-Digital", size: 19))
+                        }
                     }
                 }
                 .padding(.trailing, 25)
@@ -173,14 +184,15 @@ class SpeedTestViews: ObservableObject, Identifiable {
         isBusy = true
         
         Task {
-            let result = await DownloadService.shared.testWithPing(for: url, in: 60)
+            let result = await DownloadService.shared.test(for: url, in: 60)
             
             switch result {
-            case .success(let (ping, speed)):
+            case .success(let speed):
                 DispatchQueue.main.async {
                     withAnimation {
                         self.savedSpeed = speed
-                        UserDefaults.saveNewSpeedWithPing(ping: ping, speed: speed)
+                        self.date = .now
+                        UserDefaults.saveNewSpeed(speed: speed, at: .now)
                     }
                 }
                 break
@@ -524,7 +536,7 @@ class BhagvatGitaView: Identifiable {
     static let shared = BhagvatGitaView()
     
     private init() {
-        self.bhagwatGitaResponse = getShlokas().randomElement()!
+        self.bhagwatGitaResponse = UserDefaults.savedBhagvatGitaResponses.randomElement()!
     }
     
     let id: UUID = UUID()
