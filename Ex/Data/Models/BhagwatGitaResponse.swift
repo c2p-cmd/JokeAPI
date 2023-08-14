@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BhagvatGitaResponse: Codable {
+class BhagvatGitaResponse: Codable, RawRepresentable {
     let chapterNo: Int
     let shlokNo: Int
     let shlok: String
@@ -37,6 +37,41 @@ class BhagvatGitaResponse: Codable {
         self.hindiAuthor = try container.decode(String.self, forKey: .hindiAuthor)
     }
     
+    required init?(rawValue: String) {
+        guard let data = rawValue.data(using: .utf8),
+              let value = try? JSONDecoder().decode(BhagvatGitaResponse.self, from: data)
+        else {
+            return nil
+        }
+        self.englishAuthor = value.englishAuthor
+        self.englishTranslation = value.englishTranslation
+        self.hindiAuthor = value.hindiAuthor
+        self.hindiTranslation = value.hindiTranslation
+        self.chapterNo = value.chapterNo
+        self.shlok = value.shlok
+        self.shlokNo = value.shlokNo
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.chapterNo, forKey: .chapterNo)
+        try container.encode(self.shlokNo, forKey: .shlokNo)
+        try container.encode(self.shlok, forKey: .shlok)
+        try container.encode(self.englishTranslation, forKey: .englishTranslation)
+        try container.encode(self.hindiTranslation, forKey: .hindiTranslation)
+        try container.encode(self.englishAuthor, forKey: .englishAuthor)
+        try container.encode(self.hindiAuthor, forKey: .hindiAuthor)
+    }
+    
+    var rawValue: String {
+        guard let data = try? JSONEncoder().encode(self),
+              let json = String(data: data, encoding: .utf8)
+        else {
+            return "{}"
+        }
+        return json
+    }
+    
     enum CodingKeys: String, CodingKey {
         case chapterNo = "chapter_no"
         case shlokNo = "shlok_no"
@@ -50,20 +85,18 @@ class BhagvatGitaResponse: Codable {
 
 
 // static data
-func getShlokas() -> [BhagvatGitaResponse] {
-    let shlokaUrl = Bundle.main.url(forResource: "Shlokas", withExtension: "json")
-    guard let shlokaUrl else {
-        print("No url")
-        return [firstResponse]
+extension BhagvatGitaResponse {
+    static func getShlokas() -> [BhagvatGitaResponse] {
+        let shlokaUrl = Bundle.main.url(forResource: "Shlokas", withExtension: "json")
+        
+        guard let shlokaUrl = shlokaUrl,
+              let data = try? Data(contentsOf: shlokaUrl),
+              let shlokaList = try? JSONDecoder().decode([BhagvatGitaResponse].self, from: data)
+        else {
+            print("No data")
+            return [UserDefaults.defaultBhagvadGitaResponse]
+        }
+        
+        return shlokaList
     }
-    guard let data = try? Data(contentsOf: shlokaUrl) else {
-        print("NO data")
-        return [firstResponse]
-    }
-    guard let shlokaList = try? JSONDecoder().decode([BhagvatGitaResponse].self, from: data) else {
-        print("No data")
-        return [firstResponse]
-    }
-    
-    return shlokaList
 }
