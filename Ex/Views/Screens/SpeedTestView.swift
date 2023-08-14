@@ -82,3 +82,7 @@ struct SpeedTestView: View {
         )
     }
 }
+
+#Preview {
+    SpeedTestView()
+}
