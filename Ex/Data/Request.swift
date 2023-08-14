@@ -43,6 +43,58 @@ var configPlist: NSDictionary = {
 }()
 
 
+// MARK: - BhagwatGita API
+func getBhagvadGitaShloka() async -> Result<BhagvatGitaResponse, Error> {
+    let deviceId: String? = await UIDevice.current.identifierForVendor?.uuidString
+    let urlString = "https://7c8b-219-91-171-119.ngrok-free.app/bhagvadgita/\(deviceId ?? "nil")/"
+    
+    guard let url = URL(string: urlString) else {
+        let error = NetworkError(message: "Bad URL")
+        return .failure(error)
+    }
+    
+    do {
+        let (data, _) = try await URLSession.shared.data(from: url)
+        
+        let bhagvadGitaResponse = try JSONDecoder().decode(BhagvatGitaResponse.self, from: data)
+        
+        return .success(bhagvadGitaResponse)
+    } catch {
+        return .failure(error)
+    }
+}
+
+// MARK: - BhagwatGita API
+func getBhagvadGitaShloka(
+    completion: @escaping (BhagvatGitaResponse?, Error?) -> Void
+) {
+    let deviceId: String? = UIDevice.current.identifierForVendor?.uuidString
+    let urlString = "https://7c8b-219-91-171-119.ngrok-free.app/bhagvadgita/\(deviceId ?? "nil")/"
+    
+    guard let url = URL(string: urlString) else {
+        let error = NetworkError(message: "Bad URL")
+        completion(nil, error)
+        return
+    }
+    
+    URLSession.shared.dataTask(with: url) { data, _, error in
+        if let data {
+            do {
+                print(String(decoding: data, as: UTF8.self))
+                let response = try JSONDecoder().decode(BhagvatGitaResponse.self, from: data)
+                completion(response, nil)
+            } catch {
+                completion(nil, error)
+            }
+        }
+        
+        if let error {
+            completion(nil, error)
+        }
+    }.resume()
+}
+
+
 // MARK: - TV Show Quote
 func getTVShowQuote(
     from tvShow: String = TVShowQuoteResponses.allShows.randomElement()!,
@@ -85,7 +137,7 @@ func getTVShowQuote(
     urlString.append("/\(count)")
     let queryItems = [
         URLQueryItem(name: "show", value: tvShow),
-        URLQueryItem(name: "short", value: keepShort.description)
+        URLQueryItem(name: "short", value: "\(keepShort)")
     ]
     guard let url = URL(string: urlString)?.appending(queryItems: queryItems) else {
         fatalError(URLError(.badURL).localizedDescription)
