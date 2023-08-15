@@ -48,6 +48,13 @@
 		004D9B432A4DA50600199886 /* NewConfigIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B3F2A4D9E5600199886 /* NewConfigIntent.swift */; };
 		005048F52A6E95F200328710 /* FlirtyLineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005048F42A6E95F200328710 /* FlirtyLineModel.swift */; };
 		005048F62A6E95F200328710 /* FlirtyLineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005048F42A6E95F200328710 /* FlirtyLineModel.swift */; };
+		0050BDE92A8B740700D3162A /* NextMCUFilm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050BDE82A8B740700D3162A /* NextMCUFilm.swift */; };
+		0050BDEA2A8B76E400D3162A /* NextMCUFilm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050BDE82A8B740700D3162A /* NextMCUFilm.swift */; };
+		0050BDED2A8B79B200D3162A /* NextMCUFILMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050BDEC2A8B79B200D3162A /* NextMCUFILMView.swift */; };
+		0050BDEF2A8BDB3A00D3162A /* MCUFilms.json in Resources */ = {isa = PBXBuildFile; fileRef = 0050BDEE2A8BDB3A00D3162A /* MCUFilms.json */; };
+		0050BDF02A8BDB3A00D3162A /* MCUFilms.json in Resources */ = {isa = PBXBuildFile; fileRef = 0050BDEE2A8BDB3A00D3162A /* MCUFilms.json */; };
+		0050BDF12A8BDB3A00D3162A /* MCUFilms.json in Resources */ = {isa = PBXBuildFile; fileRef = 0050BDEE2A8BDB3A00D3162A /* MCUFilms.json */; };
+		0050BDF32A8BE0E100D3162A /* NextMCUFilmWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050BDF22A8BE0E100D3162A /* NextMCUFilmWidget.swift */; };
 		00511CE22A2C911F00D1FD13 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00511CE12A2C911F00D1FD13 /* Request.swift */; };
 		00511CEA2A2C960300D1FD13 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00511CE92A2C960300D1FD13 /* WidgetKit.framework */; };
 		00511CEC2A2C960300D1FD13 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00511CEB2A2C960300D1FD13 /* SwiftUI.framework */; };
@@ -192,6 +199,10 @@
 		004D9B3D2A4D99CD00199886 /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
 		004D9B3F2A4D9E5600199886 /* NewConfigIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConfigIntent.swift; sourceTree = "<group>"; };
 		005048F42A6E95F200328710 /* FlirtyLineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlirtyLineModel.swift; sourceTree = "<group>"; };
+		0050BDE82A8B740700D3162A /* NextMCUFilm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextMCUFilm.swift; sourceTree = "<group>"; };
+		0050BDEC2A8B79B200D3162A /* NextMCUFILMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextMCUFILMView.swift; sourceTree = "<group>"; };
+		0050BDEE2A8BDB3A00D3162A /* MCUFilms.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MCUFilms.json; sourceTree = "<group>"; };
+		0050BDF22A8BE0E100D3162A /* NextMCUFilmWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextMCUFilmWidget.swift; sourceTree = "<group>"; };
 		00511CE12A2C911F00D1FD13 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		00511CE72A2C960300D1FD13 /* JokeWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = JokeWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		00511CE92A2C960300D1FD13 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = Library/Frameworks/WidgetKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -295,6 +306,7 @@
 				00AC0A252A8641C900798580 /* TVShowQuoteResponse.swift */,
 				00AC0A6C2A867E8000798580 /* Array+RawRepresentable.swift */,
 				007F29B42A8A3D7600D729D0 /* Date+RawRepresentale.swift */,
+				0050BDE82A8B740700D3162A /* NextMCUFilm.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -310,6 +322,7 @@
 				00D004B52A65963500D51C7E /* JokeType.swift */,
 				00F5230C2A8103400046576E /* Shlokas.json */,
 				00AC0A272A8642B300798580 /* TVShowQuotes.json */,
+				0050BDEE2A8BDB3A00D3162A /* MCUFilms.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -432,6 +445,7 @@
 				0043377D2A339DBD004AF73F /* JokeView.swift */,
 				00AC0A2B2A86515400798580 /* TVShowQuotesView.swift */,
 				007F29B22A8A332500D729D0 /* BhagwatGitaResponseView.swift */,
+				0050BDEC2A8B79B200D3162A /* NextMCUFILMView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -464,6 +478,7 @@
 				009CEBCA2A72645A00E3D2E7 /* FunFactAboutTodayWidget.swift */,
 				00F5230F2A81043F0046576E /* BhagvatGitaWidget.swift */,
 				00AC0A542A865F5D00798580 /* TVShowQuoteWidget.swift */,
+				0050BDF22A8BE0E100D3162A /* NextMCUFilmWidget.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -611,6 +626,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00A605252A6FF6CB00AF5FD0 /* DS-DIGIB.TTF in Resources */,
+				0050BDEF2A8BDB3A00D3162A /* MCUFilms.json in Resources */,
 				00D004B12A65618200D51C7E /* SubscribeShadowRegular.ttf in Resources */,
 				00A6051F2A6FEE2D00AF5FD0 /* DigitalDisplayRegular.ttf in Resources */,
 				00F5230D2A8103400046576E /* Shlokas.json in Resources */,
@@ -637,6 +653,7 @@
 				00A605262A6FF6CB00AF5FD0 /* DS-DIGIB.TTF in Resources */,
 				00B799B22A6985D300F66EC5 /* RAVIE.TTF in Resources */,
 				00AC0A292A8642B300798580 /* TVShowQuotes.json in Resources */,
+				0050BDF02A8BDB3A00D3162A /* MCUFilms.json in Resources */,
 				00F5230E2A8103400046576E /* Shlokas.json in Resources */,
 				00D004B22A65618200D51C7E /* SubscribeShadowRegular.ttf in Resources */,
 				00A07F762A5D7B85006FC4DB /* Config.plist in Resources */,
@@ -653,6 +670,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0050BDF12A8BDB3A00D3162A /* MCUFilms.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -663,6 +681,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0050BDE92A8B740700D3162A /* NextMCUFilm.swift in Sources */,
+				0050BDED2A8B79B200D3162A /* NextMCUFILMView.swift in Sources */,
 				00134F1C2A514D080091D6FD /* SpeedModel.swift in Sources */,
 				001CB1F62A67ED1200458B60 /* MemeGeneratorModels.swift in Sources */,
 				004CA8492A793EEB005B4F07 /* GifImage.swift in Sources */,
@@ -729,6 +749,7 @@
 				00511CFC2A2C961200D1FD13 /* Request.swift in Sources */,
 				00898D042A683CE8008EF693 /* RedditMemeWidget.swift in Sources */,
 				0058ABA32A66BC3F0050FA96 /* CuteAnimalWidget.swift in Sources */,
+				0050BDEA2A8B76E400D3162A /* NextMCUFilm.swift in Sources */,
 				009CEBCB2A72645A00E3D2E7 /* FunFactAboutTodayWidget.swift in Sources */,
 				003BD2692A4D72B3009FDFAC /* MyIntents.swift in Sources */,
 				004D9B402A4D9E5600199886 /* NewConfigIntent.swift in Sources */,
@@ -739,6 +760,7 @@
 				00E4B58A2A4C6E580064E63C /* QuoteWidget.swift in Sources */,
 				00134F2A2A514E820091D6FD /* URL+ping.swift in Sources */,
 				001ACE0B2A4EBA2E000CE9AF /* UIImage+resize.swift in Sources */,
+				0050BDF32A8BE0E100D3162A /* NextMCUFilmWidget.swift in Sources */,
 				004D9B3E2A4D99CD00199886 /* ImageProvider.swift in Sources */,
 				00A6051D2A6FE09600AF5FD0 /* NumberAPIURLS.swift in Sources */,
 				00E4B5852A4C4B4D0064E63C /* MultiSelection.swift in Sources */,

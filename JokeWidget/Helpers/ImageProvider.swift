@@ -8,6 +8,23 @@
 import UIKit
 
 func fetchImage(
+    from url: URL
+) async -> (UIImage, Bool) {
+    do {
+        let (data, _) = try await URLSession.shared.data(from: url)
+        
+        guard let image = UIImage(data: data) else {
+            return (UIImage(systemName: "exclamationmark.triangle.fill")!, false)
+        }
+        
+        return (image.resizedForWidget, true)
+    } catch {
+        print(error.localizedDescription)
+        return (UIImage(systemName: "exclamationmark.triangle.fill")!, false)
+    }
+}
+
+func fetchImage(
     from url: URL,
     completion: @escaping (UIImage, Bool) -> Void
 ) {
@@ -15,11 +32,12 @@ func fetchImage(
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             
-            if let image = UIImage(data: data) {
-                completion(image.resizedForWidget, true)
-            } else {
+            guard let image = UIImage(data: data) else {
                 completion(UIImage(systemName: "exclamationmark.triangle.fill")!, false)
+                return
             }
+            
+            completion(image.resizedForWidget, true)
         } catch {
             print(error.localizedDescription)
             completion(UIImage(systemName: "exclamationmark.triangle.fill")!, false)

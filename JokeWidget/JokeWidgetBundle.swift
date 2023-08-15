@@ -23,6 +23,16 @@ struct JokeWidgetBundle: WidgetBundle {
         
         TVShowQuoteWidget()
         
+        MoreWidgets().body
+    }
+}
+
+struct MoreWidgets: WidgetBundle {
+    
+    @WidgetBundleBuilder
+    var body: some Widget {
+        NextMCUFilmWidget()
+        
         FunFactAboutTodayWidget()
         
         CuteAnimalWidget()

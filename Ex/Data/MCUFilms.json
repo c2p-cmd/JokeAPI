@@ -1,0 +1,66 @@
+[
+  {
+    "days_until": -3576,
+    "following_production": {
+      "days_until": -3435,
+      "overview": "After the cataclysmic events in New York with The Avengers, Steve Rogers, aka Captain America is living quietly in Washington, D.C. and trying to adjust to the modern world. But when a S.H.I.E.L.D. colleague comes under attack, Steve becomes embroiled in a web of intrigue that threatens to put the world at risk. Joining forces with the Black Widow, Captain America struggles to expose the ever-widening conspiracy while fighting off professional assassins sent to silence him at every turn. When the full scope of the villainous plot is revealed, Captain America and the Black Widow enlist the help of a new ally, the Falcon. However, they soon find themselves up against an unexpected and formidable enemy—the Winter Soldier.",
+      "poster_url": "https://image.tmdb.org/t/p/w500/tVFRpFw3xTedgPGqxW0AOI8Qhh0.jpg",
+      "release_date": "2014-03-20",
+      "title": "Captain America: The Winter Soldier",
+      "type": "Movie"
+    },
+    "overview": "Thor fights to restore order across the cosmos… but an ancient race led by the vengeful Malekith returns to plunge the universe back into darkness. Faced with an enemy that even Odin and Asgard cannot withstand, Thor must embark on his most perilous and personal journey yet, one that will reunite him with Jane Foster and force him to sacrifice everything to save us all.",
+    "poster_url": "https://image.tmdb.org/t/p/w500/wp6OxE4poJ4G7c0U2ZIXasTSMR7.jpg",
+    "release_date": "2013-10-30",
+    "title": "Thor: The Dark World",
+    "type": "Movie"
+  },
+  {
+    "days_until": 85,
+    "following_production": {
+      "days_until": 106,
+      "overview": "After her ruthless behavior in New York City catches up with her in her hometown, Maya Lopez must face her past, reconnect with her Native American roots and embrace the meaning of family and community if she ever hopes to move forward.",
+      "poster_url": "https://image.tmdb.org/t/p/w500/3bv5Dv3YmQfzg5ckQMwzCUQ89hU.jpg",
+      "release_date": "2023-11-29",
+      "title": "Echo",
+      "type": "TV Show"
+    },
+    "overview": "Carol Danvers, aka Captain Marvel, has reclaimed her identity from the tyrannical Kree and taken revenge on the Supreme Intelligence. But unintended consequences see Carol shouldering the burden of a destabilized universe. When her duties send her to an anomalous wormhole linked to a Kree revolutionary, her powers become entangled with that of Jersey City super-fan Kamala Khan, aka Ms. Marvel, and Carol’s estranged niece, now S.A.B.E.R. astronaut Captain Monica Rambeau. Together, this unlikely trio must team up and learn to work in concert to save the universe.",
+    "poster_url": "https://image.tmdb.org/t/p/w500/3Wt72AVKhWBwVgurzdKvDmyKQGj.jpg",
+    "release_date": "2023-11-08",
+    "title": "The Marvels",
+    "type": "Movie"
+  },
+  {
+    "days_until": -5585,
+    "following_production": {
+      "days_until": -5542,
+      "overview": "Scientist Bruce Banner scours the planet for an antidote to the unbridled force of rage within him: the Hulk. But when the military masterminds who dream of exploiting his powers force him back to civilization, he finds himself coming face to face with a new, deadly foe.",
+      "poster_url": "https://image.tmdb.org/t/p/w500/gKzYx79y0AQTL4UAk1cBQJ3nvrm.jpg",
+      "release_date": "2008-06-12",
+      "title": "The Incredible Hulk",
+      "type": "Movie"
+    },
+    "overview": "After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.",
+    "poster_url": "https://image.tmdb.org/t/p/w500/78lPtwv72eTNqFW9COBYI0dWDJa.jpg",
+    "release_date": "2008-04-30",
+    "title": "Iron Man",
+    "type": "Movie"
+  },
+  {
+    "days_until": -4499,
+    "following_production": {
+      "days_until": -4407,
+      "overview": "During World War II, Steve Rogers is a sickly man from Brooklyn who's transformed into super-soldier Captain America to aid in the war effort. Rogers must stop the Red Skull – Adolf Hitler's ruthless head of weaponry, and the leader of an organization that intends to use a mysterious device of untold powers for world domination.",
+      "poster_url": "https://image.tmdb.org/t/p/w500/vSNxAJTlD0r02V9sPYpOjqDZXUK.jpg",
+      "release_date": "2011-07-22",
+      "title": "Captain America: The First Avenger",
+      "type": "Movie"
+    },
+    "overview": "Against his father Odin's will, The Mighty Thor - a powerful but arrogant warrior god - recklessly reignites an ancient war. Thor is cast down to Earth and forced to live among humans as punishment. Once here, Thor learns what it takes to be a true hero when the most dangerous villain of his world sends the darkest forces of Asgard to invade Earth.",
+    "poster_url": "https://image.tmdb.org/t/p/w500/prSfAi1xGrhLQNxVSUFh61xQ4Qy.jpg",
+    "release_date": "2011-04-21",
+    "title": "Thor",
+    "type": "Movie"
+  }
+]

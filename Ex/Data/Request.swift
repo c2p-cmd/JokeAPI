@@ -43,6 +43,44 @@ var configPlist: NSDictionary = {
 }()
 
 
+// MARK: - NextMCUFilm API
+func getNextMCUFilm(
+    on date: Date? = nil,
+    completion: @escaping (Result<NextMcuFilm, Error>) -> Void
+) {
+    let urlString = configPlist.value(forKey: "NEXT MCU FILM API LINK") as! String
+    guard var url = URL(string: urlString) else {
+        completion(.failure(URLError(.badURL)))
+        return
+    }
+    
+    if let date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        let dateString = dateFormatter.string(from: date)
+        let dateQueryItem = URLQueryItem(name: "date", value: dateString)
+        
+        url.append(queryItems: [dateQueryItem])
+    }
+    
+    URLSession.shared.dataTask(with: url) { data, _, error in
+        if let error {
+            completion(.failure(error))
+        }
+        
+        if let data {
+            do {
+                let response = try JSONDecoder().decode(NextMcuFilm.self, from: data)
+                completion(.success(response))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }.resume()
+}
+
+
 // MARK: - BhagwatGita API
 func getBhagvadGitaShloka() async -> Result<BhagvatGitaResponse, Error> {
     let deviceId: String? = await UIDevice.current.identifierForVendor?.uuidString

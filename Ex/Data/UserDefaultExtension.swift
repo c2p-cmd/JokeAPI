@@ -10,6 +10,46 @@ import Foundation
 // MARK: - APPSTORAGE to use
 let appStorage = UserDefaults(suiteName: "group.com.kidastudios.mygroup")!
 
+// MARK: - MCU Films
+extension UserDefaults {
+    private static let mcuFilmRawValue = """
+{
+    "days_until": -4499,
+    "following_production": {
+      "days_until": -4407,
+      "overview": "During World War II, Steve Rogers is a sickly man from Brooklyn who's transformed into super-soldier Captain America to aid in the war effort. Rogers must stop the Red Skull – Adolf Hitler's ruthless head of weaponry, and the leader of an organization that intends to use a mysterious device of untold powers for world domination.",
+      "poster_url": "https://image.tmdb.org/t/p/w500/vSNxAJTlD0r02V9sPYpOjqDZXUK.jpg",
+      "release_date": "2011-07-22",
+      "title": "Captain America: The First Avenger",
+      "type": "Movie"
+    },
+    "overview": "Against his father Odin's will, The Mighty Thor - a powerful but arrogant warrior god - recklessly reignites an ancient war. Thor is cast down to Earth and forced to live among humans as punishment. Once here, Thor learns what it takes to be a true hero when the most dangerous villain of his world sends the darkest forces of Asgard to invade Earth.",
+    "poster_url": "https://image.tmdb.org/t/p/w500/prSfAi1xGrhLQNxVSUFh61xQ4Qy.jpg",
+    "release_date": "2011-04-21",
+    "title": "Thor",
+    "type": "Movie"
+  }
+"""
+    
+    static let defaultNextMCUFilmResponse = NextMcuFilm(rawValue: mcuFilmRawValue)!
+    
+    static var savedNextMCUFilmResponse: NextMcuFilm {
+        guard let responseRawValue = appStorage.string(forKey: "next_mcu_film"),
+              let response = NextMcuFilm(rawValue: responseRawValue)
+        else {
+            return ListofNextMCUFilms.getDummyData().randomElement()!
+        }
+        
+        return response
+    }
+    
+    static func saveNewNextMCUFilmResponse(
+        _ newFilm: NextMcuFilm
+    ) {
+        appStorage.setValue(newFilm.rawValue, forKey: "next_mcu_film")
+    }
+}
+
 // MARK: - BhagvadGita Response
 extension UserDefaults {
     static let defaultBhagvadGitaResponse = BhagvatGitaResponse(
