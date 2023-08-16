@@ -53,9 +53,10 @@ struct SpeedTimelineProvider: TimelineProvider {
                 case .success(let newSpeed):
                     UserDefaults.saveNewSpeed(newSpeed)
                     speedEntry.speed = newSpeed
+                    speedEntry.speedTestDate = .now
                     break
                 case .failure(_):
-                    speedEntry.speed = UserDefaults.savedSpeed
+                    (speedEntry.speed, speedEntry.speedTestDate) = UserDefaults.savedSpeedWithDate
                     break
                 }
                 

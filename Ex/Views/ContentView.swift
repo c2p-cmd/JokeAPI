@@ -57,6 +57,9 @@ struct MyTabView: View {
 }
 
 struct ContentView: View {
+    @State private var keys: [String] = []
+    @State private var showAlert = false
+    
     var body: some View {
         NavigationStack {
             VStack(alignment: .center) {
@@ -82,6 +85,39 @@ struct ContentView: View {
                             .foregroundStyle(.black)
                     }
                     .clipShape(Circle())
+                    
+                    Button("Clear All Keys") {
+                        showAlert = true
+                        print(appStorage.dictionaryRepresentation().keys.count)
+                    }
+                    .onAppear {
+                        self.keys = appStorage.dictionaryRepresentation().keys.map { $0.description }
+                        appStorage.dictionaryRepresentation().keys.map { $0.description }.forEach {
+                            print($0)
+                        }
+                    }
+                    .fullScreenCover(isPresented: $showAlert, content: {
+                        List {
+                            HStack {
+                                Button("Confirm?", role: .destructive) {
+                                    self.deleteAllKeys()
+                                }
+                                
+                                Spacer()
+                                
+                                Button("Cancel") {
+                                    showAlert = false
+                                }
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .foregroundColor(.black)
+                            
+                            ForEach(appStorage.dictionaryRepresentation().keys.map { $0.description }, id: \.self) { key in
+                                Text(key)
+                                    .foregroundStyle(.black)
+                            }
+                        }
+                    })
                 }
                 .labelStyle(.iconOnly)
                 .buttonStyle(.borderedProminent)
@@ -109,6 +145,14 @@ struct ContentView: View {
             .scaledToFill()
             .ignoresSafeArea()
             .background(gradient)
+    }
+    
+    private func deleteAllKeys() {
+        for (k, _) in appStorage.dictionaryRepresentation() {
+            print(k)
+            appStorage.removeObject(forKey: k)
+        }
+        appStorage.synchronize()
     }
 }
 

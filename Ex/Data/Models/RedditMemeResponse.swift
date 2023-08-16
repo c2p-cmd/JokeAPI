@@ -85,9 +85,7 @@ class RedditMemeResponse: Codable, RawRepresentable {
         self.title = try container.decode(String.self, forKey: .title)
         self.url = try container.decode(String.self, forKey: .url)
         
-        if let data = try container.decodeIfPresent(Data.self, forKey: .uiImage) {
-            self.uiImage = UIImage(data: data)
-        }
+        
     }
     
     var rawValue: String {
@@ -106,9 +104,7 @@ class RedditMemeResponse: Codable, RawRepresentable {
         try container.encode(self.title, forKey: .title)
         try container.encode(self.url, forKey: .url)
         
-        if let pngData = self.uiImage?.pngData() {
-            try container.encodeIfPresent(pngData, forKey: .uiImage)
-        }
+        
     }
     
     enum CodingKeys: String, CodingKey {

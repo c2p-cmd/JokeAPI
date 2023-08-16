@@ -10,6 +10,14 @@ import Foundation
 // MARK: - APPSTORAGE to use
 let appStorage = UserDefaults(suiteName: "group.com.kidastudios.mygroup")!
 
+extension UserDefaults {
+    enum Keys: String, CaseIterable {
+        case mcuFilm = "next_mcu_film"
+        case bhagvadGita = "bhagvad_gita_response"
+        case tvshowquotes = "tv_show_quotes"
+    }
+}
+
 // MARK: - MCU Films
 extension UserDefaults {
     private static let mcuFilmRawValue = """

@@ -15,6 +15,17 @@ struct ExApp: App {
                 .defaultAppStorage(appStorage)
                 .preferredColorScheme(.light)
                 .onAppear {
+//                    let domain = Bundle.main.bundleIdentifier!
+//                    appStorage.removePersistentDomain(forName: domain)
+//                    appStorage.synchronize()
+//                    print(domain)
+//                    print(Array(UserDefaults.standard.dictionaryRepresentation().keys).count)
+//                    print(Array(appStorage.dictionaryRepresentation().keys).count)
+//                    
+//                    for (k, _) in appStorage.dictionaryRepresentation() {
+//                        appStorage.removeObject(forKey: k)
+//                    }
+                    
                     let deviceId = UIDevice.current.identifierForVendor?.uuidString
                     print("My Device ID is: \(deviceId ?? "NO ID!")")
                 }
