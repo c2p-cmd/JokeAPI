@@ -210,23 +210,3 @@ struct NextMCUFilmWidget: Widget {
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
 }
-
-struct MCUFilmEntryView_Preview: PreviewProvider {
-    static var entry: MCUFilmEntry {
-        var e = ListofNextMCUFilms.getDummyData().map { film in
-            MCUFilmEntry(nextMCFUFilmResponse: film)
-        }[3]
-    
-        e.posterImage = UIImage(named: "Thor")
-        
-        return e
-    }
-    
-    static var previews: some View {
-        MCUFilmEntryView(entry: entry)
-            .previewContext(WidgetPreviewContext(family: .systemMedium))
-        
-        MCUFilmEntryView(entry: entry)
-            .previewContext(WidgetPreviewContext(family: .systemLarge))
-    }
-}
