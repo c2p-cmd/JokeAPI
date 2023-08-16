@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 class JokeViews: ObservableObject, Identifiable {
     static let shared = JokeViews()
@@ -284,39 +285,21 @@ class NASApodView: ObservableObject, Identifiable {
     var isBusy = false
     
     var views: [some View] {
-        let apodImage = AsyncImage(url: URL(string: apod.url)) {
-            $0.resizable()
-        } placeholder: {
-            Image("M31WideField_Ziegenbalg_960")
-                .resizable()
-        }
-        
-        let text = VStack {
-            Spacer()
-            Text(self.apod.title)
-                .foregroundStyle(.white)
-                .font(.system(size: 15, weight: .semibold, design: .rounded))
-                .background(LinearGradient(colors: [.black, .black.opacity(0.5), .black.opacity(0.1)], startPoint: .bottom, endPoint: .top))
-        }
-        
         return [
             GenericWidgetView(backgroundImage: {
-                apodImage
+                AsyncImage(url: URL(string: apod.url)) {
+                    $0.resizable()
+                } placeholder: {
+                    Image("M31WideField_Ziegenbalg_960")
+                        .resizable()
+                }
             }, textView: {
-                text
-            }, widgetFamily: .systemLarge),
-            
-            GenericWidgetView(backgroundImage: {
-                apodImage
-            }, textView: {
-                text
-            }, widgetFamily: .systemMedium),
-            
-            GenericWidgetView(backgroundImage: {
-                apodImage
-            }, textView: {
-                text
-            }, widgetFamily: .systemSmall)
+                Spacer()
+                Text(self.apod.title)
+                    .foregroundStyle(.white)
+                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+                    .background(LinearGradient(colors: [.black, .black.opacity(0.5), .black.opacity(0.1)], startPoint: .bottom, endPoint: .top))
+            }, widgetFamily: .systemLarge)
         ]
     }
     
@@ -642,6 +625,152 @@ class TVShowQuotesResponsesView: Identifiable, ObservableObject {
                 withAnimation {
                     self.tvShowQuote = responses.randomElement()!
                 }
+            }
+        }
+    }
+}
+
+class NextMCUFilmResponseView: Identifiable, ObservableObject {
+    static let shared = NextMCUFilmResponseView()
+    
+    @Published var mcuFilm: NextMcuFilm
+    let id: UUID = UUID()
+    private var isBusy = false
+    
+    private init() {
+        mcuFilm = ListofNextMCUFilms.getDummyData().randomElement()!
+        self.getNextMCUFilm()
+    }
+    
+    var views: [some View] {
+        let views: [any View] = [
+            ZStack {
+                imageBG(widgetFamily: .systemLarge)
+                
+                VStack {
+                    AsyncImage(url: URL(string: mcuFilm.posterUrl)) {
+                        $0.resizable()
+                    } placeholder: {
+                        ProgressView()
+                            .padding()
+                    }
+                    .scaledToFit()
+                    .frame(height: self.height(widgetFamily: .systemLarge))
+                    
+                    Text(mcuFilm.title)
+                        .font(.system(size: 18, weight: .bold, design: .rounded))
+                    
+                    Text(mcuFilm.theReleaseDate.formatted(date: .complete, time: .omitted))
+                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                }
+                .minimumScaleFactor(0.75)
+                .foregroundStyle(.white)
+                .padding(.all, 15)
+            }.modifier(ModifyForWidgetViewFrame(widgetFamily: .systemLarge))
+                .background(.clear),
+            
+            ZStack {
+                imageBG(widgetFamily: .systemMedium)
+                
+                HStack {
+                    AsyncImage(url: URL(string: mcuFilm.posterUrl)) {
+                        $0.resizable()
+                    } placeholder: {
+                        ProgressView()
+                            .padding()
+                    }
+                    .scaledToFit()
+                    .frame(height: self.height(widgetFamily: .systemMedium))
+                    
+                    VStack {
+                        Text(mcuFilm.title)
+                            .font(.system(size: 15, weight: .bold, design: .rounded))
+                        
+                        Text(mcuFilm.theReleaseDate.formatted(date: .complete, time: .omitted))
+                            .font(.system(size: 10, weight: .bold, design: .rounded))
+                    }
+                    .padding()
+                }
+                .minimumScaleFactor(0.75)
+                .foregroundStyle(.white)
+                .padding(.all, 15)
+            }.modifier(ModifyForWidgetViewFrame(widgetFamily: .systemMedium))
+                .background(.clear),
+            
+            ZStack {
+                imageBG(widgetFamily: .systemSmall)
+                
+                VStack {
+                    AsyncImage(url: URL(string: mcuFilm.posterUrl)) {
+                        $0.resizable()
+                    } placeholder: {
+                        ProgressView()
+                            .padding()
+                    }
+                    .scaledToFit()
+                    .frame(height: self.height(widgetFamily: .systemSmall))
+                    
+                    Text(mcuFilm.title)
+                        .font(.system(size: 15, weight: .bold, design: .rounded))
+                    
+                    Text(mcuFilm.theReleaseDate.formatted(date: .complete, time: .omitted))
+                        .font(.system(size: 10, weight: .bold, design: .rounded))
+                }
+                .minimumScaleFactor(0.75)
+                .foregroundStyle(.white)
+                .padding(.all, 15)
+            }.modifier(ModifyForWidgetViewFrame(widgetFamily: .systemSmall))
+                .background(.clear)
+        ]
+        
+        return views.map { AnyView($0) }
+    }
+    
+    private func imageBG(widgetFamily: WidgetFamily) -> some View {
+        Image("Marvel Logo")
+            .resizable()
+            .scaledToFill()
+            .opacity(0.25)
+            .blur(radius: 8.0)
+            .modifier(ModifyForWidgetViewFrame(widgetFamily: widgetFamily))
+            .overlay {
+                Color.red.opacity(0.1)
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+    }
+    
+    private func height(widgetFamily: WidgetFamily) -> CGFloat? {
+        if widgetFamily == .systemSmall {
+            return 110
+        }
+        
+        if widgetFamily == .systemMedium {
+            return 150
+        }
+        
+        if widgetFamily == .systemLarge {
+            return 300
+        }
+        
+        return nil
+    }
+    
+    
+    private func getNextMCUFilm() {
+        if isBusy {
+            return
+        }
+        self.isBusy = true
+        Ex.getNextMCUFilm { result in
+            switch result {
+            case .success(let newFilm):
+                DispatchQueue.main.async {
+                    self.mcuFilm = newFilm
+                    self.isBusy = false
+                }
+                break
+            case .failure(_):
+                break
             }
         }
     }
