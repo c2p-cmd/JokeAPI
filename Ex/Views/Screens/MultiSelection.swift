@@ -7,23 +7,6 @@
 
 import SwiftUI
 
-struct IdentifiableString: Identifiable, Hashable, RawRepresentable {
-    let string: String
-    var id: String { string }
-    
-    init(string: String) {
-        self.string = string
-    }
-    
-    init(rawValue: String) {
-        self.string = rawValue
-    }
-    
-    var rawValue: String {
-        self.string
-    }
-}
-
 struct MultiSelectionView<Selectable: Identifiable & Hashable>: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
