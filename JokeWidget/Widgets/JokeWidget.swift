@@ -10,29 +10,47 @@ import SwiftUI
 
 struct JokeEntry: TimelineEntry {
     let date: Date = .now
-    var joke: String = UserDefaults.savedJoke
+    var joke: String
+    var imageResource: String
+    
+    init(joke: String = UserDefaults.savedJoke, imageResource: String? = nil) {
+        self.joke = joke
+        self.imageResource = imageResource ?? "FUNNY 1"
+    }
 }
 
-struct JokeProvider: TimelineProvider {
+struct JokeProvider: IntentTimelineProvider {
     func placeholder(in context: Context) -> JokeEntry {
         JokeEntry()
     }
     
-    func getSnapshot(in context: Context, completion: @escaping (JokeEntry) -> ()) {
+    func getSnapshot(
+        for configuration: JokeCategoryChoiceIntent,
+        in context: Context,
+        completion: @escaping (JokeEntry) -> ()
+    ) {
         if context.isPreview {
             completion(self.placeholder(in: context))
             return
         }
         
-        completion(JokeEntry(
-            joke: UserDefaults.savedJoke
-        ))
+        let selectedCategory = configuration.JokeCategory
+        
+        let entry = JokeEntry(imageResource: selectedCategory == "Any" ? nil : selectedCategory)
+        completion(entry)
     }
     
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    func getTimeline(
+        for configuration: JokeCategoryChoiceIntent,
+        in context: Context,
+        completion: @escaping (Timeline<Entry>) -> ()
+    ) {
         Task {
-            let res = await getRandomJoke(of: [], type: .twopart, safeMode: true)
-            var entry = JokeEntry()
+            let selectedCategory: String = configuration.JokeCategory ?? "Any"
+            let safeMode: Bool = selectedCategory.contains("Dark") == false
+            
+            let res = await getRandomJoke(of: selectedCategory, type: .twopart, safeMode: safeMode)
+            var entry = JokeEntry(imageResource: configuration.JokeCategory)
             
             switch res {
             case .success(let newJoke):
@@ -45,24 +63,35 @@ struct JokeProvider: TimelineProvider {
             }
             
             let components = DateComponents(hour: 1)
-            let nextReload = Calendar.current.date(
-                byAdding: components, to: entry.date
-            )!
-            let policy: TimelineReloadPolicy = .after(nextReload)
-            completion(Timeline(entries: [entry], policy: policy))
+            let nextReloadDate = Calendar.current.date(byAdding: components, to: entry.date)!
+            
+            let timeline = Timeline(entries: [entry], policy: .after(nextReloadDate))
+            completion(timeline)
         }
     }
 }
 
 struct JokeEntryView_Placeholder: View {
+    let imageResource: String
+    
+    init(_ imageResource: String = "FUNNY 1") {
+        self.imageResource = imageResource
+    }
+    
     private let gradient = LinearGradient(
-        gradient: Gradient(colors: [
+        colors: [
             Color("Orange1", bundle: .main),
             Color("Orange2", bundle: .main)
-        ]), startPoint: .bottom, endPoint: .top)
+        ],
+        startPoint: .bottom,
+        endPoint: .top
+    )
     
     var body: some View {
-        Image("FUNNY 1")
+        let configurationImage = UIImage(named: self.imageResource)
+        let defaultFunnyBG = UIImage(named: "FUNNY 1")!
+        
+        return Image(uiImage: configurationImage ?? defaultFunnyBG)
             .resizable()
             .scaledToFill()
             .frame(width: 370, height: 170)
@@ -77,7 +106,7 @@ struct JokeWidgetEntryView : View {
         ]), startPoint: .bottom, endPoint: .top)
     
     var entry: JokeProvider.Entry
-        
+    
     @Environment(\.widgetFamily) var widgetFamily: WidgetFamily
     
     func text() -> some View {
@@ -117,7 +146,7 @@ struct JokeWidgetEntryView : View {
             .background {
                 ZStack {
                     gradient
-                    JokeEntryView_Placeholder()
+                    JokeEntryView_Placeholder(entry.imageResource)
                 }
                 .aspectRatio(contentMode: .fill)
                 .ignoresSafeArea()
@@ -130,8 +159,9 @@ struct JokeWidget: Widget {
     let kind: String = "JokeWidget"
     
     var body: some WidgetConfiguration {
-        StaticConfiguration(
+        IntentConfiguration(
             kind: kind,
+            intent: JokeCategoryChoiceIntent.self,
             provider: JokeProvider()
         ) { entry in
             JokeWidgetEntryView(entry: entry)
