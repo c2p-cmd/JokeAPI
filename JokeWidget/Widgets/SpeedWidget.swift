@@ -77,7 +77,7 @@ struct SpeedWidget_Placeholder: View {
     
     var body: some View {
         if widgetFamily == .systemMedium {
-            Image("Speed WIDGETS SCREEN2", bundle: .main)
+            Image("Speed Widget New", bundle: .main)
                 .resizable()
                 .ignoresSafeArea()
                 .scaledToFill()
@@ -121,7 +121,7 @@ struct SpeedWidgetEntryView: View {
         return HStack(alignment: .center) {
             Spacer()
             VStack(alignment: .trailing, spacing: 5) {
-                Text("Download Speed")
+                Text("⚡️ Download Speed")
                     .font(.custom("DS-Digital", size: 16.5))
                 
                 if preview {
@@ -137,7 +137,7 @@ struct SpeedWidgetEntryView: View {
                 }
                 
                 if let speedTestDate = entry.speedTestDate {
-                    Text(speedTestDate.formatted(date: .omitted, time: .shortened))
+                    Text("⏰ \(speedTestDate.formatted(date: .omitted, time: .shortened))")
                         .font(.custom("DS-Digital", size: 19))
                 } else {
                     Text("--")
@@ -195,7 +195,7 @@ struct SpeedTestWidget: Widget {
 }
 
 struct SpeedWidgetEntryView_Previews: PreviewProvider {
-    static let entry = SpeedEntry(speed: Speed(value: 99.1234, units: .Mbps), takenAt: nil)
+    static let entry = SpeedEntry(speed: Speed(value: 99.1234, units: .Mbps), takenAt: .distantFuture)
 
     static var previews: some View {
         Group {
