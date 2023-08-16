@@ -545,6 +545,49 @@ func getRandomJoke(
         
         let (data, _) = try await URLSession.shared.data(from: url)
         let joke = String(decoding: data, as: UTF8.self)
+        
+        if joke.starts(with: "Error") {
+            return .failure(CustomIntentError("No jokes in category"))
+        }
+        
+        return .success(joke)
+    } catch let err {
+        return .failure(err)
+    }
+}
+
+func getRandomJoke(
+    of category: String,
+    type jokeType: JokeType,
+    safeMode: Bool = false
+) async -> Result<String, Error> {
+    do {
+        var urlString = configPlist.value(forKey: "Joke URL") as! String
+        
+        if category.isEmpty || category == "Any" {
+            urlString.append("Any")
+        } else {
+            urlString.append(category)
+        }
+        
+        let format = safeMode ? "?format=txt&safe-mode" : "?format=txt"
+        urlString.append(format)
+        
+        if jokeType != .any {
+            urlString.append("&type=\(jokeType.rawValue)")
+        }
+        
+        guard let url = URL(string: urlString) else {
+            return .failure(URLError(.badURL))
+        }
+        
+        let (data, _) = try await URLSession.shared.data(from: url)
+        let joke = String(decoding: data, as: UTF8.self)
+        
+        if joke.starts(with: "Error") {
+            return .failure(CustomIntentError("No jokes in category"))
+        }
+        
         return .success(joke)
     } catch let err {
         return .failure(err)
