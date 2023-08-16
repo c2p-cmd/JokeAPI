@@ -77,6 +77,14 @@
 		0091D99A2A5EBFD9002A281A /* HelperViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0091D9992A5EBFD9002A281A /* HelperViews.swift */; };
 		009CEBCB2A72645A00E3D2E7 /* FunFactAboutTodayWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009CEBCA2A72645A00E3D2E7 /* FunFactAboutTodayWidget.swift */; };
 		009E8B202A71343D00676255 /* NumberAPIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009E8B1F2A71343D00676255 /* NumberAPIView.swift */; };
+		009ECD532A8CA99B002DE0A9 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AC0A602A867BC800798580 /* IntentHandler.swift */; };
+		009ECD542A8CA99C002DE0A9 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AC0A602A867BC800798580 /* IntentHandler.swift */; };
+		009ECD572A8CAA20002DE0A9 /* Array+asNStringArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009ECD562A8CAA20002DE0A9 /* Array+asNStringArray.swift */; };
+		009ECD582A8CAA20002DE0A9 /* Array+asNStringArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009ECD562A8CAA20002DE0A9 /* Array+asNStringArray.swift */; };
+		009ECD592A8CAA20002DE0A9 /* Array+asNStringArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009ECD562A8CAA20002DE0A9 /* Array+asNStringArray.swift */; };
+		009ECD5C2A8CE19A002DE0A9 /* IdentifiableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009ECD5B2A8CE19A002DE0A9 /* IdentifiableString.swift */; };
+		009ECD5D2A8CE19A002DE0A9 /* IdentifiableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009ECD5B2A8CE19A002DE0A9 /* IdentifiableString.swift */; };
+		009ECD5E2A8CE19A002DE0A9 /* IdentifiableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009ECD5B2A8CE19A002DE0A9 /* IdentifiableString.swift */; };
 		00A07F652A5D2F6B006FC4DB /* NASAApodResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A07F642A5D2F6B006FC4DB /* NASAApodResponse.swift */; };
 		00A07F662A5D2F6B006FC4DB /* NASAApodResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A07F642A5D2F6B006FC4DB /* NASAApodResponse.swift */; };
 		00A07F6C2A5D4416006FC4DB /* NASAApodWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A07F6A2A5D4416006FC4DB /* NASAApodWidget.swift */; };
@@ -223,6 +231,8 @@
 		0091D9992A5EBFD9002A281A /* HelperViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperViews.swift; sourceTree = "<group>"; };
 		009CEBCA2A72645A00E3D2E7 /* FunFactAboutTodayWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunFactAboutTodayWidget.swift; sourceTree = "<group>"; };
 		009E8B1F2A71343D00676255 /* NumberAPIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberAPIView.swift; sourceTree = "<group>"; };
+		009ECD562A8CAA20002DE0A9 /* Array+asNStringArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+asNStringArray.swift"; sourceTree = "<group>"; };
+		009ECD5B2A8CE19A002DE0A9 /* IdentifiableString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableString.swift; sourceTree = "<group>"; };
 		00A07F642A5D2F6B006FC4DB /* NASAApodResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAApodResponse.swift; sourceTree = "<group>"; };
 		00A07F6A2A5D4416006FC4DB /* NASAApodWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAApodWidget.swift; sourceTree = "<group>"; };
 		00A07F712A5D67F6006FC4DB /* NASAApodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAApodView.swift; sourceTree = "<group>"; };
@@ -304,9 +314,8 @@
 				005048F42A6E95F200328710 /* FlirtyLineModel.swift */,
 				00F523092A81008C0046576E /* BhagwatGitaResponse.swift */,
 				00AC0A252A8641C900798580 /* TVShowQuoteResponse.swift */,
-				00AC0A6C2A867E8000798580 /* Array+RawRepresentable.swift */,
-				007F29B42A8A3D7600D729D0 /* Date+RawRepresentale.swift */,
 				0050BDE82A8B740700D3162A /* NextMCUFilm.swift */,
+				009ECD5B2A8CE19A002DE0A9 /* IdentifiableString.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -314,6 +323,7 @@
 		003BD26D2A4D81C6009FDFAC /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				009ECD552A8CA9B6002DE0A9 /* Extensions */,
 				009CEBCD2A726FF500E3D2E7 /* FetchHelpers */,
 				00134F1E2A514D120091D6FD /* Models */,
 				00511CE12A2C911F00D1FD13 /* Request.swift */,
@@ -460,6 +470,16 @@
 				00A6051B2A6FE09600AF5FD0 /* NumberAPIURLS.swift */,
 			);
 			name = FetchHelpers;
+			sourceTree = "<group>";
+		};
+		009ECD552A8CA9B6002DE0A9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				00AC0A6C2A867E8000798580 /* Array+RawRepresentable.swift */,
+				007F29B42A8A3D7600D729D0 /* Date+RawRepresentale.swift */,
+				009ECD562A8CAA20002DE0A9 /* Array+asNStringArray.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		00A07F6D2A5D4459006FC4DB /* Widgets */ = {
@@ -685,11 +705,13 @@
 				0050BDED2A8B79B200D3162A /* NextMCUFILMView.swift in Sources */,
 				00134F1C2A514D080091D6FD /* SpeedModel.swift in Sources */,
 				001CB1F62A67ED1200458B60 /* MemeGeneratorModels.swift in Sources */,
+				009ECD532A8CA99B002DE0A9 /* IntentHandler.swift in Sources */,
 				004CA8492A793EEB005B4F07 /* GifImage.swift in Sources */,
 				00BDAE1E2A627C17002CFD69 /* CustomImageView.swift in Sources */,
 				007F29B52A8A3D7600D729D0 /* Date+RawRepresentale.swift in Sources */,
 				005048F52A6E95F200328710 /* FlirtyLineModel.swift in Sources */,
 				00F49BAC2A73C450008428F9 /* AllWidgetsView.swift in Sources */,
+				009ECD5C2A8CE19A002DE0A9 /* IdentifiableString.swift in Sources */,
 				00F5230A2A81008C0046576E /* BhagwatGitaResponse.swift in Sources */,
 				00134F2F2A5153610091D6FD /* ViewModifier_iOS17.swift in Sources */,
 				00AC0A2C2A86515400798580 /* TVShowQuotesView.swift in Sources */,
@@ -718,6 +740,7 @@
 				00A6051C2A6FE09600AF5FD0 /* NumberAPIURLS.swift in Sources */,
 				0043377F2A339DBD004AF73F /* JokeView.swift in Sources */,
 				00F2F8BD2A515DDD00A2ADE5 /* SpeedTestView.swift in Sources */,
+				009ECD572A8CAA20002DE0A9 /* Array+asNStringArray.swift in Sources */,
 				00E4B5882A4C64540064E63C /* QuoteView.swift in Sources */,
 				00F49BAF2A73DD44008428F9 /* Storage.swift in Sources */,
 				003BD2682A4D72B3009FDFAC /* MyIntents.swift in Sources */,
@@ -737,10 +760,13 @@
 				00511CF12A2C960300D1FD13 /* JokeWidget.swift in Sources */,
 				00134F242A514E0F0091D6FD /* NetworkError.swift in Sources */,
 				00AC0A6E2A867E9E00798580 /* Array+RawRepresentable.swift in Sources */,
+				009ECD542A8CA99C002DE0A9 /* IntentHandler.swift in Sources */,
+				009ECD582A8CAA20002DE0A9 /* Array+asNStringArray.swift in Sources */,
 				00D004B72A65963500D51C7E /* JokeType.swift in Sources */,
 				00AC0A2A2A864ADC00798580 /* TVShowQuoteResponse.swift in Sources */,
 				00134F1D2A514D080091D6FD /* SpeedModel.swift in Sources */,
 				004337832A33A140004AF73F /* UserDefaultExtension.swift in Sources */,
+				009ECD5D2A8CE19A002DE0A9 /* IdentifiableString.swift in Sources */,
 				00134F272A514E540091D6FD /* DownloadService.swift in Sources */,
 				001CB1F72A67EEBB00458B60 /* MemeGeneratorModels.swift in Sources */,
 				001FB8C22A5FDF220020F69C /* ImageSaver.swift in Sources */,
@@ -782,8 +808,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				00AC0A612A867BC800798580 /* IntentHandler.swift in Sources */,
+				009ECD592A8CAA20002DE0A9 /* Array+asNStringArray.swift in Sources */,
 				00AC0A6B2A867C6C00798580 /* TVShowQuoteResponse.swift in Sources */,
 				00AC0A692A867C0C00798580 /* AnimalPictureConfig.intentdefinition in Sources */,
+				009ECD5E2A8CE19A002DE0A9 /* IdentifiableString.swift in Sources */,
 				00AC0A6F2A867E9F00798580 /* Array+RawRepresentable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
