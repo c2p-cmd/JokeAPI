@@ -19,6 +19,7 @@ struct AllWidgetsView: View {
     @StateObject private var nasaApod = NASApodView.shared
     @StateObject private var cuteAnimal = CuteAnimalView.shared
     @StateObject private var funFactAboutToday = FunFactAboutTodayView.shared
+    @StateObject private var nextMCUfilm = NextMCUFilmResponseView.shared
     
     private var httpAnimal = HTTPAnimalView.shared
     private var bhagwatGita = BhagvatGitaView.shared
@@ -51,6 +52,14 @@ struct AllWidgetsView: View {
             NonStickySection(
                 title: "📺 TV Show Quote Widgets",
                 showing: tvShowQuotes.views,
+                showBottomSheet: $showBottomSheet
+            ).tag(tvShowQuotes.id)
+            
+            // mcu film countdown view
+            NonStickySection(
+                title: "🎬 Next MCU Film Widgets",
+                showing: nextMCUfilm.views,
+                height: largeWidgetHeight,
                 showBottomSheet: $showBottomSheet
             ).tag(tvShowQuotes.id)
             
