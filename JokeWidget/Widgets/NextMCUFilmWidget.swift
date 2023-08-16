@@ -11,20 +11,15 @@ import WidgetKit
 struct MCUFilmEntry: TimelineEntry {
     let date: Date = .now
     var nextMCFUFilmResponse: NextMcuFilm = UserDefaults.savedNextMCUFilmResponse
-    var posterImage: UIImage? = UIImage(named: "Marvel Logo")
+    var posterImage: UIImage?
 }
 
 struct MCUFilmTimelineProvider: TimelineProvider {
     func placeholder(in context: Context) -> MCUFilmEntry {
-        MCUFilmEntry()
+        MCUFilmEntry(posterImage: nil)
     }
     
     func getSnapshot(in context: Context, completion: @escaping (MCUFilmEntry) -> Void) {
-        if context.isPreview {
-            completion(self.placeholder(in: context))
-            return
-        }
-        
         getNextMCUFilm { result in
             switch result {
             case .success(let newResponse):
@@ -170,8 +165,7 @@ struct MCUFilmEntryView: View {
     }
     
     func imageBG() -> some View {
-        Image("Marvel Logo")
-            .resizable()
+        Color.red
             .scaledToFill()
             .frame(width: 370)
             .opacity(0.25)
