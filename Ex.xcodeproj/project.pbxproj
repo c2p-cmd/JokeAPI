@@ -33,7 +33,6 @@
 		003BD2692A4D72B3009FDFAC /* MyIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003BD2672A4D72B3009FDFAC /* MyIntents.swift */; };
 		003BD26B2A4D81C2009FDFAC /* QuoteAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003BD26A2A4D81C2009FDFAC /* QuoteAPIModel.swift */; };
 		003BD26C2A4D81C2009FDFAC /* QuoteAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003BD26A2A4D81C2009FDFAC /* QuoteAPIModel.swift */; };
-		0043377F2A339DBD004AF73F /* JokeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0043377D2A339DBD004AF73F /* JokeView.swift */; };
 		004337802A339DBD004AF73F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0043377E2A339DBD004AF73F /* ContentView.swift */; };
 		004337822A339E87004AF73F /* UserDefaultExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004337812A339E87004AF73F /* UserDefaultExtension.swift */; };
 		004337832A33A140004AF73F /* UserDefaultExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004337812A339E87004AF73F /* UserDefaultExtension.swift */; };
@@ -50,7 +49,6 @@
 		005048F62A6E95F200328710 /* FlirtyLineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005048F42A6E95F200328710 /* FlirtyLineModel.swift */; };
 		0050BDE92A8B740700D3162A /* NextMCUFilm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050BDE82A8B740700D3162A /* NextMCUFilm.swift */; };
 		0050BDEA2A8B76E400D3162A /* NextMCUFilm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050BDE82A8B740700D3162A /* NextMCUFilm.swift */; };
-		0050BDED2A8B79B200D3162A /* NextMCUFILMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0050BDEC2A8B79B200D3162A /* NextMCUFILMView.swift */; };
 		0050BDEF2A8BDB3A00D3162A /* MCUFilms.json in Resources */ = {isa = PBXBuildFile; fileRef = 0050BDEE2A8BDB3A00D3162A /* MCUFilms.json */; };
 		0050BDF02A8BDB3A00D3162A /* MCUFilms.json in Resources */ = {isa = PBXBuildFile; fileRef = 0050BDEE2A8BDB3A00D3162A /* MCUFilms.json */; };
 		0050BDF12A8BDB3A00D3162A /* MCUFilms.json in Resources */ = {isa = PBXBuildFile; fileRef = 0050BDEE2A8BDB3A00D3162A /* MCUFilms.json */; };
@@ -64,19 +62,14 @@
 		00511CF72A2C960500D1FD13 /* JokeWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 00511CE72A2C960300D1FD13 /* JokeWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		00511CFC2A2C961200D1FD13 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00511CE12A2C911F00D1FD13 /* Request.swift */; };
 		00511CFE2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png in Resources */ = {isa = PBXBuildFile; fileRef = 00511CFD2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png */; };
-		0058ABA12A66A3010050FA96 /* RedditScrapperAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0058ABA02A66A3010050FA96 /* RedditScrapperAPI.swift */; };
 		0058ABA32A66BC3F0050FA96 /* CuteAnimalWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0058ABA22A66BC3F0050FA96 /* CuteAnimalWidget.swift */; };
-		007F29B32A8A332500D729D0 /* BhagwatGitaResponseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F29B22A8A332500D729D0 /* BhagwatGitaResponseView.swift */; };
 		007F29B52A8A3D7600D729D0 /* Date+RawRepresentale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F29B42A8A3D7600D729D0 /* Date+RawRepresentale.swift */; };
 		007F29B62A8A3D7600D729D0 /* Date+RawRepresentale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F29B42A8A3D7600D729D0 /* Date+RawRepresentale.swift */; };
 		00842AD32A7A76350016983C /* MarqueeText in Frameworks */ = {isa = PBXBuildFile; productRef = 00842AD22A7A76350016983C /* MarqueeText */; };
-		00898D042A683CE8008EF693 /* RedditMemeWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00898D032A683CE8008EF693 /* RedditMemeWidget.swift */; };
 		008C2AF92A7B918D0078EEB7 /* CarryYouRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 008C2AF82A7B918D0078EEB7 /* CarryYouRegular.ttf */; };
 		008C2AFA2A7B918D0078EEB7 /* CarryYouRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 008C2AF82A7B918D0078EEB7 /* CarryYouRegular.ttf */; };
-		0091D9972A5E961C002A281A /* MultiSelectionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0091D9962A5E961C002A281A /* MultiSelectionMenu.swift */; };
 		0091D99A2A5EBFD9002A281A /* HelperViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0091D9992A5EBFD9002A281A /* HelperViews.swift */; };
 		009CEBCB2A72645A00E3D2E7 /* FunFactAboutTodayWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009CEBCA2A72645A00E3D2E7 /* FunFactAboutTodayWidget.swift */; };
-		009E8B202A71343D00676255 /* NumberAPIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009E8B1F2A71343D00676255 /* NumberAPIView.swift */; };
 		009ECD532A8CA99B002DE0A9 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AC0A602A867BC800798580 /* IntentHandler.swift */; };
 		009ECD542A8CA99C002DE0A9 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AC0A602A867BC800798580 /* IntentHandler.swift */; };
 		009ECD572A8CAA20002DE0A9 /* Array+asNStringArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009ECD562A8CAA20002DE0A9 /* Array+asNStringArray.swift */; };
@@ -88,7 +81,6 @@
 		00A07F652A5D2F6B006FC4DB /* NASAApodResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A07F642A5D2F6B006FC4DB /* NASAApodResponse.swift */; };
 		00A07F662A5D2F6B006FC4DB /* NASAApodResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A07F642A5D2F6B006FC4DB /* NASAApodResponse.swift */; };
 		00A07F6C2A5D4416006FC4DB /* NASAApodWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A07F6A2A5D4416006FC4DB /* NASAApodWidget.swift */; };
-		00A07F722A5D67F6006FC4DB /* NASAApodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A07F712A5D67F6006FC4DB /* NASAApodView.swift */; };
 		00A07F752A5D7B85006FC4DB /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00A07F742A5D7B85006FC4DB /* Config.plist */; };
 		00A07F762A5D7B85006FC4DB /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00A07F742A5D7B85006FC4DB /* Config.plist */; };
 		00A6051A2A6E9BD100AF5FD0 /* FlirtyLinesWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A605192A6E9BD100AF5FD0 /* FlirtyLinesWidget.swift */; };
@@ -104,7 +96,6 @@
 		00AC0A282A8642B300798580 /* TVShowQuotes.json in Resources */ = {isa = PBXBuildFile; fileRef = 00AC0A272A8642B300798580 /* TVShowQuotes.json */; };
 		00AC0A292A8642B300798580 /* TVShowQuotes.json in Resources */ = {isa = PBXBuildFile; fileRef = 00AC0A272A8642B300798580 /* TVShowQuotes.json */; };
 		00AC0A2A2A864ADC00798580 /* TVShowQuoteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AC0A252A8641C900798580 /* TVShowQuoteResponse.swift */; };
-		00AC0A2C2A86515400798580 /* TVShowQuotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AC0A2B2A86515400798580 /* TVShowQuotesView.swift */; };
 		00AC0A552A865F5D00798580 /* TVShowQuoteWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AC0A542A865F5D00798580 /* TVShowQuoteWidget.swift */; };
 		00AC0A5E2A867BC700798580 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00AC0A342A865EA000798580 /* Intents.framework */; };
 		00AC0A612A867BC800798580 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AC0A602A867BC800798580 /* IntentHandler.swift */; };
@@ -117,7 +108,6 @@
 		00B799B12A6985D300F66EC5 /* RAVIE.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 00B799B02A6985D300F66EC5 /* RAVIE.TTF */; };
 		00B799B22A6985D300F66EC5 /* RAVIE.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 00B799B02A6985D300F66EC5 /* RAVIE.TTF */; };
 		00BDAE1C2A627805002CFD69 /* CustomPictureWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BDAE1B2A627805002CFD69 /* CustomPictureWidget.swift */; };
-		00BDAE1E2A627C17002CFD69 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BDAE1D2A627C17002CFD69 /* CustomImageView.swift */; };
 		00D004AB2A652F7200D51C7E /* ComicKings.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00D004AA2A652F7200D51C7E /* ComicKings.ttf */; };
 		00D004AC2A652F7200D51C7E /* ComicKings.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00D004AA2A652F7200D51C7E /* ComicKings.ttf */; };
 		00D004B12A65618200D51C7E /* SubscribeShadowRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00D004AF2A65618200D51C7E /* SubscribeShadowRegular.ttf */; };
@@ -128,11 +118,7 @@
 		00D004B72A65963500D51C7E /* JokeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D004B52A65963500D51C7E /* JokeType.swift */; };
 		00E23D7C2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 00E23D7F2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition */; };
 		00E23D7D2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 00E23D7F2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition */; };
-		00E4B5842A4C47020064E63C /* MultiSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4B5832A4C47020064E63C /* MultiSelection.swift */; };
-		00E4B5852A4C4B4D0064E63C /* MultiSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4B5832A4C47020064E63C /* MultiSelection.swift */; };
-		00E4B5882A4C64540064E63C /* QuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4B5872A4C64540064E63C /* QuoteView.swift */; };
 		00E4B58A2A4C6E580064E63C /* QuoteWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4B5892A4C6E580064E63C /* QuoteWidget.swift */; };
-		00F2F8BD2A515DDD00A2ADE5 /* SpeedTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2F8BC2A515DDD00A2ADE5 /* SpeedTestView.swift */; };
 		00F49BAC2A73C450008428F9 /* AllWidgetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F49BAB2A73C450008428F9 /* AllWidgetsView.swift */; };
 		00F49BAF2A73DD44008428F9 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F49BAE2A73DD44008428F9 /* Storage.swift */; };
 		00F5230A2A81008C0046576E /* BhagwatGitaResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F523092A81008C0046576E /* BhagwatGitaResponse.swift */; };
@@ -194,7 +180,6 @@
 		003BD2662A4D7194009FDFAC /* JokeWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JokeWidgetExtension.entitlements; sourceTree = "<group>"; };
 		003BD2672A4D72B3009FDFAC /* MyIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyIntents.swift; sourceTree = "<group>"; };
 		003BD26A2A4D81C2009FDFAC /* QuoteAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteAPIModel.swift; sourceTree = "<group>"; };
-		0043377D2A339DBD004AF73F /* JokeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JokeView.swift; sourceTree = "<group>"; };
 		0043377E2A339DBD004AF73F /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		004337812A339E87004AF73F /* UserDefaultExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultExtension.swift; sourceTree = "<group>"; };
 		004860112A1B8A7800F3E6B4 /* Ex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ex.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -208,7 +193,6 @@
 		004D9B3F2A4D9E5600199886 /* NewConfigIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConfigIntent.swift; sourceTree = "<group>"; };
 		005048F42A6E95F200328710 /* FlirtyLineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlirtyLineModel.swift; sourceTree = "<group>"; };
 		0050BDE82A8B740700D3162A /* NextMCUFilm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextMCUFilm.swift; sourceTree = "<group>"; };
-		0050BDEC2A8B79B200D3162A /* NextMCUFILMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextMCUFILMView.swift; sourceTree = "<group>"; };
 		0050BDEE2A8BDB3A00D3162A /* MCUFilms.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MCUFilms.json; sourceTree = "<group>"; };
 		0050BDF22A8BE0E100D3162A /* NextMCUFilmWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextMCUFilmWidget.swift; sourceTree = "<group>"; };
 		00511CE12A2C911F00D1FD13 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
@@ -220,22 +204,16 @@
 		00511CF22A2C960500D1FD13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00511CF42A2C960500D1FD13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00511CFD2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2023-06-04 at 16.04.08.png"; sourceTree = "<group>"; };
-		0058ABA02A66A3010050FA96 /* RedditScrapperAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditScrapperAPI.swift; sourceTree = "<group>"; };
 		0058ABA22A66BC3F0050FA96 /* CuteAnimalWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuteAnimalWidget.swift; sourceTree = "<group>"; };
 		006E267E2A855013000F3A23 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AnimalPictureConfig.strings; sourceTree = "<group>"; };
-		007F29B22A8A332500D729D0 /* BhagwatGitaResponseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BhagwatGitaResponseView.swift; sourceTree = "<group>"; };
 		007F29B42A8A3D7600D729D0 /* Date+RawRepresentale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+RawRepresentale.swift"; sourceTree = "<group>"; };
-		00898D032A683CE8008EF693 /* RedditMemeWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditMemeWidget.swift; sourceTree = "<group>"; };
 		008C2AF82A7B918D0078EEB7 /* CarryYouRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CarryYouRegular.ttf; sourceTree = "<group>"; };
-		0091D9962A5E961C002A281A /* MultiSelectionMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectionMenu.swift; sourceTree = "<group>"; };
 		0091D9992A5EBFD9002A281A /* HelperViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperViews.swift; sourceTree = "<group>"; };
 		009CEBCA2A72645A00E3D2E7 /* FunFactAboutTodayWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunFactAboutTodayWidget.swift; sourceTree = "<group>"; };
-		009E8B1F2A71343D00676255 /* NumberAPIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberAPIView.swift; sourceTree = "<group>"; };
 		009ECD562A8CAA20002DE0A9 /* Array+asNStringArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+asNStringArray.swift"; sourceTree = "<group>"; };
 		009ECD5B2A8CE19A002DE0A9 /* IdentifiableString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableString.swift; sourceTree = "<group>"; };
 		00A07F642A5D2F6B006FC4DB /* NASAApodResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAApodResponse.swift; sourceTree = "<group>"; };
 		00A07F6A2A5D4416006FC4DB /* NASAApodWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAApodWidget.swift; sourceTree = "<group>"; };
-		00A07F712A5D67F6006FC4DB /* NASAApodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAApodView.swift; sourceTree = "<group>"; };
 		00A07F742A5D7B85006FC4DB /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		00A605192A6E9BD100AF5FD0 /* FlirtyLinesWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlirtyLinesWidget.swift; sourceTree = "<group>"; };
 		00A6051B2A6FE09600AF5FD0 /* NumberAPIURLS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberAPIURLS.swift; sourceTree = "<group>"; };
@@ -244,7 +222,6 @@
 		00A605242A6FF6CB00AF5FD0 /* DS-DIGIB.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGIB.TTF"; sourceTree = "<group>"; };
 		00AC0A252A8641C900798580 /* TVShowQuoteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowQuoteResponse.swift; sourceTree = "<group>"; };
 		00AC0A272A8642B300798580 /* TVShowQuotes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TVShowQuotes.json; sourceTree = "<group>"; };
-		00AC0A2B2A86515400798580 /* TVShowQuotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowQuotesView.swift; sourceTree = "<group>"; };
 		00AC0A342A865EA000798580 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		00AC0A3F2A865EA000798580 /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
 		00AC0A542A865F5D00798580 /* TVShowQuoteWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowQuoteWidget.swift; sourceTree = "<group>"; };
@@ -254,17 +231,13 @@
 		00AC0A6C2A867E8000798580 /* Array+RawRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+RawRepresentable.swift"; sourceTree = "<group>"; };
 		00B799B02A6985D300F66EC5 /* RAVIE.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = RAVIE.TTF; sourceTree = "<group>"; };
 		00BDAE1B2A627805002CFD69 /* CustomPictureWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPictureWidget.swift; sourceTree = "<group>"; };
-		00BDAE1D2A627C17002CFD69 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		00D004AA2A652F7200D51C7E /* ComicKings.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ComicKings.ttf; sourceTree = "<group>"; };
 		00D004AF2A65618200D51C7E /* SubscribeShadowRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SubscribeShadowRegular.ttf; path = "Ex/subscribe-font/SubscribeShadowRegular.ttf"; sourceTree = SOURCE_ROOT; };
 		00D004B02A65618200D51C7E /* SubscribeRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SubscribeRegular.ttf; path = "Ex/subscribe-font/SubscribeRegular.ttf"; sourceTree = SOURCE_ROOT; };
 		00D004B52A65963500D51C7E /* JokeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeType.swift; sourceTree = "<group>"; };
 		00E23D7E2A56B7AE003DD155 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/AnimalPictureConfig.intentdefinition; sourceTree = "<group>"; };
-		00E4B5832A4C47020064E63C /* MultiSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelection.swift; sourceTree = "<group>"; };
 		00E4B5862A4C61570064E63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		00E4B5872A4C64540064E63C /* QuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteView.swift; sourceTree = "<group>"; };
 		00E4B5892A4C6E580064E63C /* QuoteWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteWidget.swift; sourceTree = "<group>"; };
-		00F2F8BC2A515DDD00A2ADE5 /* SpeedTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTestView.swift; sourceTree = "<group>"; };
 		00F49BAB2A73C450008428F9 /* AllWidgetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWidgetsView.swift; sourceTree = "<group>"; };
 		00F49BAE2A73DD44008428F9 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		00F523092A81008C0046576E /* BhagwatGitaResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BhagwatGitaResponse.swift; sourceTree = "<group>"; };
@@ -443,19 +416,7 @@
 		009CEBCC2A726FD500E3D2E7 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				00E4B5832A4C47020064E63C /* MultiSelection.swift */,
-				00E4B5872A4C64540064E63C /* QuoteView.swift */,
-				00F2F8BC2A515DDD00A2ADE5 /* SpeedTestView.swift */,
-				00A07F712A5D67F6006FC4DB /* NASAApodView.swift */,
-				0091D9962A5E961C002A281A /* MultiSelectionMenu.swift */,
-				00BDAE1D2A627C17002CFD69 /* CustomImageView.swift */,
-				0058ABA02A66A3010050FA96 /* RedditScrapperAPI.swift */,
 				001CB1F32A67E84900458B60 /* MemeGenView.swift */,
-				009E8B1F2A71343D00676255 /* NumberAPIView.swift */,
-				0043377D2A339DBD004AF73F /* JokeView.swift */,
-				00AC0A2B2A86515400798580 /* TVShowQuotesView.swift */,
-				007F29B22A8A332500D729D0 /* BhagwatGitaResponseView.swift */,
-				0050BDEC2A8B79B200D3162A /* NextMCUFILMView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -492,7 +453,6 @@
 				00134F2B2A514F6A0091D6FD /* SpeedWidget.swift */,
 				00A07F6A2A5D4416006FC4DB /* NASAApodWidget.swift */,
 				0058ABA22A66BC3F0050FA96 /* CuteAnimalWidget.swift */,
-				00898D032A683CE8008EF693 /* RedditMemeWidget.swift */,
 				00BDAE1B2A627805002CFD69 /* CustomPictureWidget.swift */,
 				00A605192A6E9BD100AF5FD0 /* FlirtyLinesWidget.swift */,
 				009CEBCA2A72645A00E3D2E7 /* FunFactAboutTodayWidget.swift */,
@@ -702,31 +662,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				0050BDE92A8B740700D3162A /* NextMCUFilm.swift in Sources */,
-				0050BDED2A8B79B200D3162A /* NextMCUFILMView.swift in Sources */,
 				00134F1C2A514D080091D6FD /* SpeedModel.swift in Sources */,
 				001CB1F62A67ED1200458B60 /* MemeGeneratorModels.swift in Sources */,
 				009ECD532A8CA99B002DE0A9 /* IntentHandler.swift in Sources */,
 				004CA8492A793EEB005B4F07 /* GifImage.swift in Sources */,
-				00BDAE1E2A627C17002CFD69 /* CustomImageView.swift in Sources */,
 				007F29B52A8A3D7600D729D0 /* Date+RawRepresentale.swift in Sources */,
 				005048F52A6E95F200328710 /* FlirtyLineModel.swift in Sources */,
 				00F49BAC2A73C450008428F9 /* AllWidgetsView.swift in Sources */,
 				009ECD5C2A8CE19A002DE0A9 /* IdentifiableString.swift in Sources */,
 				00F5230A2A81008C0046576E /* BhagwatGitaResponse.swift in Sources */,
 				00134F2F2A5153610091D6FD /* ViewModifier_iOS17.swift in Sources */,
-				00AC0A2C2A86515400798580 /* TVShowQuotesView.swift in Sources */,
 				003BD26B2A4D81C2009FDFAC /* QuoteAPIModel.swift in Sources */,
 				00D004B62A65963500D51C7E /* JokeType.swift in Sources */,
-				00E4B5842A4C47020064E63C /* MultiSelection.swift in Sources */,
 				00E23D7C2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */,
-				007F29B32A8A332500D729D0 /* BhagwatGitaResponseView.swift in Sources */,
 				004D9B432A4DA50600199886 /* NewConfigIntent.swift in Sources */,
 				00AC0A262A8641C900798580 /* TVShowQuoteResponse.swift in Sources */,
 				00134F202A514DD20091D6FD /* SpeedService.swift in Sources */,
 				001FB8C12A5FDE3B0020F69C /* ImageSaver.swift in Sources */,
 				00A07F652A5D2F6B006FC4DB /* NASAApodResponse.swift in Sources */,
 				004337822A339E87004AF73F /* UserDefaultExtension.swift in Sources */,
-				0091D9972A5E961C002A281A /* MultiSelectionMenu.swift in Sources */,
 				001ACE0A2A4EBA2C000CE9AF /* UIImage+resize.swift in Sources */,
 				00134F292A514E820091D6FD /* URL+ping.swift in Sources */,
 				00511CE22A2C911F00D1FD13 /* Request.swift in Sources */,
@@ -734,17 +688,11 @@
 				00134F262A514E540091D6FD /* DownloadService.swift in Sources */,
 				00AC0A6D2A867E8000798580 /* Array+RawRepresentable.swift in Sources */,
 				00134F232A514E0F0091D6FD /* NetworkError.swift in Sources */,
-				009E8B202A71343D00676255 /* NumberAPIView.swift in Sources */,
 				001CB1F42A67E84900458B60 /* MemeGenView.swift in Sources */,
-				00A07F722A5D67F6006FC4DB /* NASAApodView.swift in Sources */,
 				00A6051C2A6FE09600AF5FD0 /* NumberAPIURLS.swift in Sources */,
-				0043377F2A339DBD004AF73F /* JokeView.swift in Sources */,
-				00F2F8BD2A515DDD00A2ADE5 /* SpeedTestView.swift in Sources */,
 				009ECD572A8CAA20002DE0A9 /* Array+asNStringArray.swift in Sources */,
-				00E4B5882A4C64540064E63C /* QuoteView.swift in Sources */,
 				00F49BAF2A73DD44008428F9 /* Storage.swift in Sources */,
 				003BD2682A4D72B3009FDFAC /* MyIntents.swift in Sources */,
-				0058ABA12A66A3010050FA96 /* RedditScrapperAPI.swift in Sources */,
 				0091D99A2A5EBFD9002A281A /* HelperViews.swift in Sources */,
 				004337802A339DBD004AF73F /* ContentView.swift in Sources */,
 				00F523102A81043F0046576E /* BhagvatGitaWidget.swift in Sources */,
@@ -773,7 +721,6 @@
 				00E23D7D2A56B7AE003DD155 /* AnimalPictureConfig.intentdefinition in Sources */,
 				004D9B392A4D98F100199886 /* HTTPAnimalPictureWidget.swift in Sources */,
 				00511CFC2A2C961200D1FD13 /* Request.swift in Sources */,
-				00898D042A683CE8008EF693 /* RedditMemeWidget.swift in Sources */,
 				0058ABA32A66BC3F0050FA96 /* CuteAnimalWidget.swift in Sources */,
 				0050BDEA2A8B76E400D3162A /* NextMCUFilm.swift in Sources */,
 				009CEBCB2A72645A00E3D2E7 /* FunFactAboutTodayWidget.swift in Sources */,
@@ -789,7 +736,6 @@
 				0050BDF32A8BE0E100D3162A /* NextMCUFilmWidget.swift in Sources */,
 				004D9B3E2A4D99CD00199886 /* ImageProvider.swift in Sources */,
 				00A6051D2A6FE09600AF5FD0 /* NumberAPIURLS.swift in Sources */,
-				00E4B5852A4C4B4D0064E63C /* MultiSelection.swift in Sources */,
 				00BDAE1C2A627805002CFD69 /* CustomPictureWidget.swift in Sources */,
 				005048F62A6E95F200328710 /* FlirtyLineModel.swift in Sources */,
 				00F5230B2A81008C0046576E /* BhagwatGitaResponse.swift in Sources */,

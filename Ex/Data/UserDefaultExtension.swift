@@ -15,6 +15,14 @@ extension UserDefaults {
         case mcuFilm = "next_mcu_film"
         case bhagvadGita = "bhagvad_gita_response"
         case tvshowquotes = "tv_show_quotes"
+        case dateFunFact = "date_fun_fact"
+        case flirtyLine = "flirty_line"
+        case reddit = "reddit_meme"
+        case nasaApod = "nasa_apod"
+        case quotes = "quotes"
+        case saveJoke = "save_joke"
+        case netSpeed = "net_speed"
+        case netSpeedWithDate = "speed_test_date"
     }
 }
 
@@ -42,7 +50,7 @@ extension UserDefaults {
     static let defaultNextMCUFilmResponse = NextMcuFilm(rawValue: mcuFilmRawValue)!
     
     static var savedNextMCUFilmResponse: NextMcuFilm {
-        guard let responseRawValue = appStorage.string(forKey: "next_mcu_film"),
+        guard let responseRawValue = appStorage.string(forKey: Keys.mcuFilm.rawValue),
               let response = NextMcuFilm(rawValue: responseRawValue)
         else {
             return ListofNextMCUFilms.getDummyData().randomElement()!
@@ -54,7 +62,7 @@ extension UserDefaults {
     static func saveNewNextMCUFilmResponse(
         _ newFilm: NextMcuFilm
     ) {
-        appStorage.setValue(newFilm.rawValue, forKey: "next_mcu_film")
+        appStorage.setValue(newFilm.rawValue, forKey: Keys.mcuFilm.rawValue)
     }
 }
 
@@ -73,7 +81,7 @@ extension UserDefaults {
     static var savedBhagvatGitaResponses: [BhagvatGitaResponse] {
         let shloaksFromFile = BhagvatGitaResponse.getShlokas()
         
-        guard let responseRawValue = appStorage.string(forKey: "bhagvad_gita_response")
+        guard let responseRawValue = appStorage.string(forKey: Keys.bhagvadGita.rawValue)
         else {
             return shloaksFromFile
         }
@@ -91,7 +99,7 @@ extension UserDefaults {
 // MARK: - TV Show Quote
 extension UserDefaults {
     static var savedTVShowQuotes: TVShowQuoteResponses {
-        let responses = TVShowQuoteResponses(rawValue: appStorage.string(forKey: "tv_show_quotes") ?? "[]")
+        let responses = TVShowQuoteResponses(rawValue: appStorage.string(forKey: Keys.tvshowquotes.rawValue) ?? "[]")
         
         if responses.isEmpty {
             return .getSavedQuotes()
@@ -102,7 +110,7 @@ extension UserDefaults {
     static func saveNewTVShowQuotes(_ newResponse: TVShowQuoteResponses) {
         var savedResponses = savedTVShowQuotes
         savedResponses.append(contentsOf: newResponse)
-        appStorage.set(savedResponses.rawValue, forKey: "tv_show_quotes")
+        appStorage.set(savedResponses.rawValue, forKey: Keys.tvshowquotes.rawValue)
     }
 }
 
@@ -113,11 +121,11 @@ extension UserDefaults {
     }
     
     static var savedFunFact: String {
-        appStorage.string(forKey: "date_fun_fact") ?? defaultFunFact
+        appStorage.string(forKey: Keys.dateFunFact.rawValue) ?? defaultFunFact
     }
     
     static func saveNewFunFact(_ line: String) {
-        appStorage.setValue(line, forKey: "date_fun_fact")
+        appStorage.setValue(line, forKey: Keys.dateFunFact.rawValue)
     }
 }
 
@@ -128,36 +136,16 @@ extension UserDefaults {
     }
     
     static var savedFlirtyLine: String {
-        appStorage.string(forKey: "flirty_line") ?? defaultFlirtyLine
+        appStorage.string(forKey: Keys.flirtyLine.rawValue) ?? defaultFlirtyLine
     }
     
     static func saveNewFlirtyLine(_ line: String) {
-        appStorage.setValue(line, forKey: "flirty_line")
+        appStorage.setValue(line, forKey: Keys.flirtyLine.rawValue)
     }
 }
 
 // MARK: - UserDefaults RedditMemeResponse Extension
 extension UserDefaults {
-    static var defaultRedditMemeResponse: RedditMemeResponse {
-        return RedditMemeResponse(
-            title: "Hoping for an Extraordinary Future for My Newborn",
-            url: "https://i.redd.it/5vk4ob6hnrcb1.jpg",
-            nsfw: false
-        )
-    }
-    
-    static var savedRedditMemeResponse: RedditMemeResponse {
-        guard let saved = appStorage.string(forKey: "reddit_memeZ"),
-              let response = RedditMemeResponse(rawValue: saved) else {
-            return defaultRedditMemeResponse
-        }
-        return response
-    }
-    
-    static func saveNewRedditMemeResponse(_ newResponse: RedditMemeResponse) {
-        appStorage.set(newResponse.rawValue, forKey: "reddit_memeZ")
-    }
-    
     static var defaultRedditAnimalResponse: RedditMemeResponse {
         return RedditMemeResponse(
             title: "This Cute Rottweiler Pup 🐶",
@@ -167,7 +155,7 @@ extension UserDefaults {
     }
     
     static var savedRedditAnimalResponse: RedditMemeResponse {
-        guard let saved = appStorage.string(forKey: "reddit_meme"),
+        guard let saved = appStorage.string(forKey: Keys.reddit.rawValue),
               let response = RedditMemeResponse(rawValue: saved) else {
             return defaultRedditAnimalResponse
         }
@@ -175,7 +163,7 @@ extension UserDefaults {
     }
     
     static func saveNewRedditAnimalResponse(_ newResponse: RedditMemeResponse) {
-        appStorage.set(newResponse.rawValue, forKey: "reddit_meme")
+        appStorage.set(newResponse.rawValue, forKey: Keys.reddit.rawValue)
     }
 }
 
@@ -186,7 +174,7 @@ extension UserDefaults {
     }
     
     static var savedApod: ApodResponse {
-        guard let apodRawValue = appStorage.string(forKey: "nasa_apod"),
+        guard let apodRawValue = appStorage.string(forKey: Keys.nasaApod.rawValue),
               let apod = ApodResponse(rawValue: apodRawValue) else {
             return defaultApodResponse
         }
@@ -194,7 +182,7 @@ extension UserDefaults {
     }
     
     static func saveNewNASAApod(_ apodResponse: ApodResponse) {
-        appStorage.set(apodResponse.rawValue, forKey: "nasa_apod")
+        appStorage.set(apodResponse.rawValue, forKey: Keys.nasaApod.rawValue)
     }
 }
 
@@ -203,7 +191,7 @@ extension UserDefaults {
     static let defaultSpeed: Speed = Speed(value: 0.0, units: .Kbps)
     
     static var savedSpeed: Speed {
-        guard let speedRawValue = appStorage.string(forKey: "net_speed"),
+        guard let speedRawValue = appStorage.string(forKey: Keys.netSpeed.rawValue),
               let speed = Speed(rawValue: speedRawValue)
         else {
             return UserDefaults.defaultSpeed
@@ -213,10 +201,10 @@ extension UserDefaults {
     }
     
     static var savedSpeedWithDate: (Speed, Date?) {
-        let dateRawValue = appStorage.double(forKey: "speed_test_date")
+        let dateRawValue = appStorage.double(forKey: Keys.netSpeedWithDate.rawValue)
         let date: Date? = Date(rawValue: dateRawValue)
         
-        guard let speedRawValue = appStorage.string(forKey: "net_speed"),
+        guard let speedRawValue = appStorage.string(forKey: Keys.netSpeed.rawValue),
               let speed = Speed(rawValue: speedRawValue)
         else {
             return (UserDefaults.defaultSpeed, nil)
@@ -225,29 +213,13 @@ extension UserDefaults {
         return (speed, date)
     }
     
-    static var savedSpeedWithPing: (Int, Speed) {
-        let speed = savedSpeed
-        let ping = appStorage.integer(forKey: "speed_ping")
-        
-        return (ping, speed)
-    }
-    
-    static func saveNewPing(_ ping: Int) {
-        appStorage.setValue(ping, forKey: "speed_ping")
-    }
-    
     static func saveNewSpeed(speed: Speed, at date: Date) {
         self.saveNewSpeed(speed)
-        appStorage.setValue(date.rawValue, forKey: "speed_test_date")
-    }
-    
-    static func saveNewSpeedWithPing(ping: Int, speed: Speed) {
-        self.saveNewSpeed(speed)
-        appStorage.setValue(ping, forKey: "speed_ping")
+        appStorage.setValue(date.rawValue, forKey: Keys.netSpeedWithDate.rawValue)
     }
     
     static func saveNewSpeed(_ speed: Speed) {
-        appStorage.set(speed.rawValue, forKey: "net_speed")
+        appStorage.set(speed.rawValue, forKey: Keys.netSpeed.rawValue)
     }
 }
 
@@ -256,7 +228,7 @@ extension UserDefaults {
     static let defaultQuote = QuoteApiResponse("Much wisdom often goes with fewest words.", by: "Sophocles")
     
     static var savedQuote: QuoteApiResponse {
-        guard let quoteRawValue = appStorage.string(forKey: "quote"),
+        guard let quoteRawValue = appStorage.string(forKey: Keys.quotes.rawValue),
               let quote = QuoteApiResponse(rawValue: quoteRawValue)
         else {
             return UserDefaults.defaultQuote
@@ -268,7 +240,7 @@ extension UserDefaults {
     static func saveNewQuote(
         _ newQuote: QuoteApiResponse
     ) {
-        appStorage.set(newQuote.rawValue, forKey: "quote")
+        appStorage.set(newQuote.rawValue, forKey: Keys.quotes.rawValue)
     }
 }
 
@@ -277,12 +249,12 @@ extension UserDefaults {
     static let defaultJoke = "Why do Java Programmers have to wear glasses?\n\nBecause they don't C#."
     
     static var savedJoke: String {
-        appStorage.string(forKey: "save_joke") ?? UserDefaults.defaultJoke
+        appStorage.string(forKey: Keys.saveJoke.rawValue) ?? UserDefaults.defaultJoke
     }
     
     static func saveNewJoke(
         _ newJoke: String
     ) {
-        appStorage.set(newJoke, forKey: "save_joke")
+        appStorage.set(newJoke, forKey: Keys.saveJoke.rawValue)
     }
 }
