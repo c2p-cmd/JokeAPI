@@ -181,7 +181,7 @@ func getTVShowQuote(
         fatalError(URLError(.badURL).localizedDescription)
     }
     
-//    print(url.absoluteString)
+    print(url.absoluteString)
     
     URLSession.shared.dataTask(with: url) { (data: Data?, _: URLResponse?, error: Error?) in
         var savedResponses = UserDefaults.savedTVShowQuotes
@@ -547,7 +547,7 @@ func getRandomJoke(
         let joke = String(decoding: data, as: UTF8.self)
         
         if joke.starts(with: "Error") {
-            return .failure(CustomIntentError("No jokes in category"))
+            return .failure(NetworkError(message: "No jokes in category"))
         }
         
         return .success(joke)
@@ -585,7 +585,7 @@ func getRandomJoke(
         let joke = String(decoding: data, as: UTF8.self)
         
         if joke.starts(with: "Error") {
-            return .failure(CustomIntentError("No jokes in category"))
+            return .failure(NetworkError(message: "No jokes in category"))
         }
         
         return .success(joke)

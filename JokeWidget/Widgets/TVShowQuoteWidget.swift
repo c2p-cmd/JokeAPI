@@ -97,6 +97,7 @@ struct TVShowQuoteEntryView: View {
             makeInvalidatable {
                 VStack(spacing: 10) {
                     Text(tvShowQuote.text)
+                        .lineLimit(5)
                         .font(myFont(size: 15))
                     
                     HStack {

@@ -59,25 +59,47 @@ struct NASAApodEntryView: View {
     var entry: NASAApodEntry
     
     var body: some View {
-        ZStack(alignment: .bottom) {
-            Image(uiImage: entry.uiImage)
-                .resizable()
-                .scaledToFill()
-            
-            if entry.showTitle {
-                Text(entry.title)
-                    .font(.system(.caption, design: .rounded))
-                    .foregroundColor(.white)
-                    .background(gradient)
-                    .cornerRadius(5)
-                    .padding(.bottom, 5)
-                    .padding(.horizontal, 25)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                    .multilineTextAlignment(.center)
+        if #available(iOSApplicationExtension 17, *) {
+            ZStack {
+                VStack {
+                    Spacer()
+                    if entry.showTitle {
+                        Text(entry.title)
+                            .font(.system(.caption, design: .rounded))
+                            .foregroundColor(.white)
+                            .background(gradient)
+                            .cornerRadius(5)
+                            .padding(.horizontal, 25)
+                            .frame(alignment: .bottom)
+                            .multilineTextAlignment(.center)
+                    }
+                }
             }
+            .containerBackground(for: .widget) {
+                Image(uiImage: entry.uiImage)
+                    .resizable()
+                    .scaledToFill()
+            }
+        } else {
+            ZStack(alignment: .bottom) {
+                Image(uiImage: entry.uiImage)
+                    .resizable()
+                    .scaledToFill()
+                
+                if entry.showTitle {
+                    Text(entry.title) 
+                        .font(.system(.caption, design: .rounded))
+                        .foregroundColor(.white)
+                        .background(gradient)
+                        .cornerRadius(5)
+                        .padding(.bottom, 5)
+                        .padding(.horizontal, 25)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                        .multilineTextAlignment(.center)
+                }
+            }
+            .modifyForiOS17(.black)
         }
-        .widgetURL(URL(string: "widget://nasa_apod"))
-        .modifyForiOS17(.black)
     }
 }
 
@@ -99,9 +121,15 @@ struct NASAApodWidget: Widget {
     }
 }
 
-//struct Preview: PreviewProvider {
-//    static var previews: some View {
-//        NASAApodEntryView(entry: NASAApodEntry(showTitle: true))
-//            .previewContext(WidgetPreviewContext(family: .systemLarge))
-//    }
-//}
+struct NASAAPOD_Preview: PreviewProvider {
+    static var previews: some View {
+        Group {
+            NASAApodEntryView(entry: NASAApodEntry(showTitle: true))
+                .previewContext(WidgetPreviewContext(family: .systemExtraLarge))
+                .previewDevice("iPad mini (6th generation)")
+            
+            NASAApodEntryView(entry: NASAApodEntry(showTitle: true))
+                .previewContext(WidgetPreviewContext(family: .systemLarge))
+        }
+    }
+}

@@ -107,7 +107,6 @@
 		00AC0A6F2A867E9F00798580 /* Array+RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AC0A6C2A867E8000798580 /* Array+RawRepresentable.swift */; };
 		00B799B12A6985D300F66EC5 /* RAVIE.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 00B799B02A6985D300F66EC5 /* RAVIE.TTF */; };
 		00B799B22A6985D300F66EC5 /* RAVIE.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 00B799B02A6985D300F66EC5 /* RAVIE.TTF */; };
-		00BDAE1C2A627805002CFD69 /* CustomPictureWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BDAE1B2A627805002CFD69 /* CustomPictureWidget.swift */; };
 		00D004AB2A652F7200D51C7E /* ComicKings.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00D004AA2A652F7200D51C7E /* ComicKings.ttf */; };
 		00D004AC2A652F7200D51C7E /* ComicKings.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00D004AA2A652F7200D51C7E /* ComicKings.ttf */; };
 		00D004B12A65618200D51C7E /* SubscribeShadowRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00D004AF2A65618200D51C7E /* SubscribeShadowRegular.ttf */; };
@@ -230,7 +229,6 @@
 		00AC0A622A867BC800798580 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00AC0A6C2A867E8000798580 /* Array+RawRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+RawRepresentable.swift"; sourceTree = "<group>"; };
 		00B799B02A6985D300F66EC5 /* RAVIE.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = RAVIE.TTF; sourceTree = "<group>"; };
-		00BDAE1B2A627805002CFD69 /* CustomPictureWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPictureWidget.swift; sourceTree = "<group>"; };
 		00D004AA2A652F7200D51C7E /* ComicKings.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ComicKings.ttf; sourceTree = "<group>"; };
 		00D004AF2A65618200D51C7E /* SubscribeShadowRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SubscribeShadowRegular.ttf; path = "Ex/subscribe-font/SubscribeShadowRegular.ttf"; sourceTree = SOURCE_ROOT; };
 		00D004B02A65618200D51C7E /* SubscribeRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = SubscribeRegular.ttf; path = "Ex/subscribe-font/SubscribeRegular.ttf"; sourceTree = SOURCE_ROOT; };
@@ -453,7 +451,6 @@
 				00134F2B2A514F6A0091D6FD /* SpeedWidget.swift */,
 				00A07F6A2A5D4416006FC4DB /* NASAApodWidget.swift */,
 				0058ABA22A66BC3F0050FA96 /* CuteAnimalWidget.swift */,
-				00BDAE1B2A627805002CFD69 /* CustomPictureWidget.swift */,
 				00A605192A6E9BD100AF5FD0 /* FlirtyLinesWidget.swift */,
 				009CEBCA2A72645A00E3D2E7 /* FunFactAboutTodayWidget.swift */,
 				00F5230F2A81043F0046576E /* BhagvatGitaWidget.swift */,
@@ -736,7 +733,6 @@
 				0050BDF32A8BE0E100D3162A /* NextMCUFilmWidget.swift in Sources */,
 				004D9B3E2A4D99CD00199886 /* ImageProvider.swift in Sources */,
 				00A6051D2A6FE09600AF5FD0 /* NumberAPIURLS.swift in Sources */,
-				00BDAE1C2A627805002CFD69 /* CustomPictureWidget.swift in Sources */,
 				005048F62A6E95F200328710 /* FlirtyLineModel.swift in Sources */,
 				00F5230B2A81008C0046576E /* BhagwatGitaResponse.swift in Sources */,
 				00AC0A552A865F5D00798580 /* TVShowQuoteWidget.swift in Sources */,

@@ -65,11 +65,3 @@ class IntentHandler: INExtension, TVShowIntentIntentHandling, JokeCategoryChoice
         completion(INObjectCollection(items: nsStringArray), nil)
     }
 }
-
-class CustomIntentError: Error {
-    let message: String
-    
-    init(_ message: String) {
-        self.message = message
-    }
-}
