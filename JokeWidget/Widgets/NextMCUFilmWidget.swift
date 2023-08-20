@@ -8,48 +8,45 @@
 import SwiftUI
 import WidgetKit
 
-struct MCUFilmEntry: TimelineEntry {
+struct ListOfMCUFilmEntry: TimelineEntry {
     let date: Date = .now
-    var nextMCFUFilmResponse: NextMcuFilm = UserDefaults.savedNextMCUFilmResponse
-    var posterImage: UIImage?
+    var nextMCFUFilmResponses: ListofNextMCUFilms = .getDummyData()
+    var posterImages: [UIImage?] = [UIImage(named: "Thor"), UIImage(named: "Thor")]
 }
 
 struct MCUFilmTimelineProvider: TimelineProvider {
-    func placeholder(in context: Context) -> MCUFilmEntry {
-        MCUFilmEntry(posterImage: nil)
+    func placeholder(in context: Context) -> ListOfMCUFilmEntry {
+        .init()
     }
     
-    func getSnapshot(in context: Context, completion: @escaping (MCUFilmEntry) -> Void) {
-        getNextMCUFilm { result in
+    func getSnapshot(in context: Context, completion: @escaping (ListOfMCUFilmEntry) -> Void) {
+        if context.isPreview {
+            completion(self.placeholder(in: context))
+            return
+        }
+        
+        Task {
+            let result = await getNextTwoMCUFilms()
+            
+            var entry = ListOfMCUFilmEntry()
+            
             switch result {
-            case .success(let newResponse):
-                Task {
-                    var entry = MCUFilmEntry()
-                    UserDefaults.saveNewNextMCUFilmResponse(newResponse)
-                    entry.nextMCFUFilmResponse = newResponse
-                    let (image, _) = await fetchImage(from: URL(string: newResponse.posterUrl)!)
-                    entry.posterImage = image
-                    completion(entry)
-                }
+            case .success(let newResponses):
+                entry.nextMCFUFilmResponses = newResponses
+                let urls = newResponses.map { URL(string: $0.posterUrl)! }
+                entry.posterImages = await fetchImagesForMCUWidget(from: urls)
                 break
             case .failure(_):
-                Task {
-                    var entry = MCUFilmEntry()
-                    let savedResponse = UserDefaults.savedNextMCUFilmResponse
-                    entry.nextMCFUFilmResponse = savedResponse
-                    let (image, didSuccess) = await fetchImage(from: URL(string: savedResponse.posterUrl)!)
-                    
-                    if didSuccess {
-                        entry.posterImage = image
-                    }
-                    completion(entry)
-                }
+                let urls = entry.nextMCFUFilmResponses.map { URL(string: $0.posterUrl)! }
+                entry.posterImages = await fetchImagesForMCUWidget(from: urls)
                 break
             }
+            
+            completion(entry)
         }
     }
     
-    func getTimeline(in context: Context, completion: @escaping (Timeline<MCUFilmEntry>) -> Void) {
+    func getTimeline(in context: Context, completion: @escaping (Timeline<ListOfMCUFilmEntry>) -> Void) {
         getSnapshot(in: context) { newEntry in
             let entries = [newEntry]
             
@@ -62,17 +59,25 @@ struct MCUFilmTimelineProvider: TimelineProvider {
     }
 }
 
-struct MCUFilmEntryView: View {
-    var entry: MCUFilmEntry
+struct ListOfMCUFilmEntryView: View {
+    let firstFilm: NextMcuFilm
+    let firstPosterImage: UIImage?
     
-    let mcuFilm: NextMcuFilm
+    let secondFilm: NextMcuFilm
+    let secondPosterImage: UIImage?
     
-    init(entry: MCUFilmEntry) {
-        self.entry = entry
-        self.mcuFilm = entry.nextMCFUFilmResponse
+    @Environment(\.widgetFamily) private var widgetFamily: WidgetFamily
+    
+    init(entry: ListOfMCUFilmEntry) {
+        let responses = entry.nextMCFUFilmResponses
+        let posterImages = entry.posterImages
+        
+        self.firstFilm = responses[0]
+        self.firstPosterImage = posterImages[0]
+        
+        self.secondFilm = responses[1]
+        self.secondPosterImage = posterImages[1]
     }
-    
-    @Environment(\.widgetFamily) var widgetFamily: WidgetFamily
     
     var body: some View {
         modifyForiOS17 {
@@ -80,61 +85,103 @@ struct MCUFilmEntryView: View {
                 imageBG()
                     .ignoresSafeArea()
                 
-                if widgetFamily == .systemLarge {
-                    VStack {
-                        if let image = entry.posterImage {
-                            Image(uiImage: image)
+                if widgetFamily == .systemMedium {
+                    HStack(spacing: 15) {
+                        if let firstPosterImage {
+                            Image(uiImage: firstPosterImage)
                                 .resizable()
                                 .scaledToFit()
                                 .clipShape(RoundedRectangle(cornerRadius: 8))
                                 .frame(height: height)
                         }
                         
-                        Text(mcuFilm.title)
-                            .font(.system(size: 18, weight: .bold, design: .rounded))
+                        VStack(spacing: 10) {
+                            VStack {
+                                Text("\(firstFilm.title)")
+                                    .font(.system(size: 12, weight: .bold, design: .rounded))
+                                
+                                Text("\(firstFilm.theReleaseDate.formatted(date: .abbreviated, time: .omitted))")
+                                    .font(.system(size: 9, weight: .bold, design: .rounded))
+                            }
+                            .multilineTextAlignment(.leading)
+                            .minimumScaleFactor(0.75)
+                            .foregroundColor(.white)
+                            
+                            VStack {
+                                Text("\(secondFilm.title)")
+                                    .font(.system(size: 12, weight: .bold, design: .rounded))
+                                
+                                Text("\(secondFilm.theReleaseDate.formatted(date: .abbreviated, time: .omitted))")
+                                    .font(.system(size: 9, weight: .bold, design: .rounded))
+                            }
+                            .multilineTextAlignment(.trailing)
+                            .minimumScaleFactor(0.75)
+                            .foregroundColor(.white)
+                        }
                         
-                        Text(mcuFilm.theReleaseDate.formatted(date: .complete, time: .omitted))
-                            .font(.system(size: 12, weight: .bold, design: .rounded))
-                    }
-                    .minimumScaleFactor(0.75)
-                    .foregroundStyle(.white)
-                    .padding()
+                        if let secondPosterImage {
+                            Image(uiImage: secondPosterImage)
+                                .resizable()
+                                .scaledToFit()
+                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                                .frame(height: height)
+                        }
+                    }.padding(.horizontal, 20)
                 }
                 
-                if widgetFamily == .systemMedium {
+                if widgetFamily == .systemLarge {
                     HStack {
-                        if let image = entry.posterImage {
-                            VStack {
-                                Image(uiImage: image)
+                        VStack {
+                            if let firstPosterImage {
+                                Image(uiImage: firstPosterImage)
                                     .resizable()
                                     .scaledToFit()
                                     .clipShape(RoundedRectangle(cornerRadius: 8))
                                     .frame(height: height)
                             }
-                            .padding(.vertical, 15)
-                            .padding(.leading, 20)
                             
                             Spacer()
+                            
+                            VStack {
+                                Text(firstFilm.title)
+                                    .font(.system(size: 15, weight: .bold, design: .rounded))
+                                Text(firstFilm.theReleaseDate.formatted(date: .abbreviated, time: .omitted))
+                                    .font(.system(size: 12, weight: .bold, design: .rounded))
+                            }
+                            .multilineTextAlignment(.center)
                         }
+                        .padding(.vertical, 7.5)
                         
                         VStack {
-                            Text(mcuFilm.title)
-                                .font(.system(size: 18, weight: .bold, design: .rounded))
+                            if let secondPosterImage {
+                                Image(uiImage: secondPosterImage)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                                    .frame(height: height)
+                            }
                             
-                            Text(mcuFilm.theReleaseDate.formatted(date: .complete, time: .omitted))
-                                .font(.system(size: 12, weight: .bold, design: .rounded))
+                            Spacer()
+                            
+                            VStack {
+                                Text(secondFilm.title)
+                                    .font(.system(size: 15, weight: .bold, design: .rounded))
+                                Text(secondFilm.theReleaseDate.formatted(date: .abbreviated, time: .omitted))
+                                    .font(.system(size: 12, weight: .bold, design: .rounded))
+                            }
+                            .multilineTextAlignment(.center)
                         }
-                        .multilineTextAlignment(.trailing)
-                        .padding(.trailing, 20)
+                        .padding(.vertical, 7.5)
                     }
-                    .padding()
-                    .foregroundStyle(.white)
+                    .padding(.horizontal, 18)
+                    .padding(.bottom, 15)
                     .minimumScaleFactor(0.75)
+                    .foregroundColor(.white)
                 }
                 
                 if widgetFamily == .systemSmall {
                     VStack {
-                        if let image = entry.posterImage {
+                        if let image = firstPosterImage {
                             Image(uiImage: image)
                                 .resizable()
                                 .scaledToFit()
@@ -142,10 +189,10 @@ struct MCUFilmEntryView: View {
                                 .frame(height: height)
                         }
                         
-                        Text(mcuFilm.title)
+                        Text(firstFilm.title)
                             .font(.system(size: 12, weight: .bold, design: .rounded))
                         
-                        Text(mcuFilm.theReleaseDate.formatted(date: .long, time: .omitted))
+                        Text(firstFilm.theReleaseDate.formatted(date: .long, time: .omitted))
                             .font(.system(size: 9, weight: .bold, design: .rounded))
                     }
                     .minimumScaleFactor(0.75)
@@ -185,7 +232,7 @@ struct MCUFilmEntryView: View {
         }
         
         if widgetFamily == .systemLarge {
-            return 300
+            return 270
         }
         
         return nil
@@ -196,11 +243,31 @@ struct NextMCUFilmWidget: Widget {
     let kind = "Next MCU Film Widget"
     
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: MCUFilmTimelineProvider()) { entry in
-            MCUFilmEntryView(entry: entry)
+        StaticConfiguration(
+            kind: kind,
+            provider: MCUFilmTimelineProvider()
+        ) { entry in
+            ListOfMCUFilmEntryView(entry: entry)
         }
         .configurationDisplayName(kind)
         .description("Simple Countdown to next Marvel Film.")
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
+    }
+}
+
+struct W_Preview: PreviewProvider {
+    static var entry = ListOfMCUFilmEntry(nextMCFUFilmResponses: ListofNextMCUFilms.getDummyData(), posterImages: [UIImage(named: "Thor"), UIImage(named: "Marvel_Logo")])
+    
+    static var previews: some View {
+        Group {
+            ListOfMCUFilmEntryView(entry: entry)
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
+            
+            ListOfMCUFilmEntryView(entry: entry)
+                .previewContext(WidgetPreviewContext(family: .systemMedium))
+            
+            ListOfMCUFilmEntryView(entry: entry)
+                .previewContext(WidgetPreviewContext(family: .systemLarge))
+        }
     }
 }

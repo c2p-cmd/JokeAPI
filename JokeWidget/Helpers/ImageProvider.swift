@@ -7,6 +7,28 @@
 
 import UIKit
 
+func fetchImagesForMCUWidget(
+    from urls: [URL]
+) async -> [UIImage] {
+    var images = [UIImage]()
+    
+    for url in urls {
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            
+            if let image = UIImage(data: data) {
+                images.append(image.resizedForWidget)
+            } else {
+                images.append(UIImage(named: "Marvel_Logo")!.resizedForWidget)
+            }
+        } catch {
+            images.append(UIImage(named: "Marvel_Logo")!.resizedForWidget)
+        }
+    }
+    
+    return images
+}
+
 func fetchImage(
     from url: URL
 ) async -> (UIImage, Bool) {

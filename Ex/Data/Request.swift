@@ -80,6 +80,43 @@ func getNextMCUFilm(
     }.resume()
 }
 
+func getNextTwoMCUFilms() async -> Result<ListofNextMCUFilms, Error> {
+    let urlString = configPlist.value(forKey: "NEXT MCU FILM API LINK") as! String
+    guard let url = URL(string: urlString) else {
+        return .failure(URLError(.badURL))
+    }
+    
+    var responses: ListofNextMCUFilms = []
+    
+    do {
+        let (firstData, _) = try await URLSession.shared.data(from: url)
+        
+        let firstResponse = try JSONDecoder().decode(NextMcuFilm.self, from: firstData)
+        
+        responses.append(firstResponse)
+        
+        if let nextMovie = firstResponse.followingProduction {
+            responses.append(nextMovie)
+        } else {
+            let firstReleaseDate: Date = firstResponse.theReleaseDate
+            let nextDay: Date = Calendar.current.date(byAdding: .day, value: 1, to: firstReleaseDate)!
+            
+            // second request
+            let secondURL = url.appending(queryItems: [URLQueryItem(name: "date", value: nextDay.toString)])
+            
+            let (secondData, _) = try await URLSession.shared.data(from: secondURL)
+            
+            let secondResponse = try JSONDecoder().decode(NextMcuFilm.self, from: secondData)
+            
+            responses.append(secondResponse)
+        }
+        
+        return .success(responses)
+    } catch {
+        return .failure(error)
+    }
+}
+
 
 // MARK: - BhagwatGita API
 func getBhagvadGitaShloka() async -> Result<BhagvatGitaResponse, Error> {
