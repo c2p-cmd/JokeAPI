@@ -78,7 +78,7 @@ struct SpeedWidget_Placeholder: View {
     
     var body: some View {
         if widgetFamily == .systemMedium {
-            Image("Speed Widget New", bundle: .main)
+            Image("Speed Widget New 1", bundle: .main)
                 .resizable()
                 .ignoresSafeArea()
                 .scaledToFill()
@@ -120,39 +120,66 @@ struct SpeedWidgetEntryView: View {
         let preview = entry.speedTestDate == nil
         
         return HStack(alignment: .center) {
+            if #available(iOSApplicationExtension 17, macOSApplicationExtension 14, *) {
+                Button(intent: SpeedTestIntent()) {
+                    VStack(spacing: 5) {
+                        Image(systemName: "arrow.clockwise.circle")
+                            .font(.custom("DS-Digital", size: 50))
+                        
+                        Text("Tap To\nRefresh")
+                            .font(.custom("DS-Digital", size: 14.5))
+                            .multilineTextAlignment(.center)
+                    }
+                }
+                .foregroundColor(Color(red: 1, green: 1, blue: 1, opacity: 0.8))
+                .padding(.leading, 40)
+            }
+            
             Spacer()
-            VStack(alignment: .trailing, spacing: 5) {
-                Text("⚡️ Download Speed")
-                    .font(.custom("DS-Digital", size: 16.5))
+            
+            VStack(alignment: .trailing, spacing: 3) {
+                HStack {
+                    Text("⚡️ ")
+                        .font(.custom("DS-Digital", size: 13.5))
+                    
+                    Text("Internet Speed")
+                        .font(.custom("DS-Digital", size: 16.5))
+                }
                 
                 if preview {
                     Text("----")
-                        .font(.custom("DS-Digital", size: 30))
+                        .font(.custom("DS-Digital", size: 40))
                         .contentTransition(.numericText())
                         .maybeInvalidatableContent()
                 } else {
                     Text(entry.speed.widgetDescription())
-                        .font(.custom("DS-Digital", size: 30))
+                        .font(.custom("DS-Digital", size: 40))
                         .contentTransition(.numericText())
                         .maybeInvalidatableContent()
                 }
                 
                 if let speedTestDate = entry.speedTestDate {
-                    Text("⏰ \(speedTestDate.formatted(date: .omitted, time: .shortened))")
-                        .font(.custom("DS-Digital", size: 19))
+                    HStack {
+                        Text("⏰ ")
+                            .font(.custom("DS-Digital", size: 13))
+                        
+                        Text(speedTestDate.formatted(date: .omitted, time: .shortened))
+                            .font(.custom("DS-Digital", size: 19))
+                            .contentTransition(.numericText())
+                            .maybeInvalidatableContent()
+                    }
                 } else {
-                    Text("--")
-                        .font(.custom("DS-Digital", size: 19))
-                }
-                
-                if #available(iOSApplicationExtension 17, macOSApplicationExtension 14, *) {
-                    Button(intent: SpeedTestIntent()) {
-                        Image(systemName: "arrow.counterclockwise")
+                    HStack {
+                        Text("⏰ ")
+                            .font(.custom("DS-Digital", size: 13))
+                        
+                        Text("--")
+                            .font(.custom("DS-Digital", size: 19))
                     }
                 }
             }
         }
-        .padding(.trailing, 25)
+        .padding(.trailing, 40)
         .bold()
         .multilineTextAlignment(.trailing)
         .buttonStyle(.plain)
@@ -188,7 +215,6 @@ struct SpeedTestWidget: Widget {
         .configurationDisplayName("Speed Test Widget")
         .description("This widget provides you the internet speed every hour.")
         .supportedFamilies([
-            // .systemSmall,
             .systemMedium,
             .accessoryRectangular
         ])
@@ -196,8 +222,8 @@ struct SpeedTestWidget: Widget {
 }
 
 struct SpeedWidgetEntryView_Previews: PreviewProvider {
-    static let entry = SpeedEntry(speed: Speed(value: 99.1234, units: .Mbps), takenAt: .distantFuture)
-
+    static let entry = SpeedEntry(speed: Speed(value: 309.1234, units: .Mbps), takenAt: .distantFuture)
+    
     static var previews: some View {
         Group {
             SpeedWidgetEntryView(entry: entry)

@@ -35,7 +35,7 @@ struct MoreWidgets: WidgetBundle {
         
         FunFactAboutTodayWidget()
         
-        CuteAnimalWidget()
+//        CuteAnimalWidget()
         
 //        MemeWidget()
         

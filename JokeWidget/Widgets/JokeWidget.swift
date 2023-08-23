@@ -78,15 +78,6 @@ struct JokeEntryView_Placeholder: View {
         self.imageResource = imageResource
     }
     
-    private let gradient = LinearGradient(
-        colors: [
-            Color("Orange1", bundle: .main),
-            Color("Orange2", bundle: .main)
-        ],
-        startPoint: .bottom,
-        endPoint: .top
-    )
-    
     var body: some View {
         let configurationImage = UIImage(named: self.imageResource)
         let defaultFunnyBG = UIImage(named: "FUNNY 1")!
@@ -99,59 +90,55 @@ struct JokeEntryView_Placeholder: View {
 }
 
 struct JokeWidgetEntryView : View {
-    private let gradient = LinearGradient(
-        gradient: Gradient(colors: [
-            Color("Orange1", bundle: .main),
-            Color("Orange2", bundle: .main)
-        ]), startPoint: .bottom, endPoint: .top)
-    
     var entry: JokeProvider.Entry
     
-    @Environment(\.widgetFamily) var widgetFamily: WidgetFamily
+    @Environment(\.widgetFamily) private var widgetFamily: WidgetFamily
     
-    func text() -> some View {
-        Text(entry.joke)
-            .font(.system(size: 17, weight: .bold, design: .rounded))
-            .shadow(radius: 1.0)
-            .multilineTextAlignment(.leading)
-            .foregroundStyle(.white)
-            .padding(.all, 15)
-            .transition(.push(from: .bottom))
-            .maybeInvalidatableContent()
-    }
-    
-    func modifyForiOS17() -> some View {
-        if #available(iOS 17, macOS 14, *) {
-            return ZStack {
-                text()
-                HStack {
-                    Spacer()
-                    Button(intent: JokeIntent()) {
-                        Image(systemName: "arrow.counterclockwise")
-                            .foregroundStyle(.white)
+    var body: some View {
+        modifyForiOS17 {
+            ZStack {
+                JokeEntryView_Placeholder(entry.imageResource)
+                    .scaledToFill()
+                
+                HStack(spacing: 20) {
+                    Text(entry.joke)
+                        .font(customFont)
+                        .shadow(radius: 1.0)
+                        .multilineTextAlignment(.leading)
+                        .foregroundStyle(.white)
+                        .transition(.push(from: .bottom))
+                        .frame(alignment: .leading)
+                        .minimumScaleFactor(0.75)
+                        .maybeInvalidatableContent()
+                    
+                    if #available(iOSApplicationExtension 17, *) {
+                        Button(intent: JokeIntent()) {
+                            Image(systemName: "arrow.clockwise.circle")
+                                .font(.system(size: 20))
+                        }
+                        .foregroundColor(.white)
+                        .buttonStyle(.plain)
                     }
-                    .buttonStyle(.plain)
                 }
+                .padding(.all, 25)
             }
-            .containerBackground(gradient, for: .widget)
-        } else {
-            return text()
-                .ignoresSafeArea()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
     
-    var body: some View {
-        modifyForiOS17()
-            .background {
-                ZStack {
-                    gradient
-                    JokeEntryView_Placeholder(entry.imageResource)
-                }
-                .aspectRatio(contentMode: .fill)
-                .ignoresSafeArea()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-            }
+    var customFont: Font {
+        if entry.imageResource == "Programming" {
+            return .custom("HiraMinProN-W3", size: 16.5)
+        }
+        
+        return .system(size: 17, weight: .bold, design: .rounded)
+    }
+    
+    func modifyForiOS17(_ content: () -> some View) -> some View {
+        if #available(iOSApplicationExtension 17, *) {
+            return content().containerBackground(.clear, for: .widget)
+        } else {
+            return content()
+        }
     }
 }
 
@@ -172,22 +159,12 @@ struct JokeWidget: Widget {
     }
 }
 
-
-//#Preview("Somrhing", as: .systemMedium, widget: {
-//    JokeWidget()
-//}, timelineProvider: {
-//    JokeProvider()
-//})
-
 //struct JokeWidget_Previews: PreviewProvider {
 //    static var previews: some View {
+//        let joke = "Who's there?\nControl Freak.\nCon....\nOK, now you say, \"Control Freak who?\""
+//        
 //        JokeWidgetEntryView(
-//            entry: JokeEntry(
-//                joke: """
-//My employer came running to me and said, "I was looking for you all day!Where the hell have you been?"
-//\nI replied, "Good employees are hard to find"
-//"""
-//            )
+//            entry: JokeEntry(joke: joke, imageResource: "Programming")
 //        )
 //        .previewContext(
 //            WidgetPreviewContext(

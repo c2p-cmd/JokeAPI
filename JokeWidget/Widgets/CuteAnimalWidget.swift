@@ -103,19 +103,13 @@ struct CuteAnimalProvider: TimelineProvider {
 }
 
 struct CuteAnimalEntryView: View {
-    let gradient = LinearGradient(colors: [
-        .black.opacity(0.9),
-        .black.opacity(0.75),
-        .black.opacity(0.1)
-    ], startPoint: .bottom, endPoint: .top)
-    
     var entry: CuteAnimalEntry
     
     var body: some View {
         Image(uiImage: entry.uiImage)
             .resizable()
             .scaledToFill()
-            .modifyForiOS17(gradient)
+            .modifyForiOS17(.black)
     }
 }
 
