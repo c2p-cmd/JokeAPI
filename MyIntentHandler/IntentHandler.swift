@@ -48,7 +48,7 @@ class IntentHandler: INExtension, TVShowIntentIntentHandling, JokeCategoryChoice
             "Pun",
             "Spooky",
             "Christmas",
-            "Dark",
+//            "Dark",
             "Misc",
             "Programming"
         ]

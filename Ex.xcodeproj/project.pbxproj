@@ -29,6 +29,8 @@
 		001CB1F72A67EEBB00458B60 /* MemeGeneratorModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001CB1F52A67ED1200458B60 /* MemeGeneratorModels.swift */; };
 		001FB8C12A5FDE3B0020F69C /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001FB8C02A5FDE3B0020F69C /* ImageSaver.swift */; };
 		001FB8C22A5FDF220020F69C /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001FB8C02A5FDE3B0020F69C /* ImageSaver.swift */; };
+		0024EA0A2A9765DC002DA30C /* Apple Chancery.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0024EA092A9765DC002DA30C /* Apple Chancery.ttf */; };
+		0024EA0B2A9765DC002DA30C /* Apple Chancery.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0024EA092A9765DC002DA30C /* Apple Chancery.ttf */; };
 		003BD2682A4D72B3009FDFAC /* MyIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003BD2672A4D72B3009FDFAC /* MyIntents.swift */; };
 		003BD2692A4D72B3009FDFAC /* MyIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003BD2672A4D72B3009FDFAC /* MyIntents.swift */; };
 		003BD26B2A4D81C2009FDFAC /* QuoteAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003BD26A2A4D81C2009FDFAC /* QuoteAPIModel.swift */; };
@@ -175,6 +177,7 @@
 		001CB1F32A67E84900458B60 /* MemeGenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeGenView.swift; sourceTree = "<group>"; };
 		001CB1F52A67ED1200458B60 /* MemeGeneratorModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeGeneratorModels.swift; sourceTree = "<group>"; };
 		001FB8C02A5FDE3B0020F69C /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
+		0024EA092A9765DC002DA30C /* Apple Chancery.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Apple Chancery.ttf"; sourceTree = "<group>"; };
 		003BD2652A4D718A009FDFAC /* Ex.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ex.entitlements; sourceTree = "<group>"; };
 		003BD2662A4D7194009FDFAC /* JokeWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JokeWidgetExtension.entitlements; sourceTree = "<group>"; };
 		003BD2672A4D72B3009FDFAC /* MyIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyIntents.swift; sourceTree = "<group>"; };
@@ -472,6 +475,7 @@
 		00D004AE2A65618200D51C7E /* subscribe-font */ = {
 			isa = PBXGroup;
 			children = (
+				0024EA092A9765DC002DA30C /* Apple Chancery.ttf */,
 				00F523122A8108650046576E /* HandwritingDraft.ttf */,
 				00A605242A6FF6CB00AF5FD0 /* DS-DIGIB.TTF */,
 				00A605212A6FF15D00AF5FD0 /* DS-DIGI.TTF */,
@@ -615,6 +619,7 @@
 				008C2AF92A7B918D0078EEB7 /* CarryYouRegular.ttf in Resources */,
 				00A605222A6FF15D00AF5FD0 /* DS-DIGI.TTF in Resources */,
 				00D004B32A65618200D51C7E /* SubscribeRegular.ttf in Resources */,
+				0024EA0A2A9765DC002DA30C /* Apple Chancery.ttf in Resources */,
 				00B799B12A6985D300F66EC5 /* RAVIE.TTF in Resources */,
 				00511CFE2A2CA03C00D1FD13 /* Screenshot 2023-06-04 at 16.04.08.png in Resources */,
 				0048601C2A1B8A7900F3E6B4 /* Preview Assets.xcassets in Resources */,
@@ -639,6 +644,7 @@
 				00F523142A8108650046576E /* HandwritingDraft.ttf in Resources */,
 				00D004B42A65618200D51C7E /* SubscribeRegular.ttf in Resources */,
 				008C2AFA2A7B918D0078EEB7 /* CarryYouRegular.ttf in Resources */,
+				0024EA0B2A9765DC002DA30C /* Apple Chancery.ttf in Resources */,
 				00D004AC2A652F7200D51C7E /* ComicKings.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

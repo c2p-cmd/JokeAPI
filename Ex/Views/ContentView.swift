@@ -10,6 +10,8 @@ import SwiftUI
 struct ContentView: View {
     @State private var keys: [String] = []
     @State private var showAlert = false
+    @State private var confirmAction = false
+    @State private var success = false
     
     var body: some View {
         NavigationStack {
@@ -39,19 +41,32 @@ struct ContentView: View {
                     
                     Button("Clear All Keys") {
                         showAlert = true
-                        print(appStorage.dictionaryRepresentation().keys.count)
                     }
-                    .onAppear {
-                        self.keys = appStorage.dictionaryRepresentation().keys.map { $0.description }
-                        appStorage.dictionaryRepresentation().keys.map { $0.description }.forEach {
-                            print($0)
+                    .alert("Success!", isPresented: $success, actions: {
+                        Button("Okay") {
+                            self.success = false
                         }
-                    }
+                    })
+                    .confirmationDialog("Confirm Delete?", isPresented: $confirmAction, actions: {
+                        Button("Yes") {
+                            self.deleteAllKeys()
+                            self.confirmAction = false
+                        }
+                        
+                        Button("No") {
+                            self.confirmAction = false
+                        }
+                    }, message: {
+                        Text("This will delete all cache from app.")
+                    })
                     .fullScreenCover(isPresented: $showAlert, content: {
                         List {
                             HStack {
                                 Button("Confirm?", role: .destructive) {
-                                    self.deleteAllKeys()
+                                    self.showAlert = false
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        self.confirmAction = true
+                                    }
                                 }
                                 
                                 Spacer()
@@ -63,11 +78,14 @@ struct ContentView: View {
                             .buttonStyle(.borderedProminent)
                             .foregroundColor(.black)
                             
-                            ForEach(appStorage.dictionaryRepresentation().keys.map { $0.description }, id: \.self) { key in
+                            ForEach(self.keys, id: \.self) { key in
                                 Text(key)
                                     .foregroundStyle(.black)
                             }
                         }
+                        .onAppear(perform: {
+                            self.keys = appStorage.dictionaryRepresentation().keys.map { $0.description }
+                        })
                     })
                 }
                 .labelStyle(.iconOnly)
@@ -100,10 +118,13 @@ struct ContentView: View {
     
     private func deleteAllKeys() {
         for (k, _) in appStorage.dictionaryRepresentation() {
-            print(k)
             appStorage.removeObject(forKey: k)
         }
         appStorage.synchronize()
+        self.keys = appStorage.dictionaryRepresentation().keys.map { $0.description }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            self.success = true
+        })
     }
 }
 

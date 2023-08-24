@@ -17,6 +17,7 @@ struct QuoteIntent: AppIntent {
         
         switch quoteResult {
         case .success(let quoteResponse):
+            UserDefaults.saveNewQuote(quoteResponse)
             let reply = "Once \(quoteResponse.author) said. \(quoteResponse.content)"
             return .result(value: reply)
         case .failure(_):
@@ -36,6 +37,7 @@ struct JokeIntent: AppIntent {
         
         switch jokeRes {
         case .success(let newJoke):
+            UserDefaults.saveNewJoke(newJoke)
             return .result(value: newJoke)
         case .failure(_):
             return .result(value: UserDefaults.savedJoke)
@@ -54,6 +56,7 @@ struct SpeedTestIntent: AppIntent {
         
         switch res {
         case .success(let newSpeed):
+            UserDefaults.saveNewSpeed(speed: newSpeed, at: .now)
             return .result(value: "The speed is \(newSpeed.description)")
         case .failure(_):
             return .result(value: "Sorry! you seem to be offline")
@@ -71,6 +74,7 @@ struct FlirtyLinesIntent: AppIntent {
         
         switch result {
         case .success(let newLine):
+            UserDefaults.saveNewFlirtyLine(newLine)
             return .result(value: newLine)
         case .failure(_):
             return .result(value: UserDefaults.savedFlirtyLine)
@@ -94,11 +98,11 @@ struct TVShowQuoteAppIntent: AppIntent {
     }
     
     func perform() async throws -> some IntentResult & ReturnsValue<String> {
-        let tvShowQuote = await getTVShowQuote(count: 1, keepShort: self.keepShort).randomElement()!
+        let tvShowQuote = await getTVShowQuote(count: 1, keepShort: self.keepShort, didSuccess: UserDefaults.saveNewTVShowQuotes(_:)).randomElement()!
         
         let responseString = """
 From the show: \"\(tvShowQuote.show)\",
-\"\(tvShowQuote.character)\" says.
+\"\(tvShowQuote.character)\" says;
 \(tvShowQuote.text)
 """
         

@@ -9,11 +9,12 @@ import WidgetKit
 import SwiftUI
 
 struct JokeEntry: TimelineEntry {
-    let date: Date = .now
+    let date: Date
     var joke: String
     var imageResource: String
     
-    init(joke: String = UserDefaults.savedJoke, imageResource: String? = nil) {
+    init(joke: String = UserDefaults.savedJoke, imageResource: String? = nil, on date: Date = .now) {
+        self.date = date
         self.joke = joke
         self.imageResource = imageResource ?? "FUNNY 1"
     }
@@ -71,7 +72,7 @@ struct JokeProvider: IntentTimelineProvider {
     }
 }
 
-struct JokeEntryView_Placeholder: View {
+struct JokeEntryView_BackgroundImage: View {
     let imageResource: String
     
     init(_ imageResource: String = "FUNNY 1") {
@@ -96,9 +97,10 @@ struct JokeWidgetEntryView : View {
     
     var body: some View {
         modifyForiOS17 {
-            ZStack {
-                JokeEntryView_Placeholder(entry.imageResource)
+            ZStack(alignment: .topLeading) {
+                JokeEntryView_BackgroundImage(entry.imageResource)
                     .scaledToFill()
+                    .frame(alignment: .center)
                 
                 HStack(spacing: 20) {
                     Text(entry.joke)
@@ -106,8 +108,9 @@ struct JokeWidgetEntryView : View {
                         .shadow(radius: 1.0)
                         .multilineTextAlignment(.leading)
                         .foregroundStyle(.white)
-                        .transition(.push(from: .bottom))
-                        .frame(alignment: .leading)
+                        .animation(.interpolatingSpring, value: entry.joke)
+                        .id(entry.joke)
+                        .frame(alignment: .topLeading)
                         .minimumScaleFactor(0.75)
                         .maybeInvalidatableContent()
                     
@@ -116,6 +119,7 @@ struct JokeWidgetEntryView : View {
                             Image(systemName: "arrow.clockwise.circle")
                                 .font(.system(size: 20))
                         }
+                        .frame(width: .infinity, alignment: .trailing)
                         .foregroundColor(.white)
                         .buttonStyle(.plain)
                     }
@@ -126,7 +130,7 @@ struct JokeWidgetEntryView : View {
     }
     
     var customFont: Font {
-        if entry.imageResource == "Programming" {
+        if entry.imageResource == "Programming" || entry.imageResource == "Dark" {
             return .custom("HiraMinProN-W3", size: 16.5)
         }
         
@@ -153,9 +157,9 @@ struct JokeWidget: Widget {
         ) { entry in
             JokeWidgetEntryView(entry: entry)
         }
-        .supportedFamilies([.systemMedium])
         .configurationDisplayName("Joke Widget")
         .description("This is a widget to feed you with joke every hour.")
+        .supportedFamilies([.systemMedium])
     }
 }
 

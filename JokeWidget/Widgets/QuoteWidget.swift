@@ -104,22 +104,23 @@ struct QuoteWidgetEntryView: View {
         VStack {
             Text("\(entry.quoteResponse.content)\n")
                 .font(.custom("Chalkduster", size: 18))
-                .multilineTextAlignment(.leading)
-                .transition(.slide)
+                .multilineTextAlignment(.center)
+                .contentTransition(.interpolate)
+                .maybeInvalidatableContent()
             
             HStack {
                 Spacer()
                 Text("-\(entry.quoteResponse.author) ")
-                    .multilineTextAlignment(.trailing)
+                    .multilineTextAlignment(.center)
                     .font(.custom("Chalkduster", size: 11.5))
-                    .transition(.push(from: .leading))
+                    .contentTransition(.interpolate)
+                    .maybeInvalidatableContent()
                 if #available(iOS 17, macOS 14, *) {
                     Spacer()
                     refreshButton
                 }
             }
         }
-        .maybeInvalidatableContent()
         .padding(.all, 15)
         .minimumScaleFactor(0.75)
         .shadow(radius: 10, x: 5)

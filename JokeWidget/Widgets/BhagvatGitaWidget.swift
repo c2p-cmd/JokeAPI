@@ -23,9 +23,9 @@ struct BhagvatGitaEntry: TimelineEntry {
         self.languageChoice = language == .unknown ? .english : language
     }
     
-    static func randomShloka() -> BhagvatGitaEntry {
+    static func randomShloka(in language: LanguageChoice = .english) -> BhagvatGitaEntry {
         let randomShloka: BhagvatGitaResponse = .getShlokas().randomElement()!
-        return BhagvatGitaEntry(randomShloka)
+        return BhagvatGitaEntry(randomShloka, in: language)
     }
 }
 
@@ -92,64 +92,6 @@ struct BhagvatGitaProvider: IntentTimelineProvider {
     }
 }
 
-struct BhagvatGitaLargeEntryView: View {
-    var entry: BhagvatGitaEntry
-    
-    var bhagvatGitaResponse: BhagvatGitaResponse {
-        entry.bhagwatGitaResponse
-    }
-    
-    var body: some View {
-        modifyForiOS17 {
-            ZStack {
-                background()
-                
-                let brown = Color(red: 104/256, green: 63/256, blue: 17/256)
-                
-                VStack(spacing: 45) {
-                    Text(bhagvatGitaResponse.shlok)
-                        .font(.custom("Devanagari Sangam MN", size: 18))
-                        .animation(.easeInOut)
-                    
-                    switch entry.languageChoice {
-                    case .english:
-                        Text(bhagvatGitaResponse.englishTranslation)
-                            .font(.custom("handwriting-draft_free-version", size: 16.5))
-                            .animation(.easeInOut)
-                    case .hindi:
-                        Text(bhagvatGitaResponse.hindiTranslation.replacingOccurrences(of: " ", with: "  "))
-                            .font(.custom("Devanagari Sangam MN", size: 18))
-                            .animation(.easeInOut)
-                    case .unknown:
-                        Text("")
-                    }
-                }
-                .multilineTextAlignment(.leading)
-                .foregroundColor(brown)
-                .minimumScaleFactor(0.75)
-                .padding(.all, 25)
-            }
-        }
-    }
-    
-    private func background() -> some View {
-        return Image("bhagawatGita")
-            .resizable()
-            .scaledToFill()
-            .rotationEffect(.degrees(180))
-            .frame(width: 365, height: 380)
-            .ignoresSafeArea()
-    }
-    
-    private func modifyForiOS17(_ content: () -> some View) -> some View {
-        if #available(iOS 17, *) {
-            return content().containerBackground(.clear, for: .widget)
-        } else {
-            return content().background(background())
-        }
-    }
-}
-
 struct BhagvatGitaMediumEntryView: View {
     var entry: BhagvatGitaEntry
     
@@ -161,24 +103,24 @@ struct BhagvatGitaMediumEntryView: View {
         modifyForiOS17 {
             ZStack {
                 background()
-                
-                let brown = Color(red: 104/256, green: 63/256, blue: 17/256)
+                    .ignoresSafeArea()
                 
                 VStack(spacing: 18) {
                     switch entry.languageChoice {
                     case .english:
                         Text(bhagvatGitaResponse.englishTranslation)
-                            .font(.custom("handwriting-draft_free-version", size: 18))
+                            .font(.custom("Apple-Chancery", size: 16.5))
                             .animation(.easeInOut)
                     case .hindi:
                         Text(bhagvatGitaResponse.hindiTranslation.replacingOccurrences(of: " ", with: "  "))
-                            .font(.custom("Devanagari Sangam MN", size: 18))
+                            .font(.system(size: 16.5, weight: .bold, design: .rounded))
                             .animation(.easeInOut)
                     case .unknown:
                         Text("")
                     }
                 }
-                .foregroundColor(brown)
+                .shadow(color: Color(red: 48/256, green: 26/256, blue: 0/256), radius: 5)
+                .foregroundColor(Color(red: 225/256, green: 178/256, blue: 116/256))
                 .minimumScaleFactor(0.75)
                 .padding(.all, 25)
             }
@@ -189,15 +131,14 @@ struct BhagvatGitaMediumEntryView: View {
         return Image("bhagawatGita")
             .resizable()
             .scaledToFill()
-            .frame(width: 365, height: 169)
-            .ignoresSafeArea()
+            .frame(width: 365, height: 170)
     }
     
     private func modifyForiOS17(_ content: () -> some View) -> some View {
         if #available(iOS 17, *) {
             return content().invalidatableContent().containerBackground(.clear, for: .widget)
         } else {
-            return content().background(background())
+            return content()
         }
     }
 }
@@ -218,5 +159,12 @@ struct BhagvatGitaWidget: Widget {
         .configurationDisplayName("Bhagvat Gita Widget")
         .description("Everyday learn something new.")
         .supportedFamilies([.systemMedium])
+    }
+}
+
+struct BhagvatGita_Preview: PreviewProvider {
+    static var previews: some View {
+        BhagvatGitaMediumEntryView(entry: .randomShloka(in: .hindi))
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }

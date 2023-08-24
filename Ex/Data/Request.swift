@@ -174,7 +174,8 @@ func getBhagvadGitaShloka(
 func getTVShowQuote(
     from tvShow: String = TVShowQuoteResponses.allShows.randomElement()!,
     count: Int = 1,
-    keepShort: Bool = true
+    keepShort: Bool = true,
+    didSuccess newResponsesClosure: ((TVShowQuoteResponses) -> Void)? = nil
 ) async -> TVShowQuoteResponses {
     var urlString = configPlist.value(forKey: "TV Show Quotes") as! String
     urlString.append("/\(count)")
@@ -191,6 +192,7 @@ func getTVShowQuote(
         
         let newResponses: TVShowQuoteResponses = try JSONDecoder().decode(TVShowQuoteResponses.self, from: data)
         
+        newResponsesClosure?(newResponses)
         return newResponses
     } catch {
         print(error.localizedDescription)
