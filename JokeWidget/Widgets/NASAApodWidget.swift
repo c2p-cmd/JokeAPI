@@ -38,7 +38,7 @@ struct NASAApodTimelineProvider: IntentTimelineProvider {
             let tomorrow = Calendar.current.date(byAdding: halfDayComponent, to: newEntry.date)!
             
             // if errored retry after an hour
-            let nextHourComponents = DateComponents(hour: 1)
+            let nextHourComponents = DateComponents(minute: 15)
             let nextHour = Calendar.current.date(byAdding: nextHourComponents, to: newEntry.date)!
             
             let nextReloadDate = didError ? tomorrow : nextHour
@@ -58,47 +58,38 @@ struct NASAApodEntryView: View {
     
     var entry: NASAApodEntry
     
+    func image() -> some View {
+        Image(uiImage: entry.uiImage)
+            .resizable()
+            .scaledToFill()
+            .frame(width: 370, height: 370)
+    }
+    
     var body: some View {
-        if #available(iOSApplicationExtension 17, *) {
+        modifyForiOS17 {
             ZStack {
-                VStack {
-                    Spacer()
-                    if entry.showTitle {
-                        Text(entry.title)
-                            .font(.system(.caption, design: .rounded))
-                            .foregroundColor(.white)
-                            .background(gradient)
-                            .cornerRadius(5)
-                            .padding(.horizontal, 25)
-                            .frame(alignment: .bottom)
-                            .multilineTextAlignment(.center)
-                    }
-                }
-            }
-            .containerBackground(for: .widget) {
-                Image(uiImage: entry.uiImage)
-                    .resizable()
-                    .scaledToFill()
-            }
-        } else {
-            ZStack(alignment: .bottom) {
-                Image(uiImage: entry.uiImage)
-                    .resizable()
-                    .scaledToFill()
+                image()
                 
-                if entry.showTitle {
-                    Text(entry.title) 
+                if entry.showTitle == true {
+                    Text(entry.title)
                         .font(.system(.caption, design: .rounded))
                         .foregroundColor(.white)
                         .background(gradient)
                         .cornerRadius(5)
                         .padding(.bottom, 5)
                         .padding(.horizontal, 25)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                        .frame(height: 365, alignment: .bottom)
                         .multilineTextAlignment(.center)
                 }
             }
-            .modifyForiOS17(.black)
+        }
+    }
+    
+    func modifyForiOS17(content: () -> some View) -> some View {
+        if #available(iOS 17, *) {
+            return content().containerBackground(.clear, for: .widget)
+        } else {
+            return content()
         }
     }
 }

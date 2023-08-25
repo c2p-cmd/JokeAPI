@@ -109,3 +109,41 @@ From the show: \"\(tvShowQuote.show)\",
         return .result(value: responseString)
     }
 }
+
+@available(iOS 17, *)
+struct BhagvatGitaAppIntent: AudioPlaybackIntent {
+    static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Read out a bhagvat gita shloka")
+    static var description: IntentDescription? = IntentDescription(stringLiteral: "")
+    
+    @Parameter(title: "The shloka to be read out")
+    var shloka: String
+    
+    @Parameter(title: "Language")
+    var language: ShlokaLanguage
+    
+    init(shloka: String, in language: ShlokaLanguage) {
+        self.shloka = shloka
+        self.language = language
+    }
+    
+    init() {
+        self.shloka = BhagvatGitaEntry.randomShloka().bhagwatGitaResponse.englishTranslation
+        self.language = .english
+    }
+    
+    @MainActor
+    func perform() async throws -> some IntentResult {
+        try await ShlokaPlayerModel.shared.playSound(shloka: shloka, in: language)
+        return .result()
+    }
+}
+
+enum ShlokaLanguage: String, AppEnum {
+    case english, hindi
+    
+    static var typeDisplayRepresentation: TypeDisplayRepresentation = TypeDisplayRepresentation(stringLiteral: "Shloka Language")
+    static var caseDisplayRepresentations: [ShlokaLanguage : DisplayRepresentation] = [
+        .english: DisplayRepresentation(stringLiteral: "English"),
+        .hindi: DisplayRepresentation(stringLiteral: "Hindi")
+    ]
+}

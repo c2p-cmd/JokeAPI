@@ -112,7 +112,7 @@ fileprivate func fetchNASAImage(
         
         if let data = data {
             guard let uiImage = UIImage(data: data) else {
-                let entry = NASAApodEntry(uiImage: UIImage(named: "error")!, title: "Image problem", showTitle: false)
+                let entry = NASAApodEntry(uiImage: UIImage(named: "AuroraSnow")!, title: "Image problem", showTitle: false)
                 completion(entry, true)
                 return
             }
@@ -125,7 +125,7 @@ fileprivate func fetchNASAImage(
             print(error.localizedDescription)
 #endif
             
-            let entry = NASAApodEntry(uiImage: UIImage(named: "error")!, title: error.localizedDescription, showTitle: false)
+            let entry = NASAApodEntry(uiImage: UIImage(named: "AuroraSnow")!, title: error.localizedDescription, showTitle: false)
             completion(entry, true)
         }
     }

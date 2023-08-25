@@ -118,6 +118,23 @@ struct BhagvatGitaMediumEntryView: View {
                     case .unknown:
                         Text("")
                     }
+                    
+                    if #available(iOS 17, *) {
+                        HStack {
+                            if entry.languageChoice == .english {
+                                Button(intent: BhagvatGitaAppIntent(shloka: entry.bhagwatGitaResponse.englishTranslation, in: .english)) {
+                                    Image(systemName: "speaker.wave.2.bubble.left")
+                                }
+                            }
+                            if entry.languageChoice == .hindi {
+                                Button(intent: BhagvatGitaAppIntent(shloka: entry.bhagwatGitaResponse.hindiTranslation, in: .hindi)) {
+                                    Image(systemName: "speaker.wave.2.bubble.left")
+                                }
+                            }
+                            Spacer()
+                        }
+                        .buttonStyle(.plain)
+                    }
                 }
                 .shadow(color: Color(red: 48/256, green: 26/256, blue: 0/256), radius: 5)
                 .foregroundColor(Color(red: 225/256, green: 178/256, blue: 116/256))
@@ -162,9 +179,9 @@ struct BhagvatGitaWidget: Widget {
     }
 }
 
-struct BhagvatGita_Preview: PreviewProvider {
-    static var previews: some View {
-        BhagvatGitaMediumEntryView(entry: .randomShloka(in: .hindi))
-            .previewContext(WidgetPreviewContext(family: .systemMedium))
-    }
-}
+//struct BhagvatGita_Preview: PreviewProvider {
+//    static var previews: some View {
+//        BhagvatGitaMediumEntryView(entry: .randomShloka(in: .hindi))
+//            .previewContext(WidgetPreviewContext(family: .systemMedium))
+//    }
+//}

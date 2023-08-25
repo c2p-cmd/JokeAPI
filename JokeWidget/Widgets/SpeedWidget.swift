@@ -73,23 +73,14 @@ struct SpeedTimelineProvider: TimelineProvider {
     }
 }
 
-struct SpeedWidget_Placeholder: View {
-    @Environment(\.widgetFamily) var widgetFamily: WidgetFamily
-    
+struct SpeedWidget_BGImage: View {
     var body: some View {
-        if widgetFamily == .systemMedium {
-            Image("Speed Widget New 1", bundle: .main)
-                .resizable()
-                .ignoresSafeArea()
-                .scaledToFill()
-                .frame(width: 370, height: 170, alignment: .center)
-        } else {
-            Image("xl lg sm", bundle: .main)
-                .resizable()
-                .ignoresSafeArea()
-                .scaledToFill()
-                .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 20)))
-        }
+        Image("Speed Widget New 1", bundle: .main)
+            .resizable()
+            .ignoresSafeArea()
+            .scaledToFill()
+            .frame(width: 370, height: 170, alignment: .center)
+            .blur(radius: 2.75)
     }
 }
 
@@ -191,7 +182,7 @@ struct SpeedWidgetEntryView: View {
         switch self.widgetFamily {
         case .systemMedium:
             ZStack {
-                SpeedWidget_Placeholder()
+                SpeedWidget_BGImage()
                 homescreenWidgetView()
             }
         case .accessoryRectangular:

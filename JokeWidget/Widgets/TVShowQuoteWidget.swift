@@ -87,58 +87,67 @@ struct TVShowQuoteEntryView: View {
     }
     
     var body: some View {
-        adaptToiOS17(ZStack {
-            Image("TV_Quote_BG")
-                .resizable()
-                .scaledToFill()
-                .frame(width: 369, height: 380)
-            
-            
-            VStack(spacing: 10) {
-                Text(tvShowQuote.text)
-                    .lineLimit(5)
-                    .font(myFont(size: 15))
-                    .animation(.interpolatingSpring, value: tvShowQuote.text)
-                    .maybeInvalidatableContent()
+        adaptToiOS17 {
+            GeometryReader { geometry in
+                let width = geometry.size.width * 1.15
+                let height = geometry.size.height
                 
-                HStack {
-                    Text("From: \"\(tvShowQuote.show)\"")
-                        .font(myFont(size: 12))
-                        .animation(.interpolatingSpring, value: tvShowQuote.show)
-                        .maybeInvalidatableContent()
+                ZStack {
+                    Image("tv-screen-1")
+                        .resizable()
+                        .scaledToFill()
+                        .offset(x: -18, y: 6)
+                        .frame(width: width, height: height)
                     
-                    Spacer()
-                    
-                    Text("-\(tvShowQuote.character)")
-                        .font(myFont(size: 12))
-                        .animation(.interpolatingSpring, value: tvShowQuote.character)
-                        .maybeInvalidatableContent()
-                    
-                    if #available(iOSApplicationExtension 17, *) {
-                        Button(intent: TVShowQuoteAppIntent(keepShort: true)) {
-                            Image(systemName: "arrow.counterclockwise")
-                                .foregroundStyle(.black)
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text(tvShowQuote.text)
+                            .lineLimit(5)
+                            .font(myFont(size: 15))
+                            .animation(.interpolatingSpring, value: tvShowQuote.text)
+                            .maybeInvalidatableContent()
+                            .multilineTextAlignment(.leading)
+                        
+                        HStack {
+                            Text("From: \"\(tvShowQuote.show)\"")
+                                .font(myFont(size: 12))
+                                .animation(.interpolatingSpring, value: tvShowQuote.show)
+                                .maybeInvalidatableContent()
+                            
+                            Spacer()
+                            
+                            Text("-\(tvShowQuote.character)")
+                                .font(myFont(size: 12))
+                                .animation(.interpolatingSpring, value: tvShowQuote.character)
+                                .maybeInvalidatableContent()
+                            
+                            if #available(iOSApplicationExtension 17, *) {
+                                Button(intent: TVShowQuoteAppIntent(keepShort: true)) {
+                                    Image(systemName: "arrow.counterclockwise.circle")
+                                        .foregroundStyle(.white)
+                                }
+                                .buttonStyle(.plain)
+                            }
                         }
-                        .buttonStyle(.plain)
+                        .padding(.trailing, 15)
                     }
+                    .id(tvShowQuote.rawValue)
+                    .minimumScaleFactor(0.75)
+                    .padding(.vertical, 10)
+                    .padding(.trailing, 72.5)
                 }
-                .padding(.horizontal, 5)
             }
-            .id(tvShowQuote.rawValue)
-            .minimumScaleFactor(0.75)
-            .padding(.all, 25)
-        })
+        }
     }
     
     private func myFont(size: CGFloat) -> Font {
         .custom("Arial Rounded MT Bold", size: size)
     }
     
-    private func adaptToiOS17(_ content: some View) -> some View {
+    private func adaptToiOS17(_ content: () -> some View) -> some View {
         if #available(iOSApplicationExtension 17, *) {
-            return content.containerBackground(.clear, for: .widget)
+            return content().containerBackground(.clear, for: .widget)
         } else {
-            return content
+            return content()
         }
     }
 }
@@ -160,7 +169,7 @@ struct TVShowQuoteWidget: Widget {
     }
 }
 
-//struct Preview: PreviewProvider {
+//struct TVSHOW_Preview: PreviewProvider {
 //    static var previews: some View {
 //        TVShowQuoteEntryView(
 //            entry: TVShowQuoteEntry(tvShowQuote: TVShowQuoteEntry.savedResponses().randomElement()!)

@@ -27,6 +27,8 @@
 		001CB1F42A67E84900458B60 /* MemeGenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001CB1F32A67E84900458B60 /* MemeGenView.swift */; };
 		001CB1F62A67ED1200458B60 /* MemeGeneratorModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001CB1F52A67ED1200458B60 /* MemeGeneratorModels.swift */; };
 		001CB1F72A67EEBB00458B60 /* MemeGeneratorModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001CB1F52A67ED1200458B60 /* MemeGeneratorModels.swift */; };
+		001E38022A98830D00964FA6 /* ShlokaPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001E38012A98830D00964FA6 /* ShlokaPlayerModel.swift */; };
+		001E38032A98830D00964FA6 /* ShlokaPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001E38012A98830D00964FA6 /* ShlokaPlayerModel.swift */; };
 		001FB8C12A5FDE3B0020F69C /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001FB8C02A5FDE3B0020F69C /* ImageSaver.swift */; };
 		001FB8C22A5FDF220020F69C /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001FB8C02A5FDE3B0020F69C /* ImageSaver.swift */; };
 		0024EA0A2A9765DC002DA30C /* Apple Chancery.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0024EA092A9765DC002DA30C /* Apple Chancery.ttf */; };
@@ -176,6 +178,7 @@
 		001ACE092A4EBA2C000CE9AF /* UIImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resize.swift"; sourceTree = "<group>"; };
 		001CB1F32A67E84900458B60 /* MemeGenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeGenView.swift; sourceTree = "<group>"; };
 		001CB1F52A67ED1200458B60 /* MemeGeneratorModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeGeneratorModels.swift; sourceTree = "<group>"; };
+		001E38012A98830D00964FA6 /* ShlokaPlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShlokaPlayerModel.swift; sourceTree = "<group>"; };
 		001FB8C02A5FDE3B0020F69C /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		0024EA092A9765DC002DA30C /* Apple Chancery.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Apple Chancery.ttf"; sourceTree = "<group>"; };
 		003BD2652A4D718A009FDFAC /* Ex.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ex.entitlements; sourceTree = "<group>"; };
@@ -307,6 +310,7 @@
 				00F5230C2A8103400046576E /* Shlokas.json */,
 				00AC0A272A8642B300798580 /* TVShowQuotes.json */,
 				0050BDEE2A8BDB3A00D3162A /* MCUFilms.json */,
+				001E38012A98830D00964FA6 /* ShlokaPlayerModel.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -697,6 +701,7 @@
 				00F49BAF2A73DD44008428F9 /* Storage.swift in Sources */,
 				003BD2682A4D72B3009FDFAC /* MyIntents.swift in Sources */,
 				0091D99A2A5EBFD9002A281A /* HelperViews.swift in Sources */,
+				001E38022A98830D00964FA6 /* ShlokaPlayerModel.swift in Sources */,
 				004337802A339DBD004AF73F /* ContentView.swift in Sources */,
 				00F523102A81043F0046576E /* BhagvatGitaWidget.swift in Sources */,
 				004860152A1B8A7800F3E6B4 /* ExApp.swift in Sources */,
@@ -711,6 +716,7 @@
 				00511CF12A2C960300D1FD13 /* JokeWidget.swift in Sources */,
 				00134F242A514E0F0091D6FD /* NetworkError.swift in Sources */,
 				00AC0A6E2A867E9E00798580 /* Array+RawRepresentable.swift in Sources */,
+				001E38032A98830D00964FA6 /* ShlokaPlayerModel.swift in Sources */,
 				009ECD542A8CA99C002DE0A9 /* IntentHandler.swift in Sources */,
 				009ECD582A8CAA20002DE0A9 /* Array+asNStringArray.swift in Sources */,
 				00D004B72A65963500D51C7E /* JokeType.swift in Sources */,

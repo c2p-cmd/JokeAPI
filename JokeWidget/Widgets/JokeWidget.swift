@@ -124,12 +124,28 @@ struct JokeWidgetEntryView : View {
                         .buttonStyle(.plain)
                     }
                 }
-                .padding(.all, 25)
+                .modifier(PaddingModifier(for: entry.imageResource))
             }
         }
     }
     
-    var customFont: Font {
+    struct PaddingModifier: ViewModifier {
+        let imageResource: String
+        
+        init(for imageResource: String) {
+            self.imageResource = imageResource
+        }
+        
+        func body(content: Content) -> some View {
+            if imageResource == "Dark" {
+                return content.padding(.all, 35)
+            }
+            
+            return content.padding(.all, 25)
+        }
+    }
+    
+    private var customFont: Font {
         if entry.imageResource == "Programming" || entry.imageResource == "Dark" {
             return .custom("HiraMinProN-W3", size: 16.5)
         }
@@ -137,7 +153,7 @@ struct JokeWidgetEntryView : View {
         return .system(size: 17, weight: .bold, design: .rounded)
     }
     
-    func modifyForiOS17(_ content: () -> some View) -> some View {
+    private func modifyForiOS17(_ content: () -> some View) -> some View {
         if #available(iOSApplicationExtension 17, *) {
             return content().containerBackground(.clear, for: .widget)
         } else {
@@ -163,17 +179,17 @@ struct JokeWidget: Widget {
     }
 }
 
-//struct JokeWidget_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let joke = "Who's there?\nControl Freak.\nCon....\nOK, now you say, \"Control Freak who?\""
-//        
-//        JokeWidgetEntryView(
-//            entry: JokeEntry(joke: joke, imageResource: "Programming")
-//        )
-//        .previewContext(
-//            WidgetPreviewContext(
-//                family: .systemMedium
-//            )
-//        )
-//    }
-//}
+struct JokeWidget_Previews: PreviewProvider {
+    static var previews: some View {
+        let joke = "I had a granny that we couldn't decide whether to bury or cremate\n\nIn the end we decided to just let her live."
+        
+        JokeWidgetEntryView(
+            entry: JokeEntry(joke: joke, imageResource: "Any")
+        )
+        .previewContext(
+            WidgetPreviewContext(
+                family: .systemMedium
+            )
+        )
+    }
+}
