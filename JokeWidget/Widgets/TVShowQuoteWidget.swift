@@ -36,7 +36,12 @@ struct TVShowQuoteProvider: IntentTimelineProvider {
         in context: Context,
         completion: @escaping (Entry) -> Void
     ) {
-        let entry = placeholder(in: context)
+        if context.isPreview {
+            completion(self.placeholder(in: context))
+            return
+        }
+        
+        let entry = TVShowQuoteEntry(tvShowQuote: TVShowQuoteEntry.savedResponses().randomElement()!)
         
         completion(entry)
     }
@@ -86,55 +91,57 @@ struct TVShowQuoteEntryView: View {
         entry.tvShowQuote
     }
     
+    func imageBG(_ width: CGFloat? = 360, _ height: CGFloat? = 169) -> some View {
+        Image("tv-widgets1")
+            .resizable()
+            .scaledToFill()
+            .frame(width: width, height: height, alignment: .center)
+    }
+    
     var body: some View {
         adaptToiOS17 {
             GeometryReader { geometry in
-                let width = geometry.size.width * 1.15
+                let width = geometry.size.width
                 let height = geometry.size.height
                 
-                ZStack {
-                    Image("tv-screen-1")
-                        .resizable()
-                        .scaledToFill()
-                        .offset(x: -18, y: 6)
-                        .frame(width: width, height: height)
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(tvShowQuote.text)
+                        .lineLimit(5)
+                        .font(myFont(size: 15))
+                        .animation(.interpolatingSpring, value: tvShowQuote.text)
+                        .maybeInvalidatableContent()
+                        .multilineTextAlignment(.leading)
                     
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text(tvShowQuote.text)
-                            .lineLimit(5)
-                            .font(myFont(size: 15))
-                            .animation(.interpolatingSpring, value: tvShowQuote.text)
+                    HStack {
+                        Text("From: \"\(tvShowQuote.show)\"")
+                            .font(myFont(size: 10))
+                            .animation(.interpolatingSpring, value: tvShowQuote.show)
                             .maybeInvalidatableContent()
-                            .multilineTextAlignment(.leading)
                         
-                        HStack {
-                            Text("From: \"\(tvShowQuote.show)\"")
-                                .font(myFont(size: 12))
-                                .animation(.interpolatingSpring, value: tvShowQuote.show)
-                                .maybeInvalidatableContent()
-                            
-                            Spacer()
-                            
-                            Text("-\(tvShowQuote.character)")
-                                .font(myFont(size: 12))
-                                .animation(.interpolatingSpring, value: tvShowQuote.character)
-                                .maybeInvalidatableContent()
-                            
-                            if #available(iOSApplicationExtension 17, *) {
-                                Button(intent: TVShowQuoteAppIntent(keepShort: true)) {
-                                    Image(systemName: "arrow.counterclockwise.circle")
-                                        .foregroundStyle(.white)
-                                }
-                                .buttonStyle(.plain)
-                            }
-                        }
-                        .padding(.trailing, 15)
+                        Spacer()
+                        
+                        Text("-\(tvShowQuote.character)")
+                            .font(myFont(size: 10))
+                            .animation(.interpolatingSpring, value: tvShowQuote.character)
+                            .maybeInvalidatableContent()
                     }
-                    .id(tvShowQuote.rawValue)
-                    .minimumScaleFactor(0.75)
-                    .padding(.vertical, 10)
-                    .padding(.trailing, 72.5)
+                    
+                    if #available(iOSApplicationExtension 17, *) {
+                        HStack(alignment: .center) {
+                            Spacer()
+                            Button(intent: TVShowQuoteAppIntent(keepShort: true)) {
+                                Image(systemName: "arrow.counterclockwise.circle")
+                                    .foregroundStyle(.white)
+                            }
+                            .buttonStyle(.plain)
+                            Spacer()
+                        }
+                    }
                 }
+                .frame(width: width * 0.75, height: height * 0.9, alignment: .top)
+                .id(tvShowQuote.rawValue)
+                .minimumScaleFactor(0.75)
+                .padding(.vertical)
             }
         }
     }
@@ -145,9 +152,13 @@ struct TVShowQuoteEntryView: View {
     
     private func adaptToiOS17(_ content: () -> some View) -> some View {
         if #available(iOSApplicationExtension 17, *) {
-            return content().containerBackground(.clear, for: .widget)
+            return content().containerBackground(for: .widget) {
+                imageBG(nil, nil)
+            }
         } else {
             return content()
+                .padding(.horizontal, 15)
+                .background(alignment: .center) { imageBG(nil, nil) }
         }
     }
 }
@@ -169,10 +180,9 @@ struct TVShowQuoteWidget: Widget {
     }
 }
 
-//struct TVSHOW_Preview: PreviewProvider {
-//    static var previews: some View {
-//        TVShowQuoteEntryView(
-//            entry: TVShowQuoteEntry(tvShowQuote: TVShowQuoteEntry.savedResponses().randomElement()!)
-//        ).previewContext(WidgetPreviewContext(family: .systemMedium))
-//    }
+//@available(iOS 17, *)
+//#Preview(as: .systemMedium) {
+//    TVShowQuoteWidget()
+//} timeline: {
+//    return TVShowQuoteEntry.savedResponses().map { TVShowQuoteEntry(tvShowQuote: $0) }
 //}
