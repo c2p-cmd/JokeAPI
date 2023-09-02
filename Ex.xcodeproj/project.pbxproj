@@ -132,6 +132,8 @@
 		00F523112A81043F0046576E /* BhagvatGitaWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F5230F2A81043F0046576E /* BhagvatGitaWidget.swift */; };
 		00F523132A8108650046576E /* HandwritingDraft.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00F523122A8108650046576E /* HandwritingDraft.ttf */; };
 		00F523142A8108650046576E /* HandwritingDraft.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00F523122A8108650046576E /* HandwritingDraft.ttf */; };
+		00FEA1272AA086D4000C8E88 /* Dictionary+percentEncoded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FEA1262AA086D4000C8E88 /* Dictionary+percentEncoded.swift */; };
+		00FEA1282AA086D4000C8E88 /* Dictionary+percentEncoded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FEA1262AA086D4000C8E88 /* Dictionary+percentEncoded.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -248,6 +250,7 @@
 		00F5230C2A8103400046576E /* Shlokas.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Shlokas.json; sourceTree = "<group>"; };
 		00F5230F2A81043F0046576E /* BhagvatGitaWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BhagvatGitaWidget.swift; sourceTree = "<group>"; };
 		00F523122A8108650046576E /* HandwritingDraft.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HandwritingDraft.ttf; sourceTree = "<group>"; };
+		00FEA1262AA086D4000C8E88 /* Dictionary+percentEncoded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+percentEncoded.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -444,6 +447,7 @@
 				00AC0A6C2A867E8000798580 /* Array+RawRepresentable.swift */,
 				007F29B42A8A3D7600D729D0 /* Date+RawRepresentale.swift */,
 				009ECD562A8CAA20002DE0A9 /* Array+asNStringArray.swift */,
+				00FEA1262AA086D4000C8E88 /* Dictionary+percentEncoded.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -688,6 +692,7 @@
 				001FB8C12A5FDE3B0020F69C /* ImageSaver.swift in Sources */,
 				00A07F652A5D2F6B006FC4DB /* NASAApodResponse.swift in Sources */,
 				004337822A339E87004AF73F /* UserDefaultExtension.swift in Sources */,
+				00FEA1272AA086D4000C8E88 /* Dictionary+percentEncoded.swift in Sources */,
 				001ACE0A2A4EBA2C000CE9AF /* UIImage+resize.swift in Sources */,
 				00134F292A514E820091D6FD /* URL+ping.swift in Sources */,
 				00511CE22A2C911F00D1FD13 /* Request.swift in Sources */,
@@ -754,6 +759,7 @@
 				00A07F6C2A5D4416006FC4DB /* NASAApodWidget.swift in Sources */,
 				00134F302A5153610091D6FD /* ViewModifier_iOS17.swift in Sources */,
 				007F29B62A8A3D7600D729D0 /* Date+RawRepresentale.swift in Sources */,
+				00FEA1282AA086D4000C8E88 /* Dictionary+percentEncoded.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
