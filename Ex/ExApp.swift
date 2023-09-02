@@ -14,27 +14,18 @@ struct ExApp: App {
             ContentView()
                 .defaultAppStorage(appStorage)
                 .preferredColorScheme(.light)
-                .onAppear {
-//                    let domain = Bundle.main.bundleIdentifier!
-//                    appStorage.removePersistentDomain(forName: domain)
-//                    appStorage.synchronize()
-//                    print(domain)
-//                    print(Array(UserDefaults.standard.dictionaryRepresentation().keys).count)
-//                    print(Array(appStorage.dictionaryRepresentation().keys).count)
-//                    
-//                    for (k, _) in appStorage.dictionaryRepresentation() {
-//                        appStorage.removeObject(forKey: k)
-//                    }
+                .task {
+                    async let uiDevice = UIDevice.current
                     
-                    let deviceId = UIDevice.current.identifierForVendor?.uuidString
+                    let deviceId = await uiDevice.identifierForVendor?.uuidString
                     print("My Device ID is: \(deviceId ?? "NO ID!")")
+                    
+                    let name = await uiDevice.name
+                    let modelName = await uiDevice.localizedModel
+                    let systemVersion = await uiDevice.systemVersion
+                    
+                    print("Details \(name) \(modelName) \(systemVersion)")
                 }
-//                .onAppear {
-//                    for family in UIFont.familyNames.sorted() {
-//                        let names = UIFont.fontNames(forFamilyName: family)
-//                        print("Family: \(family) Font names: \(names)")
-//                    }
-//                }
         }
     }
 }
