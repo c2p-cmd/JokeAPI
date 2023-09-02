@@ -15,90 +15,102 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            VStack(alignment: .center) {
-                Text("KIDA Entertainment!")
-                    .font(.system(.largeTitle, design: .rounded, weight: .heavy))
-                    .multilineTextAlignment(.center)
-                
-                Spacer()
-                
-                VStack(alignment: .center, spacing: 25.0) {
-                    Text("Your One Stop Shop For Widget Entertainment!")
-                        .font(.system(size: 24, weight: .semibold, design: .rounded))
-                        .foregroundStyle(.black)
-                        .padding(.bottom, 55.0)
-                        .multilineTextAlignment(.center)
-                    
-                    NavigationLink {
-                        AllWidgetsView()
-                            .navigationTitle("All Widgets")
-                            .navigationBarBackButtonHidden(true)
-                    } label: {
-                        Label("All Widgets View", systemImage: "arrow.forward.circle")
-                            .foregroundStyle(.black)
-                    }
-                    .clipShape(Circle())
-                    
-                    Button("Clear All Keys") {
-                        showAlert = true
-                    }
-                    .alert("Success!", isPresented: $success, actions: {
-                        Button("Okay") {
-                            self.success = false
+            AllWidgetsView()
+                .padding(.horizontal, 10)
+                .navigationTitle("All Widgets")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            showAlert = true
+                        } label: {
+                            Label("Clear Keys?", systemImage: "gear.circle.fill")
                         }
-                    })
-                    .confirmationDialog("Confirm Delete?", isPresented: $confirmAction, actions: {
-                        Button("Yes") {
-                            self.deleteAllKeys()
-                            self.confirmAction = false
+                        .alert("Success!", isPresented: $success) {
+                            Button("Okay") {
+                                self.success = false
+                            }
                         }
-                        
-                        Button("No") {
-                            self.confirmAction = false
+                        .confirmationDialog("Confirm Delete?", isPresented: $confirmAction) {
+                            Button("Yes") {
+                                self.deleteAllKeys()
+                                self.confirmAction = false
+                            }
+                            
+                            Button("No") {
+                                self.confirmAction = false
+                            }
+                        } message: {
+                            Text("This will delete all cache from app.")
                         }
-                    }, message: {
-                        Text("This will delete all cache from app.")
-                    })
-                    .fullScreenCover(isPresented: $showAlert, content: {
-                        List {
-                            HStack {
-                                Button("Confirm?", role: .destructive) {
-                                    self.showAlert = false
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                        self.confirmAction = true
+                        .fullScreenCover(isPresented: $showAlert) {
+                            List {
+                                HStack {
+                                    Button("Confirm?", role: .destructive) {
+                                        self.showAlert = false
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                            self.confirmAction = true
+                                        }
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                    Button("Cancel") {
+                                        showAlert = false
                                     }
                                 }
+                                .buttonStyle(.borderedProminent)
+                                .foregroundColor(.black)
                                 
-                                Spacer()
-                                
-                                Button("Cancel") {
-                                    showAlert = false
+                                ForEach(self.keys, id: \.self) { key in
+                                    Text(key)
+                                        .foregroundStyle(.black)
                                 }
                             }
-                            .buttonStyle(.borderedProminent)
-                            .foregroundColor(.black)
-                            
-                            ForEach(self.keys, id: \.self) { key in
-                                Text(key)
-                                    .foregroundStyle(.black)
+                            .onAppear {
+                                self.keys = appStorage.dictionaryRepresentation().keys.map { $0.description }
                             }
                         }
-                        .onAppear(perform: {
-                            self.keys = appStorage.dictionaryRepresentation().keys.map { $0.description }
-                        })
-                    })
+                    }
                 }
-                .labelStyle(.iconOnly)
-                .buttonStyle(.borderedProminent)
-                .foregroundStyle(.bar)
-                .tint(.orange)
-                
-                Spacer()
-            }
-            .padding(.vertical, 30)
-            .padding(.horizontal, 10)
-            .background(backGround())
         }
+    }
+    
+    private func oldContentView() -> some View {
+        VStack(alignment: .center) {
+            Text("KIDA Entertainment!")
+                .font(.system(.largeTitle, design: .rounded, weight: .heavy))
+                .multilineTextAlignment(.center)
+            
+            Spacer()
+            
+            VStack(alignment: .center, spacing: 25.0) {
+                Text("Your One Stop Shop For Widget Entertainment!")
+                    .font(.system(size: 24, weight: .semibold, design: .rounded))
+                    .foregroundStyle(.black)
+                    .padding(.bottom, 55.0)
+                    .multilineTextAlignment(.center)
+                
+                NavigationLink {
+                    AllWidgetsView()
+                        .navigationTitle("All Widgets")
+                        .navigationBarBackButtonHidden(true)
+                } label: {
+                    Label("All Widgets View", systemImage: "arrow.forward.circle")
+                        .foregroundStyle(.black)
+                }
+                .clipShape(Circle())
+                
+                
+            }
+            .labelStyle(.iconOnly)
+            .buttonStyle(.borderedProminent)
+            .foregroundStyle(.bar)
+            .tint(.orange)
+            
+            Spacer()
+        }
+        .background(backGround())
     }
     
     private func backGround() -> some View {
