@@ -7,6 +7,7 @@
 
 import AppIntents
 import SwiftUI
+import WidgetKit
 
 struct QuoteIntent: AppIntent {
     static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Fetch New Quote")
@@ -49,10 +50,12 @@ struct SpeedTestIntent: AppIntent {
     static var title: LocalizedStringResource = LocalizedStringResource(stringLiteral: "Fetch Latest Download Speed")
     static var description: IntentDescription? = IntentDescription(stringLiteral: "This is an intent to test internet speed")
     
+    static var widgetFamily: WidgetFamily?
+    
     func perform() async throws -> some IntentResult & ReturnsValue<String> {
         let downloadService = DownloadService.shared
         
-        let res = await downloadService.test(for: url, in: 60)
+        let res = await downloadService.testWithAnalytics(for: url, in: 60, fromWidget: Self.widgetFamily)
         
         switch res {
         case .success(let newSpeed):
@@ -61,6 +64,13 @@ struct SpeedTestIntent: AppIntent {
         case .failure(_):
             return .result(value: "Sorry! you seem to be offline")
         }
+    }
+}
+
+extension SpeedTestIntent {
+    init(with: WidgetFamily) {
+        SpeedTestIntent.widgetFamily = SpeedTestIntent.widgetFamily
+        self.init()
     }
 }
 
