@@ -48,27 +48,27 @@ struct SpeedTimelineProvider: TimelineProvider {
             let downloadService = DownloadService.shared
             var speedEntry = SpeedEntry()
             
-            downloadService.test(for: url, timeout: 60) { result in
-                switch result {
-                case .success(let newSpeed):
-                    UserDefaults.saveNewSpeed(newSpeed)
-                    speedEntry.speed = newSpeed
-                    speedEntry.speedTestDate = .now
-                    break
-                case .failure(_):
-                    (speedEntry.speed, speedEntry.speedTestDate) = UserDefaults.savedSpeedWithDate
-                    break
-                }
-                
-                let components = DateComponents(hour: 1)
-                let nextReloadDate = Calendar.current.date(
-                    byAdding: components, to: speedEntry.date
-                )!
-                let policy: TimelineReloadPolicy = .after(nextReloadDate)
-                let timeline = Timeline(entries: [speedEntry], policy: policy)
-                
-                completion(timeline)
+            let result = await downloadService.testWithAnalytics(for: url, in: 60, fromWidget: context.family)
+            
+            switch result {
+            case .success(let newSpeed):
+                UserDefaults.saveNewSpeed(speed: newSpeed, at: .now)
+                speedEntry.speed = newSpeed
+                speedEntry.speedTestDate = .now
+                break
+            case .failure(_):
+                (speedEntry.speed, speedEntry.speedTestDate) = UserDefaults.savedSpeedWithDate
+                break
             }
+            
+            let components = DateComponents(hour: 1)
+            let nextReloadDate = Calendar.current.date(
+                byAdding: components, to: speedEntry.date
+            )!
+            let policy: TimelineReloadPolicy = .after(nextReloadDate)
+            let timeline = Timeline(entries: [speedEntry], policy: policy)
+            
+            completion(timeline)
         }
     }
 }
@@ -112,7 +112,7 @@ struct SpeedWidgetEntryView: View {
         
         return HStack(alignment: .center) {
             if #available(iOSApplicationExtension 17, macOSApplicationExtension 14, *) {
-                Button(intent: SpeedTestIntent()) {
+                Button(intent: SpeedTestIntent(with: widgetFamily)) {
                     VStack(spacing: 5) {
                         Image(systemName: "arrow.clockwise.circle")
                             .font(.custom("DS-Digital", size: 50))
