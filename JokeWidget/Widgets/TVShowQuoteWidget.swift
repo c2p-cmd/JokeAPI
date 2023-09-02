@@ -87,10 +87,6 @@ struct TVShowQuoteProvider: IntentTimelineProvider {
 struct TVShowQuoteEntryView: View {
     var entry: TVShowQuoteEntry
     
-    var tvShowQuote: TVShowQuoteResponse {
-        entry.tvShowQuote
-    }
-    
     func imageBG(_ width: CGFloat? = 360, _ height: CGFloat? = 169) -> some View {
         Image("tv-widgets1")
             .resizable()
@@ -99,6 +95,8 @@ struct TVShowQuoteEntryView: View {
     }
     
     var body: some View {
+        let tvShowQuote = entry.tvShowQuote
+        
         adaptToiOS17 {
             GeometryReader { geometry in
                 let width = geometry.size.width
@@ -142,6 +140,7 @@ struct TVShowQuoteEntryView: View {
                 .id(tvShowQuote.rawValue)
                 .minimumScaleFactor(0.75)
                 .padding(.vertical)
+                .foregroundStyle(.white)
             }
         }
     }
@@ -180,9 +179,9 @@ struct TVShowQuoteWidget: Widget {
     }
 }
 
-//@available(iOS 17, *)
-//#Preview(as: .systemMedium) {
-//    TVShowQuoteWidget()
-//} timeline: {
-//    return TVShowQuoteEntry.savedResponses().map { TVShowQuoteEntry(tvShowQuote: $0) }
-//}
+@available(iOS 17, *)
+#Preview(as: .systemMedium) {
+    TVShowQuoteWidget()
+} timeline: {
+    return TVShowQuoteEntry.savedResponses().map { TVShowQuoteEntry(tvShowQuote: $0) }
+}
