@@ -5,7 +5,8 @@
 //  Created by Sharan Thakur on 02/07/23.
 //
 
-import Foundation
+import SwiftUI
+import WidgetKit
 
 private let urlString = (configPlist.value(forKey: "SpeedTestFile URL") as? String)!
 let url = URL(string: urlString)!
@@ -147,3 +148,67 @@ extension DownloadService: URLSessionDownloadDelegate {
     }
 }
 
+// MARK: - WITH Analytics
+extension DownloadService {
+    func testWithAnalytics(
+        for url: URL,
+        in timeout: TimeInterval,
+        fromWidget widgetFamily: WidgetFamily?
+    ) async -> Result<Speed, Error> {
+        do {
+            let res: Speed = try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Speed, Error>) in
+                self.speedTestMayErrorContinuation(for: url, in: timeout, continuation: continuation)
+            }
+            
+            await self.analyticsCall(sending: res.pretty, fromWidget: widgetFamily)
+            
+            return .success(res)
+        } catch {
+            return .failure(error)
+        }
+    }
+    
+    private func analyticsCall(
+        sending speed: Speed,
+        at date: Date = .now,
+        fromWidget widgetFamily: WidgetFamily?
+    ) async {
+        guard let analyticsUrl = URL(string: "https://5221-219-91-170-183.ngrok-free.app/speed_test/") else {
+            print("Invalid url")
+            return
+        }
+        
+        let uiDevice = await UIDevice.current
+        let name = await uiDevice.name
+        let modelName = await uiDevice.model
+        let systemVersion = await uiDevice.systemVersion
+        let uuid = await uiDevice.identifierForVendor?.uuidString
+        
+        var requestBody: [String: String] = [
+            "Speed" : speed.description,
+            "DateTime" : Date.now.formatted(date: .complete, time: .complete),
+            "BinaryUrl" : url.absoluteString,
+            "Device Name Model" : "\(name) \(modelName)",
+            "Device ID" : "\(uuid ?? "nil")",
+            "System Version" : systemVersion
+        ]
+        
+        if let widgetFamily {
+            requestBody["WidgetFamily"] = widgetFamily.description
+        }
+        
+        var urlRequest = URLRequest(url: analyticsUrl)
+        urlRequest.httpMethod = "POST"
+        urlRequest.httpBody = requestBody.percentEncoded()
+        
+        do {
+            let (_, response) = try await URLSession.shared.data(for: urlRequest)
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print(httpResponse.statusCode)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+}
