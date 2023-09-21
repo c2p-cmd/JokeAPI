@@ -71,22 +71,37 @@ struct FunFactEntryView: View {
     let entry: FunFactEntry
     
     let grey: Color = Color(red: 198/256, green: 194/256, blue: 195/256)
+    let textColor = Color(red: 177/256, green: 139/256, blue: 55/256)
+    let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM dd"
+        return formatter
+    }()
     
     func layout() -> some View {
         return ZStack {
-            Image("IMG_6838", bundle: .main)
+            Image("Fun Fact", bundle: .main)
                 .resizable()
                 .scaledToFill()
                 .frame(width: 370, height: 170)
-                .opacity(0.6)
-                .blur(radius: 5)
             
-            Text(entry.funFact)
-                .font(.system(size: 15, weight: .bold, design: .rounded))
-                .foregroundStyle(.black)
-                .minimumScaleFactor(0.75)
-                .padding(.all, 20)
-                .multilineTextAlignment(.leading)
+            VStack {
+                Text(entry.funFact)
+                    .font(.system(size: 16, weight: .bold, design: .rounded))
+                    .multilineTextAlignment(.leading)
+                    .frame(alignment: .top)
+                
+                Spacer()
+                
+                Text(formatter.string(from: .now))
+                    .font(.system(size: 12, weight: .bold, design: .rounded))
+                    .multilineTextAlignment(.center)
+                    .frame(alignment: .bottom)
+            }
+            .foregroundStyle(textColor)
+            .minimumScaleFactor(0.75)
+            .padding(.vertical, 20)
+            .padding(.horizontal, 30)
         }
         .background(grey)
     }

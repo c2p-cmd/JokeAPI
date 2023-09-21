@@ -70,13 +70,12 @@ struct FlirtyLinesEntryView: View {
     
     var body: some View {
         modifyForiOS17()
-            .background(background)
     }
     
     var text: some View {
         VStack {
             Text(entry.pickup)
-                .font(.custom("CarryYou-Regular", size: 30))
+                .font(.system(size: 19, weight: .bold, design: .rounded))
                 .shadow(radius: 1.0)
                 .multilineTextAlignment(.leading)
                 .foregroundStyle(.white)
@@ -86,46 +85,31 @@ struct FlirtyLinesEntryView: View {
                 .maybeInvalidatableContent()
             
             if #available(iOSApplicationExtension 17, macOSApplicationExtension 14, *) {
-                HStack {
-                    Spacer()
-                    Button(intent: FlirtyLinesIntent()) {
-                        Image(systemName: "arrow.counterclockwise")
-                    }
-                    .buttonStyle(.plain)
-                    .foregroundStyle(.white)
+                Spacer()
+                Button(intent: FlirtyLinesIntent()) {
+                    Text("😉")
                 }
+                .font(.headline)
+                .buttonStyle(.borderedProminent)
+                .buttonBorderShape(.circle)
+                .tint(.pink)
+                .foregroundStyle(.white)
             }
         }
     }
     
     var background: some View {
-        let bgGradient = LinearGradient(
-            colors: [
-                Color(red: 251 / 256, green: 87 / 256, blue: 113 / 256),
-                Color(red: 227 / 256, green: 64 / 256, blue: 82 / 256),
-                Color(red: 240 / 256, green: 42 / 256, blue: 63 / 256)
-            ],
-            startPoint: .bottom,
-            endPoint: .top
-        )
-        
-        return ZStack {
-            Image("wp3515553")
-                .offset(x: -55, y: 66)
-                .opacity(1)
-                .rotationEffect(.degrees(180-15))
-                .background(bgGradient)
-            
-            RoundedRectangle(cornerRadius: 20)
-                .fill(bgGradient)
-                .opacity(0.75)
-        }
+        Image("Flirty Coochie Coochie", bundle: .main)
+            .resizable()
+            .scaledToFill()
     }
     
     func modifyForiOS17() -> some View {
         if #available(iOS 17, macOS 14, *) {
             return text
-                .containerBackground(.pink, for: .widget)
+                .containerBackground(for: .widget) {
+                    background
+                }
         } else {
             return text
         }
