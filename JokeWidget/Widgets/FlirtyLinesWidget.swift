@@ -78,6 +78,8 @@ struct FlirtyLinesEntryView: View {
                 refreshButton
                     .rotationEffect(.degrees(180))
                     .scaleEffect(y: -1)
+                    .offset(x: -5)
+                    .frame(width: .infinity, alignment: .leading)
                 Spacer()
             }
             
@@ -93,6 +95,8 @@ struct FlirtyLinesEntryView: View {
             if #available(iOSApplicationExtension 17, macOSApplicationExtension 14, *) {
                 Spacer()
                 refreshButton
+                    .offset(x: 5)
+                    .frame(width: .infinity, alignment: .trailing)
             }
         }
     }
@@ -103,7 +107,7 @@ struct FlirtyLinesEntryView: View {
             Image("cupid_red")
                 .resizable()
                 .scaledToFit()
-                .frame(height: 33)
+                .frame(height: 25)
         }
         .buttonStyle(.plain)
     }

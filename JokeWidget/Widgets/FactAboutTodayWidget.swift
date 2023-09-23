@@ -82,19 +82,17 @@ struct FunFactEntryView: View {
                 Text(entry.funFact)
                     .font(.system(size: 16, weight: .bold, design: .rounded))
                     .multilineTextAlignment(.leading)
-                    .frame(alignment: .top)
+                    .frame(height: .infinity, alignment: .top)
                 
                 Spacer()
                 
                 Text(formatter.string(from: .now))
-                    .font(.system(size: 12, weight: .bold, design: .rounded))
+                    .font(.system(size: 11, weight: .bold, design: .rounded))
                     .multilineTextAlignment(.center)
-                    .frame(alignment: .bottom)
+                    .frame(height: .infinity, alignment: .bottom)
             }
-            .foregroundStyle(.white)
+            .foregroundStyle(Color(red: 177/256, green: 139/256, blue: 55/256))
             .minimumScaleFactor(0.75)
-            .padding(.vertical, 20)
-            .padding(.horizontal, 30)
         }
     }
     
@@ -102,13 +100,7 @@ struct FunFactEntryView: View {
         if #available(iOS 17, macOS 14, *) {
             layout()
                 .containerBackground(for: .widget) {
-                    Image("numbers_background", bundle: .main)
-                        .resizable()
-                        .overlay(alignment: .center) {
-                            Image("grainy-opacity-80")
-                                .resizable()
-                                .scaledToFill()
-                        }
+                    Image("Fun Fact", bundle: .main)
                 }
         } else {
             layout()

@@ -122,7 +122,6 @@ struct BhagvatGitaMediumEntryView: View {
                 .shadow(color: Color(red: 48/256, green: 26/256, blue: 0/256), radius: 5)
                 .foregroundColor(Color(red: 225/256, green: 178/256, blue: 116/256))
                 .minimumScaleFactor(0.75)
-                .padding(.all, 25)
             }
         }
     }

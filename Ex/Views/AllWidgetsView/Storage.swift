@@ -362,20 +362,31 @@ class FactAboutTodayView: ObservableObject, Identifiable {
     var isBusy = false
     
     var views: [some View] {
+        let formatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MMMM dd"
+            return formatter
+        }()
+        
         return [
             GenericWidgetView(backgroundImage: {
-                Image("numbers_background", bundle: .main)
+                Image("Fun Fact", bundle: .main)
                     .resizable()
-                    .overlay(alignment: .center) {
-                        Image("grainy-opacity-80")
-                            .resizable()
-                            .scaledToFill()
-                    }
             }, textView: {
-                Text(self.funFact)
-                    .font(.system(size: 15, weight: .bold, design: .rounded))
-                    .foregroundStyle(.white)
-                    .multilineTextAlignment(.leading)
+                VStack {
+                    Text(self.funFact)
+                        .font(.system(size: 16, weight: .bold, design: .rounded))
+                        .multilineTextAlignment(.leading)
+                        .frame(alignment: .top)
+                    
+                    Spacer()
+                    
+                    Text(formatter.string(from: .now))
+                        .font(.system(size: 11, weight: .bold, design: .rounded))
+                        .multilineTextAlignment(.center)
+                        .frame(alignment: .bottom)
+                }
+                .foregroundStyle(Color(red: 177/256, green: 139/256, blue: 55/256))
             })
         ]
     }
@@ -561,27 +572,12 @@ class BhagvatGitaView: Identifiable {
             Text(bhagwatGitaResponse.englishTranslation)
                 .multilineTextAlignment(.leading)
                 .font(.custom("handwriting-draft_free-version", size: 15))
-            
-            HStack {
-                Spacer()
-                Text("-\(bhagwatGitaResponse.englishAuthor)")
-                    .multilineTextAlignment(.trailing)
-                    .font(.custom("handwriting-draft_free-version", size: 12.5))
-                
-            }
         }.foregroundStyle(brown)
         
         let textHindi = VStack {
             Text(bhagwatGitaResponse.hindiTranslation)
                 .multilineTextAlignment(.leading)
                 .font(.custom("Devanagari Sangam MN", size: 15))
-            
-            HStack {
-                Spacer()
-                Text("-\(bhagwatGitaResponse.hindiAuthor)")
-                    .multilineTextAlignment(.trailing)
-                    .font(.custom("handwriting-draft_free-version", size: 12.5))
-            }
         }.foregroundStyle(brown)
         
         return [
