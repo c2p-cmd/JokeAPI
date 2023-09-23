@@ -29,8 +29,8 @@
 		<string>ConfigurationIntent</string>
 		<string>GitaLanguageIntent</string>
 		<string>JokeCategoryChoiceIntent</string>
-		<string>NASAWidgetConfigIntent</string>
 		<string>QuoteBGIntent</string>
+		<string>SpeedTestBGIntent</string>
 		<string>TVShowIntentIntent</string>
 	</array>
 	<key>UIAppFonts</key>
@@ -45,6 +45,7 @@
 		<string>CarryYouRegular.ttf</string>
 		<string>HandwritingDraft.ttf</string>
 		<string>Apple Chancery.ttf</string>
+		<string>EraserDust-p70d.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

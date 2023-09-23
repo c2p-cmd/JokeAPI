@@ -15,6 +15,8 @@ struct ExApp: App {
                 .defaultAppStorage(appStorage)
                 .preferredColorScheme(.light)
                 .task {
+                    let _ = UIFont.familyNames
+                      .flatMap { UIFont.fontNames(forFamilyName: $0) }
                     async let uiDevice = UIDevice.current
                     
                     let deviceId = await uiDevice.identifierForVendor?.uuidString
