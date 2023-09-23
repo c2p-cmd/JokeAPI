@@ -67,6 +67,7 @@ struct ContentView: View {
                                         .foregroundStyle(.black)
                                 }
                             }
+                            .background(.white)
                             .onAppear {
                                 self.keys = appStorage.dictionaryRepresentation().keys.map { $0.description }
                             }
@@ -74,43 +75,6 @@ struct ContentView: View {
                     }
                 }
         }
-    }
-    
-    private func oldContentView() -> some View {
-        VStack(alignment: .center) {
-            Text("KIDA Entertainment!")
-                .font(.system(.largeTitle, design: .rounded, weight: .heavy))
-                .multilineTextAlignment(.center)
-            
-            Spacer()
-            
-            VStack(alignment: .center, spacing: 25.0) {
-                Text("Your One Stop Shop For Widget Entertainment!")
-                    .font(.system(size: 24, weight: .semibold, design: .rounded))
-                    .foregroundStyle(.black)
-                    .padding(.bottom, 55.0)
-                    .multilineTextAlignment(.center)
-                
-                NavigationLink {
-                    AllWidgetsView()
-                        .navigationTitle("All Widgets")
-                        .navigationBarBackButtonHidden(true)
-                } label: {
-                    Label("All Widgets View", systemImage: "arrow.forward.circle")
-                        .foregroundStyle(.black)
-                }
-                .clipShape(Circle())
-                
-                
-            }
-            .labelStyle(.iconOnly)
-            .buttonStyle(.borderedProminent)
-            .foregroundStyle(.bar)
-            .tint(.orange)
-            
-            Spacer()
-        }
-        .background(backGround())
     }
     
     private func backGround() -> some View {

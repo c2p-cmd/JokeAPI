@@ -18,7 +18,7 @@ struct AllWidgetsView: View {
     @StateObject private var flirtyLines = FlirtyLineViews.shared
     @StateObject private var nasaApod = NASApodView.shared
     @StateObject private var cuteAnimal = CuteAnimalView.shared
-    @StateObject private var funFactAboutToday = FunFactAboutTodayView.shared
+    @StateObject private var funFactAboutToday = FactAboutTodayView.shared
     @StateObject private var nextMCUfilm = NextMCUFilmResponseView.shared
     
     private var httpAnimal = HTTPAnimalView.shared
@@ -95,7 +95,7 @@ struct AllWidgetsView: View {
             
             // fun fact about today
             NonStickySection(
-                title: "🗓️ Fun Fact About Today Widget",
+                title: "🗓️ Fact About Today Widget",
                 showing: funFactAboutToday.views,
                 showBottomSheet: $showBottomSheet
             ).tag(funFactAboutToday.id)

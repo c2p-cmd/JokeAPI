@@ -26,6 +26,7 @@ class JokeViews: ObservableObject, Identifiable {
                     .resizable()
             }, textView: {
                 Text(self.savedJoke)
+                    .foregroundStyle(.white)
                     .font(.system(size: 18, weight: .bold, design: .rounded))
             })
         ]
@@ -72,27 +73,41 @@ class QuoteViews: ObservableObject, Identifiable {
         let text = VStack {
             Text(savedQuote.content)
                 .multilineTextAlignment(.leading)
-                .font(.custom("Chalkduster", size: 18))
+                .font(.custom(Bool.random() ? "Chalkduster" : "EraserDust", size: 18))
             
             HStack {
                 Spacer()
                 Text("-\(savedQuote.author)")
                     .multilineTextAlignment(.trailing)
-                    .font(.custom("Chalkduster", size: 11.5))
+                    .font(.custom(Bool.random() ? "Chalkduster" : "EraserDust", size: 11.5))
                 
             }
         }.foregroundStyle(.white)
         
         return [
             GenericWidgetView(backgroundImage: {
-                Image("BLACKBOARD2")
+                Image("black")
                     .resizable()
             }, textView: {
                 text
             }),
             
             GenericWidgetView(backgroundImage: {
-                Image("BLACKBOARD")
+                Image("green_w_chalk")
+                    .resizable()
+            }, textView: {
+                text
+            }),
+            
+            GenericWidgetView(backgroundImage: {
+                Image("black_w_chalk")
+                    .resizable()
+            }, textView: {
+                text
+            }),
+            
+            GenericWidgetView(backgroundImage: {
+                Image("green")
                     .resizable()
             }, textView: {
                 text
@@ -145,7 +160,38 @@ class SpeedTestViews: ObservableObject, Identifiable {
     var views: [some View] {
         return [
             GenericWidgetView(backgroundImage: {
-                Image("Speed WIDGETS SCREEN2")
+                Image("SpeedTest_bluecontrast")
+                    .resizable()
+            }, textView: {
+                HStack(alignment: .center) {
+                    Spacer()
+                    VStack(alignment: .trailing, spacing: 5) {
+                        Text("Download Speed")
+                            .font(.custom("DS-Digital", size: 16.5))
+                        
+                        if date == nil {
+                            Text("----")
+                                .font(.custom("DS-Digital", size: 30))
+                        } else {
+                            Text(self.savedSpeed.widgetDescription())
+                                .font(.custom("DS-Digital", size: 30))
+                        }
+                        
+                        if let date {
+                            Text(date.formatted(date: .omitted, time: .shortened))
+                                .font(.custom("DS-Digital", size: 19))
+                        }
+                    }
+                }
+                .padding(.trailing, 25)
+                .bold()
+                .multilineTextAlignment(.trailing)
+                .buttonStyle(.plain)
+                .foregroundStyle(.white)
+            }),
+            
+            GenericWidgetView(backgroundImage: {
+                Image("Speed Widget New 1")
                     .resizable()
             }, textView: {
                 HStack(alignment: .center) {
@@ -217,28 +263,13 @@ class FlirtyLineViews: ObservableObject, Identifiable {
     var isBusy = false
     
     var views: [some View] {
-        let bgGradient = LinearGradient(
-            colors: [
-                Color(red: 251 / 256, green: 87 / 256, blue: 113 / 256),
-                Color(red: 227 / 256, green: 64 / 256, blue: 82 / 256),
-                Color(red: 240 / 256, green: 42 / 256, blue: 63 / 256)
-            ],
-            startPoint: .bottom,
-            endPoint: .top
-        )
-        
-        let img = Image("wp3515553")
-            .offset(x: 135, y: 111)
-            .opacity(0.25)
-            .rotationEffect(.degrees(180-15))
-            .background(bgGradient)
-        
         return [
             GenericWidgetView(backgroundImage: {
-                img
+                Image("Flirty Coochie Coochie")
+                    .resizable()
             }, textView: {
                 Text(self.savedFlirtyLine)
-                    .font(.custom("CarryYou-Regular", size: 30))
+                    .font(.system(size: 19, weight: .bold, design: .rounded))
                     .shadow(radius: 1.0)
                     .foregroundStyle(.white)
                     .multilineTextAlignment(.leading)
@@ -290,15 +321,10 @@ class NASApodView: ObservableObject, Identifiable {
                 AsyncImage(url: URL(string: apod.url)) {
                     $0.resizable()
                 } placeholder: {
-                    Image("M31WideField_Ziegenbalg_960")
+                    Image("AuroraSnow")
                         .resizable()
                 }
             }, textView: {
-                Spacer()
-                Text(self.apod.title)
-                    .foregroundStyle(.white)
-                    .font(.system(size: 15, weight: .semibold, design: .rounded))
-                    .background(LinearGradient(colors: [.black, .black.opacity(0.5), .black.opacity(0.1)], startPoint: .bottom, endPoint: .top))
             }, widgetFamily: .systemLarge)
         ]
     }
@@ -323,8 +349,8 @@ class NASApodView: ObservableObject, Identifiable {
     }
 }
 
-class FunFactAboutTodayView: ObservableObject, Identifiable {
-    static let shared = FunFactAboutTodayView()
+class FactAboutTodayView: ObservableObject, Identifiable {
+    static let shared = FactAboutTodayView()
     
     private init() {
         funFact = UserDefaults.savedFunFact
@@ -338,14 +364,17 @@ class FunFactAboutTodayView: ObservableObject, Identifiable {
     var views: [some View] {
         return [
             GenericWidgetView(backgroundImage: {
-                Image("IMG_6838", bundle: .main)
+                Image("numbers_background", bundle: .main)
                     .resizable()
-                    .opacity(0.6)
-                    .blur(radius: 5)
+                    .overlay(alignment: .center) {
+                        Image("grainy-opacity-80")
+                            .resizable()
+                            .scaledToFill()
+                    }
             }, textView: {
                 Text(self.funFact)
                     .font(.system(size: 15, weight: .bold, design: .rounded))
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.white)
                     .multilineTextAlignment(.leading)
             })
         ]
