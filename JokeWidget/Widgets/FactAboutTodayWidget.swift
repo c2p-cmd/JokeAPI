@@ -70,8 +70,6 @@ struct FunFactTimelineProvider: TimelineProvider {
 struct FunFactEntryView: View {
     let entry: FunFactEntry
     
-    let grey: Color = Color(red: 198/256, green: 194/256, blue: 195/256)
-    let textColor = Color(red: 177/256, green: 139/256, blue: 55/256)
     let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM dd"
@@ -80,11 +78,6 @@ struct FunFactEntryView: View {
     
     func layout() -> some View {
         return ZStack {
-            Image("Fun Fact", bundle: .main)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 370, height: 170)
-            
             VStack {
                 Text(entry.funFact)
                     .font(.system(size: 16, weight: .bold, design: .rounded))
@@ -98,25 +91,32 @@ struct FunFactEntryView: View {
                     .multilineTextAlignment(.center)
                     .frame(alignment: .bottom)
             }
-            .foregroundStyle(textColor)
+            .foregroundStyle(.white)
             .minimumScaleFactor(0.75)
             .padding(.vertical, 20)
             .padding(.horizontal, 30)
         }
-        .background(grey)
     }
     
     var body: some View {
         if #available(iOS 17, macOS 14, *) {
             layout()
-                .containerBackground(grey, for: .widget)
+                .containerBackground(for: .widget) {
+                    Image("numbers_background", bundle: .main)
+                        .resizable()
+                        .overlay(alignment: .center) {
+                            Image("grainy-opacity-80")
+                                .resizable()
+                                .scaledToFill()
+                        }
+                }
         } else {
             layout()
         }
     }
 }
 
-struct FunFactAboutTodayWidget: Widget {
+struct FactAboutTodayWidget: Widget {
     let kind = "FunFactAboutToday"
     
     var body: some WidgetConfiguration {

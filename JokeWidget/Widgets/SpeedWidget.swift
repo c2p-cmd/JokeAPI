@@ -12,23 +12,27 @@ struct SpeedEntry: TimelineEntry {
     let date: Date = .now
     var speed: Speed
     var speedTestDate: Date?
+    var blueBG: Bool
     
-    init(speed: Speed, takenAt takenDate: Date?) {
+    init(speed: Speed, takenAt takenDate: Date?, blue: Bool = true) {
         self.speed = speed
         self.speedTestDate = takenDate
+        self.blueBG = true
     }
     
-    init() {
+    init(blue: Bool = true) {
         (speed, speedTestDate) = UserDefaults.savedSpeedWithDate
+        self.blueBG = blue
     }
 }
 
-struct SpeedTimelineProvider: TimelineProvider {
+struct SpeedTimelineProvider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SpeedEntry {
-        SpeedEntry(speed: UserDefaults.savedSpeed, takenAt: nil)
+        SpeedEntry(speed: UserDefaults.savedSpeed, takenAt: nil, blue: false)
     }
     
     func getSnapshot(
+        for configuration: SpeedTestBGIntent,
         in context: Context,
         completion: @escaping (SpeedEntry) -> Void
     ) {
@@ -41,6 +45,7 @@ struct SpeedTimelineProvider: TimelineProvider {
     }
     
     func getTimeline(
+        for configuration: SpeedTestBGIntent,
         in context: Context,
         completion: @escaping (Timeline<SpeedEntry>) -> Void
     ) {
@@ -74,8 +79,10 @@ struct SpeedTimelineProvider: TimelineProvider {
 }
 
 struct SpeedWidget_BGImage: View {
+    var blueBG = false
+    
     var body: some View {
-        Image("Speed Widget New 1", bundle: .main)
+        Image(blueBG ? "SpeedTest_bluecontrast" : "Speed Widget New 1", bundle: .main)
             .resizable()
             .ignoresSafeArea()
             .scaledToFill()
@@ -114,15 +121,16 @@ struct SpeedWidgetEntryView: View {
             if #available(iOSApplicationExtension 17, macOSApplicationExtension 14, *) {
                 Button(intent: SpeedTestIntent(with: widgetFamily)) {
                     VStack(spacing: 5) {
-                        Image(systemName: "arrow.clockwise.circle")
+                        Image("cellular-network")
                             .font(.custom("DS-Digital", size: 50))
+                            .opacity(0.72)
                         
                         Text("Tap To\nRefresh")
                             .font(.custom("DS-Digital", size: 14.5))
                             .multilineTextAlignment(.center)
+                            .foregroundStyle(.white.opacity(0.75))
                     }
                 }
-                .foregroundColor(Color(red: 1, green: 1, blue: 1, opacity: 0.8))
                 .padding(.leading, 40)
             }
             
@@ -182,7 +190,7 @@ struct SpeedWidgetEntryView: View {
         switch self.widgetFamily {
         case .systemMedium:
             ZStack {
-                SpeedWidget_BGImage()
+                SpeedWidget_BGImage(blueBG: entry.blueBG)
                 homescreenWidgetView()
             }
         case .accessoryRectangular:
@@ -197,8 +205,9 @@ struct SpeedTestWidget: Widget {
     let kind = "SpeedTestWidget"
     
     var body: some WidgetConfiguration {
-        StaticConfiguration(
+        IntentConfiguration(
             kind: kind,
+            intent: SpeedTestBGIntent.self,
             provider: SpeedTimelineProvider()
         ) { entry in
             SpeedWidgetEntryView(entry: entry)

@@ -21,7 +21,7 @@ struct JokeWidgetBundle: WidgetBundle {
         
         FlirtyLinesWidget()
         
-        TVShowQuoteWidget()
+//        TVShowQuoteWidget()
         
         MoreWidgets().body
     }
@@ -31,15 +31,15 @@ struct MoreWidgets: WidgetBundle {
     
     @WidgetBundleBuilder
     var body: some Widget {
-        NextMCUFilmWidget()
+//        NextMCUFilmWidget()
         
-        FunFactAboutTodayWidget()
+        FactAboutTodayWidget()
         
 //        CuteAnimalWidget()
         
 //        MemeWidget()
         
-        AnimalPictureWidget()
+//        AnimalPictureWidget()
         
 //        CustomPictureWidget()
         

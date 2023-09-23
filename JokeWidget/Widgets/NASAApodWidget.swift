@@ -11,28 +11,26 @@ import WidgetKit
 struct NASAApodEntry: TimelineEntry {
     let date: Date = .now
     var uiImage: UIImage = UIImage(named: "AuroraSnow")!
-    var title: String = "Some title about the image"
-    var showTitle = true
 }
 
-struct NASAApodTimelineProvider: IntentTimelineProvider {
+struct NASAApodTimelineProvider: TimelineProvider {
     func placeholder(in context: Context) -> NASAApodEntry {
         NASAApodEntry()
     }
     
-    func getSnapshot(for configuration: NASAWidgetConfigIntent, in context: Context, completion: @escaping (NASAApodEntry) -> Void) {
+    func getSnapshot(in context: Context, completion: @escaping (NASAApodEntry) -> Void) {
         if context.isPreview {
             completion(self.placeholder(in: context))
             return
         }
         
-        fetchNASAApod(showTitle: configuration.showTitle as? Bool) { newEntry, _ in
+        fetchNASAApod(showTitle: false) { newEntry, _ in
             completion(newEntry)
         }
     }
     
-    func getTimeline(for configuration: NASAWidgetConfigIntent, in context: Context, completion: @escaping (Timeline<NASAApodEntry>) -> Void) {
-        fetchNASAApod(showTitle: configuration.showTitle as? Bool) { (newEntry: NASAApodEntry, didError: Bool) in
+    func getTimeline(in context: Context, completion: @escaping (Timeline<NASAApodEntry>) -> Void) {
+        fetchNASAApod(showTitle: false) { (newEntry: NASAApodEntry, didError: Bool) in
             // if success fetch new image after 12 hours
             let halfDayComponent = DateComponents(hour: 12)
             let tomorrow = Calendar.current.date(byAdding: halfDayComponent, to: newEntry.date)!
@@ -58,28 +56,13 @@ struct NASAApodEntryView: View {
     
     var entry: NASAApodEntry
     
-    func image() -> some View {
-        Image(uiImage: entry.uiImage)
-            .resizable()
-            .scaledToFill()
-            .frame(width: 370, height: 370)
-    }
-    
     var body: some View {
         modifyForiOS17 {
             ZStack {
-                image()
-                
-                if entry.showTitle == true {
-                    Text(entry.title)
-                        .font(.system(.caption, design: .rounded))
-                        .foregroundColor(.white)
-                        .background(gradient)
-                        .cornerRadius(5)
-                        .padding(.bottom, 5)
-                        .padding(.horizontal, 25)
-                        .frame(height: 365, alignment: .bottom)
-                        .multilineTextAlignment(.center)
+                if #unavailable(iOSApplicationExtension 17) {
+                    Image(uiImage: entry.uiImage)
+                        .resizable()
+                        .scaledToFill()
                 }
             }
         }
@@ -87,7 +70,11 @@ struct NASAApodEntryView: View {
     
     func modifyForiOS17(content: () -> some View) -> some View {
         if #available(iOS 17, *) {
-            return content().containerBackground(.clear, for: .widget)
+            return content().containerBackground(for: .widget) {
+                Image(uiImage: entry.uiImage)
+                    .resizable()
+                    .scaledToFill()
+            }
         } else {
             return content()
         }
@@ -98,9 +85,8 @@ struct NASAApodWidget: Widget {
     let kind = "NASA Apod Widget"
     
     var body: some WidgetConfiguration {
-        IntentConfiguration(
+        StaticConfiguration(
             kind: kind,
-            intent: NASAWidgetConfigIntent.self,
             provider: NASAApodTimelineProvider(),
             content: { entry in
                 NASAApodEntryView(entry: entry)
@@ -109,18 +95,5 @@ struct NASAApodWidget: Widget {
         .configurationDisplayName("NASA Apod Widget")
         .description("This widget will show an image from NASA's website for today.")
         .supportedFamilies([.systemLarge, .systemExtraLarge])
-    }
-}
-
-struct NASAAPOD_Preview: PreviewProvider {
-    static var previews: some View {
-        Group {
-            NASAApodEntryView(entry: NASAApodEntry(showTitle: true))
-                .previewContext(WidgetPreviewContext(family: .systemExtraLarge))
-                .previewDevice("iPad mini (6th generation)")
-            
-            NASAApodEntryView(entry: NASAApodEntry(showTitle: true))
-                .previewContext(WidgetPreviewContext(family: .systemLarge))
-        }
     }
 }

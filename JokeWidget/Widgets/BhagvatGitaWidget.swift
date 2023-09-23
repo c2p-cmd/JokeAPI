@@ -95,15 +95,15 @@ struct BhagvatGitaProvider: IntentTimelineProvider {
 struct BhagvatGitaMediumEntryView: View {
     var entry: BhagvatGitaEntry
     
-    var bhagvatGitaResponse: BhagvatGitaResponse {
-        entry.bhagwatGitaResponse
-    }
-    
     var body: some View {
+        let bhagvatGitaResponse = entry.bhagwatGitaResponse
+        
         modifyForiOS17 {
             ZStack {
-                background()
-                    .ignoresSafeArea()
+                if #unavailable(iOSApplicationExtension 17, macOSApplicationExtension 14) {
+                    background()
+                        .ignoresSafeArea()
+                }
                 
                 VStack(spacing: 18) {
                     switch entry.languageChoice {
@@ -117,23 +117,6 @@ struct BhagvatGitaMediumEntryView: View {
                             .animation(.easeInOut)
                     case .unknown:
                         Text("")
-                    }
-                    
-                    if #available(iOS 17, *) {
-                        HStack {
-                            if entry.languageChoice == .english {
-                                Button(intent: BhagvatGitaAppIntent(shloka: entry.bhagwatGitaResponse.englishTranslation, in: .english)) {
-                                    Image(systemName: "speaker.wave.2.bubble.left")
-                                }
-                            }
-                            if entry.languageChoice == .hindi {
-                                Button(intent: BhagvatGitaAppIntent(shloka: entry.bhagwatGitaResponse.hindiTranslation, in: .hindi)) {
-                                    Image(systemName: "speaker.wave.2.bubble.left")
-                                }
-                            }
-                            Spacer()
-                        }
-                        .buttonStyle(.plain)
                     }
                 }
                 .shadow(color: Color(red: 48/256, green: 26/256, blue: 0/256), radius: 5)
@@ -153,7 +136,9 @@ struct BhagvatGitaMediumEntryView: View {
     
     private func modifyForiOS17(_ content: () -> some View) -> some View {
         if #available(iOS 17, *) {
-            return content().invalidatableContent().containerBackground(.clear, for: .widget)
+            return content().invalidatableContent().containerBackground(for: .widget) {
+                Image("bhagawatGita")
+            }
         } else {
             return content()
         }

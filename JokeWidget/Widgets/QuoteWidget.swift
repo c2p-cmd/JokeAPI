@@ -12,6 +12,7 @@ struct QuoteEntry: TimelineEntry {
     let date: Date = .now
     var quoteResponse = UserDefaults.savedQuote
     var bgChoice: QuoteBackground = .black
+    var fontChoice: QuoteFont = .chalk
 }
 
 struct QuoteProvider: IntentTimelineProvider {
@@ -31,7 +32,7 @@ struct QuoteProvider: IntentTimelineProvider {
             return
         }
         
-        completion(QuoteEntry(bgChoice: configuration.background))
+        completion(QuoteEntry(bgChoice: configuration.background, fontChoice: configuration.font))
     }
     
     func getTimeline(
@@ -41,7 +42,7 @@ struct QuoteProvider: IntentTimelineProvider {
     ) {
         Task {
             let result = await getRandomQuote()
-            var entry = QuoteEntry(bgChoice: configuration.background)
+            var entry = QuoteEntry(bgChoice: configuration.background, fontChoice: configuration.font)
             
             switch result {
             case .success(let newQuote):
@@ -77,9 +78,13 @@ struct QuoteEntryView_Placeholder: View {
     private var blackBoardChoice: String {
         switch self.choice {
         case .black, .unknown:
-            return "BLACKBOARD2"
+            "black"
         case .green:
-            return "BLACKBOARD"
+            "green"
+        case .blackAlt:
+            "black_w_chalk"
+        case .greenAlt:
+            "green_w_chalk"
         }
     }
     
@@ -87,7 +92,6 @@ struct QuoteEntryView_Placeholder: View {
         Image(blackBoardChoice)
             .resizable()
             .scaledToFill()
-            .frame(width: 370, height: 170)
     }
 }
 
@@ -101,21 +105,30 @@ struct QuoteWidgetEntryView: View {
     @Environment(\.widgetFamily) var widgetFamily: WidgetFamily
     
     func text() -> some View {
-        VStack {
+        var font: String
+        
+        switch entry.fontChoice {
+        case .chalk, .unknown:
+            font = "Chalkduster"
+        case .easter:
+            font = "EraserDust"
+        }
+        
+        return VStack {
             Text("\(entry.quoteResponse.content)\n")
-                .font(.custom("Chalkduster", size: 18))
+                .font(.custom(font, size: 18))
                 .multilineTextAlignment(.center)
-                .contentTransition(.interpolate)
+                .transition(.push(from: .trailing))
                 .maybeInvalidatableContent()
             
             HStack {
                 Spacer()
                 Text("-\(entry.quoteResponse.author) ")
                     .multilineTextAlignment(.center)
-                    .font(.custom("Chalkduster", size: 11.5))
-                    .contentTransition(.interpolate)
+                    .font(.custom(font, size: 11.5))
+                    .transition(.push(from: .trailing))
                     .maybeInvalidatableContent()
-                if #available(iOS 17, macOS 14, *) {
+                if #available(iOSApplicationExtension 17, macOSApplicationExtension 14, *) {
                     Spacer()
                     refreshButton
                 }
@@ -139,7 +152,9 @@ struct QuoteWidgetEntryView: View {
     func modifyForiOS17() -> some View {
         if #available(iOS 17, macOS 14, *) {
             return text()
-                .containerBackground(gradient, for: .widget)
+                .containerBackground(for: .widget) {
+                    QuoteEntryView_Placeholder(entry.bgChoice)
+                }
         } else {
             return text()
                 .ignoresSafeArea()
@@ -151,8 +166,10 @@ struct QuoteWidgetEntryView: View {
         modifyForiOS17()
             .background {
                 ZStack {
-                    gradient
-                    QuoteEntryView_Placeholder(self.entry.bgChoice)
+                    if #unavailable(iOSApplicationExtension 17) {
+                        QuoteEntryView_Placeholder(self.entry.bgChoice)
+                            .frame(width: 370, height: 170)
+                    }
                 }
                 .aspectRatio(contentMode: .fill)
                 .ignoresSafeArea()
@@ -178,26 +195,22 @@ struct QuoteWidget: Widget {
     }
 }
 
-//struct QuoteWidget_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            QuoteWidgetEntryView(entry: QuoteEntry(
-//                quoteResponse: QuoteApiResponse("Learning is the beginning of wealth.Learning is the beginning of welath.", by: "Jim Rohn")
-//            ))
-//            .previewContext(
-//                WidgetPreviewContext(
-//                    family: .systemMedium
-//                )
-//            )
-//            
-//            QuoteWidgetEntryView(entry: QuoteEntry(
-//                quoteResponse: QuoteApiResponse("मंजिल भी उसकी थी रास्ता भी उसका था,\nएक हम अकेले थे काफिला भी उसका था !", by: "Gulzar Sahab")
-//            ))
-//            .previewContext(
-//                WidgetPreviewContext(
-//                    family: .systemMedium
-//                )
-//            )
-//        }
-//    }
-//}
+struct QuoteWidget_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            QuoteWidgetEntryView(entry: QuoteEntry(
+                quoteResponse: QuoteApiResponse("Learning is the beginning of wealth.Learning is the beginning of welath.", by: "Jim Rohn"),
+                bgChoice: .greenAlt
+            ))
+            .previewContext(
+                WidgetPreviewContext(
+                    family: .systemMedium
+                )
+            )
+        }
+        .onAppear(perform: {
+            let _ = UIFont.familyNames
+              .flatMap { UIFont.fontNames(forFamilyName: $0) }
+        })
+    }
+}

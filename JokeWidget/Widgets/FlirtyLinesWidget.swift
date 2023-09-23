@@ -73,29 +73,39 @@ struct FlirtyLinesEntryView: View {
     }
     
     var text: some View {
-        VStack {
+        HStack {
+            if #available(iOSApplicationExtension 17, macOSApplicationExtension 14, *) {
+                refreshButton
+                    .rotationEffect(.degrees(180))
+                    .scaleEffect(y: -1)
+                Spacer()
+            }
+            
             Text(entry.pickup)
                 .font(.system(size: 19, weight: .bold, design: .rounded))
                 .shadow(radius: 1.0)
-                .multilineTextAlignment(.leading)
+                .multilineTextAlignment(.center)
                 .foregroundStyle(.white)
-                .padding(.all, 15)
                 .minimumScaleFactor(0.75)
-                .transition(.slide)
+                .contentTransition(.interpolate)
                 .maybeInvalidatableContent()
             
             if #available(iOSApplicationExtension 17, macOSApplicationExtension 14, *) {
                 Spacer()
-                Button(intent: FlirtyLinesIntent()) {
-                    Text("😉")
-                }
-                .font(.headline)
-                .buttonStyle(.borderedProminent)
-                .buttonBorderShape(.circle)
-                .tint(.pink)
-                .foregroundStyle(.white)
+                refreshButton
             }
         }
+    }
+    
+    @available(iOSApplicationExtension 17, macOSApplicationExtension 14, *)
+    var refreshButton: some View {
+        Button(intent: FlirtyLinesIntent()) {
+            Image("cupid_red")
+                .resizable()
+                .scaledToFit()
+                .frame(height: 33)
+        }
+        .buttonStyle(.plain)
     }
     
     var background: some View {

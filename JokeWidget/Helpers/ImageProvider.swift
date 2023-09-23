@@ -86,7 +86,7 @@ func fetchNASAApod(
             
             let apodResponse = UserDefaults.savedApod
             if let image = apodResponse.uiImage {
-                let entry = NASAApodEntry(uiImage: image, title: apodResponse.title, showTitle: showTitle ?? true)
+                let entry = NASAApodEntry(uiImage: image)
                 completion(entry, false)
             } else {
                 fetchNASAImage(from: apodResponse, showTitle: showTitle ?? false, completion: completion)
@@ -112,11 +112,11 @@ fileprivate func fetchNASAImage(
         
         if let data = data {
             guard let uiImage = UIImage(data: data) else {
-                let entry = NASAApodEntry(uiImage: UIImage(named: "AuroraSnow")!, title: "Image problem", showTitle: false)
+                let entry = NASAApodEntry(uiImage: UIImage(named: "AuroraSnow")!)
                 completion(entry, true)
                 return
             }
-            let entry = NASAApodEntry(uiImage: uiImage, title: apodResponse.title, showTitle: showTitle)
+            let entry = NASAApodEntry(uiImage: uiImage)
             completion(entry, false)
         }
         
@@ -125,7 +125,7 @@ fileprivate func fetchNASAImage(
             print(error.localizedDescription)
 #endif
             
-            let entry = NASAApodEntry(uiImage: UIImage(named: "AuroraSnow")!, title: error.localizedDescription, showTitle: false)
+            let entry = NASAApodEntry(uiImage: UIImage(named: "AuroraSnow")!)
             completion(entry, true)
         }
     }
