@@ -78,9 +78,9 @@ struct QuoteEntryView_Placeholder: View {
     private var blackBoardChoice: String {
         switch self.choice {
         case .black, .unknown:
-            "black"
+            "BLACKBOARD2"
         case .green:
-            "green"
+            "BLACKBOARD"
         case .blackAlt:
             "black_w_chalk"
         case .greenAlt:
@@ -96,12 +96,8 @@ struct QuoteEntryView_Placeholder: View {
 }
 
 struct QuoteWidgetEntryView: View {
-    private let gradient = LinearGradient(colors: [
-        Color("BlackBoard1", bundle: .main),
-        Color("BlackBoard2", bundle: .main)
-    ], startPoint: .bottom, endPoint: .top)
-    
     var entry: QuoteProvider.Entry
+    
     @Environment(\.widgetFamily) var widgetFamily: WidgetFamily
     
     func text() -> some View {
@@ -118,35 +114,34 @@ struct QuoteWidgetEntryView: View {
             Text("\(entry.quoteResponse.content)\n")
                 .font(.custom(font, size: 18))
                 .multilineTextAlignment(.center)
-                .transition(.push(from: .trailing))
+                .transition(.scale)
+                .frame(alignment: .top)
                 .maybeInvalidatableContent()
+            
+            Spacer()
             
             HStack {
                 Spacer()
-                Text("-\(entry.quoteResponse.author) ")
+                Text("-\(entry.quoteResponse.author)")
                     .multilineTextAlignment(.center)
                     .font(.custom(font, size: 11.5))
-                    .transition(.push(from: .trailing))
+                    .transition(.scale)
                     .maybeInvalidatableContent()
+                
                 if #available(iOSApplicationExtension 17, macOSApplicationExtension 14, *) {
                     Spacer()
-                    refreshButton
+                    Button(intent: QuoteIntent()) {
+                        Image(systemName: "eraser.line.dashed.fill")
+                            .foregroundStyle(.white)
+                    }
+                    .buttonStyle(.plain)
                 }
             }
+            .frame(alignment: .bottom)
         }
-        .padding(.all, 15)
         .minimumScaleFactor(0.75)
         .shadow(radius: 10, x: 5)
         .foregroundStyle(.white)
-    }
-    
-    @available(iOS 17, macOS 14, *)
-    var refreshButton: some View {
-        Button(intent: QuoteIntent()) {
-            Image(systemName: "arrow.counterclockwise")
-                .foregroundStyle(.white)
-        }
-        .buttonStyle(.plain)
     }
     
     func modifyForiOS17() -> some View {
@@ -159,22 +154,22 @@ struct QuoteWidgetEntryView: View {
             return text()
                 .ignoresSafeArea()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background {
+                    ZStack {
+                        if #unavailable(iOSApplicationExtension 17) {
+                            QuoteEntryView_Placeholder(self.entry.bgChoice)
+                                .frame(width: 370, height: 170)
+                        }
+                    }
+                    .aspectRatio(contentMode: .fill)
+                    .ignoresSafeArea()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
         }
     }
     
     var body: some View {
         modifyForiOS17()
-            .background {
-                ZStack {
-                    if #unavailable(iOSApplicationExtension 17) {
-                        QuoteEntryView_Placeholder(self.entry.bgChoice)
-                            .frame(width: 370, height: 170)
-                    }
-                }
-                .aspectRatio(contentMode: .fill)
-                .ignoresSafeArea()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-            }
     }
 }
 
@@ -200,7 +195,7 @@ struct QuoteWidget_Previews: PreviewProvider {
         Group {
             QuoteWidgetEntryView(entry: QuoteEntry(
                 quoteResponse: QuoteApiResponse("Learning is the beginning of wealth.Learning is the beginning of welath.", by: "Jim Rohn"),
-                bgChoice: .greenAlt
+                bgChoice: .green
             ))
             .previewContext(
                 WidgetPreviewContext(

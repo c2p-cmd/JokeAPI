@@ -44,5 +44,9 @@ struct MoreWidgets: WidgetBundle {
 //        CustomPictureWidget()
         
         NASAApodWidget()
+        
+        if #available(iOSApplicationExtension 17, *) {
+            SportsWallpaperWidget()
+        }
     }
 }

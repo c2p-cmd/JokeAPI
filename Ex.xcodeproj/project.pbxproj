@@ -43,6 +43,7 @@
 		004860152A1B8A7800F3E6B4 /* ExApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004860142A1B8A7800F3E6B4 /* ExApp.swift */; };
 		004860192A1B8A7900F3E6B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004860182A1B8A7900F3E6B4 /* Assets.xcassets */; };
 		0048601C2A1B8A7900F3E6B4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0048601B2A1B8A7900F3E6B4 /* Preview Assets.xcassets */; };
+		004C7D7E2AC1C96000F8D7EB /* SportsWallpaperWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004C7D7D2AC1C96000F8D7EB /* SportsWallpaperWidget.swift */; };
 		004CA8492A793EEB005B4F07 /* GifImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004CA8482A793EEB005B4F07 /* GifImage.swift */; };
 		004CA8512A79455E005B4F07 /* add_to_home_screen_new.gif in Resources */ = {isa = PBXBuildFile; fileRef = 004CA8502A79455E005B4F07 /* add_to_home_screen_new.gif */; };
 		004D9B392A4D98F100199886 /* HTTPAnimalPictureWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004D9B382A4D98F100199886 /* HTTPAnimalPictureWidget.swift */; };
@@ -196,6 +197,7 @@
 		004860142A1B8A7800F3E6B4 /* ExApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExApp.swift; sourceTree = "<group>"; };
 		004860182A1B8A7900F3E6B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0048601B2A1B8A7900F3E6B4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		004C7D7D2AC1C96000F8D7EB /* SportsWallpaperWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsWallpaperWidget.swift; sourceTree = "<group>"; };
 		004CA8482A793EEB005B4F07 /* GifImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifImage.swift; sourceTree = "<group>"; };
 		004CA8502A79455E005B4F07 /* add_to_home_screen_new.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = add_to_home_screen_new.gif; sourceTree = "<group>"; };
 		004D9B382A4D98F100199886 /* HTTPAnimalPictureWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPAnimalPictureWidget.swift; sourceTree = "<group>"; };
@@ -470,6 +472,7 @@
 				00F5230F2A81043F0046576E /* BhagvatGitaWidget.swift */,
 				00AC0A542A865F5D00798580 /* TVShowQuoteWidget.swift */,
 				0050BDF22A8BE0E100D3162A /* NextMCUFilmWidget.swift */,
+				004C7D7D2AC1C96000F8D7EB /* SportsWallpaperWidget.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -749,6 +752,7 @@
 				00F523112A81043F0046576E /* BhagvatGitaWidget.swift in Sources */,
 				00511CEF2A2C960300D1FD13 /* JokeWidgetBundle.swift in Sources */,
 				001710F52A601645003D2071 /* RedditMemeResponse.swift in Sources */,
+				004C7D7E2AC1C96000F8D7EB /* SportsWallpaperWidget.swift in Sources */,
 				00134F212A514DD20091D6FD /* SpeedService.swift in Sources */,
 				00E4B58A2A4C6E580064E63C /* QuoteWidget.swift in Sources */,
 				00134F2A2A514E820091D6FD /* URL+ping.swift in Sources */,

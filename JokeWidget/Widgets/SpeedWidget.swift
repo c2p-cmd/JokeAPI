@@ -41,7 +41,7 @@ struct SpeedTimelineProvider: IntentTimelineProvider {
             return
         }
         
-        completion(SpeedEntry())
+        completion(SpeedEntry(blue: configuration.blue as? Bool ?? false))
     }
     
     func getTimeline(
@@ -51,7 +51,7 @@ struct SpeedTimelineProvider: IntentTimelineProvider {
     ) {
         Task {
             let downloadService = DownloadService.shared
-            var speedEntry = SpeedEntry()
+            var speedEntry = SpeedEntry(blue: configuration.blue as? Bool ?? true)
             
             let result = await downloadService.testWithAnalytics(for: url, in: 60, fromWidget: context.family)
             
@@ -79,10 +79,10 @@ struct SpeedTimelineProvider: IntentTimelineProvider {
 }
 
 struct SpeedWidget_BGImage: View {
-    var blueBG = false
+    var blueBG: Bool
     
     var body: some View {
-        Image(blueBG ? "SpeedTest_bluecontrast" : "Speed Widget New 1", bundle: .main)
+        Image(blueBG ? "SpeedTest_bluecontrast" : "Speed Widget New 1")
             .resizable()
             .ignoresSafeArea()
             .scaledToFill()
@@ -131,7 +131,7 @@ struct SpeedWidgetEntryView: View {
                             .foregroundStyle(.white.opacity(0.75))
                     }
                 }
-                .padding(.leading, 40)
+                .padding(.leading, 10)
             }
             
             Spacer()
@@ -178,25 +178,35 @@ struct SpeedWidgetEntryView: View {
                 }
             }
         }
-        .padding(.trailing, 40)
         .bold()
         .multilineTextAlignment(.trailing)
         .buttonStyle(.plain)
         .foregroundStyle(.white)
-        .modifyForiOS17(.blue)
     }
     
     var body: some View {
         switch self.widgetFamily {
         case .systemMedium:
-            ZStack {
-                SpeedWidget_BGImage(blueBG: entry.blueBG)
+            modifyFor17 {
                 homescreenWidgetView()
             }
         case .accessoryRectangular:
             lockScreenWidgetView("Speed is")
         default:
             lockScreenWidgetView("& Speed is")
+        }
+    }
+    
+    func modifyFor17(content: () -> some View) -> some View {
+        if #available(iOS 17, *) {
+            return content()
+                .containerBackground(for: .widget) {
+                    SpeedWidget_BGImage(blueBG: entry.blueBG)
+                }
+        } else {
+            return content().background {
+                SpeedWidget_BGImage(blueBG: entry.blueBG)
+            }
         }
     }
 }
@@ -222,7 +232,11 @@ struct SpeedTestWidget: Widget {
 }
 
 struct SpeedWidgetEntryView_Previews: PreviewProvider {
-    static let entry = SpeedEntry(speed: Speed(value: 309.1234, units: .Mbps), takenAt: .distantFuture)
+    static let entry = SpeedEntry(
+        speed: Speed(value: 310.1234, units: .Mbps),
+        takenAt: .distantFuture,
+        blue: false
+    )
     
     static var previews: some View {
         Group {
