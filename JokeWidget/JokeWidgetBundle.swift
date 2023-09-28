@@ -32,6 +32,7 @@ struct MoreWidgets: WidgetBundle {
     @WidgetBundleBuilder
     var body: some Widget {
 //        NextMCUFilmWidget()
+        FlipClockWidget()
         
         FactAboutTodayWidget()
         

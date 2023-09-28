@@ -126,6 +126,10 @@
 		00D004B62A65963500D51C7E /* JokeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D004B52A65963500D51C7E /* JokeType.swift */; };
 		00D004B72A65963500D51C7E /* JokeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D004B52A65963500D51C7E /* JokeType.swift */; };
 		00E4B58A2A4C6E580064E63C /* QuoteWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E4B5892A4C6E580064E63C /* QuoteWidget.swift */; };
+		00E9EBB82AC5515F0082096F /* FlipClockWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E9EBB72AC5515F0082096F /* FlipClockWidget.swift */; };
+		00E9EBBA2AC572C50082096F /* String+subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E9EBB92AC572C50082096F /* String+subscript.swift */; };
+		00E9EBBB2AC572C50082096F /* String+subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E9EBB92AC572C50082096F /* String+subscript.swift */; };
+		00E9EBBC2AC572C50082096F /* String+subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E9EBB92AC572C50082096F /* String+subscript.swift */; };
 		00F49BAC2A73C450008428F9 /* AllWidgetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F49BAB2A73C450008428F9 /* AllWidgetsView.swift */; };
 		00F49BAF2A73DD44008428F9 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F49BAE2A73DD44008428F9 /* Storage.swift */; };
 		00F5230A2A81008C0046576E /* BhagwatGitaResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F523092A81008C0046576E /* BhagwatGitaResponse.swift */; };
@@ -249,6 +253,8 @@
 		00D004B52A65963500D51C7E /* JokeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeType.swift; sourceTree = "<group>"; };
 		00E4B5862A4C61570064E63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		00E4B5892A4C6E580064E63C /* QuoteWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteWidget.swift; sourceTree = "<group>"; };
+		00E9EBB72AC5515F0082096F /* FlipClockWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipClockWidget.swift; sourceTree = "<group>"; };
+		00E9EBB92AC572C50082096F /* String+subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+subscript.swift"; sourceTree = "<group>"; };
 		00F49BAB2A73C450008428F9 /* AllWidgetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWidgetsView.swift; sourceTree = "<group>"; };
 		00F49BAE2A73DD44008428F9 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		00F523092A81008C0046576E /* BhagwatGitaResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BhagwatGitaResponse.swift; sourceTree = "<group>"; };
@@ -453,6 +459,7 @@
 				007F29B42A8A3D7600D729D0 /* Date+RawRepresentale.swift */,
 				009ECD562A8CAA20002DE0A9 /* Array+asNStringArray.swift */,
 				00FEA1262AA086D4000C8E88 /* Dictionary+percentEncoded.swift */,
+				00E9EBB92AC572C50082096F /* String+subscript.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -473,6 +480,7 @@
 				00AC0A542A865F5D00798580 /* TVShowQuoteWidget.swift */,
 				0050BDF22A8BE0E100D3162A /* NextMCUFilmWidget.swift */,
 				004C7D7D2AC1C96000F8D7EB /* SportsWallpaperWidget.swift */,
+				00E9EBB72AC5515F0082096F /* FlipClockWidget.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -700,6 +708,7 @@
 				00134F202A514DD20091D6FD /* SpeedService.swift in Sources */,
 				001FB8C12A5FDE3B0020F69C /* ImageSaver.swift in Sources */,
 				00A07F652A5D2F6B006FC4DB /* NASAApodResponse.swift in Sources */,
+				00E9EBBA2AC572C50082096F /* String+subscript.swift in Sources */,
 				004337822A339E87004AF73F /* UserDefaultExtension.swift in Sources */,
 				00FEA1272AA086D4000C8E88 /* Dictionary+percentEncoded.swift in Sources */,
 				001ACE0A2A4EBA2C000CE9AF /* UIImage+resize.swift in Sources */,
@@ -767,10 +776,12 @@
 				003BD26C2A4D81C2009FDFAC /* QuoteAPIModel.swift in Sources */,
 				00A07F662A5D2F6B006FC4DB /* NASAApodResponse.swift in Sources */,
 				00A6051A2A6E9BD100AF5FD0 /* FlirtyLinesWidget.swift in Sources */,
+				00E9EBBB2AC572C50082096F /* String+subscript.swift in Sources */,
 				00A07F6C2A5D4416006FC4DB /* NASAApodWidget.swift in Sources */,
 				00134F302A5153610091D6FD /* ViewModifier_iOS17.swift in Sources */,
 				007F29B62A8A3D7600D729D0 /* Date+RawRepresentale.swift in Sources */,
 				00FEA1282AA086D4000C8E88 /* Dictionary+percentEncoded.swift in Sources */,
+				00E9EBB82AC5515F0082096F /* FlipClockWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -778,6 +789,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00E9EBBC2AC572C50082096F /* String+subscript.swift in Sources */,
 				00AC0A612A867BC800798580 /* IntentHandler.swift in Sources */,
 				008769B22ABEC40000E4B572 /* AnimalPictureConfig.intentdefinition in Sources */,
 				009ECD592A8CAA20002DE0A9 /* Array+asNStringArray.swift in Sources */,
